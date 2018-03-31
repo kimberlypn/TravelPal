@@ -1,0 +1,52 @@
+Project Proposal
+William Guo, Matt Dang, Longsheng Lin, Kimberly Nguyen
+
+We plan on building a travel-based web application. This app would 
+help users find the cheapest prices for airline tickets, while also 
+providing relevant information that users can factor into their 
+trip-planning. This information includes the average weather for 
+specific dates based on past data, currency exchange values, 
+interesting travel facts (for instance, known customs for a 
+particular country), and popular attractions. Users can also input 
+dates for which they want to set aside for travel. Additionally, we 
+plan to add a social element by allowing users to create accounts and 
+add other users as friends. Users can mark their travel dates on a 
+calendar that is public to their friends to allow for coordinated 
+trip-planning. 
+
+We plan on using a weather API to give accurate weather reports on 
+the travel times that users have selected for their destination. We 
+are currently looking at Yahoo!’s weather API for this because it 
+has a decent API limit per day, and one of our group members has had 
+a good experience with using it in the past. We also need a flights 
+price API so that we can gather prices for a destination. We are 
+looking into using Skyscanner because it has a great number of free 
+API calls. For hotel rates, we plan on using the Google Hotel and 
+Hotel Ads API, which should have hotel prices for select dates.
+
+In our database, we will store user information such as usernames and 
+passwords. In addition, we will store the users' budgets: the 
+amount that users are willing to spend on suggested travels outside 
+their travel dates. We will also store the dates that users have set 
+aside for travel. Furthermore, we will keep track of users’ lists of 
+friends so that we can compare their travel dates and see if they can 
+join or invite anyone whose travel schedules overlap with their own. 
+We will also store past user travels. This will be the dates traveled 
+and a possible summary of the trip, should the user choose to submit 
+one.
+
+There will be the usual log-in and registration pages. Next is the 
+homepage where users can view their feeds. The user feed will consist 
+of trips or past trips that friends are going or have gone on, as 
+well as a suggestions area at the bottom to suggest trips that do not 
+take into account users' travel dates but does take into account 
+their budgets. There will also be a travel dates page where users can 
+create travel dates, receive suggestions based on those dates, and 
+lock in a travel destination. Then, there will be a past travels page 
+where users can view their past travels, give summaries of their past 
+travels, and view their friends’ past travels. Finally, there will be 
+a profile page where users can edit their information, such as their 
+usual travel budget and any travel destinations in which they are 
+interested.
+
+Word Count: 486
