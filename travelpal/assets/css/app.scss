@@ -1,0 +1,15 @@
+@import "bootstrap";
+
+/********************************** FONTS ********************************/
+@font-face {
+  font-family: 'Travellers';
+  src: url('/fonts/travellers.ttf');
+}
+/****************************** END OF FONTS *****************************/
+
+/************************** SHARED ACROSS PAGES **************************/
+h1 {
+  font-family: 'Travellers';
+  font-size: 70px;
+}
+/*********************** END OF SHARED ACROSS PAGES **********************/
