@@ -19,6 +19,11 @@ defmodule TravelpalWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api/v1", TravelpalWeb do
+    pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", TravelpalWeb do
   #   pipe_through :api
