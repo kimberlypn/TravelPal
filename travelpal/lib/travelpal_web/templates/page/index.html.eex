@@ -2,6 +2,7 @@
   <h1>TRAVELPAL</h1>
 </div>
 
+<!-- @TODO decide which page to put login form -->
 <%= form_tag("/session", method: :post) do %>
   <div class="container" id="login-container">
     <div class="form-group">

@@ -27,11 +27,12 @@ defmodule TravelpalWeb.Router do
     get "/", PageController, :index
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete
+    resources "/users", UserController
   end
 
   scope "/api/v1", TravelpalWeb do
     pipe_through :api
-    resources "/users", UserController
+    #resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

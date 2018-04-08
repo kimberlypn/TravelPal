@@ -25,7 +25,7 @@ defmodule Travelpal.Accounts.User do
     |> unique_constraint(:email)
   end
 
-  def put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{pass: password}} = changeset) do
+  def put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
     change(changeset, Comeonin.Argon2.add_hash(password))
   end
   def put_pass_hash(changeset), do: changeset
@@ -39,6 +39,8 @@ defmodule Travelpal.Accounts.User do
     end)
   end
 
+  # @TODO add more password restrictions (numbers, special characters, etc.)
+  # checks a password for certain restrictions
   def valid_password?(password) when byte_size(password) >= 8 do
     {:ok, password}
   end

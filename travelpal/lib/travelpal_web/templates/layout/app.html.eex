@@ -21,6 +21,19 @@
       <% end %>
 
       <main>
+        <div class="row">
+          <div class="col-3 offset-9">
+            <%= if @current_user do %>
+              <p>
+                Logged in as: <%= @current_user.username %> |
+                <%= link "Log Out", to: "/session", method: :delete %>
+              </p>
+            <% else %>
+              <!-- @TODO remove this in final version -->
+              <p>Not logged in.</p>
+            <% end %>
+          </div>
+        </div>
         <%= render @view_module, @view_template, assigns %>
       </main>
     </div> <!-- /container -->

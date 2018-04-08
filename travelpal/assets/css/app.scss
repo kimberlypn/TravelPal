@@ -22,8 +22,12 @@ h1 {
 
 .form-group {
   max-width: 400px;
-  padding: 30px 30px 30px;
   margin: 0 auto;
+  padding: 10px 10px 10px;
+}
+
+#login-container {
+  padding: 30px 30px 30px;
 }
 
 .form-control {
