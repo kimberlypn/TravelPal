@@ -101,4 +101,12 @@ defmodule Travelpal.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  # A non-bang variant of the get_user function using id
+  def get_user(id), do: Repo.get(User, id)
+
+  # Gets a user by username
+  def get_user_by_username(username) do
+    Repo.get_by(User, username: username)
+  end
 end

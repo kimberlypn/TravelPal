@@ -6,6 +6,7 @@ defmodule Travelpal.Repo.Migrations.CreateUsers do
       add :email, :string
       add :username, :string
       add :name, :string
+      add :password_hash, :string
 
       timestamps()
     end
