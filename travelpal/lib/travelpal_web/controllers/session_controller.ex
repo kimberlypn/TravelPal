@@ -10,7 +10,7 @@ defmodule TravelpalWeb.SessionController do
     if user do
       conn
       |> put_session(:user_id, user.id)
-      |> put_flash(:info, "Welcome back #{user.username}! 🙌")
+      |> put_flash(:info, "Welcome back, #{user.username}! 🙌")
       |> redirect(to: page_path(conn, :index))
     else
       conn
