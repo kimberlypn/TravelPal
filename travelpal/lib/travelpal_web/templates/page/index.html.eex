@@ -16,6 +16,7 @@
         </div>
     <% end %>
     <div class="row">
+      <!-- @TODO link to form component -->
       <%= link "Register", to: user_path(@conn, :new) %>
     </div>
   </div>

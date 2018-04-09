@@ -25,14 +25,19 @@ defmodule TravelpalWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    #get "/users", PageController, :index
+    #get "/users/:id", PageController, :index
+
     post "/session", SessionController, :create
     delete "/session", SessionController, :delete
+
     resources "/users", UserController
   end
 
   scope "/api/v1", TravelpalWeb do
     pipe_through :api
-    #resources "/users", UserController
+
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
