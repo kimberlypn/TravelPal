@@ -13,3 +13,46 @@ h1 {
   font-size: 70px;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
+
+/******************************* LOGIN FORM ******************************/
+#login {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding: 30px 30px 30px;
+}
+
+.form-group {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px 10px 10px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#login .row {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5px 10px 5px 10px;
+}
+
+#login .row a {
+  color: grey;
+}
+/*************************** END OF LOGIN FORM ***************************/
