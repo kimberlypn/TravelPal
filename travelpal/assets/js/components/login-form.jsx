@@ -28,14 +28,14 @@ function LoginForm(props) {
         <Input type="text" className="form-control" name="username"
           placeholder="username" required="" autoFocus=""
           value={props.login.username} onChange={update} />
-        <Input type="password" className="form-control" name="password"
+        <Input type="password" className="form-control" name="pass"
           placeholder="password" required=""
           value={props.login.password} onChange={update} />
-      </FormGroup>
        <Button className="btn btn-lg btn-primary btn-block"
          onClick={create_token}>
          Log In
        </Button>
+     </FormGroup>
     </div>
   );
 };

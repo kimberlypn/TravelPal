@@ -15,6 +15,25 @@ class TheServer {
       },
     });
   }
+
+  submit_login(data) {
+    console.log(data);
+    $.ajax("/api/v1/token", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'SET_TOKEN',
+          token: resp,
+        });
+      },
+      error: (resp) => {
+        alert("Could not log in. Please try again.");
+      }
+    });
+  }
 }
 
 export default new TheServer();
