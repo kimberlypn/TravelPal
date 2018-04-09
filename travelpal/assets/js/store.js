@@ -13,6 +13,34 @@ function users(state = [], action) {
   }
 }
 
+let empty_form = {
+  token: "",
+  id: "",
+  email: "",
+  name: "",
+  username: ""
+}
+
+function form(state = empty_form, action) {
+  switch (action.type) {
+    case 'UPDATE_FORM':
+      return Object.assign({}, state, action.data);
+    case 'SET_TOKEN':
+      let session = {
+        token: action.token.token,
+        id: action.token.id,
+        email: action.token.email,
+        name: action.token.name,
+        username: action.token.username
+      }
+      return Object.assign({}, state, session);
+    case 'DESTROY_TOKEN':
+      return empty_form;
+    default:
+      return state;
+  }
+}
+
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
@@ -62,7 +90,7 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({users, token, login, register});
+  let reducer = combineReducers({users, form, token, login, register});
   let state1 = reducer(state0, action);
   return deepFreeze(state1);
 };

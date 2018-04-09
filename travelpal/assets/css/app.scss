@@ -5,12 +5,23 @@
   font-family: 'Travellers';
   src: url('/fonts/travellers.ttf');
 }
+
+@font-face {
+  font-family: 'Quicksand_Light';
+  src: url('/fonts/Quicksand_Light.otf');
+}
 /****************************** END OF FONTS *****************************/
 
 /************************** SHARED ACROSS PAGES **************************/
+body {
+  font-family: 'Quicksand_Light';
+  font-size: 18px;
+}
+
 h1 {
   font-family: 'Travellers';
   font-size: 70px;
+  color: #333a41;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
@@ -56,3 +67,46 @@ input[type="password"] {
   color: grey;
 }
 /*************************** END OF LOGIN FORM ***************************/
+
+/**************************** NAVIGATION BAR *****************************/
+.navbar {
+  background-color: #333a41;
+}
+
+.navbar-collapse a, .navbar-brand, .navbar-text {
+  color: white;
+}
+
+.navbar-collapse a:hover {
+  color: #a1cbed;
+}
+
+.navbar-text a {
+  color: white;
+}
+
+.navbar-text a:hover {
+  color: #a1cbed;
+  text-decoration: none;
+}
+
+.header {
+  margin-bottom: 50px;
+  margin-top: 15px;
+}
+
+/* Header CSS adapted from: https://stackoverflow.com/questions/11701311/logo-image-and-h1-heading-on-the-same-line?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa */
+.header img {
+  float: left;
+  width: 75px;
+  height: 75px;
+}
+
+.header h2 {
+  position: relative;
+  top: 15px;
+  left: 10px;
+  font-size: 50px;
+  font-weight: bold;
+}
+/************************ END OF NAVIGATION BAR **************************/

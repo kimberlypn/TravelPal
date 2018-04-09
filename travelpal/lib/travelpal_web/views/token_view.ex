@@ -4,9 +4,11 @@ defmodule TravelpalWeb.TokenView do
   # Taken from Nat's lecture notes
   def render("token.json", %{user: user, token: token}) do
     %{
-      user_id: user.id,
-      user_name: user.name,
-      token: token
+      token: token,
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      username: user.username
     }
   end
 end

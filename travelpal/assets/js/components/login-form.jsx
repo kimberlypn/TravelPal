@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup, Input } from 'reactstrap';
 
 import api from '../api';
 
@@ -23,19 +23,26 @@ function LoginForm(props) {
   }
 
   return (
-    <div className="container" id="login">
-      <FormGroup>
-        <Input type="text" className="form-control" name="username"
-          placeholder="username" required="" autoFocus=""
-          value={props.login.username} onChange={update} />
-        <Input type="password" className="form-control" name="pass"
-          placeholder="password" required=""
-          value={props.login.password} onChange={update} />
-       <Button className="btn btn-lg btn-primary btn-block"
-         onClick={create_token}>
-         Log In
-       </Button>
-     </FormGroup>
+    <div>
+      <div class="header">
+        {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
+        <img src="images/airplane-icon.png" alt="logo" />
+        <h1>TRAVELPAL</h1>
+      </div>
+      <div className="container" id="login">
+        <FormGroup>
+          <Input type="text" className="form-control" name="username"
+            placeholder="username" required="" autoFocus=""
+            value={props.login.username} onChange={update} />
+          <Input type="password" className="form-control" name="pass"
+            placeholder="password" required=""
+            value={props.login.password} onChange={update} />
+         <Button className="btn btn-lg btn-primary btn-block"
+           onClick={create_token}>
+           LOG IN
+         </Button>
+       </FormGroup>
+      </div>
     </div>
   );
 };
