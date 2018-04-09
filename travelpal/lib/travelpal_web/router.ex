@@ -17,6 +17,9 @@ defmodule TravelpalWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/weather", PageController, :index
+    get "/calendar", PageController, :index
+    get "/profile", PageController, :index
   end
 
   # Other scopes may use custom stacks.

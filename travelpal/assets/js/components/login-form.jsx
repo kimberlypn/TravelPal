@@ -24,7 +24,7 @@ function LoginForm(props) {
 
   return (
     <div>
-      <div class="header">
+      <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
         <img src="images/airplane-icon.png" alt="logo" />
         <h1>TRAVELPAL</h1>

@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginForm from './login-form';
 import Main from './main';
 
-// Renders the main application; adapted from Nat's lecture notes
+// Renders the main application
 export default function travelpal_init(store) {
   ReactDOM.render(
     <Provider store={store}>
@@ -27,7 +27,7 @@ let Travelpal = connect((state) => state)((props) => {
     );
   }
   else {
-    main = <Main name={props.form.name} />;
+    main = <Main state={props.form} />;
   }
 
   return (
