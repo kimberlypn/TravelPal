@@ -8,7 +8,8 @@ function Profile(props) {
 
   return (
     <div className="page-content">
-      <p>Username: {props.state.username}</p>
+      <p><b>Username:</b> {props.state.username}</p>
+      <p><b>Email:</b> {props.state.email}</p>
     </div>
   );
 };
