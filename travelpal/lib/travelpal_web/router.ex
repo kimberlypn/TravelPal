@@ -26,6 +26,9 @@ defmodule TravelpalWeb.Router do
   scope "/api/v1", TravelpalWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    resources "/follows", FollowController, except: [:new, :edit]
+    resources "/traveldates", TravelDateController, except: [:new, :edit]
+    
     post "/token", TokenController, :create
   end
 end
