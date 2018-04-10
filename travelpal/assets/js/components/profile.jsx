@@ -91,7 +91,7 @@ function Profile(props) {
         </span>
       </Row>
       {/* TODO: toggle the entire input group when clicking the edit button
-      and make it so that the budget input width is the same as the others
+      and make it so that the budget input width is the same as the others'
       <InputGroup>
         <InputGroupAddon addonType="prepend">$</InputGroupAddon>
         <Input type="number" className="form-control" name="budget"
