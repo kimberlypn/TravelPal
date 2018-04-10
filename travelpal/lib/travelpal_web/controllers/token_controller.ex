@@ -5,9 +5,9 @@ defmodule TravelpalWeb.TokenController do
 
   action_fallback TravelpalWeb.FallbackController
 
-  def create(conn, %{"username" => username, "pass" => pass}) do
+  def create(conn, %{"username" => username, "password" => password}) do
     with {:ok, %User{} = user} <-
-      Travelpal.Users.get_and_auth_user(username, pass) do
+      Travelpal.Users.get_and_auth_user(username, password) do
       token = Phoenix.Token.sign(conn, "auth token", user.id)
       conn
       |> put_status(:created)

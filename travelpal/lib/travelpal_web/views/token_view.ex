@@ -8,7 +8,8 @@ defmodule TravelpalWeb.TokenView do
       id: user.id,
       email: user.email,
       name: user.name,
-      username: user.username
+      username: user.username,
+      budget: user.budget
     }
   end
 end

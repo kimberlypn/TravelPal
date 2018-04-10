@@ -33,7 +33,7 @@ h1 {
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
-/******************************* LOGIN FORM ******************************/
+/************************** LOGIN/REGISTRATION FORM **********************/
 #login {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -65,16 +65,28 @@ input[type="password"] {
   border-top-right-radius: 0;
 }
 
-#login .row {
+.input-group {
+  margin-top: 0px;
+}
+
+#login .row, #registration .row {
   max-width: 400px;
   margin: 0 auto;
   padding: 5px 10px 5px 10px;
 }
 
-#login .row a {
-  color: grey;
+#login p, #registration p {
+  text-align: center;
 }
-/*************************** END OF LOGIN FORM ***************************/
+
+#login a:hover, #registration a:hover {
+  text-decoration: none;
+}
+
+#registration {
+  display: none;
+}
+/********************* END OF LOGIN/REGISTRATION FORM ********************/
 
 /**************************** NAVIGATION BAR *****************************/
 .navbar {

@@ -10,6 +10,7 @@ function Profile(props) {
     <div className="page-content">
       <p><b>Username:</b> {props.state.username}</p>
       <p><b>Email:</b> {props.state.email}</p>
+      <p><b>Budget:</b> ${props.state.budget}</p>
     </div>
   );
 };

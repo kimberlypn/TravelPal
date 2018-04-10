@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import LoginForm from './login-form';
+import RegistrationForm from './registration-form';
 import Main from './main';
 
 // Renders the main application

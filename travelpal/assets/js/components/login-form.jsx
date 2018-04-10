@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Button, FormGroup, Input } from 'reactstrap';
 
 import api from '../api';
+import RegistrationForm from './registration-form';
 
 // Renders the log-in form; adapted from Nat's lecture notes
 function LoginForm(props) {
@@ -22,6 +24,12 @@ function LoginForm(props) {
     api.submit_login(props.login);
   }
 
+  // Toggles the registration form
+  function register() {
+    $("#registration").show();
+    $("#login").hide();
+  }
+
   return (
     <div>
       <div className="header">
@@ -29,18 +37,24 @@ function LoginForm(props) {
         <img src="images/airplane-icon.png" alt="logo" />
         <h1>TRAVELPAL</h1>
       </div>
+      <Route path="/" exact={true} render={() =>
+        <RegistrationForm />
+      } />
       <div className="container" id="login">
         <FormGroup>
           <Input type="text" className="form-control" name="username"
             placeholder="username" required="" autoFocus=""
             value={props.login.username} onChange={update} />
-          <Input type="password" className="form-control" name="pass"
+          <Input type="password" className="form-control" name="password"
             placeholder="password" required=""
             value={props.login.password} onChange={update} />
          <Button className="btn btn-lg btn-primary btn-block"
            onClick={create_token}>
            LOG IN
          </Button>
+         <br />
+         <p>Don't have an account? Register <a href="javascript:void(0)"
+          onClick={register}>here</a>.</p>
        </FormGroup>
       </div>
     </div>

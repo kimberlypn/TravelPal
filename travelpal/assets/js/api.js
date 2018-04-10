@@ -34,6 +34,25 @@ class TheServer {
       }
     });
   }
+
+  create_user(data) {
+    $.ajax("/api/v1/users", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user: data}),
+      success: (resp) => {
+        alert("Successfully registered! You can now log in.");
+        store.dispatch({
+          type: 'ADD_USER',
+          user: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Failed to register. Please try again.");
+      },
+    });
+  }
 }
 
 export default new TheServer();

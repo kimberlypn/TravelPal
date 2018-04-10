@@ -18,7 +18,8 @@ let empty_form = {
   id: "",
   email: "",
   name: "",
-  username: ""
+  username: "",
+  budget: 0
 }
 
 function form(state = empty_form, action) {
@@ -31,7 +32,8 @@ function form(state = empty_form, action) {
         id: action.token.id,
         email: action.token.email,
         name: action.token.name,
-        username: action.token.username
+        username: action.token.username,
+        budget: action.token.budget
       }
       return Object.assign({}, state, session);
     case 'DESTROY_TOKEN':
@@ -54,7 +56,7 @@ function token(state = null, action) {
 
 let empty_login = {
   username: "",
-  pass: ""
+  password: ""
 };
 
 function login(state = empty_login, action) {
@@ -70,9 +72,10 @@ function login(state = empty_login, action) {
 
 let empty_register = {
   email: "",
-  username: "",
   name: "",
-  password: ""
+  username: "",
+  password: "",
+  budget: 0
 }
 
 function register(state = empty_register, action) {
