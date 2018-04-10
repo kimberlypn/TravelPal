@@ -31,6 +31,26 @@ function Profile(props) {
 
   return (
     <div className="page-content" id="profile">
+      <p id="name">
+        <b>Name:</b> {props.state.name}
+        <a href="javascript:void(0)" onClick={() => toggleEdit('name')}>
+          <img src="images/edit.png" alt="edit-name" />
+        </a>
+      </p>
+      <Row id="name-edit">
+        <b>New Name:</b>
+        <Input type="text" className="form-control" name="name"
+          placeholder="name" required="" autoFocus=""
+          value={props.state.name} onChange={update} />
+        <span>
+          <a href="javascript:void(0)" onClick={submit}>
+            Submit
+          </a>
+          <a href="javascript:void(0)" onClick={() => toggleEdit('name')}>
+            Cancel
+          </a>
+        </span>
+      </Row>
       <p id="username">
         <b>Username:</b> {props.state.username}
         <a href="javascript:void(0)" onClick={() => toggleEdit('username')}>
