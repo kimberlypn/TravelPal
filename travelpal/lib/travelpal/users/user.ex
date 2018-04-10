@@ -2,7 +2,7 @@ defmodule Travelpal.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Travelpal.Follows.Follow
+  alias Travelpal.Friends.Friend
 
   schema "users" do
     field :email, :string
@@ -12,10 +12,10 @@ defmodule Travelpal.Users.User do
     field :password_hash, :string
     field :password, :string, virtual: true
 
-    has_many :follower_follows, Follow, foreign_key: :follower_id
-    has_many :followee_follows, Follow, foreign_key: :followee_id
-    has_many :followers, through: [:followee_follows, :follower]
-    has_many :followees, through: [:follower_follows, :followee]
+    has_many :requestor_requests, Friend, foreign_key: :requestor_id
+    has_many :acceptor_accepts, Friend, foreign_key: :acceptor_id
+    has_many :requestors, through: [:acceptor_accepts, :requestor]
+    has_many :acceptors, through: [:requestor_requests, :acceptor]
 
     timestamps()
   end

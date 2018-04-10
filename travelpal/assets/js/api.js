@@ -13,6 +13,26 @@ class TheServer {
           users: resp.data,
         });
       },
+      error: (resp) => {
+        alert("Could not load users.");
+      }
+    });
+  }
+
+  request_friends() {
+    $.ajax("/api/v1/friends", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'FRIENDS_LIST',
+          friends: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not load friends.");
+      }
     });
   }
 
@@ -71,6 +91,24 @@ class TheServer {
       }
     });
   }
+
+  delete_friend(data) {
+  $.ajax("/api/v1/friends/" + data, {
+    method: "delete",
+    dataType: "json",
+    contentType: "application/json; charset=UTF-8",
+    data: JSON.stringify(data),
+    success: (resp) => {
+      store.dispatch({
+        type: 'FRIENDS_LIST',
+        friends: resp.data,
+      });
+    },
+    error: (resp) => {
+      alert("Could not unfriend. Please try again.");
+    }
+  });
+}
 }
 
 export default new TheServer();

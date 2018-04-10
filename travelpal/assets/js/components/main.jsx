@@ -12,7 +12,7 @@ export default function Main(props) {
 
   return (
     <div>
-      <Nav name={props.state.name} />
+      <Nav name={props.form.name} />
       <Route path="/" exact={true} render={() =>
         <Home />
       } />
@@ -23,7 +23,7 @@ export default function Main(props) {
         <PastTravels />
       } />
       <Route path="/profile" exact={true} render={() =>
-        <Profile state={props.state} />
+        <Profile form={props.form} friends={props.friends} />
       } />
     </div>
   );

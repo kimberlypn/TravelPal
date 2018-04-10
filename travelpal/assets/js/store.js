@@ -13,6 +13,15 @@ function users(state = [], action) {
   }
 }
 
+function friends(state = [], action) {
+  switch (action.type) {
+    case 'FRIENDS_LIST':
+      return [...action.friends];
+    default:
+      return state;
+  }
+}
+
 let empty_form = {
   token: "",
   id: "",
@@ -93,7 +102,7 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({users, form, token, login, register});
+  let reducer = combineReducers({users, friends, form, token, login, register});
   let state1 = reducer(state0, action);
   return deepFreeze(state1);
 };

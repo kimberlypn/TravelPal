@@ -13,13 +13,14 @@
 defmodule Seeds do
   alias Travelpal.Repo
   alias Travelpal.Users.User
+  alias Travelpal.Friends.Friend
 
   def run do
     Repo.delete_all(User)
     pass1 = Comeonin.Argon2.hashpwsalt("mdangpass")
     pass2 = Comeonin.Argon2.hashpwsalt("kimberlypnpass")
     pass3 = Comeonin.Argon2.hashpwsalt("long74100pass")
-    pass4 = Comeonin.Argon2.hashpwsalt("Guo-Williampass")
+    pass4 = Comeonin.Argon2.hashpwsalt("guo-williampass")
 
     Repo.insert!(%User{
       email: "matt@example.com",
@@ -45,9 +46,26 @@ defmodule Seeds do
     Repo.insert!(%User{
       email: "will@example.com",
       name: "William Guo",
-      username: "Guo-William",
+      username: "guo-william",
       password_hash: pass4,
       budget: 1000
+    })
+
+    Repo.delete_all(Friend)
+    Repo.insert!(%Friend{
+      requestor_id: 1,
+      acceptor_id: 2,
+      status: "Accepted"
+    })
+    Repo.insert!(%Friend{
+      requestor_id: 3,
+      acceptor_id: 2,
+      status: "Pending"
+    })
+    Repo.insert!(%Friend{
+      requestor_id: 4,
+      acceptor_id: 2,
+      status: "Accepted"
     })
   end
 

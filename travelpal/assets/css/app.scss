@@ -136,29 +136,47 @@ input[type="password"] {
 /************************ END OF NAVIGATION BAR **************************/
 
 /******************************** PROFILE ********************************/
-#profile img {
+#profile-info img {
   height: 20px;
   width: auto;
   margin-left: 10px;
 }
 
-#profile input {
+#profile-info input {
   width: 400px;
 }
 
-#profile .row {
+#profile-info .row {
   margin-left: 1px;
   margin-bottom: 15px;
   display: none;
 }
 
-#profile .row p {
+#profile-info .row p {
   margin-right: 10px;
   padding-top: 10px;
 }
 
-#profile .row a {
+#profile-info .row a {
   text-decoration: none;
   margin-right: 10px;
+}
+
+.friend-btn {
+  text-align: right;
+}
+
+.friend-btn button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.friend-btn button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
+
+#profile-friends .card {
+  margin-bottom: 15px;
 }
 /***************************** END OF PROFILE ****************************/
