@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the weather page
+// Renders the user's travel dates
 function TravelDates(props) {
 
   return (

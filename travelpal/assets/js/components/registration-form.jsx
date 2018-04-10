@@ -49,7 +49,8 @@ function RegistrationForm(props) {
             value={props.form.password} onChange={update} />
           <InputGroup>
             <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-            <Input placeholder="budget" type="number" step="100" min="0" />
+            <Input type="number" className="form-control" name="budget"
+              placeholder="budget" step="100" min="0" onChange={update} />
           </InputGroup>
           <br />
          <Button className="btn btn-lg btn-primary btn-block"
@@ -57,7 +58,7 @@ function RegistrationForm(props) {
            SUBMIT
          </Button>
          <br />
-         <p><a href="javascript:void(0)"onClick={cancel}>Cancel</a></p>
+         <p><a href="javascript:void(0)" onClick={cancel}>Cancel</a></p>
        </FormGroup>
       </div>
     </div>

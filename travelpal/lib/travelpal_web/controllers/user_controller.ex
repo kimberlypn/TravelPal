@@ -25,11 +25,14 @@ defmodule TravelpalWeb.UserController do
     render(conn, "show.json", user: user)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Users.get_user!(id)
+  def update(conn, %{"user" => user_params}) do
+    user = Users.get_user!(Map.get(user_params, "id"))
 
     with {:ok, %User{} = user} <- Users.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", page_path(conn, :index))
+      |> render("index.json", users: Users.list_users())
     end
   end
 

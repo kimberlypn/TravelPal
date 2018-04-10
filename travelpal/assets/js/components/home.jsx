@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the flights page
+// Renders the home page
 function Home(props) {
 
   return (

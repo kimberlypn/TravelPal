@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the calendar page
+// Renders the user's past travels
 function PastTravels(props) {
 
   return (

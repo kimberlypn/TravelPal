@@ -53,6 +53,24 @@ class TheServer {
       },
     });
   }
+
+  edit_user(data) {
+    $.ajax("/api/v1/users/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user: data}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'USERS_LIST',
+          users: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not save the edit. Please try again.");
+      }
+    });
+  }
 }
 
 export default new TheServer();

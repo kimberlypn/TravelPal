@@ -134,3 +134,31 @@ input[type="password"] {
   font-weight: bold;
 }
 /************************ END OF NAVIGATION BAR **************************/
+
+/******************************** PROFILE ********************************/
+#profile img {
+  height: 20px;
+  width: auto;
+  margin-left: 10px;
+}
+
+#profile input {
+  width: 400px;
+}
+
+#profile .row {
+  margin-left: 1px;
+  margin-bottom: 15px;
+  display: none;
+}
+
+#profile .row p {
+  margin-right: 10px;
+  padding-top: 10px;
+}
+
+#profile .row a {
+  text-decoration: none;
+  margin-right: 10px;
+}
+/***************************** END OF PROFILE ****************************/
