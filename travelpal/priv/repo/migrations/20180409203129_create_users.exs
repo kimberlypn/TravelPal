@@ -6,6 +6,7 @@ defmodule Travelpal.Repo.Migrations.CreateUsers do
       add :name, :string, null: false
       add :email, :string, null: false
       add :username, :string, null: false
+      add :budget, :integer, null: false, default: 0
 
       timestamps()
     end

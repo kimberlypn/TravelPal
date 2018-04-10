@@ -8,6 +8,7 @@ defmodule Travelpal.Users.User do
     field :email, :string
     field :name, :string
     field :username, :string
+    field :budget, :integer
     field :password_hash, :string
     field :password, :string, virtual: true
 
@@ -22,10 +23,10 @@ defmodule Travelpal.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :name, :username, :password])
+    |> cast(attrs, [:email, :name, :username, :budget, :password])
     |> validate_password(:password)
     |> put_pass_hash()
-    |> validate_required([:email, :name, :username, :password_hash])
+    |> validate_required([:email, :name, :username, :budget, :password_hash])
     # Regex taken from: https://gist.github.com/mgamini/4f3a8bc55bdcc96be2c6
     |> validate_format(:email, ~r/^[A-Za-z0-9._%+-+']+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
     # Check that username and email are unique (case insensitive)

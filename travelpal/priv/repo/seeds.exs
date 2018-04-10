@@ -25,25 +25,29 @@ defmodule Seeds do
       email: "matt@example.com",
       name: "Matt Dang",
       username: "mdang",
-      password_hash: pass1
+      password_hash: pass1,
+      budget: 4000
     })
     Repo.insert!(%User{
       email: "kimberly@example.com",
       name: "Kimberly Nguyen",
       username: "kimberlypn",
-      password_hash: pass2
+      password_hash: pass2,
+      budget: 3000
     })
     Repo.insert!(%User{
       email: "long@example.com",
       name: "Long Lin",
       username: "long74100",
-      password_hash: pass3
+      password_hash: pass3,
+      budget: 2000
     })
     Repo.insert!(%User{
       email: "will@example.com",
       name: "William Guo",
       username: "Guo-William",
-      password_hash: pass4
+      password_hash: pass4,
+      budget: 1000
     })
   end
 
