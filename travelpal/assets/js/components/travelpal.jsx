@@ -33,9 +33,9 @@ let Travelpal = connect((state) => state)((props) => {
 
   return (
     <Router>
-      <div>
+      <React.Fragment>
         {main}
-      </div>
+      </React.Fragment>
     </Router>
   );
 });

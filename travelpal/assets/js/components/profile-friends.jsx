@@ -7,7 +7,8 @@ import api from '../api';
 import Friend from './friend';
 
 // Renders the user's friends
-function ProfileFriends(props) {
+export default function ProfileFriends(props) {
+  // Renders each friend's details as a card
   let friends = _.map(props.friends, function(ff) {
     if (props.user == ff.acceptor.id) {
       return <Friend key={ff.id} status={ff.status} name={ff.requestor.name}
@@ -19,6 +20,7 @@ function ProfileFriends(props) {
     }
   });
 
+  // Display "No friends" message if appropriate
   if (friends.length == 0) {
     friends = <Col><b>You have no friends.</b></Col>;
   }
@@ -30,11 +32,3 @@ function ProfileFriends(props) {
     </div>
   );
 };
-
-function state2props(state) {
-  return {
-    form: state.form
-  };
-}
-
-export default connect(state2props)(ProfileFriends);

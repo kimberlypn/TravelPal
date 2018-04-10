@@ -31,7 +31,7 @@ function LoginForm(props) {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
         <img src="images/airplane-icon.png" alt="logo" />
@@ -57,7 +57,7 @@ function LoginForm(props) {
           onClick={register}>here</a>.</p>
        </FormGroup>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

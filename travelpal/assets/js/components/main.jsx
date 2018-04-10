@@ -7,11 +7,10 @@ import TravelDates from './travel-dates';
 import PastTravels from './past-travels';
 import Profile from './profile';
 
-// Renders the home page
+// Renders the home page after logging in
 export default function Main(props) {
-
   return (
-    <div>
+    <React.Fragment>
       <Nav name={props.form.name} />
       <Route path="/" exact={true} render={() =>
         <Home />
@@ -25,6 +24,6 @@ export default function Main(props) {
       <Route path="/profile" exact={true} render={() =>
         <Profile form={props.form} friends={props.friends} />
       } />
-    </div>
+    </React.Fragment>
   );
 }

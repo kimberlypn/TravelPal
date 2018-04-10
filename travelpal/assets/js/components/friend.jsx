@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect } from 'react-redux';
 import { Card, CardBody, CardHeader, Button } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
 
 import api from '../api';
 
 // Renders the details of an individual friend as a card
-function Friend(props) {
+export default function Friend(props) {
   let btnTxt = (props.status == "Accepted") ? "Unfriend" : "Cancel Request";
 
   // Sends an unfriend request
@@ -30,20 +29,10 @@ function Friend(props) {
           </Row>
         </CardHeader>
         <CardBody>
-          <div>
-            <p>{props.username}</p>
-            <p>{props.email}</p>
-          </div>
+          <p>{props.username}</p>
+          <p>{props.email}</p>
         </CardBody>
       </Card>
     </Col>
   );
 }
-
-function state2props(state) {
-  return {
-
-  };
-}
-
-export default connect(state2props)(Friend);

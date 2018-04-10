@@ -14,7 +14,7 @@ function Nav(props) {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
         <img src="images/airplane-icon.png" alt="logo" />
@@ -49,7 +49,7 @@ function Nav(props) {
           <a href="javascript:void(0)" onClick={destroy_token}> Log Out</a>
         </span>
       </nav>
-    </div>
+    </React.Fragment>
   );
 };
 
