@@ -18,7 +18,7 @@ function Profile(props) {
     });
   }
 
-  // Sends a request to update the task
+  // Sends a request to update the user
   function submit(ev) {
     api.edit_user(props.state);
   }

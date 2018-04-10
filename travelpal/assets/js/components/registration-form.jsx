@@ -17,12 +17,12 @@ function RegistrationForm(props) {
     });
   }
 
-  // Sends a request to create a user with the values from the forms
+  // Sends a request to create a user with the values from the form
   function submit(ev) {
     api.create_user(props.form);
   }
 
-  // Closes the registration form
+  // Clears and closes the registration form
   function cancel() {
     props.dispatch({
       type: 'CLEAR_FORM',
