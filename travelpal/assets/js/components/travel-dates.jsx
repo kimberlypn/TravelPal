@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import api from '../api';
 
 // Renders the weather page
-function Weather(props) {
+function TravelDates(props) {
 
   return (
     <div className="page-content">
-      Weather
+      Travel Dates
     </div>
   );
 };
@@ -19,4 +19,4 @@ function state2props(state) {
   };
 }
 
-export default connect(state2props)(Weather);
+export default connect(state2props)(TravelDates);

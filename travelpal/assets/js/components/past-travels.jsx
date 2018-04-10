@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the flights page
-function Flights(props) {
+// Renders the calendar page
+function PastTravels(props) {
 
   return (
     <div className="page-content">
-      Flights
+      Past Travels
     </div>
   );
 };
@@ -19,4 +19,4 @@ function state2props(state) {
   };
 }
 
-export default connect(state2props)(Flights);
+export default connect(state2props)(PastTravels);

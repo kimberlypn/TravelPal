@@ -24,6 +24,9 @@ function RegistrationForm(props) {
 
   // Closes the registration form
   function cancel() {
+    props.dispatch({
+      type: 'CLEAR_FORM',
+    });
     $("#registration").hide();
     $("#login").show();
   }

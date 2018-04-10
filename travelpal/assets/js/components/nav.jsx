@@ -31,13 +31,13 @@ function Nav(props) {
           <div className="navbar-nav">
             <NavLink to="/" exact={true} activeClassName="active"
               className="nav-link">
-              Flights
+              Home
             </NavLink>
-            <NavLink to="/weather" href="#" className="nav-link">
-              Weather
+            <NavLink to="/travel/dates" href="#" className="nav-link">
+              Travel Dates
             </NavLink>
-            <NavLink to="/calendar" href="#" className="nav-link">
-              Calendar
+            <NavLink to="/travel/past" href="#" className="nav-link">
+              Past Travels
             </NavLink>
             <NavLink to="/profile" href="#" className="nav-link">
               Profile

@@ -17,8 +17,8 @@ defmodule TravelpalWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/weather", PageController, :index
-    get "/calendar", PageController, :index
+    get "/travel/dates", PageController, :index
+    get "/travel/past", PageController, :index
     get "/profile", PageController, :index
   end
 
@@ -28,7 +28,7 @@ defmodule TravelpalWeb.Router do
     resources "/users", UserController, except: [:new, :edit]
     resources "/follows", FollowController, except: [:new, :edit]
     resources "/traveldates", TravelDateController, except: [:new, :edit]
-    
+
     post "/token", TokenController, :create
   end
 end
