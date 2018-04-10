@@ -5,11 +5,178 @@
   font-family: 'Travellers';
   src: url('/fonts/travellers.ttf');
 }
+
+@font-face {
+  font-family: 'Quicksand_Light';
+  src: url('/fonts/Quicksand_Light.otf');
+}
 /****************************** END OF FONTS *****************************/
 
 /************************** SHARED ACROSS PAGES **************************/
+body {
+  font-family: 'Quicksand_Light';
+  font-size: 18px;
+}
+
 h1 {
   font-family: 'Travellers';
   font-size: 70px;
+  color: #333a41;
+}
+
+.page-content {
+  margin-top: 20px;
+}
+
+.page-content b {
+  color: #19609e;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
+
+/************************** LOGIN/REGISTRATION FORM **********************/
+#login {
+  margin-top: 80px;
+  margin-bottom: 80px;
+  padding: 30px 30px 30px;
+}
+
+.form-group {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px 10px 10px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.input-group {
+  margin-top: 0px;
+}
+
+#login .row, #registration .row {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5px 10px 5px 10px;
+}
+
+#login p, #registration p {
+  text-align: center;
+}
+
+#login a:hover, #registration a:hover {
+  text-decoration: none;
+}
+
+#registration {
+  display: none;
+}
+/********************* END OF LOGIN/REGISTRATION FORM ********************/
+
+/**************************** NAVIGATION BAR *****************************/
+.navbar {
+  background-color: #333a41;
+}
+
+.navbar-collapse a, .navbar-brand, .navbar-text {
+  color: white;
+}
+
+.navbar-collapse a:hover {
+  color: #a1cbed;
+}
+
+.navbar-text a {
+  color: white;
+}
+
+.nav-link {
+  margin-right: 17px;
+}
+
+.navbar-text a:hover {
+  color: #a1cbed;
+  text-decoration: none;
+}
+
+.header {
+  margin-bottom: 50px;
+  margin-top: 15px;
+}
+
+/* Header CSS adapted from: https://stackoverflow.com/questions/11701311/logo-image-and-h1-heading-on-the-same-line?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa */
+.header img {
+  float: left;
+  width: 75px;
+  height: 75px;
+}
+
+.header h2 {
+  position: relative;
+  top: 15px;
+  left: 10px;
+  font-size: 50px;
+  font-weight: bold;
+}
+/************************ END OF NAVIGATION BAR **************************/
+
+/******************************** PROFILE ********************************/
+#profile-info img {
+  height: 20px;
+  width: auto;
+  margin-left: 10px;
+}
+
+#profile-info input {
+  width: 400px;
+}
+
+#profile-info .row {
+  margin-left: 1px;
+  margin-bottom: 15px;
+  display: none;
+}
+
+#profile-info .row p {
+  margin-right: 10px;
+  padding-top: 10px;
+}
+
+#profile-info .row a {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.friend-btn {
+  text-align: right;
+}
+
+.friend-btn button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.friend-btn button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
+
+#profile-friends .card {
+  margin-bottom: 15px;
+}
+/***************************** END OF PROFILE ****************************/

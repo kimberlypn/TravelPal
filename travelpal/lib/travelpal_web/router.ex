@@ -17,10 +17,17 @@ defmodule TravelpalWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/travel/dates", PageController, :index
+    get "/travel/past", PageController, :index
+    get "/profile", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", TravelpalWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/v1", TravelpalWeb do
+    pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/traveldates", TravelDateController, except: [:new, :edit]
+    resources "/friends", FriendController, except: [:new, :edit]
+    post "/token", TokenController, :create
+  end
 end

@@ -19,3 +19,12 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+import store from './store';
+import api from './api';
+import travelpal_init from "./components/travelpal";
+
+$(function() {
+  api.request_users();
+  api.request_friends();
+  travelpal_init(store);
+});
