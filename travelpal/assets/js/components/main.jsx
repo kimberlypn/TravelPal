@@ -22,7 +22,8 @@ export default function Main({form, friends, trips}) {
   let bookedTrips = userTrips.filter(tt => tt.booked
     && new Date(tt.end_date) >= today);
   // Grab the trips that have already passed
-  let pastTrips = userTrips.filter(tt => new Date(tt.end_date) < today);
+  let pastTrips = userTrips.filter(tt => tt.booked &&
+    new Date(tt.end_date) < today);
 
   return (
     <React.Fragment>
