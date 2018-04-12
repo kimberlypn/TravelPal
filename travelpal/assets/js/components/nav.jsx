@@ -36,8 +36,11 @@ function Nav(props) {
             <NavLink to="/travel/dates" href="#" className="nav-link">
               Travel Dates
             </NavLink>
+            <NavLink to="/travel/booked" href="#" className="nav-link">
+              Booked Trips
+            </NavLink>
             <NavLink to="/travel/past" href="#" className="nav-link">
-              Past Travels
+              Past Trips
             </NavLink>
             <NavLink to="/profile" href="#" className="nav-link">
               Profile

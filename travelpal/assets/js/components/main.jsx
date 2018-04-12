@@ -4,8 +4,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Nav from './Nav';
 import Home from './Home';
+import Search from './Search';
 import TravelDates from './TravelDates';
-import PastTravels from './PastTravels';
+import PastTrips from './PastTrips';
+import BookedTrips from './BookedTrips';
 import Profile from './Profile';
 
 // Renders the home page after logging in
@@ -19,11 +21,17 @@ export default function Main({form, friends, travelDates}) {
       <Route path="/" exact={true} render={() =>
         <Home />
       } />
+      <Route path="/search" exact={true} render={() =>
+        <Search />
+      } />
       <Route path="/travel/dates" exact={true} render={() =>
         <TravelDates userId={form.id} travelDates={travelDates} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
-        <PastTravels />
+        <PastTrips />
+      } />
+      <Route path="/travel/booked" exact={true} render={() =>
+        <BookedTrips />
       } />
       <Route path="/profile" exact={true} render={() =>
         <Profile form={form} friends={friends} />

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import api from '../api';
 
 // Renders the user's past travels
-function PastTravels(props) {
+function BookedTrips(props) {
 
   return (
     <div className="page-content">
-      Past Travels
+      Booked Trips
     </div>
   );
 };
@@ -19,4 +19,4 @@ function state2props(state) {
   };
 };
 
-export default connect(state2props)(PastTravels);
+export default connect(state2props)(BookedTrips);

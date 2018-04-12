@@ -17,7 +17,9 @@ defmodule TravelpalWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/search", PageController, :index
     get "/travel/dates", PageController, :index
+    get "/travel/booked", PageController, :index
     get "/travel/past", PageController, :index
     get "/profile", PageController, :index
   end

@@ -14,7 +14,7 @@ export default function ProfileFriends({userId, friends}) {
       return <FriendCard key={ff.id} status={ff.status} name={ff.requestor.name}
         email={ff.requestor.email} username={ff.requestor.username} id={ff.id} />
     }
-    if (props.user == ff.requestor.id) {
+    if (userId == ff.requestor.id) {
       return <FriendCard key={ff.id} status={ff.status} name={ff.acceptor.name}
         email={ff.acceptor.email} username={ff.acceptor.username} id={ff.id} />
     }
