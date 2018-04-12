@@ -28,7 +28,8 @@ let Travelpal = connect((state) => state)((props) => {
     );
   }
   else {
-    main = <Main form={props.form} friends={props.friends} />;
+    main = <Main form={props.form} friends={props.friends}
+      travelDates={props.travelDates} />;
   }
 
   return (

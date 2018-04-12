@@ -26,5 +26,6 @@ import travelpal_init from "./components/travelpal";
 $(function() {
   api.request_users();
   api.request_friends();
+  api.request_travel_dates();
   travelpal_init(store);
 });

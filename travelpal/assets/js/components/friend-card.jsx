@@ -6,7 +6,7 @@ import { Row, Col } from 'reactstrap';
 import api from '../api';
 
 // Renders the details of an individual friend as a card
-export default function Friend(props) {
+export default function FriendCard(props) {
   let btnTxt = (props.status == "Accepted") ? "Unfriend" : "Cancel Request";
 
   // Sends an unfriend request

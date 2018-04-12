@@ -1,9 +1,20 @@
 defmodule TravelpalWeb.TravelDateView do
   use TravelpalWeb, :view
   alias TravelpalWeb.TravelDateView
+  alias TravelpalWeb.UserView
 
   def render("index.json", %{traveldates: traveldates}) do
-    %{data: render_many(traveldates, TravelDateView, "travel_date.json")}
+    travels = Enum.map(traveldates, fn travel ->
+      %{
+        id: Map.get(travel, :id),
+        start_date: Map.get(travel, :start_date),
+        end_date: Map.get(travel, :end_date),
+        destination: Map.get(travel, :destination),
+        price_limit: Map.get(travel, :price_limit),
+        user: render_one(Map.get(travel, :user), UserView, "user.json")
+      }
+    end)
+    %{data: travels}
   end
 
   def render("show.json", %{travel_date: travel_date}) do
