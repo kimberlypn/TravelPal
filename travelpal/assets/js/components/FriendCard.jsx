@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import { Card, CardBody, CardHeader, Button } from 'reactstrap';
-import { Row, Col } from 'reactstrap';
+import { Card, CardBody, CardHeader, Button, Row, Col } from 'reactstrap';
 
 import api from '../api';
 
-// Renders the details of an individual friend as a card
+// Renders the details of an individual friend
 export default function FriendCard({status, name, email, username, id}) {
   let btnTxt = (status == "Accepted") ? "Unfriend" : "Cancel Request";
 
@@ -15,7 +13,6 @@ export default function FriendCard({status, name, email, username, id}) {
     api.delete_friend(id);
   }
 
-  // Returns the friend's details as a Bootstrap card element
   return (
     <Col md="6">
       <Card>

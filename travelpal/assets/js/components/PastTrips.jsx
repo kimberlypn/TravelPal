@@ -1,22 +1,31 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Row, Col } from 'reactstrap';
 
 import api from '../api';
+import PastCard from './PastCard';
 
-// Renders the user's past travels
-function PastTrips(props) {
+// Renders the user's past trips
+export default function PastTrips({pastTrips}) {
+  let trips = _.map(pastTrips, function(tt) {
+    return <PastCard key={tt.id} destination={tt.destination}
+        startDate={tt.start_date} endDate={tt.end_date} price={tt.price_limit}
+        id={tt.id} />;
+  });
+
+  // Display message if no travel dates
+  if (trips.length == 0) {
+    trips = <Col><b>You have not gone on any trips.</b></Col>;
+  }
 
   return (
     <div className="page-content">
-      Past Trips
+      <h3>Past Trips</h3>
+      <Row>{trips}</Row>
     </div>
   );
 };
 
-function state2props(state) {
-  return {
-
-  };
+PastTrips.propTypes = {
+  pastTrips: PropTypes.array.isRequired
 };
-
-export default connect(state2props)(PastTrips);

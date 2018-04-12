@@ -33,6 +33,10 @@ function Nav(props) {
               className="nav-link">
               Home
             </NavLink>
+            <NavLink to="/search" exact={true} activeClassName="active"
+              className="nav-link">
+              Search
+            </NavLink>
             <NavLink to="/travel/dates" href="#" className="nav-link">
               Travel Dates
             </NavLink>
@@ -48,7 +52,6 @@ function Nav(props) {
           </div>
         </div>
         <span className="navbar-text">
-          {props.name} |
           <a href="javascript:void(0)" onClick={destroy_token}> Log Out</a>
         </span>
       </nav>

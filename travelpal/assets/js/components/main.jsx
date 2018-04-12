@@ -11,9 +11,18 @@ import BookedTrips from './BookedTrips';
 import Profile from './Profile';
 
 // Renders the home page after logging in
-export default function Main({form, friends, travelDates}) {
-  // TODO: Figure out how to route to "/profile/<user's id or username>"
-  //let profilePath = "/profile/" + props.form.id;
+export default function Main({form, friends, trips}) {
+  let userId = form.id;
+  let today = new Date();
+  // Grab only the travelDates for the current user
+  let userTrips = trips.filter(tt => tt.user.id == userId);
+  // Grab the trips that have not yet been booked
+  let travelDates = userTrips.filter(tt => !tt.booked);
+  // Grab the trips that have been booked
+  let bookedTrips = userTrips.filter(tt => tt.booked
+    && new Date(tt.end_date) >= today);
+  // Grab the trips that have already passed
+  let pastTrips = userTrips.filter(tt => new Date(tt.end_date) < today);
 
   return (
     <React.Fragment>
@@ -25,13 +34,13 @@ export default function Main({form, friends, travelDates}) {
         <Search />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
-        <TravelDates userId={form.id} travelDates={travelDates} />
-      } />
-      <Route path="/travel/past" exact={true} render={() =>
-        <PastTrips />
+        <TravelDates travelDates={travelDates} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
-        <BookedTrips />
+        <BookedTrips bookedTrips={bookedTrips} />
+      } />
+      <Route path="/travel/past" exact={true} render={() =>
+        <PastTrips pastTrips={pastTrips} />
       } />
       <Route path="/profile" exact={true} render={() =>
         <Profile form={form} friends={friends} />
@@ -43,5 +52,5 @@ export default function Main({form, friends, travelDates}) {
 Main.propTypes = {
   form: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired,
-  travelDates: PropTypes.array.isRequired
+  trips: PropTypes.array.isRequired
 };
