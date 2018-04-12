@@ -1,14 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Nav from './nav';
-import Home from './home';
-import TravelDates from './travel-dates';
-import PastTravels from './past-travels';
-import Profile from './profile';
+import Nav from './Nav';
+import Home from './Home';
+import TravelDates from './TravelDates';
+import PastTravels from './PastTravels';
+import Profile from './Profile';
 
 // Renders the home page after logging in
 export default function Main(props) {
+  // TODO: Figure out how to route to "/profile/<user's id or username>"
   //let profilePath = "/profile/" + props.form.id;
 
   return (

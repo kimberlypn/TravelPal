@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 
 import api from '../api';
-import TravelCard from './travel-card';
+import TravelCard from './TravelCard';
 
 // Renders the user's travel dates
 export default function TravelDates(props) {

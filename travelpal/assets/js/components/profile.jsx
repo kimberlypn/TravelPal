@@ -1,8 +1,8 @@
 import React from 'react';
 
 import api from '../api';
-import ProfileInfo from './profile-info';
-import ProfileFriends from './profile-friends';
+import ProfileInfo from './ProfileInfo';
+import ProfileFriends from './ProfileFriends';
 
 // Renders the user's profile
 export default function Profile(props) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 
 import api from '../api';
-import FriendCard from './friend-card';
+import FriendCard from './FriendCard';
 
 // Renders the user's friends
 export default function ProfileFriends(props) {
