@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Nav from './Nav';
@@ -8,25 +9,31 @@ import PastTravels from './PastTravels';
 import Profile from './Profile';
 
 // Renders the home page after logging in
-export default function Main(props) {
+export default function Main({form, friends, travelDates}) {
   // TODO: Figure out how to route to "/profile/<user's id or username>"
   //let profilePath = "/profile/" + props.form.id;
 
   return (
     <React.Fragment>
-      <Nav name={props.form.name} />
+      <Nav name={form.name} />
       <Route path="/" exact={true} render={() =>
         <Home />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
-        <TravelDates user={props.form.id} travelDates={props.travelDates} />
+        <TravelDates userId={form.id} travelDates={travelDates} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
         <PastTravels />
       } />
       <Route path="/profile" exact={true} render={() =>
-        <Profile form={props.form} friends={props.friends} />
+        <Profile form={form} friends={friends} />
       } />
     </React.Fragment>
   );
-}
+};
+
+Main.propTypes = {
+  form: PropTypes.object.isRequired,
+  friends: PropTypes.array.isRequired,
+  travelDates: PropTypes.array.isRequired
+};

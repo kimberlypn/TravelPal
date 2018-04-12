@@ -17,6 +17,6 @@ function state2props(state) {
   return {
 
   };
-}
+};
 
 export default connect(state2props)(Home);

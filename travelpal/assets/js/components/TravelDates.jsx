@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 
@@ -6,18 +7,18 @@ import api from '../api';
 import TravelCard from './TravelCard';
 
 // Renders the user's travel dates
-export default function TravelDates(props) {
+export default function TravelDates({userId, travelDates}) {
   let today = new Date();
   let past = [];
   let upcoming = [];
   let future = [];
 
-  _.map(props.travelDates, function(tt) {
+  _.map(travelDates, function(tt) {
     // Convert the start and end date strings to Date objects
     let startDate = new Date(tt.start_date);
     let endDate = new Date(tt.end_date);
     // Grab this user's trips
-    if (props.user == tt.user.id) {
+    if (userId == tt.user.id) {
       // TODO: Trips that have passed
       if (endDate < today) {
 
@@ -38,6 +39,15 @@ export default function TravelDates(props) {
     }
   });
 
+  // Display none message if no upcoming or future trips
+  if (upcoming.length == 0) {
+    upcoming = <Col><b>You have no trips this month.</b></Col>;
+  }
+
+  if (future.length == 0) {
+    future = <Col><b>You have no upcoming trips.</b></Col>;
+  }
+
   return (
     <div className="page-content">
       <h3>Trips This Month</h3>
@@ -47,4 +57,9 @@ export default function TravelDates(props) {
       <Row>{future}</Row>
     </div>
   );
+};
+
+TravelDates.propTypes = {
+  userId: PropTypes.number.isRequired,
+  travelDates: PropTypes.array.isRequired
 };

@@ -65,6 +65,6 @@ function state2props(state) {
   return {
     form: state.login
   };
-}
+};
 
 export default connect(state2props)(LoginForm);

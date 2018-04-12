@@ -15,7 +15,7 @@ export default function travelpal_init(store) {
     </Provider>,
     document.getElementById('root')
   );
-}
+};
 
 let TravelPal = connect((state) => state)((props) => {
   // Choose what to render depending on whether or not the user is logged in
