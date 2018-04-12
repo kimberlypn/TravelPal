@@ -18,7 +18,7 @@ export default function TravelDates(props) {
     let endDate = new Date(tt.end_date);
     // Grab this user's trips
     if (props.user == tt.user.id) {
-      // Trips that have passed
+      // TODO: Trips that have passed
       if (endDate < today) {
 
       }
