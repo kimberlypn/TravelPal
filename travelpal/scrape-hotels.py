@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import argparse
+
 from collections import OrderedDict
 from requests import get
 from bs4 import BeautifulSoup
@@ -37,6 +39,18 @@ Example of query parameters
 '''
 
 
+parser = argparse.ArgumentParser(description='parse destination input')
+parser.add_argument('-dest', action="store", dest='destination')
+
+results = parser.parse_args()
+destination = results.destination
+
+
+# exit if no argument given
+if destination is None:
+  print("Please enter a desination by adding -dest 'some destination' when running the script")
+  exit()
+
 #url = 'https://www.booking.com/searchresults.html?label=gen173nr-1FCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYATHCAQN4MTHIAQzYAQHoAQH4AQKSAgF5qAID;sid=00e247fa4231bdeb9d723c9afc1f8aa7;checkin_month=4&checkin_monthday=20&checkin_year=2018&checkout_month=4&checkout_monthday=21&checkout_year=2018&class_interval=1&dest_id=-2637882&dest_type=city&dtdisc=0&from_sf=1&genius_rate=1&group_adults=2&group_children=0&inac=0&index_postcard=0&label_click=undef&no_rooms=1&offset=0&postcard=0&raw_dest_type=city&room1=A%2CA&sb_price_type=total&src=index&src_elem=sb&ss=Taipei&ss_all=0&ssb=empty&sshis=0&ssne=Taipei&ssne_untouched=Taipei&'
 
 url = 'https://www.booking.com/searchresults.html?'
@@ -44,8 +58,6 @@ head = {"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,
 
 # use orderedDict to keep order of query parameters
 params = OrderedDict()
-
-destination = 'chicago'
 
 params['label'] = 'gen173nr-1DCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYAS7CAQN4MTHIAQzYAQPoAQGSAgF5qAID' 
 params['lang'] = 'en-gb'
