@@ -79,29 +79,6 @@ params['ss_raw'] = 'taipei'
 params['dest_id'] = ''
 params['dest_type'] = ''
 
-'''
-params['class_interval'] = 1
-params['dest_type'] = 'city'
-params['genius_rate'] = 1
-params['group_children'] = 0
-params['label_click'] = 'undef'
-params['offset'] = 0
-params['raw_dest_type'] = 'city'
-params['room1'] = 'A,A'
-params['sb_price_type'] = 'total'
-params['ssb'] = 'empty'
-params['ssne'] = destination
-params['ssne_untouched'] = destination
-params['sid'] = '129654e8254415d360a1922d47c7ccf7'
-params['sb'] = 1
-params['src'] = 'searchresults'
-params['checkin_month'] = 4
-params['checkout_year'] = 2018
-params['no_rooms'] = 1
-params['from_sf'] = 1
-params['user_changed_date'] = 1
-'''
-
 
 response = get(url, headers=head, params=params)
 
@@ -124,21 +101,27 @@ base_url = "https://www.booking.com/"
 
 for hotel in listing:
   name = hotel.select_one("span.sr-hotel__name")
+  district = hotel.select_one(".district_link")
   price = hotel.select_one(".price")
   link = hotel.select_one(".hotel_name_link")
   rating = hotel.select_one(".review-score-badge")  
 
   if name and price:
     name = name.text.strip()
+    district = district.text.strip() if district else ""    
+    district = district[0: district.find("Show") - 2].rstrip()
     
     # all prices in us currency
     price = price.text.strip()
     price = price[price.find('$') + 1:]
     link = link.attrs['href']
-    rating = rating.text if rating else "No rating available"    
+    rating = rating.text.lstrip().rstrip() if rating else "Unrated"    
     
+    print(rating)   
+ 
     hotel_info = {} 
-    hotel_info["name"] = name
+    hotel_info["name"] = name 
+    hotel_info["district"] = district
     hotel_info["price"] = price
     hotel_info["link"] = base_url + link
     hotel_info["rating"] = rating
@@ -147,6 +130,7 @@ for hotel in listing:
 
 for hotel in hotel_list:
   print("Name: ", hotel["name"])
+  print("District: ", hotel["district"])
   print("Price: $", hotel["price"])
   print("Rating: ", hotel["rating"])
   print("Link: ", hotel["link"])
