@@ -8,35 +8,31 @@ import html5lib
 '''
 Example of query parameters
 {
-	label:gen173nr-1FCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYATHCAQN4MTHIAQzYAQHoAQH4AQKSAgF5qAID;sid=449c1b7e43269614684311e29acdfd90;checkin_monthday=20
+
+	label:gen173nr-1DCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYAS7CAQN4MTHIAQzYAQPoAQGSAgF5qAID
+	lang:en-gb
+	sid:7bd01355e93b5fc50b6943e46ac9561a
+	sb:1
+	src:index
+	src_elem:sb
+       error_url:https://www.booking.com/index.en-gb.html?label=gen173nr-1DCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYAS7CAQN4MTHIAQzYAQPoAQGSAgF5qAID;sid=7bd01355e93b5fc50b6943e46ac9561a;sb_price_type=total&;
+	ss:taipei
+	checkin_monthday:20
+	checkin_month:4
 	checkin_year:2018
-	checkout_month:4
 	checkout_monthday:21
+	checkout_month:4
 	checkout_year:2018
-	class_interval:1
-	dest_id:-2637882
-	dest_type:city
-	dtdisc:0
-	from_sf:1
-	genius_rate:1
 	group_adults:2
 	group_children:0
-	inac:0
-	index_postcard:0
-	label_click:undef
 	no_rooms:1
-	offset:0
-	postcard:0
-	raw_dest_type:city
-	room1:A,A
-	sb_price_type:total
-	src:index
-	ss:Taipei
-	ss_all:0
-	ssb:empty
-	sshis:0
-	ssne:Taipei
-	ssne_untouched:Taipei
+	from_sf:1
+	ss_raw:taipei
+	dest_id:
+	dest_type:
+	search_pageview_id:32b99f02f087023e
+	search_selected:false
+
 }
 '''
 
@@ -49,36 +45,41 @@ head = {"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML,
 # use orderedDict to keep order of query parameters
 params = OrderedDict()
 
-destination = 'Taipei'
+destination = 'chicago'
 
-params['label'] = 'gen173nr-1FCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYATHCAQN4MTHIAQzYAQHoAQH4AQKSAgF5qAID;sid=7bd01355e93b5fc50b6943e46ac9561a' 
-params['checkin_month'] = 4
+params['label'] = 'gen173nr-1DCAEoggJCAlhYSDNYBHIFdXNfbWGIAQGYAS7CAQN4MTHIAQzYAQPoAQGSAgF5qAID' 
+params['lang'] = 'en-gb'
+params['sid'] = '7bd01355e93b5fc50b6943e46ac9561a'
+params['src'] = 'index'
+params['src-elem'] = 'sb'
+params['ss'] = destination
 params['checkin_monthday'] = 20
+params['checkin_month'] = 4
 params['checkin_year'] = 2018
-params['checkout_month'] = 4
 params['checkout_monthday'] = 21
+params['checkout_month'] = 4
 params['checkout_year'] = 2018
-params['dest_id'] = -2637882
-params['class_interval'] = 1
-params['dest_type'] = 'city'
-params['from_sf'] = 1
-params['genius_rate'] = 1
 params['group_adults'] = 2
 params['group_children'] = 0
-params['label_click'] = 'undef'
 params['no_rooms'] = 1
+params['from_sf'] = 1
+params['ss_raw'] = 'taipei'
+params['dest_id'] = ''
+params['dest_type'] = ''
+
+'''
+params['class_interval'] = 1
+params['dest_type'] = 'city'
+params['genius_rate'] = 1
+params['group_children'] = 0
+params['label_click'] = 'undef'
 params['offset'] = 0
 params['raw_dest_type'] = 'city'
 params['room1'] = 'A,A'
 params['sb_price_type'] = 'total'
-params['src'] = 'index'
-params['src-elem'] = 'sb'
-params['ss'] = destination
 params['ssb'] = 'empty'
 params['ssne'] = destination
 params['ssne_untouched'] = destination
-
-'''
 params['sid'] = '129654e8254415d360a1922d47c7ccf7'
 params['sb'] = 1
 params['src'] = 'searchresults'
@@ -122,7 +123,7 @@ for hotel in listing:
     price = price.text.strip()
     price = price[price.find('$') + 1:]
     link = link.attrs['href']
-    rating = rating.text    
+    rating = rating.text if rating else "No rating available"    
     
     hotel_info = {} 
     hotel_info["name"] = name
