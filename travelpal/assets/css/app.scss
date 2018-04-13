@@ -31,6 +31,37 @@ h1 {
 .page-content b {
   color: #19609e;
 }
+
+.card {
+  margin-bottom: 15px;
+}
+
+.card-header {
+  background-color: #597487;
+  color: white;
+}
+
+.card button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.card button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
+
+.trip-btn {
+  text-align: right;
+}
+
+.trip-btn button {
+  margin-left: 10px;
+}
+
+.trip-card-header {
+  text-align: center;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -164,19 +195,5 @@ input[type="password"] {
 
 .friend-btn {
   text-align: right;
-}
-
-.friend-btn button {
-  background-color: #e06969;
-  border-color: #e06969;
-}
-
-.friend-btn button:hover {
-  background-color: #d84545;
-  border-color: #d84545;
-}
-
-#profile-friends .card {
-  margin-bottom: 15px;
 }
 /***************************** END OF PROFILE ****************************/

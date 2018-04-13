@@ -36,6 +36,23 @@ class TheServer {
     });
   }
 
+  request_travel_dates() {
+    $.ajax("/api/v1/traveldates", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'TRAVEL_DATES_LIST',
+          travelDates: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not load travel dates.");
+      }
+    });
+  }
+
   submit_login(data) {
     console.log(data);
     $.ajax("/api/v1/token", {
@@ -93,22 +110,40 @@ class TheServer {
   }
 
   delete_friend(data) {
-  $.ajax("/api/v1/friends/" + data, {
-    method: "delete",
-    dataType: "json",
-    contentType: "application/json; charset=UTF-8",
-    data: JSON.stringify(data),
-    success: (resp) => {
-      store.dispatch({
-        type: 'FRIENDS_LIST',
-        friends: resp.data,
-      });
-    },
-    error: (resp) => {
-      alert("Could not unfriend. Please try again.");
-    }
-  });
-}
+    $.ajax("/api/v1/friends/" + data, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'FRIENDS_LIST',
+          friends: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not unfriend. Please try again.");
+      }
+    });
+  }
+
+  delete_travel_date(data) {
+    $.ajax("/api/v1/traveldates/" + data, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'TRAVEL_DATES_LIST',
+          travelDates: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not cancel trip. Please try again.");
+      }
+    });
+  }
 }
 
 export default new TheServer();

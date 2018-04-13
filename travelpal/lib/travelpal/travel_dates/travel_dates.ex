@@ -19,6 +19,7 @@ defmodule Travelpal.TravelDates do
   """
   def list_traveldates do
     Repo.all(TravelDate)
+    |> Repo.preload(:user)
   end
 
   @doc """

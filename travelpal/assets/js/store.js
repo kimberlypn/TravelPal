@@ -22,6 +22,15 @@ function friends(state = [], action) {
   }
 }
 
+function travelDates(state = [], action) {
+  switch (action.type) {
+    case 'TRAVEL_DATES_LIST':
+      return [...action.travelDates];
+    default:
+      return state;
+  }
+}
+
 let empty_form = {
   token: "",
   id: "",
@@ -102,7 +111,8 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({users, friends, form, token, login, register});
+  let reducer = combineReducers({users, friends, travelDates, form, token,
+    login, register});
   let state1 = reducer(state0, action);
   return deepFreeze(state1);
 };

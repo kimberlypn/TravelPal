@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the user's past travels
-function PastTravels(props) {
+// Renders the home page
+function Home(props) {
 
   return (
     <div className="page-content">
-      Past Travels
+      Home
     </div>
   );
 };
@@ -17,6 +17,6 @@ function state2props(state) {
   return {
 
   };
-}
+};
 
-export default connect(state2props)(PastTravels);
+export default connect(state2props)(Home);

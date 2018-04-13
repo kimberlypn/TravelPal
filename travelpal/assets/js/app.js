@@ -21,10 +21,11 @@ import "phoenix_html"
 // import socket from "./socket"
 import store from './store';
 import api from './api';
-import travelpal_init from "./components/travelpal";
+import travelpal_init from "./components/TravelPal";
 
 $(function() {
   api.request_users();
   api.request_friends();
+  api.request_travel_dates();
   travelpal_init(store);
 });
