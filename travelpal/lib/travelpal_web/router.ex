@@ -4,7 +4,6 @@ defmodule TravelpalWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :get_current_user
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
@@ -14,13 +13,6 @@ defmodule TravelpalWeb.Router do
     plug :accepts, ["json"]
   end
 
-  def get_current_user(conn, _params) do
-    user_id = get_session(conn, :user_id)
-    user = Travelpal.Accounts.get_user(user_id || -1)
-
-    assign(conn, :current_user, user)
-  end
-
   scope "/", TravelpalWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -28,12 +20,6 @@ defmodule TravelpalWeb.Router do
     get "/travel/dates", PageController, :index
     get "/travel/past", PageController, :index
     get "/profile", PageController, :index
-  end
-
-  scope "/api/v1", TravelpalWeb do
-    pipe_through :api
-
-    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
