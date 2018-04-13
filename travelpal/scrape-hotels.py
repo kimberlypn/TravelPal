@@ -1,14 +1,8 @@
+#!/usr/bin/python3
+
 from requests import get
 from bs4 import BeautifulSoup
 import html5lib
-
-'''
-python3 -V
-sudo apt-get install python3-pip
-pip install requests
-pip install beautifulsoup4
-'''
-
 
 '''
 Example of query parameters
