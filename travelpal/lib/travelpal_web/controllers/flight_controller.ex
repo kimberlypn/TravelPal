@@ -7,7 +7,7 @@ defmodule TravelpalWeb.FlightController do
   def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "return_from" => return_from}) do
     # gets top 5 flights
     uri = URI.encode(flight_url() <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
-        <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&limit=5")
+        <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
     
     # comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
