@@ -1,29 +1,79 @@
 defmodule TravelpalWeb.WeatherController do
   use TravelpalWeb, :controller
 
-  # @TODO decide if other functions are needed
-  def weather_url, do: "https://query.yahooapis.com/v1/public/yql"
+  alias Travelpal.ExternalAPI
+  alias Travelpal.ExternalAPI.Weather
 
-  def get_weather_by_city(conn, %{"city" => city}) do
+  action_fallback TravelpalWeb.FallbackController
+
+  def index(conn, _params) do
+    render(conn, "index.json")
+  end
+
+  def search(conn, %{"city" => city}) do
+    city = String.capitalize(city)
+    existing_data = ExternalAPI.get_weather_by_city(city)
+    weather = if (existing_data != nil), do: existing_data, else: request_weather_by_city(city)
+
+    render(conn, "show.json", weather: weather)
+  end
+
+  def update_cities_weather() do
+    data = request_weather_by_city("Boston")
+
+    ExternalAPI.create_weather(data)
+  end
+
+  defp request_weather_by_city(city) do
+    weather_url = "https://query.yahooapis.com/v1/public/yql"
     # relevant columns from the weather table
     columns = ["units", "location", "item"]
     |> Enum.join(", ")
     # Yahoo Weather API uses YSQL to specify data
     ysql_query = "SELECT #{columns} FROM weather.forecast WHERE woeid in (SELECT woeid FROM geo.places(1) WHERE text=\"#{city}\")"
-    uri = URI.encode(weather_url() <> "?q=#{ysql_query}&format=json")
+    uri = URI.encode(weather_url <> "?q=#{ysql_query}&format=json")
     # comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
     res = dummy_data()
-    data = Poison.decode!(res.body)
+    data = Poison.decode!(res.body)["query"]["results"]["channel"]
+    # the current day's forecast info is the first element in the forecast list
+    current_day_info = Enum.at(data["item"]["forecast"], 0)
 
-    # retrieves the relevant weather details and encodes it as JSON
-    weather = data["query"]["results"]["channel"]
-    |> Poison.encode!()
-
-    render(conn, "show.json", weather: weather)
+    # retrieves the relevant weather details
+    weather = %{
+      city: data["location"]["city"],
+      date: current_day_info["date"] |> convert_date(),
+      high_temp: current_day_info["high"],
+      low_temp: current_day_info["low"],
+      forecast: Enum.drop(data["item"]["forecast"], 1)
+    }
   end
 
-  def dummy_data do
+  defp cities() do
+    [
+      "Atlanta", "Los Angeles", "Chicago",
+    ]
+  end
+
+  # Converts a date given by Yahoo Weather to an Elixir date object
+  # Yahoo Weather date is in format: "DD Mm YYYY"
+  defp convert_date(date) do
+    month_map = %{
+      "Jan" => 1, "Feb" => 2, "Mar" => 3, "Apr" => 4, "May" => 5, "Jun" => 6, "Jul" => 7, "Aug" => 8, "Sep" => 9,
+      "Oct" => 10, "Nov" => 11, "Dec" => 12
+    }
+    split_date = String.split(date)
+
+    {:ok, date} = Date.new(
+      String.to_integer(Enum.at(split_date, 2)),
+      month_map[Enum.at(split_date, 1)],
+      String.to_integer(Enum.at(split_date, 0))
+    )
+
+    date
+  end
+
+  defp dummy_data do
     %HTTPoison.Response{
       body: "{\"query\":{\"count\":1,\"created\":\"2018-04-12T04:03:38Z\",\"lang\":\"en-US\",\"results\":{\"channel\":{\"location\":{\"city\":\"Boston\",\"country\":\"United States\",\"region\":\" MA\"},\"item\":{\"title\":\"Conditions for Boston, MA, US at 11:00 PM EDT\",\"lat\":\"42.358631\",\"long\":\"-71.056702\",\"link\":\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2367105/\",\"pubDate\":\"Wed, 11 Apr 2018 11:00 PM EDT\",\"condition\":{\"code\":\"31\",\"date\":\"Wed, 11 Apr 2018 11:00 PM EDT\",\"temp\":\"38\",\"text\":\"Clear\"},\"forecast\":[{\"code\":\"11\",\"date\":\"12 Apr 2018\",\"day\":\"Thu\",\"high\":\"53\",\"low\":\"38\",\"text\":\"Showers\"},{\"code\":\"30\",\"date\":\"13 Apr 2018\",\"day\":\"Fri\",\"high\":\"64\",\"low\":\"49\",\"text\":\"Partly Cloudy\"},{\"code\":\"28\",\"date\":\"14 Apr 2018\",\"day\":\"Sat\",\"high\":\"63\",\"low\":\"44\",\"text\":\"Mostly Cloudy\"},{\"code\":\"11\",\"date\":\"15 Apr 2018\",\"day\":\"Sun\",\"high\":\"43\",\"low\":\"40\",\"text\":\"Showers\"},{\"code\":\"47\",\"date\":\"16 Apr 2018\",\"day\":\"Mon\",\"high\":\"57\",\"low\":\"44\",\"text\":\"Scattered Thunderstorms\"},{\"code\":\"28\",\"date\":\"17 Apr 2018\",\"day\":\"Tue\",\"high\":\"48\",\"low\":\"41\",\"text\":\"Mostly Cloudy\"},{\"code\":\"30\",\"date\":\"18 Apr 2018\",\"day\":\"Wed\",\"high\":\"52\",\"low\":\"38\",\"text\":\"Partly Cloudy\"},{\"code\":\"30\",\"date\":\"19 Apr 2018\",\"day\":\"Thu\",\"high\":\"52\",\"low\":\"44\",\"text\":\"Partly Cloudy\"},{\"code\":\"30\",\"date\":\"20 Apr 2018\",\"day\":\"Fri\",\"high\":\"51\",\"low\":\"42\",\"text\":\"Partly Cloudy\"},{\"code\":\"30\",\"date\":\"21 Apr 2018\",\"day\":\"Sat\",\"high\":\"52\",\"low\":\"42\",\"text\":\"Partly Cloudy\"}],\"description\":\"<![CDATA[<img src=\\\"http://l.yimg.com/a/i/us/we/52/31.gif\\\"/>\\n<BR />\\n<b>Current Conditions:</b>\\n<BR />Clear\\n<BR />\\n<BR />\\n<b>Forecast:</b>\\n<BR /> Thu - Showers. High: 53Low: 38\\n<BR /> Fri - Partly Cloudy. High: 64Low: 49\\n<BR /> Sat - Mostly Cloudy. High: 63Low: 44\\n<BR /> Sun - Showers. High: 43Low: 40\\n<BR /> Mon - Scattered Thunderstorms. High: 57Low: 44\\n<BR />\\n<BR />\\n<a href=\\\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2367105/\\\">Full Forecast at Yahoo! Weather</a>\\n<BR />\\n<BR />\\n<BR />\\n]]>\",\"guid\":{\"isPermaLink\":\"false\"}},\"units\":{\"distance\":\"mi\",\"pressure\":\"in\",\"speed\":\"mph\",\"temperature\":\"F\"}}}}}",
       headers: [
