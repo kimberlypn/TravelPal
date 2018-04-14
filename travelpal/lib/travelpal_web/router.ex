@@ -31,5 +31,7 @@ defmodule TravelpalWeb.Router do
     resources "/traveldates", TravelDateController, except: [:new, :edit]
     resources "/friends", FriendController, except: [:new, :edit]
     post "/token", TokenController, :create
+
+    resources "/hotels", HotelController, except: [:new, :edit]
   end
 end

@@ -8,31 +8,8 @@ from bs4 import BeautifulSoup
 import html5lib
 
 import psycopg2
+import datetime
 
-def connect():
-    try:
-        conn = psycopg2.connect(host="localhost",database="travelpal_dev", user="travelpal", password="Tei8ooQuo0tu")
-        cur = conn.cursor()
-        
- 	# execute a statement
-       	print('PostgreSQL database version:')
-        cur.execute('SELECT * FROM users') 
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
-       
-        # close the communication with the PostgreSQL
-        cur.close()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print('Database connection closed.')
-
-
-connect()
-exit()
 '''
 Example of query parameters
 {
@@ -105,18 +82,12 @@ params['ss_raw'] = 'taipei'
 params['dest_id'] = ''
 params['dest_type'] = ''
 
-
 response = get(url, headers=head, params=params)
-
-
 print(response.status_code)
-print(response.url)
-#print(response.text)
 
-
-#f = open('scraped-results.txt','w')
-#f.write(response.text)
-#f.close()
+if(response.status_code != 200):
+    print("Bad response")
+    exit()
 
 # parse response into bs object
 html_soup = BeautifulSoup(response.text, "html5lib")
@@ -139,28 +110,35 @@ for hotel in listing:
     
     # all prices in us currency
     price = price.text.strip()
-    price = price[price.find('$') + 1:]
+    price = float(price[price.find('$') + 1:])
     link = link.attrs['href']
-    rating = rating.text.lstrip().rstrip() if rating else "Unrated"    
-    
-    print(rating)   
+    rating = float(rating.text.lstrip().rstrip()) if rating else None    
  
-    hotel_info = {} 
-    hotel_info["name"] = name 
-    hotel_info["district"] = district
-    hotel_info["price"] = price
-    hotel_info["link"] = base_url + link
-    hotel_info["rating"] = rating
-    
+    hotel_info = (name, district, price, base_url + link, rating, datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
     hotel_list.append(hotel_info)
-
-for hotel in hotel_list:
-  print("Name: ", hotel["name"])
-  print("District: ", hotel["district"])
-  print("Price: $", hotel["price"])
-  print("Rating: ", hotel["rating"])
-  print("Link: ", hotel["link"])
-  print("- - - - - - - - - - - - - -")
 
 
 print("Retrieved information of " + str(len(hotel_list)) + " hotels")
+
+if len(hotel_list) > 0:
+    commits = 0
+    try:
+        conn = psycopg2.connect(host="localhost",database="travelpal_dev", user="travelpal", password="Tei8ooQuo0tu")
+        cur = conn.cursor()
+        
+        for hotel in hotel_list: 
+            cur.execute("""INSERT INTO hotels (name, district, price, link, rating, inserted_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s);""", hotel)  
+            if (cur.rowcount == 1):
+                conn.commit()
+                commits += 1 
+        
+        # close the communication with the PostgreSQL
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print(str(commits) + " have been made.")
+            print('Database connection closed.')
+
