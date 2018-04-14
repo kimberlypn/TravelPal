@@ -7,6 +7,32 @@ from requests import get
 from bs4 import BeautifulSoup
 import html5lib
 
+import psycopg2
+
+def connect():
+    try:
+        conn = psycopg2.connect(host="localhost",database="travelpal_dev", user="travelpal", password="Tei8ooQuo0tu")
+        cur = conn.cursor()
+        
+ 	# execute a statement
+       	print('PostgreSQL database version:')
+        cur.execute('SELECT * FROM users') 
+        # display the PostgreSQL database server version
+        db_version = cur.fetchone()
+        print(db_version)
+       
+        # close the communication with the PostgreSQL
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print('Database connection closed.')
+
+
+connect()
+exit()
 '''
 Example of query parameters
 {
