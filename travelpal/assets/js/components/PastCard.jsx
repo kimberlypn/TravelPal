@@ -7,40 +7,44 @@ import TripCardHeader from './TripCardHeader';
 import BookedForm from './BookedForm';
 
 // Renders the details of an individual past trip
-export default function PastCard({form, destination, startDate, endDate,
-  departureTime, arrivalTime, passengers, cost, rooms, flight, hotel, flights,
-  hotels, id}) {
+export default function PastCard({form, trip, flights, hotels}) {
   // Sends a request to delete the trip
   function remove() {
-    api.delete_booked_trip(id);
+    api.delete_booked_trip(trip.id);
   }
 
   // Toggles the edit form
   function edit() {
-    $('#trip-details-' + id).toggle();
-    $('#trip-edit-' + id).toggle();
+    $('#trip-details-' + trip.id).toggle();
+    $('#trip-edit-' + trip.id).toggle();
   }
 
   return (
     <Col md="12">
       <Card>
-        <TripCardHeader destination={destination} startDate={startDate}
-          endDate={endDate} />
-        <BookedForm form={form} id={id} destination={destination}
-          startDate={startDate} endDate={endDate} flights={flights}
-          hotels={hotels} />
-        <CardBody className="trip-details" id={"trip-details-" + id}>
+        <TripCardHeader destination={trip.destination}
+          startDate={trip.startDate} endDate={trip.endDate} />
+        <BookedForm form={form} id={trip.id} destination={trip.destination}
+          startDate={trip.startDate} endDate={trip.endDate}
+          flights={trip.flights} hotels={hotels} />
+        <CardBody className="trip-details" id={"trip-details-" + trip.id}>
           <Row>
             <Col md="6">
-              <p><b>Total Cost: </b>${cost}</p>
-              <p><b>Departure Time: </b>{departureTime.substring(0, 5)}</p>
-              <p><b>Arrival Time: </b>{arrivalTime.substring(0, 5)}</p>
+              <p><b>Total Cost: </b>${trip.cost}</p>
+              <p>
+                <b>Departure Time: </b>{trip.departureTime.substring(0, 5)}
+              </p>
+              <p>
+                <b>Arrival Time: </b>{trip.arrivalTime.substring(0, 5)}
+              </p>
             </Col>
             <Col md="6">
-              <p><b>Airline: </b>{flight.airline}</p>
-              <p><b>Number of Passengers: </b>{passengers}</p>
-              <p><b>Hotel: </b>{hotel ? hotel.name : "N/A"}</p>
-              <p><b>Number of Rooms: </b>{(rooms > 0) ? rooms : "N/A"}</p>
+              <p><b>Airline: </b>{trip.flight.airline}</p>
+              <p><b>Number of Passengers: </b>{trip.passengers}</p>
+              <p><b>Hotel: </b>{hotel ? trip.hotel.name : "N/A"}</p>
+              <p>
+                <b>Number of Rooms: </b>{(trip.rooms > 0) ? trip.rooms : "N/A"}
+              </p>
             </Col>
           </Row>
           <Row>
@@ -57,17 +61,7 @@ export default function PastCard({form, destination, startDate, endDate,
 
 PastCard.propTypes = {
   form: PropTypes.object.isRequired,
-  destination: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
-  departureTime: PropTypes.string.isRequired,
-  arrivalTime: PropTypes.string.isRequired,
-  passengers: PropTypes.number.isRequired,
-  cost: PropTypes.number.isRequired,
-  rooms: PropTypes.number,
-  flight: PropTypes.object.isRequired,
-  hotel: PropTypes.object,
+  trip: PropTypes.array.isRequired,
   flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
-  id: PropTypes.number.isRequired
 };
