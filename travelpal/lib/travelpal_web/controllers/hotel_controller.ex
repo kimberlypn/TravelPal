@@ -7,7 +7,8 @@ defmodule TravelpalWeb.HotelController do
   action_fallback TravelpalWeb.FallbackController
 
   def callPythonScript(location) do
-    (System.cmd "python3", ["./scrape-hotels.py", "-dest", location]) |> IO.inspect
+    "python3"
+    |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", 1])
   end
 
   def index(conn, _params) do
