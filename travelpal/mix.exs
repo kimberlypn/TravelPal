@@ -43,7 +43,10 @@ defmodule Travelpal.Mixfile do
       {:cowboy, "~> 1.0"},
       {:distillery, "~> 1.4"},
       {:comeonin, "~> 4.0"},
-      {:argon2_elixir, "~> 1.2"}
+      {:argon2_elixir, "~> 1.2"},
+      {:httpoison, "~> 1.1"},
+      {:poison, "~> 3.1"},
+      {:hackney, "~> 1.12"},
     ]
   end
 
