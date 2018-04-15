@@ -13,21 +13,27 @@ defmodule TravelpalWeb.WeatherController do
   def search(conn, %{"city" => city}) do
     city = String.capitalize(city)
     existing_data = ExternalAPI.get_weather_by_city(city)
+    # if there exists a record for the city then use the existing data, else make a request for new data
     weather = if (existing_data != nil), do: existing_data, else: request_weather_by_city(city)
 
+    if (existing_data != nil) do
+      # updates the weather in the database if it's outdated
+      if (Date.compare(weather.date, Date.utc_today()) != :eq) do
+        weather = request_weather_by_city(city)
+        ExternalAPI.update_weather(existing_data, weather)
+      end
+    else
+      # adds a weather record for the city in the database
+      ExternalAPI.create_weather(weather)
+    end
+
     render(conn, "show.json", weather: weather)
-  end
-
-  def update_cities_weather() do
-    data = request_weather_by_city("Boston")
-
-    ExternalAPI.create_weather(data)
   end
 
   defp request_weather_by_city(city) do
     weather_url = "https://query.yahooapis.com/v1/public/yql"
     # relevant columns from the weather table
-    columns = ["units", "location", "item"]
+    columns = ["units", "location", "item",]
     |> Enum.join(", ")
     # Yahoo Weather API uses YSQL to specify data
     ysql_query = "SELECT #{columns} FROM weather.forecast WHERE woeid in (SELECT woeid FROM geo.places(1) WHERE text=\"#{city}\")"
@@ -36,9 +42,11 @@ defmodule TravelpalWeb.WeatherController do
     #res = HTTPoison.get!(uri)
     res = dummy_data()
     data = Poison.decode!(res.body)["query"]["results"]["channel"]
-    # converts all of the dates in the forecast list to Elixir date objects
+    # converts all of the dates in the forecast list to Elixir date objects and the temperature strings to integers
     forecast = data["item"]["forecast"]
-    |> Enum.map(fn(x) -> Map.put(x, "date", convert_date(x["date"])) end)
+    |> Enum.map(fn(x) ->
+      %{x | "date" => convert_date(x["date"]), "high" => String.to_integer(x["high"]), "low" => String.to_integer(x["low"])}
+    end)
     # the current day's forecast info is the first element in the forecast list
     current_day_info = Enum.at(forecast, 0)
 
