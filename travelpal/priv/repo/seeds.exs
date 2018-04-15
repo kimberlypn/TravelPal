@@ -15,6 +15,9 @@ defmodule Seeds do
   alias Travelpal.Users.User
   alias Travelpal.Friends.Friend
   alias Travelpal.TravelDates.TravelDate
+  alias Travelpal.BookedTrips.BookedTrip
+  alias Travelpal.Flights.Flight
+  alias Travelpal.Hotels.Hotel
 
   def insert_users do
     Repo.delete_all(User)
@@ -67,35 +70,10 @@ defmodule Seeds do
     Repo.delete_all(TravelDate)
     # Matt's trips
     Repo.insert!(%TravelDate{
-      destination: "Melbourne",
-      end_date: ~D[2016-10-20],
-      price_limit: 3000,
-      start_date: ~D[2016-10-10],
-      booked: true,
-      user_id: 1
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Seoul",
-      end_date: ~D[2018-04-30],
-      price_limit: 3000,
-      start_date: ~D[2018-04-20],
-      booked: true,
-      user_id: 1
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Tokyo",
-      end_date: ~D[2018-07-01],
-      price_limit: 2000,
-      start_date: ~D[2018-06-01],
-      booked: true,
-      user_id: 1
-    })
-    Repo.insert!(%TravelDate{
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
       start_date: ~D[2019-05-01],
-      booked: false,
       user_id: 1
     })
     Repo.insert!(%TravelDate{
@@ -103,41 +81,15 @@ defmodule Seeds do
       end_date: ~D[2018-12-30],
       price_limit: 3000,
       start_date: ~D[2018-12-01],
-      booked: false,
       user_id: 1
     })
 
     # Kimberly's trips
     Repo.insert!(%TravelDate{
-      destination: "Honolulu",
-      end_date: ~D[2017-01-20],
-      price_limit: 1500,
-      start_date: ~D[2017-01-01],
-      booked: true,
-      user_id: 2
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Rome",
-      end_date: ~D[2018-04-25],
-      price_limit: 1000,
-      start_date: ~D[2018-04-19],
-      booked: true,
-      user_id: 2
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Tokyo",
-      end_date: ~D[2018-07-01],
-      price_limit: 2000,
-      start_date: ~D[2018-06-01],
-      booked: true,
-      user_id: 2
-    })
-    Repo.insert!(%TravelDate{
       destination: "Beijing",
       end_date: ~D[2019-03-30],
       price_limit: 3000,
       start_date: ~D[2019-03-01],
-      booked: false,
       user_id: 2
     })
     Repo.insert!(%TravelDate{
@@ -145,41 +97,15 @@ defmodule Seeds do
       end_date: ~D[2018-12-20],
       price_limit: 3000,
       start_date: ~D[2018-12-01],
-      booked: false,
       user_id: 2
     })
 
     # Long's trips
     Repo.insert!(%TravelDate{
-      destination: "Melbourne",
-      end_date: ~D[2016-10-20],
-      price_limit: 3000,
-      start_date: ~D[2016-10-10],
-      booked: true,
-      user_id: 3
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Seoul",
-      end_date: ~D[2018-04-30],
-      price_limit: 3000,
-      start_date: ~D[2018-04-20],
-      booked: true,
-      user_id: 3
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Tokyo",
-      end_date: ~D[2018-07-01],
-      price_limit: 2000,
-      start_date: ~D[2018-06-01],
-      booked: true,
-      user_id: 3
-    })
-    Repo.insert!(%TravelDate{
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
       start_date: ~D[2019-05-01],
-      booked: false,
       user_id: 3
     })
     Repo.insert!(%TravelDate{
@@ -187,41 +113,15 @@ defmodule Seeds do
       end_date: ~D[2018-12-30],
       price_limit: 3000,
       start_date: ~D[2018-12-01],
-      booked: false,
       user_id: 3
     })
 
     # Will's trips
     Repo.insert!(%TravelDate{
-      destination: "Melbourne",
-      end_date: ~D[2016-10-20],
-      price_limit: 3000,
-      start_date: ~D[2016-10-10],
-      booked: true,
-      user_id: 4
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Seoul",
-      end_date: ~D[2018-04-30],
-      price_limit: 3000,
-      start_date: ~D[2018-04-20],
-      booked: true,
-      user_id: 4
-    })
-    Repo.insert!(%TravelDate{
-      destination: "Tokyo",
-      end_date: ~D[2018-07-01],
-      price_limit: 2000,
-      start_date: ~D[2018-06-01],
-      booked: true,
-      user_id: 4
-    })
-    Repo.insert!(%TravelDate{
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
       start_date: ~D[2019-05-01],
-      booked: false,
       user_id: 4
     })
     Repo.insert!(%TravelDate{
@@ -229,8 +129,163 @@ defmodule Seeds do
       end_date: ~D[2018-12-30],
       price_limit: 3000,
       start_date: ~D[2018-12-01],
-      booked: false,
       user_id: 4
+    })
+  end
+
+  def insert_flights do
+    Repo.delete_all(Flight)
+    Repo.insert!(%Flight{airline: "American Airlines"})
+    Repo.insert!(%Flight{airline: "Delta"})
+    Repo.insert!(%Flight{airline: "Alaska Airlines"})
+    Repo.insert!(%Flight{airline: "Southwest"})
+    Repo.insert!(%Flight{airline: "JetBlue"})
+  end
+
+  def insert_hotels do
+    Repo.delete_all(Hotel)
+    Repo.insert!(%Hotel{name: "Hyatt"})
+    Repo.insert!(%Hotel{name: "Sheraton"})
+    Repo.insert!(%Hotel{name: "Best Western"})
+    Repo.insert!(%Hotel{name: "Westin"})
+  end
+
+  def insert_booked_trips do
+    Repo.delete_all(BookedTrip)
+    # Matt's trips
+    Repo.insert!(%BookedTrip{
+      destination: "Melbourne",
+      start_date: ~D[2016-10-10],
+      end_date: ~D[2016-10-20],
+      passengers: 1,
+      cost: 3000,
+      rooms: 1,
+      user_id: 1,
+      flight_id: 1,
+      hotel_id: 1
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Seoul",
+      start_date: ~D[2018-04-20],
+      end_date: ~D[2018-04-30],
+      passengers: 2,
+      cost: 3000,
+      rooms: 1,
+      user_id: 1,
+      flight_id: 2,
+      hotel_id: 3
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Tokyo",
+      start_date: ~D[2018-06-01],
+      end_date: ~D[2018-07-01],
+      passengers: 1,
+      cost: 2000,
+      rooms: 0,
+      user_id: 1,
+      flight_id: 1
+    })
+
+    # Kimberly's trips
+    Repo.insert!(%BookedTrip{
+      destination: "Honolulu",
+      start_date: ~D[2017-01-01],
+      end_date: ~D[2017-01-20],
+      passengers: 1,
+      cost: 1500,
+      rooms: 0,
+      user_id: 2,
+      flight_id: 4
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Rome",
+      start_date: ~D[2018-04-19],
+      end_date: ~D[2018-04-25],
+      passengers: 1,
+      cost: 1000,
+      rooms: 1,
+      user_id: 2,
+      flight_id: 2,
+      hotel_id: 1
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Tokyo",
+      start_date: ~D[2018-06-01],
+      end_date: ~D[2018-07-01],
+      passengers: 2,
+      cost: 2000,
+      rooms: 1,
+      user_id: 2,
+      flight_id: 1,
+      hotel_id: 1
+    })
+
+    # Long's trips
+    Repo.insert!(%BookedTrip{
+      destination: "Melbourne",
+      start_date: ~D[2016-10-10],
+      end_date: ~D[2016-10-20],
+      passengers: 3,
+      cost: 3000,
+      rooms: 2,
+      user_id: 3,
+      flight_id: 4,
+      hotel_id: 4
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Seoul",
+      start_date: ~D[2018-04-20],
+      end_date: ~D[2018-04-30],
+      passengers: 2,
+      cost: 3000,
+      rooms: 1,
+      user_id: 3,
+      flight_id: 1,
+      hotel_id: 1
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Tokyo",
+      start_date: ~D[2018-06-01],
+      end_date: ~D[2018-07-01],
+      passengers: 1,
+      cost: 2000,
+      rooms: 0,
+      user_id: 3,
+      flight_id: 4
+    })
+
+    # Will's trips
+    Repo.insert!(%BookedTrip{
+      destination: "Melbourne",
+      start_date: ~D[2016-10-10],
+      end_date: ~D[2016-10-20],
+      passengers: 5,
+      cost: 3000,
+      rooms: 5,
+      user_id: 4,
+      flight_id: 4,
+      hotel_id: 3
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Seoul",
+      start_date: ~D[2018-04-20],
+      end_date: ~D[2018-04-30],
+      passengers: 2,
+      cost: 3000,
+      rooms: 0,
+      user_id: 4,
+      flight_id: 1
+    })
+    Repo.insert!(%BookedTrip{
+      destination: "Tokyo",
+      start_date: ~D[2018-06-01],
+      end_date: ~D[2018-07-01],
+      passengers: 4,
+      cost: 2000,
+      rooms: 2,
+      user_id: 4,
+      flight_id: 2,
+      hotel_id: 2
     })
   end
 
@@ -238,6 +293,9 @@ defmodule Seeds do
     insert_users()
     insert_friends()
     insert_travel_dates()
+    insert_flights()
+    insert_hotels()
+    insert_booked_trips()
   end
 
   def seed(:dev) do

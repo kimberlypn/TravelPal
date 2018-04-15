@@ -127,6 +127,24 @@ class TheServer {
     });
   }
 
+  accept_friend(data) {
+    $.ajax("/api/v1/friends/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({friend: data}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'FRIENDS_LIST',
+          friends: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not accept the request. Please try again.");
+      }
+    });
+  }
+
   delete_travel_date(data) {
     $.ajax("/api/v1/traveldates/" + data, {
       method: "delete",
