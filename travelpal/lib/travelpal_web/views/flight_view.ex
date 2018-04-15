@@ -11,10 +11,8 @@ defmodule TravelpalWeb.FlightView do
   end
 
   def render("flight.json", %{flight: flight}) do
-    decoded_flight = Poison.decode!(flight)
-
     %{
-      flights: decoded_flight,
+      flights: flight
     }
   end
 end

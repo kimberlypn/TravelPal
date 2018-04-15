@@ -1,14 +1,21 @@
 defmodule TravelpalWeb.FlightController do
   use TravelpalWeb, :controller
 
-  # @TODO decide if other functions are needed
-  def flight_url, do: "https://api.skypicker.com/flights"
+  def search(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "return_from" => return_from}) do
+    flight = request_flights_to_from(origin, dest, date_from, return_from)
 
-  def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "return_from" => return_from}) do
+    render(conn, "show.json", flight: flight)
+  end
+
+  def test() do
+    flights = request_flights_to_from("boston", "los-angeles", "05/08/2018", "05/12/2018")
+  end
+
+  defp request_flights_to_from(origin, dest, date_from, return_from) do
+    flight_url = "https://api.skypicker.com/flights"
     # gets top 5 flights
-    uri = URI.encode(flight_url() <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
-        <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
-    
+    uri = URI.encode(flight_url <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
+        <> "&returnFrom=#{return_from}&returnTo=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
     # comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
     #data = Poison.decode!(res.body)
@@ -16,11 +23,19 @@ defmodule TravelpalWeb.FlightController do
     # use dummy data for dev purposes
     #flight = data["data"]
     # @TODO decide if more details are needed
-    flight = dummy_data()
-    |> Enum.map(fn(x) -> Map.take(x, ["price", "mapIdfrom", "mapIdto", "airlines", "duration", "deep_link"]) end)
-    |> Poison.encode!()
+    flights = dummy_data()
+    |> Enum.map(fn(x) -> format_flight(x) end)
+  end
 
-    render(conn, "show.json", flight: flight)
+  defp format_flight(flight) do
+    %{
+      origin: flight["mapIdfrom"],
+      dest: flight["mapIdto"],
+      airlines: flight["airlines"],
+      price: flight["price"],
+      duration: flight["duration"],
+      link: flight["deep_link"]
+    }
   end
 
   def dummy_data do

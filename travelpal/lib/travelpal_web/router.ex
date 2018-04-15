@@ -31,6 +31,6 @@ defmodule TravelpalWeb.Router do
     post "/token", TokenController, :create
 
     get "/weather/:city", WeatherController, :search
-    get "/travel/flights", FlightController, :get_flights_to_from
+    get "/travel/flights", FlightController, :search
   end
 end
