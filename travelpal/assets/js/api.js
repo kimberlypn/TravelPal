@@ -242,7 +242,6 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({booked_trip: data}),
       success: (resp) => {
-        alert("Your changes have been saved.");
         store.dispatch({
           type: 'BOOKED_TRIPS_LIST',
           bookedTrips: resp.data,

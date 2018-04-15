@@ -38,6 +38,7 @@ function BookedForm(props) {
   // Sends a request to update the booked trip with the values from the form
   function submit(ev) {
     api.edit_booked_trip(props.form);
+    cancel();
   }
 
   // Clears and closes the registration form
