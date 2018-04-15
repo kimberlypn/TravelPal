@@ -36,16 +36,19 @@ defmodule TravelpalWeb.WeatherController do
     #res = HTTPoison.get!(uri)
     res = dummy_data()
     data = Poison.decode!(res.body)["query"]["results"]["channel"]
+    # converts all of the dates in the forecast list to Elixir date objects
+    forecast = data["item"]["forecast"]
+    |> Enum.map(fn(x) -> Map.put(x, "date", convert_date(x["date"])) end)
     # the current day's forecast info is the first element in the forecast list
-    current_day_info = Enum.at(data["item"]["forecast"], 0)
+    current_day_info = Enum.at(forecast, 0)
 
     # retrieves the relevant weather details
     weather = %{
       city: data["location"]["city"],
-      date: current_day_info["date"] |> convert_date(),
+      date: current_day_info["date"],
       high_temp: current_day_info["high"],
       low_temp: current_day_info["low"],
-      forecast: Enum.drop(data["item"]["forecast"], 1)
+      forecast: Enum.drop(forecast, 1)
     }
   end
 
