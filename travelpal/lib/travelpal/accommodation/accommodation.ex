@@ -1,12 +1,12 @@
-defmodule Travelpal.Accomadation do
+defmodule Travelpal.Accommodation do
   @moduledoc """
-  The Accomadation context.
+  The Accommodation context.
   """
 
   import Ecto.Query, warn: false
   alias Travelpal.Repo
 
-  alias Travelpal.Accomadation.Hotel
+  alias Travelpal.Accommodation.Hotel
 
   @doc """
   Returns the list of hotels.

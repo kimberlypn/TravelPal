@@ -1,4 +1,4 @@
-defmodule Travelpal.Accomadation.Hotel do
+defmodule Travelpal.Accommodation.Hotel do
   use Ecto.Schema
   import Ecto.Changeset
 
