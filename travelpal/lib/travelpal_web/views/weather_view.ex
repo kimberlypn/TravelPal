@@ -14,8 +14,9 @@ defmodule TravelpalWeb.WeatherView do
     %{
       city: weather.city,
       date: weather.date,
-      high_temp: weather.high_temp,
-      low_temp: weather.low_temp,
+      high: weather.high,
+      low: weather.low,
+      text: weather.text,
       forecast: weather.forecast,
     }
   end

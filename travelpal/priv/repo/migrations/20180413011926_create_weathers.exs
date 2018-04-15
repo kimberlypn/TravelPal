@@ -5,8 +5,9 @@ defmodule Travelpal.Repo.Migrations.CreateWeathers do
     create table(:weathers) do
       add :city, :string
       add :date, :date
-      add :high_temp, :integer
-      add :low_temp, :integer
+      add :high, :integer
+      add :low, :integer
+      add :text, :string
       add :forecast, {:array, :map}
 
       timestamps()

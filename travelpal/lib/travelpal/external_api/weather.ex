@@ -6,8 +6,9 @@ defmodule Travelpal.ExternalAPI.Weather do
   schema "weathers" do
     field :city, :string
     field :date, :date
-    field :high_temp, :integer
-    field :low_temp, :integer
+    field :high, :integer
+    field :low, :integer
+    field :text, :string
     field :forecast, {:array, :map}
 
     timestamps()
@@ -16,8 +17,8 @@ defmodule Travelpal.ExternalAPI.Weather do
   @doc false
   def changeset(weather, attrs) do
     weather
-    |> cast(attrs, [:city, :date, :high_temp, :low_temp, :forecast])
-    |> validate_required([:city, :date, :high_temp, :low_temp])
+    |> cast(attrs, [:city, :date, :high, :low, :text, :forecast])
+    |> validate_required([:city, :date, :high, :low])
     |> validate_temps()
   end
 
