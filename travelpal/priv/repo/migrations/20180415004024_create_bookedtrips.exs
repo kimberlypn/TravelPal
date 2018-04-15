@@ -6,6 +6,8 @@ defmodule Travelpal.Repo.Migrations.CreateBookedtrips do
       add :destination, :string, null: false
       add :start_date, :date, null: false
       add :end_date, :date, null: false
+      add :departure_time, :time, null: false
+      add :arrival_time, :time, null: false
       add :passengers, :integer, default: 1, null: false
       add :cost, :integer, default: 0, null: false
       add :rooms, :integer, default: 0

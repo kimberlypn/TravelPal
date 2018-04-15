@@ -4,36 +4,43 @@ import { Card, CardBody, Button, Row, Col } from 'reactstrap';
 
 import api from '../api';
 import TripCardHeader from './TripCardHeader';
+import BookedForm from './BookedForm';
 
 // Renders the details of an individual past trip
-export default function PastCard({destination, startDate, endDate, price,
-  id}) {
+export default function PastCard({form, destination, startDate, endDate,
+  departureTime, arrivalTime, passengers, cost, rooms, flight, hotel, flights,
+  hotels, id}) {
   // Sends a request to delete the trip
   function remove() {
-    api.delete_travel_date(id);
+    api.delete_booked_trip(id);
   }
 
-  // TODO: Sends a request to edit the trip details
+  // Toggles the edit form
   function edit() {
-
+    $('#trip-details-' + id).toggle();
+    $('#trip-edit-' + id).toggle();
   }
 
-  // TODO: Fill in the card body
   return (
-    <Col md="6">
+    <Col md="12">
       <Card>
         <TripCardHeader destination={destination} startDate={startDate}
           endDate={endDate} />
-        <CardBody>
+        <BookedForm form={form} id={id} destination={destination}
+          startDate={startDate} endDate={endDate} flights={flights}
+          hotels={hotels} />
+        <CardBody className="trip-details" id={"trip-details-" + id}>
           <Row>
             <Col md="6">
-              <p><b>Price: </b>${price}</p>
-              <p><b>Hotel: </b></p>
-              <p><b>Airline: </b></p>
+              <p><b>Total Cost: </b>${cost}</p>
+              <p><b>Departure Time: </b>{departureTime.substring(0, 5)}</p>
+              <p><b>Arrival Time: </b>{arrivalTime.substring(0, 5)}</p>
             </Col>
             <Col md="6">
-              <p><b>Departure Time: </b></p>
-              <p><b>Arrival Time: </b></p>
+              <p><b>Airline: </b>{flight.airline}</p>
+              <p><b>Number of Passengers: </b>{passengers}</p>
+              <p><b>Hotel: </b>{hotel ? hotel.name : "N/A"}</p>
+              <p><b>Number of Rooms: </b>{rooms ? rooms : "N/A"}</p>
             </Col>
           </Row>
           <Row>
@@ -49,9 +56,18 @@ export default function PastCard({destination, startDate, endDate, price,
 };
 
 PastCard.propTypes = {
+  form: PropTypes.object.isRequired,
   destination: PropTypes.string.isRequired,
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  departureTime: PropTypes.string.isRequired,
+  arrivalTime: PropTypes.string.isRequired,
+  passengers: PropTypes.number.isRequired,
+  cost: PropTypes.number.isRequired,
+  rooms: PropTypes.number,
+  flight: PropTypes.object.isRequired,
+  hotel: PropTypes.object,
+  flights: PropTypes.array.isRequired,
+  hotels: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired
 };

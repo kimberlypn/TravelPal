@@ -27,5 +27,8 @@ $(function() {
   api.request_users();
   api.request_friends();
   api.request_travel_dates();
+  api.request_booked_trips();
+  api.request_flights();
+  api.request_hotels();
   travelpal_init(store);
 });

@@ -53,6 +53,57 @@ class TheServer {
     });
   }
 
+  request_booked_trips() {
+    $.ajax("/api/v1/bookedtrips", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'BOOKED_TRIPS_LIST',
+          bookedTrips: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not load booked trips.");
+      }
+    });
+  }
+
+  request_flights() {
+    $.ajax("/api/v1/flights", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'FLIGHTS_LIST',
+          flights: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not load flights.");
+      }
+    });
+  }
+
+  request_hotels() {
+    $.ajax("/api/v1/hotels", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'HOTELS_LIST',
+          hotels: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not load hotels.");
+      }
+    });
+  }
+
   submit_login(data) {
     console.log(data);
     $.ajax("/api/v1/token", {
@@ -98,6 +149,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({user: data}),
       success: (resp) => {
+        alert("Your changes have been saved.");
         store.dispatch({
           type: 'USERS_LIST',
           users: resp.data,
@@ -158,7 +210,46 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not cancel trip. Please try again.");
+        alert("Could not delete the travel date. Please try again.");
+      }
+    });
+  }
+
+  delete_booked_trip(data) {
+    $.ajax("/api/v1/bookedtrips/" + data, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'BOOKED_TRIPS_LIST',
+          bookedTrips: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not delete the trip. Please try again.");
+      }
+    });
+  }
+
+  edit_booked_trip(data) {
+    console.log("EDIT");
+    console.log(data.id);
+    $.ajax("/api/v1/bookedtrips/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({booked_trip: data}),
+      success: (resp) => {
+        alert("Your changes have been saved.");
+        store.dispatch({
+          type: 'BOOKED_TRIPS_LIST',
+          bookedTrips: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not save the edit. Please try again.");
       }
     });
   }

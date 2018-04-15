@@ -11,19 +11,18 @@ import BookedTrips from './BookedTrips';
 import Profile from './Profile';
 
 // Renders the home page after logging in
-export default function Main({form, friends, trips}) {
+export default function Main({form, bookedForm, friends, travelDates,
+  bookedTrips, flights, hotels}) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
-  let userTrips = trips.filter(tt => tt.user.id == userId);
-  // Grab the trips that have not yet been booked
-  let travelDates = userTrips.filter(tt => !tt.booked);
-  // Grab the trips that have been booked
-  let bookedTrips = userTrips.filter(tt => tt.booked
-    && new Date(tt.end_date) >= today);
-  // Grab the trips that have already passed
-  let pastTrips = userTrips.filter(tt => tt.booked &&
-    new Date(tt.end_date) < today);
+  travelDates = travelDates.filter(tt => tt.user.id == userId);
+  // Grab only the bookedTrips for the current user that have not yet passed
+  let currentBooked = bookedTrips.filter(bb => (bb.user.id == userId) &&
+    new Date(bb.end_date) >= today);
+  // Grab the booked trips that have already passed
+  let pastTrips = bookedTrips.filter(pp => (pp.user.id == userId) &&
+    new Date(pp.end_date) < today);
 
   return (
     <React.Fragment>
@@ -38,10 +37,12 @@ export default function Main({form, friends, trips}) {
         <TravelDates travelDates={travelDates} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
-        <BookedTrips bookedTrips={bookedTrips} />
+        <BookedTrips bookedTrips={currentBooked} form={bookedForm}
+          flights={flights} hotels={hotels} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
-        <PastTrips pastTrips={pastTrips} />
+        <PastTrips pastTrips={pastTrips} form={bookedForm}
+          flights={flights} hotels={hotels} />
       } />
       <Route path="/profile" exact={true} render={() =>
         <Profile form={form} friends={friends} />
@@ -52,6 +53,10 @@ export default function Main({form, friends, trips}) {
 
 Main.propTypes = {
   form: PropTypes.object.isRequired,
+  bookedForm: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired,
-  trips: PropTypes.array.isRequired
+  travelDates: PropTypes.array.isRequired,
+  bookedTrips: PropTypes.array.isRequired,
+  flights: PropTypes.array.isRequired,
+  hotels: PropTypes.array.isRequired
 };
