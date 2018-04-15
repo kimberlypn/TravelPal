@@ -6,6 +6,11 @@ defmodule TravelpalWeb.HotelController do
 
   action_fallback TravelpalWeb.FallbackController
 
+  def callPythonScript(location) do
+    (System.cmd "python3", ["./scrape-hotels.py", "-dest", location])
+    |> IO.inspect
+  end
+
   def index(conn, _params) do
     hotels = Accomadation.list_hotels()
     render(conn, "index.json", hotels: hotels)
