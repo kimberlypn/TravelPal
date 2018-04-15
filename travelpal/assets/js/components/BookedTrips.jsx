@@ -18,21 +18,13 @@ export default function BookedTrips({bookedTrips, form, flights, hotels}) {
     // Trips this month
     if ((today.getMonth() == startDate.getMonth()) &&
     (today.getFullYear() == startDate.getFullYear())) {
-      upcoming.push(<BookedCard key={tt.id} form={form}
-        destination={tt.destination} startDate={tt.start_date}
-        endDate={tt.end_date} departureTime={tt.departure_time}
-        arrivalTime={tt.arrival_time} passengers={tt.passengers} cost={tt.cost}
-        rooms={tt.rooms} flight={tt.flight} hotel={tt.hotel} flights={flights}
-        hotels={hotels} id={tt.id} />);
+      upcoming.push(<BookedCard key={tt.id} form={form} trip={tt}
+        flights={flights} hotels={hotels} />);
     }
     // Future trips
     else {
-      future.push(<BookedCard key={tt.id} form={form}
-        destination={tt.destination} startDate={tt.start_date}
-        endDate={tt.end_date} departureTime={tt.departure_time}
-        arrivalTime={tt.arrival_time} passengers={tt.passengers} cost={tt.cost}
-        rooms={tt.rooms} flight={tt.flight} hotel={tt.hotel}
-        flights={flights} hotels={hotels} id={tt.id} />);
+      future.push(<BookedCard key={tt.id} form={form} trip={tt}
+        flights={flights} hotels={hotels} />);
     }
   });
 

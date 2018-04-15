@@ -23,25 +23,25 @@ export default function PastCard({form, trip, flights, hotels}) {
     <Col md="12">
       <Card>
         <TripCardHeader destination={trip.destination}
-          startDate={trip.startDate} endDate={trip.endDate} />
+          startDate={trip.start_date} endDate={trip.end_date} />
         <BookedForm form={form} id={trip.id} destination={trip.destination}
-          startDate={trip.startDate} endDate={trip.endDate}
-          flights={trip.flights} hotels={hotels} />
+          startDate={trip.start_date} endDate={trip.end_date} flights={flights}
+          hotels={hotels} />
         <CardBody className="trip-details" id={"trip-details-" + trip.id}>
           <Row>
             <Col md="6">
               <p><b>Total Cost: </b>${trip.cost}</p>
               <p>
-                <b>Departure Time: </b>{trip.departureTime.substring(0, 5)}
+                <b>Departure Time: </b>{trip.departure_time.substring(0, 5)}
               </p>
               <p>
-                <b>Arrival Time: </b>{trip.arrivalTime.substring(0, 5)}
+                <b>Arrival Time: </b>{trip.arrival_time.substring(0, 5)}
               </p>
             </Col>
             <Col md="6">
               <p><b>Airline: </b>{trip.flight.airline}</p>
               <p><b>Number of Passengers: </b>{trip.passengers}</p>
-              <p><b>Hotel: </b>{hotel ? trip.hotel.name : "N/A"}</p>
+              <p><b>Hotel: </b>{trip.hotel ? trip.hotel.name : "N/A"}</p>
               <p>
                 <b>Number of Rooms: </b>{(trip.rooms > 0) ? trip.rooms : "N/A"}
               </p>
@@ -61,7 +61,7 @@ export default function PastCard({form, trip, flights, hotels}) {
 
 PastCard.propTypes = {
   form: PropTypes.object.isRequired,
-  trip: PropTypes.array.isRequired,
+  trip: PropTypes.object.isRequired,
   flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
 };
