@@ -11,7 +11,6 @@ import BookedForm from './BookedForm';
 export default function BookedCard({form, destination, startDate, endDate,
   departureTime, arrivalTime, passengers, cost, rooms, flight, hotel, flights,
   hotels, id}) {
-  console.log("ROOMS: " + rooms);
   // Sends a request to delete the trip
   function cancel() {
     api.delete_booked_trip(id);
