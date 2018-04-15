@@ -73,6 +73,7 @@ defmodule Seeds do
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2019-05-01],
       user_id: 1
     })
@@ -89,6 +90,7 @@ defmodule Seeds do
       destination: "Beijing",
       end_date: ~D[2019-03-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2019-03-01],
       user_id: 2
     })
@@ -96,6 +98,7 @@ defmodule Seeds do
       destination: "Singapore",
       end_date: ~D[2018-12-20],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2018-12-01],
       user_id: 2
     })
@@ -105,6 +108,7 @@ defmodule Seeds do
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2019-05-01],
       user_id: 3
     })
@@ -112,6 +116,7 @@ defmodule Seeds do
       destination: "Casablanca",
       end_date: ~D[2018-12-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2018-12-01],
       user_id: 3
     })
@@ -121,6 +126,7 @@ defmodule Seeds do
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2019-05-01],
       user_id: 4
     })
@@ -128,6 +134,7 @@ defmodule Seeds do
       destination: "Casablanca",
       end_date: ~D[2018-12-30],
       price_limit: 3000,
+      passengers: 1,
       start_date: ~D[2018-12-01],
       user_id: 4
     })

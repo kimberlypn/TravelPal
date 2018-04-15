@@ -10,7 +10,7 @@ export default function TravelDates({travelDates}) {
   let trips = _.map(travelDates, function(tt) {
     return <TravelCard key={tt.id} destination={tt.destination}
         startDate={tt.start_date} endDate={tt.end_date}
-        priceLimit={tt.price_limit} id={tt.id} />;
+        priceLimit={tt.price_limit} passengers={tt.passengers} id={tt.id} />;
   });
 
   // Display none message if no travel dates

@@ -7,7 +7,7 @@ import TripCardHeader from './TripCardHeader';
 
 // Renders the details of an individual trip as a card
 export default function TravelCard({destination, startDate, endDate,
-  priceLimit, id}) {
+  priceLimit, passengers, id}) {
   // Sends a request to delete a trip
   function cancel() {
     api.delete_travel_date(id);
@@ -25,7 +25,7 @@ export default function TravelCard({destination, startDate, endDate,
 
   // TODO: Fill in missing card body details
   return (
-    <Col md="6">
+    <Col md="12">
       <Card>
         <TripCardHeader destination={destination} startDate={startDate}
           endDate={endDate} />
@@ -33,7 +33,7 @@ export default function TravelCard({destination, startDate, endDate,
           <Row>
             <Col md="12">
               <p><b>Price Limit:</b> ${priceLimit}</p>
-              <p><b>Number of Passengers: </b></p>
+              <p><b>Number of Passengers: </b>{passengers}</p>
             </Col>
           </Row>
           <Row>
@@ -54,5 +54,6 @@ TravelCard.propTypes = {
   startDate: PropTypes.string.isRequired,
   endDate: PropTypes.string.isRequired,
   priceLimit: PropTypes.number.isRequired,
+  passengers: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired
 };

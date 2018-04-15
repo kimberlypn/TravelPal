@@ -62,6 +62,16 @@ h1 {
 .trip-card-header {
   text-align: center;
 }
+
+input {
+  margin-bottom: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group {
+  margin-top: 0px;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -69,35 +79,6 @@ h1 {
   margin-top: 80px;
   margin-bottom: 80px;
   padding: 30px 30px 30px;
-}
-
-.form-group {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px 10px 10px;
-}
-
-.form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-}
-
-input[type="text"] {
-  margin-bottom: 2px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.input-group {
-  margin-top: 0px;
 }
 
 #login .row, #registration .row {
@@ -110,8 +91,25 @@ input[type="password"] {
   text-align: center;
 }
 
+#login button {
+  margin-top: 20px;
+}
+
 #login a:hover, #registration a:hover {
   text-decoration: none;
+}
+
+#login .form-group, #registration .form-group{
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px 10px 10px;
+}
+
+#login .form-control, #registration .form-group{
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
 }
 
 #registration {

@@ -1,7 +1,6 @@
 defmodule TravelpalWeb.FlightController do
   use TravelpalWeb, :controller
 
-
   alias Travelpal.Flights
   alias Travelpal.Flights.Flight
 
@@ -29,7 +28,8 @@ defmodule TravelpalWeb.FlightController do
   def update(conn, %{"id" => id, "flight" => flight_params}) do
     flight = Flights.get_flight!(id)
 
-    with {:ok, %Flight{} = flight} <- Flights.update_flight(flight, flight_params) do
+    with {:ok, %Flight{} = flight} <-
+      Flights.update_flight(flight, flight_params) do
       render(conn, "show.json", flight: flight)
     end
   end
@@ -39,6 +39,7 @@ defmodule TravelpalWeb.FlightController do
     with {:ok, %Flight{}} <- Flights.delete_flight(flight) do
       send_resp(conn, :no_content, "")
     end
+  end
 
   # @TODO decide if other functions are needed
   def flight_url, do: "https://api.skypicker.com/flights"

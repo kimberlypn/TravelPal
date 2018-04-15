@@ -40,7 +40,7 @@ export default function PastCard({form, destination, startDate, endDate,
               <p><b>Airline: </b>{flight.airline}</p>
               <p><b>Number of Passengers: </b>{passengers}</p>
               <p><b>Hotel: </b>{hotel ? hotel.name : "N/A"}</p>
-              <p><b>Number of Rooms: </b>{rooms ? rooms : "N/A"}</p>
+              <p><b>Number of Rooms: </b>{(rooms > 0) ? rooms : "N/A"}</p>
             </Col>
           </Row>
           <Row>

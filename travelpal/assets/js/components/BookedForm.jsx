@@ -101,11 +101,8 @@ function BookedForm(props) {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
-          {/* Using a form group so that everything aligns properly */}
-          <FormGroup>
-            <Label><b>* = required</b></Label>
-          </FormGroup>
+        <Col md="12">
+            <b>* = required</b>
         </Col>
       </Row>
       <Row>
