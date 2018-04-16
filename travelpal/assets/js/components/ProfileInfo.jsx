@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
-
+import ProfileLabel from './ProfileLabel';
 import api from '../api';
 
 // Renders the user's information
@@ -32,12 +32,7 @@ function ProfileInfo(props) {
   return (
     <div id="profile-info">
       <h3>About</h3>
-      <p id="name">
-        <b>Name:</b> {props.form.name}
-        <a href="javascript:void(0)" onClick={() => toggleEdit('name')}>
-          <img src="images/edit.png" alt="edit-name" />
-        </a>
-      </p>
+      <ProfileLabel name={"name"} label={"Name"} value={props.form.name} />
       <Row id="name-edit">
         <b>New Name:</b>
         <Input type="text" className="form-control" name="name"
@@ -52,12 +47,7 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <p id="username">
-        <b>Username:</b> {props.form.username}
-        <a href="javascript:void(0)" onClick={() => toggleEdit('username')}>
-          <img src="images/edit.png" alt="edit-username" />
-        </a>
-      </p>
+      <ProfileLabel name={"username"} label={"Username"} value={props.form.username} />
       <Row id="username-edit">
         <b>New Username:</b>
         <Input type="text" className="form-control" name="username"
@@ -72,12 +62,7 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <p id="email">
-        <b>Email:</b> {props.form.email}
-        <a href="javascript:void(0)" onClick={() => toggleEdit('email')}>
-          <img src="images/edit.png" alt="edit-username" />
-        </a>
-      </p>
+      <ProfileLabel name={"email"} label={"Email"} value={props.form.email} />
       <Row id="email-edit">
         <b>New Email:</b>
         <Input type="email" className="form-control" name="email"
@@ -92,12 +77,7 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <p id="budget">
-        <b>Budget:</b> ${props.form.budget}
-        <a href="javascript:void(0)" onClick={() => toggleEdit('budget')}>
-          <img src="images/edit.png" alt="edit-username" />
-        </a>
-      </p>
+      <ProfileLabel name={"budget"} label={"Budget"} value={props.form.budget} />
       <Row id="budget-edit">
         <b>New Budget:</b>
         <Input type="number" className="form-control" name="budget"
