@@ -36,7 +36,10 @@ defmodule TravelpalWeb.TravelDateController do
   def delete(conn, %{"id" => id}) do
     travel_date = TravelDates.get_travel_date!(id)
     with {:ok, %TravelDate{}} <- TravelDates.delete_travel_date(travel_date) do
-      send_resp(conn, :no_content, "")
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", page_path(conn, :index))
+      |> render("index.json", traveldates: TravelDates.list_traveldates())
     end
   end
 end

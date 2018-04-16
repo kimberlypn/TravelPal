@@ -22,6 +22,42 @@ function friends(state = [], action) {
   }
 }
 
+function travelDates(state = [], action) {
+  switch (action.type) {
+    case 'TRAVEL_DATES_LIST':
+      return [...action.travelDates];
+    default:
+      return state;
+  }
+}
+
+function bookedTrips(state = [], action) {
+  switch (action.type) {
+    case 'BOOKED_TRIPS_LIST':
+      return [...action.bookedTrips];
+    default:
+      return state;
+  }
+}
+
+function flights(state = [], action) {
+  switch (action.type) {
+    case 'FLIGHTS_LIST':
+      return [...action.flights];
+    default:
+      return state;
+  }
+}
+
+function hotels(state = [], action) {
+  switch (action.type) {
+    case 'HOTELS_LIST':
+      return [...action.hotels];
+    default:
+      return state;
+  }
+}
+
 let empty_form = {
   token: "",
   id: "",
@@ -98,11 +134,37 @@ function register(state = empty_register, action) {
   }
 }
 
+let empty_booked = {
+  id: "",
+  destination: "",
+  start_date: "",
+  end_date: "",
+  departure_time: "",
+  arrival_time: "",
+  passengers: 1,
+  cost: 0,
+  rooms: 0,
+  flight_id: "",
+  hotel_id: ""
+}
+
+function booked(state = empty_booked, action) {
+  switch (action.type) {
+    case 'UPDATE_BOOKED_FORM':
+      return Object.assign({}, state, action.data);
+    case 'CLEAR_BOOKED_FORM':
+      return empty_booked;
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({users, friends, form, token, login, register});
+  let reducer = combineReducers({users, friends, travelDates, bookedTrips,
+    flights, hotels, form, token, login, register, booked});
   let state1 = reducer(state0, action);
   return deepFreeze(state1);
 };

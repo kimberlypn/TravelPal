@@ -25,11 +25,15 @@ defmodule TravelpalWeb.FriendController do
     render(conn, "show.json", friend: friend)
   end
 
-  def update(conn, %{"id" => id, "friend" => friend_params}) do
-    friend = Friends.get_friend!(id)
+
+  def update(conn, %{"friend" => friend_params}) do
+    friend = Friends.get_friend!(Map.get(friend_params, "id"))
 
     with {:ok, %Friend{} = friend} <- Friends.update_friend(friend, friend_params) do
-      render(conn, "show.json", friend: friend)
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", page_path(conn, :index))
+      |> render("index.json", friends: Friends.list_friends())
     end
   end
 

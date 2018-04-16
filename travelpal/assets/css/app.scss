@@ -31,6 +31,47 @@ h1 {
 .page-content b {
   color: #19609e;
 }
+
+.card {
+  margin-bottom: 15px;
+}
+
+.card-header {
+  background-color: #597487;
+  color: white;
+}
+
+.card button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.card button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
+
+.trip-btn {
+  text-align: right;
+}
+
+.trip-btn button {
+  margin-left: 10px;
+}
+
+.trip-card-header {
+  text-align: center;
+}
+
+input {
+  margin-bottom: 2px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group {
+  margin-top: 0px;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -38,35 +79,6 @@ h1 {
   margin-top: 80px;
   margin-bottom: 80px;
   padding: 30px 30px 30px;
-}
-
-.form-group {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 10px 10px 10px;
-}
-
-.form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-}
-
-input[type="text"] {
-  margin-bottom: 2px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-input[type="password"] {
-  margin-bottom: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.input-group {
-  margin-top: 0px;
 }
 
 #login .row, #registration .row {
@@ -79,8 +91,25 @@ input[type="password"] {
   text-align: center;
 }
 
+#login button {
+  margin-top: 20px;
+}
+
 #login a:hover, #registration a:hover {
   text-decoration: none;
+}
+
+#login .form-group, #registration .form-group{
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px 10px 10px;
+}
+
+#login .form-control, #registration .form-group{
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
 }
 
 #registration {
@@ -165,18 +194,18 @@ input[type="password"] {
 .friend-btn {
   text-align: right;
 }
-
-.friend-btn button {
-  background-color: #e06969;
-  border-color: #e06969;
-}
-
-.friend-btn button:hover {
-  background-color: #d84545;
-  border-color: #d84545;
-}
-
-#profile-friends .card {
-  margin-bottom: 15px;
-}
 /***************************** END OF PROFILE ****************************/
+
+/****************************** BOOKED TRIPS *****************************/
+.trip-edit {
+  display: none;
+}
+
+.trip-edit-btn {
+  display: none;
+}
+
+.required {
+  padding-left: 25px;
+}
+/*************************** END OF BOOKED TRIPS *************************/

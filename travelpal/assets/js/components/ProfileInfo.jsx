@@ -127,6 +127,6 @@ function state2props(state) {
   return {
     form: state.form
   };
-}
+};
 
 export default connect(state2props)(ProfileInfo);
