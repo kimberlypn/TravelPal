@@ -1,14 +1,56 @@
 defmodule TravelpalWeb.FlightController do
   use TravelpalWeb, :controller
 
+  alias Travelpal.Flights
+  alias Travelpal.Flights.Flight
+
+  action_fallback TravelpalWeb.FallbackController
+
+  def index(conn, _params) do
+    flights = Flights.list_flights()
+    render(conn, "index.json", flights: flights)
+  end
+
+  def create(conn, %{"flight" => flight_params}) do
+    with {:ok, %Flight{} = flight} <- Flights.create_flight(flight_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", flight_path(conn, :show, flight))
+      |> render("show.json", flight: flight)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    flight = Flights.get_flight!(id)
+    render(conn, "show.json", flight: flight)
+  end
+
+  def update(conn, %{"id" => id, "flight" => flight_params}) do
+    flight = Flights.get_flight!(id)
+
+    with {:ok, %Flight{} = flight} <-
+      Flights.update_flight(flight, flight_params) do
+      render(conn, "show.json", flight: flight)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    flight = Flights.get_flight!(id)
+    with {:ok, %Flight{}} <- Flights.delete_flight(flight) do
+      send_resp(conn, :no_content, "")
+    end
+  end
+
   # @TODO decide if other functions are needed
   def flight_url, do: "https://api.skypicker.com/flights"
 
-  def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "return_from" => return_from}) do
+  def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest,
+    "date_from" => date_from, "return_from" => return_from}) do
     # gets top 5 flights
-    uri = URI.encode(flight_url() <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
-        <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
-    
+    uri = URI.encode(flight_url()
+      <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
+      <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
+
     # comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
     #data = Poison.decode!(res.body)

@@ -7,7 +7,7 @@ defmodule Travelpal.Repo.Migrations.CreateTraveldates do
       add :end_date, :date, null: false
       add :destination, :string, null: false
       add :price_limit, :integer, default: 0, null: false
-      add :booked, :boolean, default: false, null: false
+      add :passengers, :integer, default: 1, null: false
       add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()

@@ -7,6 +7,7 @@ defmodule Travelpal.Friends.Friend do
 
   schema "friends" do
     field :status, :string
+    
     belongs_to :requestor, User
     belongs_to :acceptor, User
 

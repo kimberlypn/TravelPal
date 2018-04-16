@@ -5,13 +5,18 @@ import { Card, CardBody, CardHeader, Button, Row, Col } from 'reactstrap';
 import api from '../api';
 
 // Renders the details of an individual friend
-export default function FriendCard({status, name, email, username, id}) {
-  let btnTxt = (status == "Accepted") ? "Unfriend" : "Cancel Request";
-
+export default function FriendCard({btnTxt, name, email, username, id}) {
   // Sends an unfriend request
   function unfriend() {
     api.delete_friend(id);
   }
+
+  // Changes the status from pending to accepted
+  function accept() {
+    api.accept_friend({id: id, status: "Accepted"});
+  }
+
+  let func = (btnTxt == "Accept Request") ? (() => accept()) : (() => unfriend());
 
   return (
     <Col md="6">
@@ -22,7 +27,7 @@ export default function FriendCard({status, name, email, username, id}) {
               {name}
             </Col>
             <Col md="6" className="friend-btn">
-              <Button type="button" onClick={unfriend}>{btnTxt}</Button>
+              <Button type="button" onClick={func}>{btnTxt}</Button>
             </Col>
           </Row>
         </CardHeader>
@@ -36,7 +41,7 @@ export default function FriendCard({status, name, email, username, id}) {
 };
 
 FriendCard.propTypes = {
-  status: PropTypes.string.isRequired,
+  btnTxt: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,

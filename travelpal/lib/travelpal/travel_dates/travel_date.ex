@@ -9,7 +9,7 @@ defmodule Travelpal.TravelDates.TravelDate do
     field :end_date, :date
     field :price_limit, :integer
     field :start_date, :date
-    field :booked, :boolean
+    field :passengers, :integer
 
     belongs_to :user, User
 
@@ -19,7 +19,9 @@ defmodule Travelpal.TravelDates.TravelDate do
   @doc false
   def changeset(travel_date, attrs) do
     travel_date
-    |> cast(attrs, [:start_date, :end_date, :destination, :price_limit, :booked, :user_id])
-    |> validate_required([:start_date, :end_date, :destination, :price_limit, :booked, :user_id])
+    |> cast(attrs, [:start_date, :end_date, :destination, :price_limit,
+      :passengers, :user_id])
+    |> validate_required([:start_date, :end_date, :destination, :price_limit,
+      :passengers, :user_id])
   end
 end
