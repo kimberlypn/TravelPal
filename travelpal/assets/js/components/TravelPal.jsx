@@ -44,8 +44,7 @@ let TravelPal = connect((state) => state)((props) => {
     main = <Main form={props.form} bookedForm={props.booked}
       friends={props.friends} travelDates={props.travelDates}
       bookedTrips={props.bookedTrips} flights={props.flights}
-      hotels={props.hotels} tripSummaries={props.tripSummaries}
-      summaryForm={props.summary} />;
+      hotels={props.hotels} />;
   }
 
   return (

@@ -40,9 +40,8 @@ export default function Main(props) {
           flights={props.flights} hotels={props.hotels} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
-        <PastTrips pastTrips={pastTrips} form={props.summaryForm}
-          flights={props.flights} hotels={props.hotels}
-          tripSummaries={props.tripSummaries} />
+        <PastTrips pastTrips={pastTrips} form={props.bookedForm}
+          flights={props.flights} hotels={props.hotels} />
       } />
       <Route path="/profile" exact={true} render={() =>
         <Profile form={props.form} friends={props.friends} />

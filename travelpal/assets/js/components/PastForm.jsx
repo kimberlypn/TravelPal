@@ -10,13 +10,27 @@ function PastForm(props) {
 
   // Updates the state with the inputted values from the form
   function update(ev) {
+    console.log("YOOOOOOOO");
+    console.log(props.trip);
     let tgt = $(ev.target);
     let data = {};
     data[tgt.attr('name')] = tgt.val();
     // Populate the fields that should not change
-    data["id"] = props.id;
+    data["id"] = props.trip.id;
+    data["destination"] = props.trip.destination;
+    data["start_date"] = props.trip.start_date;
+    data["end_date"] = props.trip.end_date;
+    data["departure_time"] = props.trip.departure_time;
+    data["arrival_time"] = props.trip.arrival_time;
+    data["passengers"] = props.trip.passengers;
+    data["cost"] = props.trip.cost;
+    data["rooms"] = props.trip.room;
+    data["flight_id"] = props.trip.flight.id;
+    if (props.trip.hotel) {
+      data["hotel_id"] = props.trip.hotel.id
+    }
     props.dispatch({
-      type: 'UPDATED_SUMMARY_FORM',
+      type: 'UPDATE_BOOKED_FORM',
       data: data,
     });
   }
@@ -36,7 +50,7 @@ function PastForm(props) {
 
 function state2props(state) {
   return {
-    form: state.summary
+    form: state.booked
   };
 };
 

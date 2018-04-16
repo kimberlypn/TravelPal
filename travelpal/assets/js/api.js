@@ -104,23 +104,6 @@ class TheServer {
     });
   }
 
-  request_trip_summaries() {
-    $.ajax("/api/v1/tripsummaries", {
-      method: "get",
-      dataType: "json",
-      contentType: "application/json; charset=UTF-8",
-      success: (resp) => {
-        store.dispatch({
-          type: 'TRIP_SUMMARIES_LIST',
-          tripSummaries: resp.data,
-        });
-      },
-      error: (resp) => {
-        alert("Could not load trip summaries.");
-      }
-    });
-  }
-
   submit_login(data) {
     console.log(data);
     $.ajax("/api/v1/token", {

@@ -11,6 +11,7 @@ defmodule Travelpal.Repo.Migrations.CreateBookedtrips do
       add :passengers, :integer, default: 1, null: false
       add :cost, :integer, default: 0, null: false
       add :rooms, :integer, default: 0
+      add :summary, :text
       add :user_id, references(:users, on_delete: :delete_all), null: false
       add :flight_id, references(:flights, on_delete: :delete_all), null: false
       add :hotel_id, references(:hotels, on_delete: :delete_all)

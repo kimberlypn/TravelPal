@@ -35,6 +35,8 @@ defmodule TravelpalWeb.BookedTripController do
   end
 
   def update(conn, %{"booked_trip" => booked_trip_params}) do
+    IO.inspect("UPDATE")
+    IO.inspect(booked_trip_params)
     booked_trip =
       BookedTrips.get_booked_trip!(Map.get(booked_trip_params, "id"))
 
@@ -43,9 +45,7 @@ defmodule TravelpalWeb.BookedTripController do
       parse_time(Map.get(booked_trip_params, "arrival_time")))
     |> Map.put("departure_time",
       parse_time(Map.get(booked_trip_params, "departure_time")))
-    |> Map.put("cost",
-      Map.get(booked_trip_params, "cost") |> String.to_integer())
-      
+
     with {:ok, %BookedTrip{} = booked_trip} <-
       BookedTrips.update_booked_trip(booked_trip, booked_trip_params) do
       conn

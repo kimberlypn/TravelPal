@@ -41,7 +41,7 @@ function PastCard(props) {
         <TripCardHeader destination={props.trip.destination}
           startDate={props.trip.start_date} endDate={props.trip.end_date} />
         <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
-          <PastForm id={props.trip.id} form={props.form} />
+          <PastForm trip={props.trip} form={props.form} />
           <Row>
             <Col md="12" className="trip-btn">
               <Button type="button" onClick={cancel}>Cancel</Button>
@@ -53,7 +53,8 @@ function PastCard(props) {
           <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12">
-              <p><b>Trip Summary: </b>{props.summary}</p>
+              <p><b>Trip Summary: </b></p>
+              <p>{props.trip.summary ? props.trip.summary : "N/A"}</p>
             </Col>
           </Row>
           <Row>

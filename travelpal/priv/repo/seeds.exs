@@ -18,7 +18,6 @@ defmodule Seeds do
   alias Travelpal.BookedTrips.BookedTrip
   alias Travelpal.Flights.Flight
   alias Travelpal.Hotels.Hotel
-  alias Travelpal.TripSummaries.TripSummary
 
   def insert_users do
     Repo.delete_all(User)
@@ -170,6 +169,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 3000,
       rooms: 1,
+      summary: "So many kangaroos!",
       user_id: 1,
       flight_id: 1,
       hotel_id: 1
@@ -183,6 +183,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 1,
+      summary: "",
       user_id: 1,
       flight_id: 2,
       hotel_id: 3
@@ -196,6 +197,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 2000,
       rooms: 0,
+      summary: "",
       user_id: 1,
       flight_id: 1
     })
@@ -210,6 +212,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 1500,
       rooms: 0,
+      summary: "Fun in the sun.",
       user_id: 2,
       flight_id: 4
     })
@@ -222,6 +225,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 1000,
       rooms: 1,
+      summary: "",
       user_id: 2,
       flight_id: 2,
       hotel_id: 1
@@ -235,6 +239,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 2000,
       rooms: 1,
+      summary: "",
       user_id: 2,
       flight_id: 1,
       hotel_id: 1
@@ -250,6 +255,7 @@ defmodule Seeds do
       passengers: 3,
       cost: 3000,
       rooms: 2,
+      summary: "Isn't Matt going next year?",
       user_id: 3,
       flight_id: 4,
       hotel_id: 4
@@ -263,6 +269,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 1,
+      summary: "",
       user_id: 3,
       flight_id: 1,
       hotel_id: 1
@@ -276,6 +283,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 2000,
       rooms: 0,
+      summary: "",
       user_id: 3,
       flight_id: 4
     })
@@ -290,6 +298,7 @@ defmodule Seeds do
       passengers: 5,
       cost: 3000,
       rooms: 5,
+      summary: "Wonder when Long is going to get here.",
       user_id: 4,
       flight_id: 4,
       hotel_id: 3
@@ -303,6 +312,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 0,
+      summary: "",
       user_id: 4,
       flight_id: 1
     })
@@ -315,29 +325,10 @@ defmodule Seeds do
       passengers: 4,
       cost: 2000,
       rooms: 2,
+      summary: "",
       user_id: 4,
       flight_id: 2,
       hotel_id: 2
-    })
-  end
-
-  def insert_trip_summaries do
-    Repo.delete_all(TripSummary)
-    Repo.insert!(%TripSummary{
-      summary: "So many kangaroos!",
-      bookedtrip_id: 1
-    })
-    Repo.insert!(%TripSummary{
-      summary: "Fun in the sun.",
-      bookedtrip_id: 4
-    })
-    Repo.insert!(%TripSummary{
-      summary: "Isn't Matt going next year?",
-      bookedtrip_id: 7
-    })
-    Repo.insert!(%TripSummary{
-      summary: "Wonder when Long is going to get here.",
-      bookedtrip_id: 10
     })
   end
 
@@ -348,7 +339,6 @@ defmodule Seeds do
     insert_flights()
     insert_hotels()
     insert_booked_trips()
-    insert_trip_summaries()
   end
 
   def seed(:dev) do
