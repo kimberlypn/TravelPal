@@ -22,8 +22,8 @@ let TravelPal = connect((state) => state)((props) => {
   var main;
   if (!props.form.token) {
     main = (
-      <Route path="/" exact={true} render={() =>
-          <LoginForm login={props.login} />
+      <Route path="/*" exact={true} render={() =>
+        <LoginForm login={props.login} />
       } />
     );
   }
