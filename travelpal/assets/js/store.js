@@ -91,8 +91,16 @@ function form(state = empty_form, action) {
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
+      localStorage.setItem('token', action.token.token)
+      localStorage.setItem('id', action.token.id)
+      localStorage.setItem('email', action.token.email)
+      localStorage.setItem('name', action.token.name)
+      localStorage.setItem('username', action.token.username)
+      localStorage.setItem('budget', action.token.budget)
+      console.log(localStorage.getItem('username'))
       return action.token;
     case 'DESTROY_TOKEN':
+      localStorage.clear();
       return null;
     default:
       return state;

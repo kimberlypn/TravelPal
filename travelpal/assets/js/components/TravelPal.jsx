@@ -20,6 +20,19 @@ export default function travelpal_init(store) {
 let TravelPal = connect((state) => state)((props) => {
   // Choose what to render depending on whether or not the user is logged in
   var main;
+  if (!props.form.token && localStorage.getItem('token')) {
+    props.dispatch({
+      type: 'SET_TOKEN',
+      token: {
+        token: localStorage.getItem('token'),
+        id: localStorage.getItem('id'),
+        email: localStorage.getItem('email'),
+        name: localStorage.getItem('name'),
+        username: localStorage.getItem('username'),
+        budget: localStorage.getItem('budget'),
+      },
+    });
+  }
   if (!props.form.token) {
     main = (
       <Route path="/*" exact={true} render={() =>
