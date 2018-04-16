@@ -158,6 +158,11 @@ class TheServer {
       error: (resp) => {
         alert("Could not save the edit. Please try again.");
       }
+    }).then(() => {
+      store.dispatch({
+        type: 'SET_TOKEN',
+        token: data
+      })
     });
   }
 
