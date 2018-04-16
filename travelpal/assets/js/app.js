@@ -30,5 +30,6 @@ $(function() {
   api.request_booked_trips();
   api.request_flights();
   api.request_hotels();
+  api.request_trip_summaries();
   travelpal_init(store);
 });

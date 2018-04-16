@@ -18,6 +18,7 @@ defmodule Seeds do
   alias Travelpal.BookedTrips.BookedTrip
   alias Travelpal.Flights.Flight
   alias Travelpal.Hotels.Hotel
+  alias Travelpal.TripSummaries.TripSummary
 
   def insert_users do
     Repo.delete_all(User)
@@ -320,6 +321,26 @@ defmodule Seeds do
     })
   end
 
+  def insert_trip_summaries do
+    Repo.delete_all(TripSummary)
+    Repo.insert!(%TripSummary{
+      summary: "So many kangaroos!",
+      bookedtrip_id: 1
+    })
+    Repo.insert!(%TripSummary{
+      summary: "Fun in the sun.",
+      bookedtrip_id: 4
+    })
+    Repo.insert!(%TripSummary{
+      summary: "Isn't Matt going next year?",
+      bookedtrip_id: 7
+    })
+    Repo.insert!(%TripSummary{
+      summary: "Wonder when Long is going to get here.",
+      bookedtrip_id: 10
+    })
+  end
+
   def run do
     insert_users()
     insert_friends()
@@ -327,6 +348,7 @@ defmodule Seeds do
     insert_flights()
     insert_hotels()
     insert_booked_trips()
+    insert_trip_summaries()
   end
 
   def seed(:dev) do

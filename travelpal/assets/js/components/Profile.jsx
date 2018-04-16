@@ -11,7 +11,7 @@ export default function Profile({form, friends}) {
     <div className="page-content" id="profile">
       <ProfileInfo form={form} />
       <br />
-      <ProfileFriends userId={form.id} friends={friends} />
+      <ProfileFriends userId={Number(form.id)} friends={friends} />
     </div>
   );
 };

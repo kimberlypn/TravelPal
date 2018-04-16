@@ -1,50 +1,59 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Card, CardBody, Button, Row, Col } from 'reactstrap';
 
 import api from '../api';
 import TripCardHeader from './TripCardHeader';
-import BookedForm from './BookedForm';
+import BookedTripInfo from './BookedTripInfo';
+import PastForm from './PastForm';
 
 // Renders the details of an individual past trip
-export default function PastCard({form, trip, flights, hotels}) {
+function PastCard(props) {
   // Sends a request to delete the trip
   function remove() {
-    api.delete_booked_trip(trip.id);
+    api.delete_booked_trip(props.trip.id);
   }
 
   // Toggles the edit form
   function edit() {
-    $('#trip-details-' + trip.id).toggle();
-    $('#trip-edit-' + trip.id).toggle();
+    $('#trip-details-' + props.trip.id).toggle();
+    $('#trip-edit-' + props.trip.id).toggle();
+  }
+
+  // Clears and closes the past trips edit form
+  function cancel() {
+    props.dispatch({
+      type: 'CLEAR_BOOKED_FORM',
+    });
+    $('#trip-details-' + props.trip.id).toggle();
+    $('#trip-edit-' + props.trip.id).toggle();
+  }
+
+  // Sends a request to update the past trip with the values from the form
+  function submit(ev) {
+    api.edit_booked_trip(props.form);
+    cancel();
   }
 
   return (
     <Col md="12">
       <Card>
-        <TripCardHeader destination={trip.destination}
-          startDate={trip.start_date} endDate={trip.end_date} />
-        <BookedForm form={form} id={trip.id} destination={trip.destination}
-          startDate={trip.start_date} endDate={trip.end_date} flights={flights}
-          hotels={hotels} />
-        <CardBody className="trip-details" id={"trip-details-" + trip.id}>
+        <TripCardHeader destination={props.trip.destination}
+          startDate={props.trip.start_date} endDate={props.trip.end_date} />
+        <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
+          <PastForm id={props.trip.id} form={props.form} />
           <Row>
-            <Col md="6">
-              <p><b>Total Cost: </b>${trip.cost}</p>
-              <p>
-                <b>Departure Time: </b>{trip.departure_time.substring(0, 5)}
-              </p>
-              <p>
-                <b>Arrival Time: </b>{trip.arrival_time.substring(0, 5)}
-              </p>
+            <Col md="12" className="trip-btn">
+              <Button type="button" onClick={cancel}>Cancel</Button>
+              <Button type="button" onClick={submit}>Submit</Button>
             </Col>
-            <Col md="6">
-              <p><b>Airline: </b>{trip.flight.airline}</p>
-              <p><b>Number of Passengers: </b>{trip.passengers}</p>
-              <p><b>Hotel: </b>{trip.hotel ? trip.hotel.name : "N/A"}</p>
-              <p>
-                <b>Number of Rooms: </b>{(trip.rooms > 0) ? trip.rooms : "N/A"}
-              </p>
+          </Row>
+        </CardBody>
+        <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          <BookedTripInfo trip={props.trip} />
+          <Row>
+            <Col md="12">
+              <p><b>Trip Summary: </b>{props.summary}</p>
             </Col>
           </Row>
           <Row>
@@ -59,9 +68,10 @@ export default function PastCard({form, trip, flights, hotels}) {
   );
 };
 
-PastCard.propTypes = {
-  form: PropTypes.object.isRequired,
-  trip: PropTypes.object.isRequired,
-  flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired,
+function state2props(state) {
+  return {
+    form: state.booked
+  };
 };
+
+export default connect(state2props)(PastCard);

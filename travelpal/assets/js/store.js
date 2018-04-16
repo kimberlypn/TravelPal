@@ -58,6 +58,15 @@ function hotels(state = [], action) {
   }
 }
 
+function tripSummaries(state = [], action) {
+  switch (action.type) {
+    case 'TRIP_SUMMARIES_LIST':
+      return [...action.tripSummaries];
+    default:
+      return state;
+  }
+}
+
 let empty_form = {
   token: "",
   id: "",
@@ -167,13 +176,29 @@ function booked(state = empty_booked, action) {
   }
 }
 
+let empty_trip_summary = {
+  bookedtrip_id: "",
+  summary: ""
+}
+
+function summary(state = empty_trip_summary, action) {
+  switch (action.type) {
+    case 'UPDATED_SUMMARY_FORM':
+      return Object.assign({}, state, action.data);
+    case 'CLEAR_SUMMARY_FORM':
+      return empty_trip_summary;
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
   let reducer = combineReducers({
-    users, friends, travelDates, bookedTrips,
-    flights, hotels, form, token, login, register, booked
+    users, friends, travelDates, bookedTrips, flights, hotels, tripSummaries,
+    form, token, login, register, booked, summary
   });
   let state1 = reducer(state0, action);
   return deepFreeze(state1);

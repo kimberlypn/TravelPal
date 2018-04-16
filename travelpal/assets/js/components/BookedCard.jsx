@@ -1,57 +1,63 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Card, CardBody, Button, Row, Col } from 'reactstrap';
-import { FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 import TripCardHeader from './TripCardHeader';
 import BookedForm from './BookedForm';
+import BookedTripInfo from './BookedTripInfo';
 
 // Renders the details of an individual booked trip
-export default function BookedCard({form, trip, flights, hotels}) {
+function BookedCard(props) {
   // Sends a request to delete the trip
-  function cancel() {
-    api.delete_booked_trip(trip.id);
+  function unbook() {
+    api.delete_booked_trip(props.trip.id);
   }
 
   // Toggles the edit form
   function edit() {
-    $('#trip-details-' + trip.id).toggle();
-    $('#trip-edit-' + trip.id).toggle();
+    $('#trip-details-' + props.trip.id).toggle();
+    $('#trip-edit-' + props.trip.id).toggle();
+  }
+
+  // Clears and closes the booked edit form
+  function cancel() {
+    props.dispatch({
+      type: 'CLEAR_BOOKED_FORM',
+    });
+    $('#trip-details-' + props.trip.id).toggle();
+    $('#trip-edit-' + props.trip.id).toggle();
+  }
+
+  // Sends a request to update the booked trip with the values from the form
+  function submit(ev) {
+    api.edit_booked_trip(props.form);
+    cancel();
   }
 
   return (
     <Col md="12">
       <Card>
-        <TripCardHeader destination={trip.destination}
-          startDate={trip.start_date} endDate={trip.end_date} />
-        <BookedForm form={form} id={trip.id} destination={trip.destination}
-          startDate={trip.start_date} endDate={trip.end_date} flights={flights}
-          hotels={hotels} />
-        <CardBody className="trip-details" id={"trip-details-" + trip.id}>
+        <TripCardHeader destination={props.trip.destination}
+          startDate={props.trip.start_date} endDate={props.trip.end_date} />
+        <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
+          <BookedForm form={props.form} id={props.trip.id}
+            destination={props.trip.destination}
+            startDate={props.trip.start_date} endDate={props.trip.end_date}
+            flights={props.flights} hotels={props.hotels} />
           <Row>
-            <Col md="6">
-              <p><b>Total Cost: </b>${trip.cost}</p>
-              <p>
-                <b>Departure Time: </b>{trip.departure_time.substring(0, 5)}
-              </p>
-              <p>
-                <b>Arrival Time: </b>{trip.arrival_time.substring(0, 5)}
-              </p>
-            </Col>
-            <Col md="6">
-              <p><b>Airline: </b>{trip.flight.airline}</p>
-              <p><b>Number of Passengers: </b>{trip.passengers}</p>
-              <p><b>Hotel: </b>{trip.hotel ? trip.hotel.name : "N/A"}</p>
-              <p>
-                <b>Number of Rooms: </b>{(trip.rooms > 0) ? trip.rooms : "N/A"}
-              </p>
+            <Col md="12" className="trip-btn">
+              <Button type="button" onClick={cancel}>Cancel</Button>
+              <Button type="button" onClick={submit}>Submit</Button>
             </Col>
           </Row>
+        </CardBody>
+        <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12" className="trip-btn">
               <Button type="button" onClick={edit}>Edit</Button>
-              <Button type="button" onClick={cancel}>Unbook</Button>
+              <Button type="button" onClick={unbook}>Unbook</Button>
             </Col>
           </Row>
         </CardBody>
@@ -60,9 +66,10 @@ export default function BookedCard({form, trip, flights, hotels}) {
   );
 };
 
-BookedCard.propTypes = {
-  form: PropTypes.object.isRequired,
-  trip: PropTypes.object.isRequired,
-  flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired,
+function state2props(state) {
+  return {
+    form: state.booked
+  };
 };
+
+export default connect(state2props)(BookedCard);

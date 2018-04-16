@@ -6,10 +6,18 @@ import api from '../api';
 import PastCard from './PastCard';
 
 // Renders the user's past trips
-export default function PastTrips({pastTrips, form, flights, hotels}) {
+export default function PastTrips({pastTrips, form, flights, hotels,
+  tripSummaries}) {
   let trips = _.map(pastTrips, function(tt) {
+    var summary = null;
+    _.map(tripSummaries, function(ss) {
+      console.log(ss);
+      if (ss.bookedtrip_id == tt.id) {
+        summary = ss;
+      }
+    })
     return <PastCard key={tt.id} form={form} trip={tt} flights={flights}
-      hotels={hotels} />;
+      hotels={hotels} summary={summary} />;
   });
 
   // Display message if no travel dates
@@ -29,5 +37,6 @@ PastTrips.propTypes = {
   pastTrips: PropTypes.array.isRequired,
   form: PropTypes.object.isRequired,
   flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired
+  hotels: PropTypes.array.isRequired,
+  tripSummaries: PropTypes.array.isRequired
 };
