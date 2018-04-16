@@ -26,8 +26,9 @@ defmodule TravelpalWeb.TripSummaryController do
     render(conn, "show.json", trip_summary: trip_summary)
   end
 
-  def update(conn, %{"id" => id, "trip_summary" => trip_summary_params}) do
-    trip_summary = TripSummaries.get_trip_summary!(id)
+  def update(conn, %{"trip_summary" => trip_summary_params}) do
+    trip_summary =
+      TripSummaries.get_trip_summary!(Map.get(trip_summary_params, "id"))
 
     with {:ok, %TripSummary{} = trip_summary} <-
       TripSummaries.update_trip_summary(trip_summary, trip_summary_params) do
