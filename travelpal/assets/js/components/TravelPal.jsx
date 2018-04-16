@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import Main from './Main';
+import api from '../api';
 
 // Renders the main application
 export default function travelpal_init(store) {
@@ -23,15 +24,33 @@ let TravelPal = connect((state) => state)((props) => {
   if (!props.form.token) {
     main = (
       <Route path="/" exact={true} render={() =>
-          <LoginForm login={props.login} />
+        <LoginForm login={props.login} />
       } />
     );
   }
   else {
-    main = <Main form={props.form} bookedForm={props.booked}
-      friends={props.friends} travelDates={props.travelDates}
-      bookedTrips={props.bookedTrips} flights={props.flights}
-      hotels={props.hotels} />;
+    function updateFormAction(ev) {
+      let tgt = $(ev.target);
+      let data = {};
+      data[tgt.attr('name')] = tgt.val();
+      props.dispatch({
+        type: 'UPDATE_FORM',
+        data: data,
+      });
+    }
+    const actions = {
+      updateFormAction
+    }
+
+    function submitProfileChanges() {
+      api.edit_user(props.form);
+    }
+
+    const apiCalls = {
+      submitProfileChanges
+    }
+
+    main = <Main {...props} actions={actions} apiCalls={apiCalls} />;
   }
 
   return (

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-export default function ProfileLabel({ name, label, value }) {
+export default function ProfileLabel({ name, label, value, toggleEdit }) {
     return (
         <p id={name}>
             <b>{label}:</b> {value}
-            <a href="javascript:void(0)" onClick={() => toggleEdit({ name })}>
+            <a href="javascript:void(0)" onClick={() => toggleEdit(name)}>
                 <img src="images/edit.png" alt={`edit-${name}`} />
             </a>
         </p>
@@ -17,5 +17,6 @@ ProfileLabel.propTypes = {
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]),
+    ]).isRequired,
+    toggleEdit: PropTypes.func.isRequired
 };

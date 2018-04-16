@@ -4,12 +4,12 @@ import deepFreeze from 'deep-freeze';
 
 function users(state = [], action) {
   switch (action.type) {
-  case 'USERS_LIST':
-    return [...action.users];
-  case 'ADD_USER':
-    return [action.user, ...state];
-  default:
-    return state;
+    case 'USERS_LIST':
+      return [...action.users];
+    case 'ADD_USER':
+      return [action.user, ...state];
+    default:
+      return state;
   }
 }
 
@@ -163,9 +163,13 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({users, friends, travelDates, bookedTrips,
-    flights, hotels, form, token, login, register, booked});
+  console.log("state0", state0)
+  let reducer = combineReducers({
+    users, friends, travelDates, bookedTrips,
+    flights, hotels, form, token, login, register, booked
+  });
   let state1 = reducer(state0, action);
+  console.log("state1", state1)
   return deepFreeze(state1);
 };
 

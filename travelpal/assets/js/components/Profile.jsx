@@ -6,17 +6,17 @@ import ProfileInfo from './ProfileInfo';
 import ProfileFriends from './ProfileFriends';
 
 // Renders the user's profile
-export default function Profile({form, friends}) {
+export default function Profile({ userInfo, friends, formOnChange, submitOnClick }) {
   return (
     <div className="page-content" id="profile">
-      <ProfileInfo form={form} />
+      <ProfileInfo {...userInfo} formOnChange={formOnChange} submitOnClick={submitOnClick} />
       <br />
-      <ProfileFriends userId={form.id} friends={friends} />
+      <ProfileFriends userId={userInfo.id} friends={friends} />
     </div>
   );
 };
 
 Profile.propTypes = {
-  form: PropTypes.object.isRequired,
+  userInfo: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired
 };

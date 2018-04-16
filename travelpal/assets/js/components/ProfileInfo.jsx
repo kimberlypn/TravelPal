@@ -1,26 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Button, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
 import ProfileLabel from './ProfileLabel';
 import api from '../api';
 
 // Renders the user's information
-function ProfileInfo(props) {
-  // Updates the state with the edited values
-  function update(ev) {
-    let tgt = $(ev.target);
-    let data = {};
-    data[tgt.attr('name')] = tgt.val();
-    props.dispatch({
-      type: 'UPDATE_FORM',
-      data: data,
-    });
-  }
-
+export default function ProfileInfo({ name, username, email, budget, formOnChange, submitOnClick }) {
   // Sends a request to update the user
   function submit(ev) {
-    api.edit_user(props.form);
+    api.edit_user(userInfo);
   }
 
   // Toggles the edit input for the given field
@@ -32,14 +20,14 @@ function ProfileInfo(props) {
   return (
     <div id="profile-info">
       <h3>About</h3>
-      <ProfileLabel name={"name"} label={"Name"} value={props.form.name} />
+      <ProfileLabel name={"name"} label={"Name"} value={name} toggleEdit={toggleEdit} />
       <Row id="name-edit">
         <b>New Name:</b>
         <Input type="text" className="form-control" name="name"
           placeholder="name" required="" autoFocus=""
-          value={props.form.name} onChange={update} />
+          value={name} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submit}>
+          <a href="javascript:void(0)" onClick={submitOnClick}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('name')}>
@@ -47,14 +35,14 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <ProfileLabel name={"username"} label={"Username"} value={props.form.username} />
+      <ProfileLabel name={"username"} label={"Username"} value={username} toggleEdit={toggleEdit} />
       <Row id="username-edit">
         <b>New Username:</b>
         <Input type="text" className="form-control" name="username"
           placeholder="username" required="" autoFocus=""
-          value={props.form.username} onChange={update} />
+          value={username} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submit}>
+          <a href="javascript:void(0)" onClick={submitOnClick}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('username')}>
@@ -62,14 +50,14 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <ProfileLabel name={"email"} label={"Email"} value={props.form.email} />
+      <ProfileLabel name={"email"} label={"Email"} value={email} toggleEdit={toggleEdit} />
       <Row id="email-edit">
         <b>New Email:</b>
         <Input type="email" className="form-control" name="email"
           placeholder="email" required="" autoFocus=""
-          value={props.form.email} onChange={update} />
+          value={email} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submit}>
+          <a href="javascript:void(0)" onClick={submitOnClick}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('email')}>
@@ -77,13 +65,13 @@ function ProfileInfo(props) {
           </a>
         </span>
       </Row>
-      <ProfileLabel name={"budget"} label={"Budget"} value={props.form.budget} />
+      <ProfileLabel name={"budget"} label={"Budget"} value={budget} toggleEdit={toggleEdit} />
       <Row id="budget-edit">
         <b>New Budget:</b>
         <Input type="number" className="form-control" name="budget"
-          placeholder="budget" step="100" min="0" onChange={update} />
+          placeholder="budget" step="100" min="0" onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={() => toggleEdit('budget')}>
+          <a href="javascript:void(0)" onClick={submitOnClick}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('budget')}>
@@ -102,11 +90,3 @@ function ProfileInfo(props) {
     </div>
   );
 };
-
-function state2props(state) {
-  return {
-    form: state.form
-  };
-};
-
-export default connect(state2props)(ProfileInfo);
