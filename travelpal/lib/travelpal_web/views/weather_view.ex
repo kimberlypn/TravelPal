@@ -17,7 +17,7 @@ defmodule TravelpalWeb.WeatherView do
       high: weather.high,
       low: weather.low,
       text: weather.text,
-      forecast: weather.forecast,
+      forecast: weather.forecast
     }
   end
 end

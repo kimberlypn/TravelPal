@@ -9,6 +9,25 @@ defmodule TravelpalWeb.FlightController do
     uri = URI.encode(flight_url() <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
         <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
     
+  alias Travelpal.Flights
+  alias Travelpal.Flights.Flight
+
+  action_fallback TravelpalWeb.FallbackController
+
+  def index(conn, _params) do
+    flights = Flights.list_flights()
+    render(conn, "index.json", flights: flights)
+  end
+
+  # @TODO decide if other functions are needed
+  def flight_url, do: "https://api.skypicker.com/flights"
+
+  def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest,
+    "date_from" => date_from, "return_from" => return_from}) do
+    # gets top 5 flights
+    uri = URI.encode(flight_url()
+      <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
+      <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
     # comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
     #data = Poison.decode!(res.body)

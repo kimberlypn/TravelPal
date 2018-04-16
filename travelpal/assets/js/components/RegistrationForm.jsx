@@ -69,6 +69,6 @@ function state2props(state) {
   return {
     form: state.register
   };
-}
+};
 
 export default connect(state2props)(RegistrationForm);

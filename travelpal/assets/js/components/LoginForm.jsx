@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Button, FormGroup, Input } from 'reactstrap';
 
 import api from '../api';
-import RegistrationForm from './registration-form';
+import RegistrationForm from './RegistrationForm';
 
 // Renders the log-in form; adapted from Nat's lecture notes
 function LoginForm(props) {
@@ -65,6 +65,6 @@ function state2props(state) {
   return {
     form: state.login
   };
-}
+};
 
 export default connect(state2props)(LoginForm);

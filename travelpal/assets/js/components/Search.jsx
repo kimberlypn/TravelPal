@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import api from '../api';
 
-// Renders the user's travel dates
-function TravelDates(props) {
+// Renders the search page
+function Search(props) {
 
   return (
     <div className="page-content">
-      Travel Dates
+      Search
     </div>
   );
 };
@@ -17,6 +17,6 @@ function state2props(state) {
   return {
 
   };
-}
+};
 
-export default connect(state2props)(TravelDates);
+export default connect(state2props)(Search);

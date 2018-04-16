@@ -33,11 +33,18 @@ function Nav(props) {
               className="nav-link">
               Home
             </NavLink>
+            <NavLink to="/search" exact={true} activeClassName="active"
+              className="nav-link">
+              Search
+            </NavLink>
             <NavLink to="/travel/dates" href="#" className="nav-link">
               Travel Dates
             </NavLink>
+            <NavLink to="/travel/booked" href="#" className="nav-link">
+              Booked Trips
+            </NavLink>
             <NavLink to="/travel/past" href="#" className="nav-link">
-              Past Travels
+              Past Trips
             </NavLink>
             <NavLink to="/profile" href="#" className="nav-link">
               Profile
@@ -45,7 +52,6 @@ function Nav(props) {
           </div>
         </div>
         <span className="navbar-text">
-          {props.name} |
           <a href="javascript:void(0)" onClick={destroy_token}> Log Out</a>
         </span>
       </nav>
@@ -57,6 +63,6 @@ function state2props(state) {
   return {
     form: state.login
   };
-}
+};
 
 export default connect(state2props)(Nav);
