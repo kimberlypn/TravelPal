@@ -6,16 +6,13 @@ import api from '../api';
 
 // Renders the user's information
 export default function ProfileInfo({ name, username, email, budget, formOnChange, submitOnClick }) {
-  // Sends a request to update the user
-  function submit(ev) {
-    api.edit_user(userInfo);
-  }
 
   // Toggles the edit input for the given field
   function toggleEdit(field) {
     $('#' + field).toggle();
     $('#' + field + '-edit').toggle();
   }
+
 
   return (
     <div id="profile-info">
@@ -27,7 +24,7 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
           placeholder="name" required="" autoFocus=""
           value={name} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submitOnClick}>
+          <a href="javascript:void(0)" onClick={() => submitOnClick("name")}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('name')}>
@@ -42,7 +39,7 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
           placeholder="username" required="" autoFocus=""
           value={username} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submitOnClick}>
+          <a href="javascript:void(0)" onClick={() => submitOnClick("username")}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('username')}>
@@ -57,7 +54,7 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
           placeholder="email" required="" autoFocus=""
           value={email} onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submitOnClick}>
+          <a href="javascript:void(0)" onClick={() => submitOnClick("email")}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('email')}>
@@ -71,7 +68,7 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
         <Input type="number" className="form-control" name="budget"
           placeholder="budget" step="100" min="0" onChange={formOnChange} />
         <span>
-          <a href="javascript:void(0)" onClick={submitOnClick}>
+          <a href="javascript:void(0)" onClick={() => submitOnClick("budget")}>
             Save
           </a>
           <a href="javascript:void(0)" onClick={() => toggleEdit('budget')}>

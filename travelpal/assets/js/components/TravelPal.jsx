@@ -42,8 +42,8 @@ let TravelPal = connect((state) => state)((props) => {
       updateFormAction
     }
 
-    function submitProfileChanges() {
-      api.edit_user(props.form);
+    function submitProfileChanges(field) {
+      api.edit_user({ field, data: props.form });
     }
 
     const apiCalls = {
