@@ -37,9 +37,7 @@ function LoginForm(props) {
         <img src="/images/airplane-icon.png" alt="logo" />
         <h1>TRAVELPAL</h1>
       </div>
-      <Route path="/" exact={true} render={() =>
-        <RegistrationForm />
-      } />
+      <RegistrationForm />
       <div className="container" id="login">
         <FormGroup>
           <Input type="text" className="form-control" name="username"
