@@ -7,15 +7,20 @@ defmodule TravelpalWeb.HotelController do
   action_fallback TravelpalWeb.FallbackController
 
   def callExternalScript(location) do
+    IO.puts location
+    IO.puts is_binary(location)
+
     "python3"
-    |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", 1])
+    |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", "1"])
   end
 
   def get_hotel_information(conn, %{"info" => travel_info}) do
 
-    hotels = travel_info["location"]
-             |> callExternalScript()
+    l_location = travel_info["location"]
+                 |> String.downcase()
 
+    callExternalScript(l_location)
+    hotels = Accommodation.list_hotels_by_location(l_location)
     render(conn, "index.json", hotels: hotels)
   end
 

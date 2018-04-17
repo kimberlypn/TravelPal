@@ -24,7 +24,7 @@ defmodule Travelpal.Accommodation do
   def list_hotels_by_location(location) do
     query = from h in Hotel,
             where: h.result_from == ^(location)
-MyRepo.all(query)
+    Repo.all(query)
   end
 
   @doc """
