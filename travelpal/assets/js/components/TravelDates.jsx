@@ -8,9 +8,7 @@ import TravelCard from './TravelCard';
 // Renders the user's travel dates
 export default function TravelDates({travelDates}) {
   let trips = _.map(travelDates, function(tt) {
-    return <TravelCard key={tt.id} destination={tt.destination}
-        startDate={tt.start_date} endDate={tt.end_date}
-        priceLimit={tt.price_limit} passengers={tt.passengers} id={tt.id} />;
+    return <TravelCard key={tt.id} trip={tt} />;
   });
 
   // Display none message if no travel dates

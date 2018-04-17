@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Card, CardBody, Button, Row, Col } from 'reactstrap';
 
 import api from '../api';
 import TripCardHeader from './TripCardHeader';
 
 // Renders the details of an individual trip as a card
-export default function TravelCard({destination, startDate, endDate,
-  priceLimit, passengers, id}) {
+function TravelCard(props) {
   // Sends a request to delete a trip
   function cancel() {
-    api.delete_travel_date(id);
+    api.delete_travel_date(props.trip.id);
   }
 
   // TODO: Sends a request to flights API with the trip details
@@ -27,13 +26,13 @@ export default function TravelCard({destination, startDate, endDate,
   return (
     <Col md="12">
       <Card>
-        <TripCardHeader destination={destination} startDate={startDate}
-          endDate={endDate} />
+        <TripCardHeader destination={props.trip.destination}
+          startDate={props.trip.start_date} endDate={props.trip.end_date} />
         <CardBody>
           <Row>
             <Col md="12">
-              <p><b>Price Limit:</b> ${priceLimit}</p>
-              <p><b>Number of Passengers: </b>{passengers}</p>
+              <p><b>Price Limit:</b> ${props.trip.price_limit}</p>
+              <p><b>Number of Passengers: </b>{props.trip.passengers}</p>
             </Col>
           </Row>
           <Row>
@@ -49,11 +48,10 @@ export default function TravelCard({destination, startDate, endDate,
   );
 };
 
-TravelCard.propTypes = {
-  destination: PropTypes.string.isRequired,
-  startDate: PropTypes.string.isRequired,
-  endDate: PropTypes.string.isRequired,
-  priceLimit: PropTypes.number.isRequired,
-  passengers: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired
+function state2props(state) {
+  return {
+    form: state.booked
+  };
 };
+
+export default connect(state2props)(TravelCard);
