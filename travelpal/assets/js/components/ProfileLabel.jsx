@@ -21,7 +21,7 @@ ProfileLabel.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    toggleEdit: PropTypes.func.isRequired,
+    toggleEdit: PropTypes.func,
     isEditDisabled: PropTypes.bool,
 };
 
