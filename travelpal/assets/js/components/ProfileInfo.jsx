@@ -27,19 +27,6 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
         submitOnClick={submitOnClick}
         toggleEdit={toggleEdit}
       />
-      <Row id="budget-edit">
-        <b>New Budget:</b>
-        <Input type="number" className="form-control" name="budget"
-          placeholder="budget" step="100" min="0" onChange={formOnChange} />
-        <span>
-          <a href="javascript:void(0)" onClick={() => submitOnClick("budget")}>
-            Save
-          </a>
-          <a href="javascript:void(0)" onClick={() => toggleEdit('budget')}>
-            Cancel
-          </a>
-        </span>
-      </Row>
       {/* TODO: toggle the entire input group when clicking the edit button
       and make it so that the budget input width is the same as the others'
       <InputGroup>
