@@ -34,7 +34,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
         <Search />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
-        <TravelDates travelDates={travelDates} form={travel} />
+        <TravelDates travelDates={travelDates} form={travel} userId={token.id} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
         <BookedTrips bookedTrips={currentBooked} form={booked}
@@ -64,5 +64,6 @@ Main.propTypes = {
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
   flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired
+  hotels: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired
 };

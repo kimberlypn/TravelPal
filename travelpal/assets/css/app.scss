@@ -51,18 +51,6 @@ h1 {
   border-color: #d84545;
 }
 
-.trip-btn {
-  text-align: right;
-}
-
-.trip-btn button {
-  margin-left: 10px;
-}
-
-.trip-card-header {
-  text-align: center;
-}
-
 input {
   margin-bottom: 2px;
   border-bottom-left-radius: 0;
@@ -73,8 +61,15 @@ input {
   margin-top: 0px;
 }
 
+// Gets rid of the spinner for number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 b {
-  font-weight: lighter;
+  font-weight: 400;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
@@ -209,14 +204,25 @@ b {
   display: none;
 }
 
+.trip-btn {
+  text-align: right;
+}
+
+.trip-btn button {
+  margin-left: 10px;
+}
+
+.trip-card-header {
+  text-align: center;
+}
+
 .required {
   padding-left: 25px;
 }
 /*************************** END OF BOOKED TRIPS *************************/
 
-// Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+/******************************* TRAVEL DATES ****************************/
+#trip-create {
+  display: none;
 }
+/************************** END OF TRAVEL DATES **************************/

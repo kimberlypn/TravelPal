@@ -29,6 +29,8 @@ function travelDates(state = [], action) {
   switch (action.type) {
     case 'TRAVEL_DATES_LIST':
       return [...action.travelDates];
+    case 'ADD_TRAVEL_DATE':
+      return [action.travelDate, ...state];
     default:
       return state;
   }

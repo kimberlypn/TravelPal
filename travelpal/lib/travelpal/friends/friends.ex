@@ -55,6 +55,10 @@ defmodule Travelpal.Friends do
     {:ok, friend} = %Friend{}
     |> Friend.changeset(attrs)
     |> Repo.insert()
+
+    friend = friend
+    |> Repo.preload(:requestor)
+    |> Repo.preload(:acceptor)
     {:ok, friend}
   end
 
