@@ -18,7 +18,12 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
   return (
     <div id="profile-info">
       <h3>About</h3>
-      <ProfileLabel name={"name"} label={"Name"} value={name} />
+      <ProfileLabel name={"name"} label={"Name"} value={name} toggleEdit={toggleEdit} isEditDisabled={false} />
+      <ProfileInfoEdit name={"name"} label={"Name"} inputType={"text"}
+        formOnChange={formOnChange}
+        submitOnClick={submitOnClick}
+        toggleEdit={toggleEdit}
+      />
       <ProfileLabel name={"username"} label={"Username"} value={username} />
       <ProfileLabel name={"email"} label={"Email"} value={email} />
       <ProfileLabel name={"budget"} label={"Budget"} value={budget} toggleEdit={toggleEdit} isEditDisabled={false} />
