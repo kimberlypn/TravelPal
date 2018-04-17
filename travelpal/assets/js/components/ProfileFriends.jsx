@@ -46,6 +46,9 @@ export default function ProfileFriends({userId, friends}) {
 };
 
 ProfileFriends.propTypes = {
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+  ]),
   friends: PropTypes.array.isRequired
 };
