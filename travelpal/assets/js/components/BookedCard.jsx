@@ -25,7 +25,7 @@ function BookedCard(props) {
     props.dispatch({
       type: 'CLEAR_BOOKED_FORM',
     });
-    $toggle();
+    toggle();
   }
 
   // Sends a request to update the booked trip with the values from the form

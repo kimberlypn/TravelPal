@@ -60,11 +60,13 @@ function TravelDates(props) {
       </div>
       <div id="travel-dates">
         <Row>
-          <Col md="12" className="trip-btn">
+          <Col md="6">
+            <h3>Travel Dates</h3>
+          </Col>
+          <Col md="6" className="trip-btn">
             <Button type="button" onClick={toggle}>+ Add</Button>
           </Col>
         </Row>
-        <h3>Travel Dates</h3>
         <Row>{trips}</Row>
       </div>
     </div>
