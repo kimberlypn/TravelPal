@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { FormGroup, Label, Input } from 'reactstrap';
 
 import api from '../api';
 
@@ -8,7 +9,10 @@ function Search(props) {
 
   return (
     <div className="page-content">
-      Search
+      <FormGroup>
+        <Label>Search</Label>
+        <Input type="search" name="search" placeholder="Enter name or username" />
+      </FormGroup>
     </div>
   );
 };
