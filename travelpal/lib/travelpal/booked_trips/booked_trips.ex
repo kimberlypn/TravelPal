@@ -18,7 +18,8 @@ defmodule Travelpal.BookedTrips do
 
   """
   def list_bookedtrips do
-    Repo.all(BookedTrip)
+    Repo.all(from b in BookedTrip,
+      order_by: [desc: :start_date])
     |> Repo.preload(:user)
     |> Repo.preload(:flight)
     |> Repo.preload(:hotel)

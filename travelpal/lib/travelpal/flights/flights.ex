@@ -18,7 +18,8 @@ defmodule Travelpal.Flights do
 
   """
   def list_flights do
-    Repo.all(Flight)
+    Repo.all(from f in Flight,
+      order_by: [asc: :airline])
   end
 
   @doc """

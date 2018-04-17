@@ -18,7 +18,8 @@ defmodule Travelpal.Hotels do
 
   """
   def list_hotels do
-    Repo.all(Hotel)
+    Repo.all(from h in Hotel,
+      order_by: [asc: :name])
   end
 
   @doc """

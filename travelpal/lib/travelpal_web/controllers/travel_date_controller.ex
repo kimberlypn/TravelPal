@@ -55,7 +55,7 @@ defmodule TravelpalWeb.TravelDateController do
       conn
       |> put_status(:ok)
       |> put_resp_header("location", page_path(conn, :index))
-      |> render(conn, "index.json", traveldates: TravelDates.list_traveldates())
+      |> render("index.json", traveldates: TravelDates.list_traveldates())
     end
   end
 

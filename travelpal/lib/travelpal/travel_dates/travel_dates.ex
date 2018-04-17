@@ -18,7 +18,8 @@ defmodule Travelpal.TravelDates do
 
   """
   def list_traveldates do
-    Repo.all(TravelDate)
+    Repo.all(from t in TravelDate,
+      order_by: [desc: :start_date])
     |> Repo.preload(:user)
   end
 
