@@ -15,23 +15,23 @@ function PastCard(props) {
   }
 
   // Toggles the edit form
-  function edit() {
+  function toggle() {
     $('#trip-details-' + props.trip.id).toggle();
     $('#trip-edit-' + props.trip.id).toggle();
   }
 
-  // Clears and closes the past trips edit form
+  // Clears and closes the edit form
   function cancel() {
     props.dispatch({
       type: 'CLEAR_BOOKED_FORM',
     });
-    $('#trip-details-' + props.trip.id).toggle();
-    $('#trip-edit-' + props.trip.id).toggle();
+    toggle();
   }
 
   // Sends a request to update the past trip with the values from the form
   function submit(ev) {
     api.edit_booked_trip(props.form);
+    // Clear and close the form afterward
     cancel();
   }
 
@@ -59,7 +59,7 @@ function PastCard(props) {
           </Row>
           <Row>
             <Col md="12" className="trip-btn">
-              <Button type="button" onClick={edit}>Edit</Button>
+              <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={remove}>Delete</Button>
             </Col>
           </Row>

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Button, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import { Row, Col } from 'reactstrap';
+
+import api from '../api';
 import ProfileLabel from './ProfileLabel';
 import ProfileInfoEdit from './ProfileInfoEdit';
-import api from '../api';
 
 // Renders the user's information
 export default function ProfileInfo({ name, username, email, budget,

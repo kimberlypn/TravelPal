@@ -5,15 +5,15 @@ import { FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
-// Renders the edit form for a booked trip
+// Renders the form for a booked trip
 function BookedForm(props) {
-  // Grabs all of the airlines to populate the dropdown
+  // Grab all of the airlines to populate the dropdown
   let airlines = [];
   airlines.push(<option disabled value="" key="-1">--</option>);
   _.map(props.flights, (ff) =>
   airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
 
-  // Grabs all of the hotels to populate the dropdown
+  // Grab all of the hotels to populate the dropdown
   let hotels = [];
   hotels.push(<option value="" key="-1">--</option>);
   _.map(props.hotels, (hh) =>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 import api from '../api';
 import BookedCard from './BookedCard';

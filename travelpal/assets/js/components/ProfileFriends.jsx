@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 
 import api from '../api';

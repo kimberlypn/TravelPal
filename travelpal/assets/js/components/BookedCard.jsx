@@ -15,18 +15,17 @@ function BookedCard(props) {
   }
 
   // Toggles the edit form
-  function edit() {
+  function toggle() {
     $('#trip-details-' + props.trip.id).toggle();
     $('#trip-edit-' + props.trip.id).toggle();
   }
 
-  // Clears and closes the booked edit form
+  // Clears and closes the edit form
   function cancel() {
     props.dispatch({
       type: 'CLEAR_BOOKED_FORM',
     });
-    $('#trip-details-' + props.trip.id).toggle();
-    $('#trip-edit-' + props.trip.id).toggle();
+    $toggle();
   }
 
   // Sends a request to update the booked trip with the values from the form
@@ -56,7 +55,7 @@ function BookedCard(props) {
           <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12" className="trip-btn">
-              <Button type="button" onClick={edit}>Edit</Button>
+              <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={unbook}>Unbook</Button>
             </Col>
           </Row>

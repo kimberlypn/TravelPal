@@ -1,17 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, Button, Row, Col } from 'reactstrap';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { Row, Col, FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
-// Renders the edit form for a past trip
+// Renders the form for a past trip
 function PastForm(props) {
-
   // Updates the state with the inputted values from the form
   function update(ev) {
-    console.log("YOOOOOOOO");
-    console.log(props.trip);
     let tgt = $(ev.target);
     let data = {};
     data[tgt.attr('name')] = tgt.val();
