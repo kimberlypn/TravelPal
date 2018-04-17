@@ -7,10 +7,10 @@ import api from '../api';
 import FriendCard from './FriendCard';
 
 // Renders the user's friends
-export default function ProfileFriends({userId, friends}) {
+export default function ProfileFriends({ userId, friends }) {
   var btnTxt; // Displays "Unfriend", "Cancel Request", or "Accept Request"
   // Renders each friend's details as a card
-  friends = _.map(friends, function(ff) {
+  friends = _.map(friends, function (ff) {
     if (userId == ff.acceptor.id) {
       // User received the friend request, so should say "Accept Request"
       btnTxt = (ff.status == "Accepted") ? "Unfriend" : "Accept Request";
@@ -29,7 +29,7 @@ export default function ProfileFriends({userId, friends}) {
   // When friend is deleted, value in friends array gets set to undefined
   // rather than removed, so need to check if all values are undefined to
   // determine if the user has no friends
-  _.map(friends, function(ff) {
+  _.map(friends, function (ff) {
     empty = empty && (typeof ff == 'undefined');
   });
   // Display "No friends" message if appropriate
