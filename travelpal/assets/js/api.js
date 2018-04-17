@@ -144,6 +144,21 @@ class TheServer {
       }
     });
   }
+
+  request_hotels(data) {
+    $.ajax("/api/v1/hotels/fetch", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({info:data}),
+      success: (resp) => {
+
+      },
+      error: (resp) => {
+        alert("Could not load friends.");
+      }
+    });
+  }
 }
 
 export default new TheServer();

@@ -6,12 +6,22 @@ defmodule TravelpalWeb.HotelController do
 
   action_fallback TravelpalWeb.FallbackController
 
-  def callPythonScript(location) do
+  def callExternalScript(location) do
     "python3"
     |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", 1])
   end
 
-  def index(conn, _params) do
+  def get_hotel_information(conn, %{"info" => travel_info}) do
+    IO.puts "---------------------------------"
+    IO.puts "We did it bois"
+    IO.inspect travel_info["location"]
+    IO.puts "---------------------------------"
+    hotels = Accommodation.list_hotels()
+    render(conn, "index.json", hotels: hotels)
+  end
+
+  def index(conn, params) do
+    IO.inspect params
     hotels = Accommodation.list_hotels()
     render(conn, "index.json", hotels: hotels)
   end
@@ -23,6 +33,14 @@ defmodule TravelpalWeb.HotelController do
       |> put_resp_header("location", hotel_path(conn, :show, hotel))
       |> render("show.json", hotel: hotel)
     end
+  end
+
+
+  def show(conn, %{"bob" => a, "dog" => b}) do
+    IO.inspect a
+    IO.inspect b
+    hotels = Accommodation.list_hotels()
+    render(conn, "index.json", hotels: hotels)
   end
 
   def show(conn, %{"id" => id}) do
