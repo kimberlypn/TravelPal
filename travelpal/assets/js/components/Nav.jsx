@@ -17,7 +17,7 @@ function Nav(props) {
     <React.Fragment>
       <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
-        <img src="images/airplane-icon.png" alt="logo" />
+        <img src="/images/airplane-icon.png" alt="logo" />
         <h2>TRAVELPAL</h2>
       </div>
       {/* Navbar template from: https://getbootstrap.com/docs/4.0/components/navbar/ */}

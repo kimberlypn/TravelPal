@@ -34,12 +34,10 @@ function LoginForm(props) {
     <React.Fragment>
       <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
-        <img src="images/airplane-icon.png" alt="logo" />
+        <img src="/images/airplane-icon.png" alt="logo" />
         <h1>TRAVELPAL</h1>
       </div>
-      <Route path="/" exact={true} render={() =>
-        <RegistrationForm />
-      } />
+      <RegistrationForm />
       <div className="container" id="login">
         <FormGroup>
           <Input type="text" className="form-control" name="username"
@@ -48,14 +46,14 @@ function LoginForm(props) {
           <Input type="password" className="form-control" name="password"
             placeholder="password" required=""
             value={props.login.password} onChange={update} />
-         <Button className="btn btn-lg btn-primary btn-block"
-           onClick={create_token}>
-           LOG IN
+          <Button className="btn btn-lg btn-primary btn-block"
+            onClick={create_token}>
+            LOG IN
          </Button>
-         <br />
-         <p>Don't have an account? Register <a href="javascript:void(0)"
-          onClick={register}>here</a>.</p>
-       </FormGroup>
+          <br />
+          <p>Don't have an account? Register <a href="javascript:void(0)"
+            onClick={register}>here</a>.</p>
+        </FormGroup>
       </div>
     </React.Fragment>
   );
