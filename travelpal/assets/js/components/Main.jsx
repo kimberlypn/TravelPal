@@ -11,8 +11,8 @@ import BookedTrips from './BookedTrips';
 import Profile from './Profile';
 
 // Renders the home page after logging in
-export default function Main({form, bookedForm, friends, travelDates,
-  bookedTrips, flights, hotels}) {
+export default function Main({ form, booked, friends, travelDates,
+  bookedTrips, flights, hotels, token, actions, apiCalls }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -37,15 +37,20 @@ export default function Main({form, bookedForm, friends, travelDates,
         <TravelDates travelDates={travelDates} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
-        <BookedTrips bookedTrips={currentBooked} form={bookedForm}
+        <BookedTrips bookedTrips={currentBooked} form={booked}
           flights={flights} hotels={hotels} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
-        <PastTrips pastTrips={pastTrips} form={bookedForm}
+        <PastTrips pastTrips={pastTrips} form={booked}
           flights={flights} hotels={hotels} />
       } />
       <Route path="/profile" exact={true} render={() =>
-        <Profile form={form} friends={friends} />
+        <Profile
+          userInfo={token}
+          friends={friends}
+          formOnChange={actions.updateFormAction}
+          submitOnClick={apiCalls.submitProfileChanges}
+        />
       } />
     </React.Fragment>
   );
@@ -53,7 +58,7 @@ export default function Main({form, bookedForm, friends, travelDates,
 
 Main.propTypes = {
   form: PropTypes.object.isRequired,
-  bookedForm: PropTypes.object.isRequired,
+  booked: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,

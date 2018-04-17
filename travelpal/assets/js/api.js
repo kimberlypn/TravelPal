@@ -144,18 +144,23 @@ class TheServer {
     });
   }
 
-  edit_user(data) {
+  edit_user({ field, data }) {
     $.ajax("/api/v1/users/" + data.id, {
       method: "patch",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ user: data }),
       success: (resp) => {
-        alert("Your changes have been saved.");
         store.dispatch({
           type: 'USERS_LIST',
           users: resp.data,
-        });
+        })
+        store.dispatch({
+          type: 'SET_TOKEN',
+          token: data
+        })
+        $('#' + field).toggle();
+        $('#' + field + '-edit').toggle();
       },
       error: (resp) => {
         alert("Could not save the edit. Please try again.");
