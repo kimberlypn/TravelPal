@@ -105,7 +105,6 @@ class TheServer {
   }
 
   submit_login(data) {
-    console.log(data);
     $.ajax("/api/v1/token", {
       method: "post",
       dataType: "json",
@@ -241,8 +240,6 @@ class TheServer {
   }
 
   edit_booked_trip(data) {
-    console.log("EDIT");
-    console.log(data.id);
     $.ajax("/api/v1/bookedtrips/" + data.id, {
       method: "patch",
       dataType: "json",
@@ -252,6 +249,24 @@ class TheServer {
         store.dispatch({
           type: 'BOOKED_TRIPS_LIST',
           bookedTrips: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not save the edit. Please try again.");
+      }
+    });
+  }
+
+  edit_travel_date(data) {
+    $.ajax("/api/v1/traveldates/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ travel_date: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'TRAVEL_DATES_LIST',
+          travelDates: resp.data,
         });
       },
       error: (resp) => {

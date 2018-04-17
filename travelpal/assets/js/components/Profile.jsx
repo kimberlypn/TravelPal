@@ -6,7 +6,8 @@ import ProfileInfo from './ProfileInfo';
 import ProfileFriends from './ProfileFriends';
 
 // Renders the user's profile
-export default function Profile({ userInfo, friends, formOnChange, submitOnClick }) {
+export default function Profile({ userInfo, friends, formOnChange,
+  submitOnClick }) {
   return (
     <div className="page-content" id="profile">
       <ProfileInfo
@@ -15,7 +16,7 @@ export default function Profile({ userInfo, friends, formOnChange, submitOnClick
         submitOnClick={submitOnClick}
       />
       <br />
-      <ProfileFriends userId={Number(form.id)} friends={friends} />
+      <ProfileFriends userId={userInfo.id} friends={friends} />
     </div>
   );
 };

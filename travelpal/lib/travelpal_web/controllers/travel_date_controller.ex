@@ -25,11 +25,37 @@ defmodule TravelpalWeb.TravelDateController do
     render(conn, "show.json", travel_date: travel_date)
   end
 
-  def update(conn, %{"id" => id, "travel_date" => travel_date_params}) do
-    travel_date = TravelDates.get_travel_date!(id)
+  # Converts a string from "YYYY/MM/DD" to a date object
+  def parse_date(date) do
+    date = String.split(date, "-")
+    yyyy = Enum.at(date, 0) |> String.to_integer()
+    mm = Enum.at(date, 1) |> String.to_integer()
+    dd = Enum.at(date, 2) |> String.to_integer()
+    %Date{year: yyyy, month: mm, day: dd}
+  end
 
-    with {:ok, %TravelDate{} = travel_date} <- TravelDates.update_travel_date(travel_date, travel_date_params) do
-      render(conn, "show.json", travel_date: travel_date)
+  def update(conn, %{"travel_date" => travel_date_params}) do
+    travel_date =
+      TravelDates.get_travel_date!(Map.get(travel_date_params, "id"))
+
+    travel_date_params = travel_date_params
+      |> Map.put("start_date",
+        parse_date(Map.get(travel_date_params, "start_date")))
+      |> Map.put("end_date",
+        parse_date(Map.get(travel_date_params, "end_date")))
+      |> Map.put("passengers",
+        Map.get(travel_date_params, "passengers")
+        |> String.to_integer())
+      |> Map.put("price_limit",
+        Map.get(travel_date_params, "price_limit")
+          |> String.to_integer())
+
+    with {:ok, %TravelDate{} = travel_date} <-
+      TravelDates.update_travel_date(travel_date, travel_date_params) do
+      conn
+      |> put_status(:ok)
+      |> put_resp_header("location", page_path(conn, :index))
+      |> render(conn, "index.json", traveldates: TravelDates.list_traveldates())
     end
   end
 

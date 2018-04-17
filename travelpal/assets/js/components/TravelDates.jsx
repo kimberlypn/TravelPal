@@ -6,9 +6,9 @@ import api from '../api';
 import TravelCard from './TravelCard';
 
 // Renders the user's travel dates
-export default function TravelDates({travelDates}) {
+export default function TravelDates({travelDates, form}) {
   let trips = _.map(travelDates, function(tt) {
-    return <TravelCard key={tt.id} trip={tt} />;
+    return <TravelCard key={tt.id} trip={tt} form={form} />;
   });
 
   // Display none message if no travel dates
@@ -26,5 +26,6 @@ export default function TravelDates({travelDates}) {
 };
 
 TravelDates.propTypes = {
-  travelDates: PropTypes.array.isRequired
+  travelDates: PropTypes.array.isRequired,
+  form: PropTypes.object.isRequired
 };

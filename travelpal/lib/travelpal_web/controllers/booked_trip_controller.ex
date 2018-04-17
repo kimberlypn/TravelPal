@@ -35,8 +35,6 @@ defmodule TravelpalWeb.BookedTripController do
   end
 
   def update(conn, %{"booked_trip" => booked_trip_params}) do
-    IO.inspect("UPDATE")
-    IO.inspect(booked_trip_params)
     booked_trip =
       BookedTrips.get_booked_trip!(Map.get(booked_trip_params, "id"))
 
