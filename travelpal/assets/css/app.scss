@@ -213,3 +213,10 @@ b {
   padding-left: 25px;
 }
 /*************************** END OF BOOKED TRIPS *************************/
+
+// Gets rid of the spinner for number inputs
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

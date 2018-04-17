@@ -36,15 +36,20 @@ export default function Main(props) {
         <TravelDates travelDates={dates} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
-        <BookedTrips bookedTrips={currentBooked} form={props.bookedForm}
+        <BookedTrips bookedTrips={currentBooked} form={props.booked}
           flights={props.flights} hotels={props.hotels} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
-        <PastTrips pastTrips={pastTrips} form={props.bookedForm}
+        <PastTrips pastTrips={pastTrips} form={props.booked}
           flights={props.flights} hotels={props.hotels} />
       } />
       <Route path="/profile" exact={true} render={() =>
-        <Profile form={props.form} friends={props.friends} />
+        <Profile
+          userInfo={token}
+          friends={friends}
+          formOnChange={actions.updateFormAction}
+          submitOnClick={apiCalls.submitProfileChanges}
+        />
       } />
     </React.Fragment>
   );
