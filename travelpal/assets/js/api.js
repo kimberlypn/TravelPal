@@ -135,6 +135,8 @@ class TheServer {
           type: 'ADD_USER',
           user: resp.data,
         });
+        $("#registration").hide();
+        $("#login").show();
       },
       error: (resp) => {
         alert("Failed to register. Please try again.");
