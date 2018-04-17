@@ -45,7 +45,12 @@ export default function Main({ form, booked, friends, travelDates,
           flights={flights} hotels={hotels} />
       } />
       <Route path="/profile" exact={true} render={() =>
-        <Profile userInfo={token} friends={friends} formOnChange={actions.updateFormAction} submitOnClick={apiCalls.submitProfileChanges} />
+        <Profile
+          userInfo={token}
+          friends={friends}
+          formOnChange={actions.updateFormAction}
+          submitOnClick={apiCalls.submitProfileChanges}
+        />
       } />
     </React.Fragment>
   );

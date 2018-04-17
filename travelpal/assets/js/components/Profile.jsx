@@ -9,7 +9,11 @@ import ProfileFriends from './ProfileFriends';
 export default function Profile({ userInfo, friends, formOnChange, submitOnClick }) {
   return (
     <div className="page-content" id="profile">
-      <ProfileInfo {...userInfo} formOnChange={formOnChange} submitOnClick={submitOnClick} />
+      <ProfileInfo
+        {...userInfo}
+        formOnChange={formOnChange}
+        submitOnClick={submitOnClick}
+      />
       <br />
       <ProfileFriends userId={userInfo.id} friends={friends} />
     </div>
