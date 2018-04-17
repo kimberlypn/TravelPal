@@ -27,6 +27,5 @@ $(function() {
   api.request_users();
   api.request_friends();
   api.request_travel_dates();
-  api.request_hotels({"location": "California", "start_date":"3/19"});
   travelpal_init(store);
 });
