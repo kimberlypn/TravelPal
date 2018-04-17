@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Input } from 'reactstrap';
+import { Row, Input, InputGroupAddon, InputGroup } from 'reactstrap';
 export default function ProfileInfoEdit({
     name,
     value,
@@ -8,14 +8,18 @@ export default function ProfileInfoEdit({
     inputType,
     formOnChange,
     submitOnClick,
-    toggleEdit
+    toggleEdit,
+    prepend
 }) {
     return (
         <Row id={`${name}-edit`} >
             <b>New {label}:</b>
-            <Input type={inputType} className="form-control" name={name}
-                placeholder={name} required="" autoFocus=""
-                value={value} onChange={formOnChange} />
+            <InputGroup>
+                <InputGroupAddon addonType="prepend">{prepend}</InputGroupAddon>
+                <Input type={inputType} className="form-control" name={name}
+                    placeholder={name} required="" autoFocus=""
+                    value={value} onChange={formOnChange} />
+            </InputGroup>
             <span>
                 <a href="javascript:void(0)" onClick={() => submitOnClick(name)}>
                     Save
@@ -38,5 +42,6 @@ ProfileInfoEdit.propTypes = {
     inputType: PropTypes.string.isRequired,
     formOnChange: PropTypes.func.isRequired,
     submitOnClick: PropTypes.func.isRequired,
-    toggleEdit: PropTypes.func.isRequired
+    toggleEdit: PropTypes.func.isRequired,
+    prepend: PropTypes.string
 };

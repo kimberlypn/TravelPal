@@ -27,7 +27,7 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
       <ProfileLabel name={"username"} label={"Username"} value={username} />
       <ProfileLabel name={"email"} label={"Email"} value={email} />
       <ProfileLabel name={"budget"} label={"Budget"} value={budget} toggleEdit={toggleEdit} isEditDisabled={false} />
-      <ProfileInfoEdit name={"budget"} label={"Budget"} inputType={"number"}
+      <ProfileInfoEdit name={"budget"} label={"Budget"} inputType={"number"} prepend={"$"}
         formOnChange={formOnChange}
         submitOnClick={submitOnClick}
         toggleEdit={toggleEdit}
