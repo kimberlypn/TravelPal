@@ -12,11 +12,10 @@ defmodule TravelpalWeb.HotelController do
   end
 
   def get_hotel_information(conn, %{"info" => travel_info}) do
-    IO.puts "---------------------------------"
-    IO.puts "We did it bois"
-    IO.inspect travel_info["location"]
-    IO.puts "---------------------------------"
-    hotels = Accommodation.list_hotels()
+
+    hotels = travel_info["location"]
+             |> callExternalScript()
+
     render(conn, "index.json", hotels: hotels)
   end
 

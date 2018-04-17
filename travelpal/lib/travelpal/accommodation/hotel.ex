@@ -9,6 +9,7 @@ defmodule Travelpal.Accommodation.Hotel do
     field :name, :string
     field :price, :float
     field :rating, :float
+    field :result_from, :string
 
     timestamps()
   end
@@ -16,7 +17,7 @@ defmodule Travelpal.Accommodation.Hotel do
   @doc false
   def changeset(hotel, attrs) do
     hotel
-    |> cast(attrs, [:name, :district, :price, :link, :rating])
-    |> validate_required([:name, :district, :price, :link, :rating])
+    |> cast(attrs, [:name, :district, :price, :link, :rating, :result_from])
+    |> validate_required([:name, :district, :price, :link, :rating, :result_from])
   end
 end

@@ -8,6 +8,7 @@ defmodule Travelpal.Repo.Migrations.CreateHotels do
       add :price, :float
       add :link, :text
       add :rating, :float
+      add :result_from, :text
 
       timestamps()
     end

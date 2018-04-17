@@ -80,9 +80,9 @@ for hotel in listing:
     price = price.text.strip()
     price = float(price[price.find('$') + 1:].replace(',', ''))
     link = link.attrs['href']
-    rating = float(rating.text.lstrip().rstrip()) if rating else None    
- 
-    hotel_info = (name, district, price, base_url + link, rating, datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
+    rating = float(rating.text.lstrip().rstrip()) if rating else None        
+
+    hotel_info = (name, district, price, base_url + link, rating, destination,datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
     hotel_list.append(hotel_info)
 
 
@@ -98,7 +98,7 @@ if len(hotel_list) > 0 and shouldStoreResults != 0:
         cur = conn.cursor()
         
         for hotel in hotel_list: 
-            cur.execute("""INSERT INTO hotels (name, district, price, link, rating, inserted_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s);""", hotel)  
+            cur.execute("""INSERT INTO hotels (name, district, price, link, rating, result_from, inserted_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);""", hotel)  
             if (cur.rowcount == 1):
                 conn.commit()
                 commits += 1 

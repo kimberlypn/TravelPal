@@ -152,7 +152,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({info:data}),
       success: (resp) => {
-
+        console.log(resp.data)
       },
       error: (resp) => {
         alert("Could not load friends.");
