@@ -7,9 +7,6 @@ defmodule TravelpalWeb.HotelController do
   action_fallback TravelpalWeb.FallbackController
 
   def callExternalScript(location) do
-    IO.puts location
-    IO.puts is_binary(location)
-
     "python3"
     |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", "1"])
   end
