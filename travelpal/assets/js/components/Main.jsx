@@ -9,6 +9,7 @@ import TravelDates from './TravelDates';
 import PastTrips from './PastTrips';
 import BookedTrips from './BookedTrips';
 import Profile from './Profile';
+import ProfileView from './ProfileView';
 
 // Renders the home page after logging in
 export default function Main({ form, booked, friends, travelDates,
@@ -43,6 +44,13 @@ export default function Main({ form, booked, friends, travelDates,
       <Route path="/travel/past" exact={true} render={() =>
         <PastTrips pastTrips={pastTrips} form={booked}
           flights={flights} hotels={hotels} />
+      } />
+      <Route path="/profile/:username" exact={true} render={({ match }) =>
+        <ProfileView
+          users={users}
+          friends={friends}
+          username={match.params.username}
+        />
       } />
       <Route path="/profile" exact={true} render={() =>
         <Profile

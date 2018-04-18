@@ -15,7 +15,7 @@ export default function ProfileLabel({ name, label, value, toggleEdit, isEditDis
 }
 
 ProfileLabel.propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     label: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([
         PropTypes.string,
