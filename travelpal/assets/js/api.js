@@ -168,6 +168,18 @@ class TheServer {
     });
   }
 
+  friend_request(data) {
+    $.ajax("/api/v1/friends/", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ friend: data }),
+      success: (resp) => {
+        this.request_friends();
+      }
+    });
+  }
+
   delete_friend(data) {
     $.ajax("/api/v1/friends/" + data, {
       method: "delete",

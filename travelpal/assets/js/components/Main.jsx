@@ -50,6 +50,7 @@ export default function Main({ form, booked, friends, travelDates,
           users={users}
           friends={friends}
           username={match.params.username}
+          userId={userId}
         />
       } />
       <Route path="/profile" exact={true} render={() =>
