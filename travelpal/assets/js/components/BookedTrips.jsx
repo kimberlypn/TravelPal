@@ -4,9 +4,10 @@ import { Row, Col } from 'reactstrap';
 
 import api from '../api';
 import BookedCard from './BookedCard';
+import BookedForm from './BookedForm.jsx';
 
 // Renders the user's booked trips
-export default function BookedTrips({bookedTrips}) {
+export default function BookedTrips({bookedTrips, form, flights, hotels}) {
   let today = new Date();
   let upcoming = [];
   let future = [];
@@ -18,15 +19,13 @@ export default function BookedTrips({bookedTrips}) {
     // Trips this month
     if ((today.getMonth() == startDate.getMonth()) &&
     (today.getFullYear() == startDate.getFullYear())) {
-      upcoming.push(<BookedCard key={tt.id} destination={tt.destination}
-        startDate={tt.start_date} endDate={tt.end_date} price={tt.price_limit}
-        id={tt.id} />);
+      upcoming.push(<BookedCard key={tt.id} form={form} trip={tt}
+        flights={flights} hotels={hotels} />);
     }
     // Future trips
     else {
-      future.push(<BookedCard key={tt.id} destination={tt.destination}
-        startDate={tt.start_date} endDate={tt.end_date} price={tt.price_limit}
-        id={tt.id} />);
+      future.push(<BookedCard key={tt.id} form={form} trip={tt}
+        flights={flights} hotels={hotels} />);
     }
   });
 
@@ -50,5 +49,8 @@ export default function BookedTrips({bookedTrips}) {
 };
 
 BookedTrips.propTypes = {
-  bookedTrips: PropTypes.array.isRequired
+  bookedTrips: PropTypes.array.isRequired,
+  form: PropTypes.object.isRequired,
+  flights: PropTypes.array.isRequired,
+  hotels: PropTypes.array.isRequired
 };

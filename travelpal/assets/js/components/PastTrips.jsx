@@ -6,11 +6,11 @@ import api from '../api';
 import PastCard from './PastCard';
 
 // Renders the user's past trips
-export default function PastTrips({pastTrips}) {
+export default function PastTrips({pastTrips, form, flights, hotels,
+  tripSummaries}) {
   let trips = _.map(pastTrips, function(tt) {
-    return <PastCard key={tt.id} destination={tt.destination}
-        startDate={tt.start_date} endDate={tt.end_date} price={tt.price_limit}
-        id={tt.id} />;
+    return <PastCard key={tt.id} form={form} trip={tt} flights={flights}
+      hotels={hotels} />;
   });
 
   // Display message if no travel dates
@@ -27,5 +27,8 @@ export default function PastTrips({pastTrips}) {
 };
 
 PastTrips.propTypes = {
-  pastTrips: PropTypes.array.isRequired
+  pastTrips: PropTypes.array.isRequired,
+  form: PropTypes.object.isRequired,
+  flights: PropTypes.array.isRequired,
+  hotels: PropTypes.array.isRequired
 };

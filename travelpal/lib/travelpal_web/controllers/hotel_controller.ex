@@ -40,13 +40,6 @@ defmodule TravelpalWeb.HotelController do
   end
 
 
-  def show(conn, %{"bob" => a, "dog" => b}) do
-    IO.inspect a
-    IO.inspect b
-    hotels = Accommodation.list_hotels()
-    render(conn, "index.json", hotels: hotels)
-  end
-
   def show(conn, %{"id" => id}) do
     hotel = Accommodation.get_hotel!(id)
     render(conn, "show.json", hotel: hotel)

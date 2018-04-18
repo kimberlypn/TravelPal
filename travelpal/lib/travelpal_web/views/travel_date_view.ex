@@ -11,7 +11,7 @@ defmodule TravelpalWeb.TravelDateView do
         end_date: Map.get(travel, :end_date),
         destination: Map.get(travel, :destination),
         price_limit: Map.get(travel, :price_limit),
-        booked: Map.get(travel, :booked),
+        passengers: Map.get(travel, :passengers),
         user: render_one(Map.get(travel, :user), UserView, "user.json")
       }
     end)
@@ -23,12 +23,14 @@ defmodule TravelpalWeb.TravelDateView do
   end
 
   def render("travel_date.json", %{travel_date: travel_date}) do
-    %{id: travel_date.id,
+    %{
+      id: travel_date.id,
       start_date: travel_date.start_date,
       end_date: travel_date.end_date,
       destination: travel_date.destination,
       price_limit: travel_date.price_limit,
-      booked: travel_date.booked
+      passengers: travel_date.passengers,
+      user: render_one(travel_date.user, UserView, "user.json")
     }
   end
 end

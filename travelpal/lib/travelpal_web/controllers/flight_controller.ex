@@ -1,26 +1,88 @@
 defmodule TravelpalWeb.FlightController do
   use TravelpalWeb, :controller
 
-  # @TODO decide if other functions are needed
-  def flight_url, do: "https://api.skypicker.com/flights"
+  alias Travelpal.Flights
+  alias Travelpal.Flights.Flight
 
-  def get_flights_to_from(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "return_from" => return_from}) do
+  action_fallback TravelpalWeb.FallbackController
+
+  def index(conn, _params) do
+    flights = Flights.list_flights()
+    render(conn, "index.json", flights: flights)
+  end
+
+  def create(conn, %{"flight" => flight_params}) do
+    with {:ok, %Flight{} = flight} <- Flights.create_flight(flight_params) do
+      conn
+      |> put_status(:created)
+      |> put_resp_header("location", flight_path(conn, :show, flight))
+      |> render("show.json", flight: flight)
+    end
+  end
+
+  def show(conn, %{"id" => id}) do
+    flight = Flights.get_flight!(id)
+    render(conn, "show.json", flight: flight)
+  end
+
+  def update(conn, %{"id" => id, "flight" => flight_params}) do
+    flight = Flights.get_flight!(id)
+
+    with {:ok, %Flight{} = flight} <-
+      Flights.update_flight(flight, flight_params) do
+      render(conn, "show.json", flight: flight)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    flight = Flights.get_flight!(id)
+    with {:ok, %Flight{}} <- Flights.delete_flight(flight) do
+      send_resp(conn, :no_content, "")
+    end
+  end
+
+  def search(conn, %{"origin" => origin, "dest" => dest,
+    "date_from" => date_from, "return_from" => return_from}) do
+    flight = request_flights_to_from(origin, dest, date_from, return_from)
+
+    render(conn, "show.json", flight: flight)
+  end
+
+  def test() do
+    flights = request_flights_to_from(
+      "boston",
+      "los-angeles",
+      "05/08/2018",
+      "05/12/2018"
+    )
+  end
+
+  defp request_flights_to_from(origin, dest, date_from, return_from) do
+    flight_url = "https://api.skypicker.com/flights"
     # gets top 5 flights
-    uri = URI.encode(flight_url() <> "?flyFrom=#{origin}&to=#{dest}&date_from=#{date_from}&date_to=#{date_from}"
-        <> "&return_from=#{return_from}&return_to=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
-    
-    # comment out HTTP request for dev purposes and use dummy data instead
+    uri = URI.encode(flight_url
+        <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
+        <> "&returnFrom=#{return_from}&returnTo=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5")
+    # Comment out HTTP request for dev purposes and use dummy data instead
     #res = HTTPoison.get!(uri)
     #data = Poison.decode!(res.body)
 
-    # use dummy data for dev purposes
+    # Use dummy data for dev purposes
     #flight = data["data"]
     # @TODO decide if more details are needed
-    flight = dummy_data()
-    |> Enum.map(fn(x) -> Map.take(x, ["price", "mapIdfrom", "mapIdto", "airlines", "duration", "deep_link"]) end)
-    |> Poison.encode!()
+    flights = dummy_data()
+    |> Enum.map(fn(x) -> format_flight(x) end)
+  end
 
-    render(conn, "show.json", flight: flight)
+  defp format_flight(flight) do
+    %{
+      origin: flight["mapIdfrom"],
+      dest: flight["mapIdto"],
+      airlines: flight["airlines"],
+      price: flight["price"],
+      duration: flight["duration"],
+      link: flight["deep_link"]
+    }
   end
 
   def dummy_data do

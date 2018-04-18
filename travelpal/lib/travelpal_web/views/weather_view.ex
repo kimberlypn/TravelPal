@@ -11,12 +11,13 @@ defmodule TravelpalWeb.WeatherView do
   end
 
   def render("weather.json", %{weather: weather}) do
-    decoded_weather = Poison.decode!(weather)
-
     %{
-      units: decoded_weather["units"],
-      location: decoded_weather["location"],
-      item: decoded_weather["item"],
+      city: weather.city,
+      date: weather.date,
+      high: weather.high,
+      low: weather.low,
+      text: weather.text,
+      forecast: weather.forecast
     }
   end
 end
