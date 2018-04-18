@@ -12,7 +12,7 @@ import Profile from './Profile';
 
 // Renders the home page after logging in
 export default function Main({ form, booked, friends, travelDates,
-  bookedTrips, flights, hotels, token, actions, apiCalls }) {
+  bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -31,7 +31,7 @@ export default function Main({ form, booked, friends, travelDates,
         <Home />
       } />
       <Route path="/search" exact={true} render={() =>
-        <Search />
+        <Search users={users} updateSearch={actions.updateSearch} search={search} />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
         <TravelDates travelDates={travelDates} />
