@@ -59,6 +59,10 @@ export default function Main({ form, booked, travel, friends, travelDates,
           friends={friends}
           formOnChange={actions.updateFormAction}
           submitOnClick={apiCalls.submitProfileChanges}
+          userId={userId}
+          users={users}
+          updateSearch={actions.updateSearch}
+          search={search}
         />
       } />
     </Fragment>

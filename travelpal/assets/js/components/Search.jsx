@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, Label, Input } from 'reactstrap';
 import SearchResults from './SearchResults';
