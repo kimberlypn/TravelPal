@@ -128,13 +128,15 @@ class TheServer {
       method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({user: data}),
+      data: JSON.stringify({ user: data }),
       success: (resp) => {
         alert("Successfully registered! You can now log in.");
         store.dispatch({
           type: 'ADD_USER',
           user: resp.data,
         });
+        $("#registration").hide();
+        $("#login").show();
       },
       error: (resp) => {
         alert("Failed to register. Please try again.");
@@ -142,18 +144,23 @@ class TheServer {
     });
   }
 
-  edit_user(data) {
+  edit_user({ field, data }) {
     $.ajax("/api/v1/users/" + data.id, {
       method: "patch",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({user: data}),
+      data: JSON.stringify({ user: data }),
       success: (resp) => {
-        alert("Your changes have been saved.");
         store.dispatch({
           type: 'USERS_LIST',
           users: resp.data,
-        });
+        })
+        store.dispatch({
+          type: 'SET_TOKEN',
+          token: data
+        })
+        $('#' + field).toggle();
+        $('#' + field + '-edit').toggle();
       },
       error: (resp) => {
         alert("Could not save the edit. Please try again.");
@@ -184,7 +191,7 @@ class TheServer {
       method: "patch",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({friend: data}),
+      data: JSON.stringify({ friend: data }),
       success: (resp) => {
         store.dispatch({
           type: 'FRIENDS_LIST',
@@ -240,7 +247,7 @@ class TheServer {
       method: "patch",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({booked_trip: data}),
+      data: JSON.stringify({ booked_trip: data }),
       success: (resp) => {
         store.dispatch({
           type: 'BOOKED_TRIPS_LIST',
