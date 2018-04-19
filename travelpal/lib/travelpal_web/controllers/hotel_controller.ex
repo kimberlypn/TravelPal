@@ -17,11 +17,13 @@ defmodule TravelpalWeb.HotelController do
                  |> String.downcase()
 
     hotels = Accommodation.list_hotels_by_location(l_location)
+             |> Enum.take(-15)
 
     # only call script if the given location has not been searched
     if length(hotels) == 0 do
       scrape_hotel_information(l_location)
       hotels = Accommodation.list_hotels_by_location(l_location)
+              |> Enum.take(-15)
     end
 
     render(conn, "index.json", hotels: hotels)

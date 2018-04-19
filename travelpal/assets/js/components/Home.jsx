@@ -9,9 +9,11 @@ function Home(props) {
     price={uu.price} link={uu.link} rating={uu.rating} image={uu.image_src} />);
 
   return (
-    <div className="page-content">
+    <div className="page-content container">
       Home
-      {hotels}
+      <div className="row">
+        {hotels}
+      </div>
     </div>
   );
 };
