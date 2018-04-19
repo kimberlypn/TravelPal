@@ -28,7 +28,7 @@ defmodule Seeds do
   alias Travelpal.Friends.Friend
   alias Travelpal.TravelDates.TravelDate
   alias Travelpal.BookedTrips.BookedTrip
-  alias Travelpal.Flights.Flight
+  alias Travelpal.ExternalAPI.Flight
   alias Travelpal.Accommodation.Hotel
 
   def insert_users do
