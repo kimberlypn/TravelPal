@@ -5,19 +5,19 @@ import { FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
-// Renders the form for a booked trip
+// Renders the edit form for a booked trip
 function BookedForm(props) {
-  // Grab all of the airlines to populate the dropdown
+  // Grabs all of the airlines to populate the dropdown
   let airlines = [];
   airlines.push(<option disabled value="" key="-1">--</option>);
   _.map(props.flights, (ff) =>
-  airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
+    airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
 
-  // Grab all of the hotels to populate the dropdown
+  // Grabs all of the hotels to populate the dropdown
   let hotels = [];
   hotels.push(<option value="" key="-1">--</option>);
   _.map(props.hotels, (hh) =>
-  hotels.push(<option key={hh.id} value={hh.id}>{hh.name}</option>));
+    hotels.push(<option key={hh.id} value={hh.id}>{hh.name}</option>));
 
   // Updates the state with the inputted values from the form
   function update(ev) {
@@ -35,8 +35,23 @@ function BookedForm(props) {
     });
   }
 
+  // Sends a request to update the booked trip with the values from the form
+  function submit(ev) {
+    api.edit_booked_trip(props.form);
+    cancel();
+  }
+
+  // Clears and closes the registration form
+  function cancel() {
+    props.dispatch({
+      type: 'CLEAR_BOOKED_FORM',
+    });
+    $('#trip-details-' + props.id).toggle();
+    $('#trip-edit-' + props.id).toggle();
+  }
+
   return (
-    <React.Fragment>
+    <CardBody className="trip-edit" id={"trip-edit-" + props.id}>
       <Row>
         <Col md="6">
           <FormGroup>
@@ -88,10 +103,16 @@ function BookedForm(props) {
       </Row>
       <Row>
         <Col md="12">
-          <b>* = required</b>
+            <b>* = required</b>
         </Col>
       </Row>
-    </React.Fragment>
+      <Row>
+        <Col md="12" className="trip-btn">
+          <Button type="button" onClick={cancel}>Cancel</Button>
+          <Button type="button" onClick={submit}>Submit</Button>
+        </Col>
+      </Row>
+    </CardBody>
   );
 };
 

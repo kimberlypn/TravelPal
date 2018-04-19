@@ -6,8 +6,7 @@ import api from '../api';
 import PastCard from './PastCard';
 
 // Renders the user's past trips
-export default function PastTrips({pastTrips, form, flights, hotels,
-  tripSummaries}) {
+export default function PastTrips({pastTrips, form, flights, hotels}) {
   let trips = _.map(pastTrips, function(tt) {
     return <PastCard key={tt.id} form={form} trip={tt} flights={flights}
       hotels={hotels} />;

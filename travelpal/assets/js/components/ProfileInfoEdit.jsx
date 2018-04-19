@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Row, Input, InputGroupAddon, InputGroup } from 'reactstrap';
 
 // Renders the profile edit fields

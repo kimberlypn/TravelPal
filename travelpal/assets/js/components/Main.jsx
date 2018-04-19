@@ -1,3 +1,4 @@
+
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -29,13 +30,13 @@ export default function Main({ form, booked, friends, travelDates,
     <Fragment>
       <Nav name={form.name} />
       <Route path="/" exact={true} render={() =>
-        <Home hotels={hotels}/>
+        <Home />
       } />
       <Route path="/search" exact={true} render={() =>
         <Search userId={userId} users={users} updateSearch={actions.updateSearch} search={search} />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
-        <TravelDates travelDates={travelDates} form={travel} userId={token.id} />
+        <TravelDates travelDates={travelDates} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
         <BookedTrips bookedTrips={currentBooked} form={booked}
@@ -68,11 +69,9 @@ export default function Main({ form, booked, friends, travelDates,
 Main.propTypes = {
   form: PropTypes.object.isRequired,
   booked: PropTypes.object.isRequired,
-  travel: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
   flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired,
-  token: PropTypes.object.isRequired
+  hotels: PropTypes.array.isRequired
 };
