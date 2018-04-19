@@ -72,6 +72,20 @@ input {
 .input-group {
   margin-top: 0px;
 }
+
+a:hover {
+  text-decoration: none;
+}
+
+.page-content button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.page-content button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -194,6 +208,14 @@ input {
 .friend-btn {
   text-align: right;
 }
+
+#profile-friends .card button {
+  margin-left: 10px;
+}
+
+.profile-view button {
+  margin-right: 10px;
+}
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/
@@ -211,8 +233,8 @@ input {
 /*************************** END OF BOOKED TRIPS *************************/
 
 // Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

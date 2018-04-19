@@ -167,6 +167,15 @@ function booked(state = empty_booked, action) {
   }
 }
 
+function search(state = "", action) {
+  switch (action.type) {
+    case 'UPDATE_SEARCH':
+      return action.data
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
@@ -174,7 +183,7 @@ function root_reducer(state0, action) {
   console.log("state0", state0)
   let reducer = combineReducers({
     users, friends, travelDates, bookedTrips,
-    flights, hotels, form, token, login, register, booked
+    flights, hotels, form, token, login, register, booked, search
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)
