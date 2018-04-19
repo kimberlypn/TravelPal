@@ -194,6 +194,7 @@ function travel(state = empty_travel, action) {
       return Object.assign({}, state, action.data);
     case 'CLEAR_TRAVEL_FORM':
       return empty_travel;
+    }
 }
 
 function root_reducer(state0, action) {
