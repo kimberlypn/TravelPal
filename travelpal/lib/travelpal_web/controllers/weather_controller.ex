@@ -13,10 +13,6 @@ defmodule TravelpalWeb.WeatherController do
   # Does a search for weather data on the specified city from either the database or an external API request and
   # returns the results in JSON format.
   def search(conn, %{"city" => city}) do
-    # @TODO BUG: the city parameter only supports single-word cities, so requested multi-word cities will always
-    # return nil when existing data is searched for in the database. Not a huge deal since it still has the external
-    # request as a fallback.
-
     city = String.capitalize(city)
     # weather data for the city in the database; returns a Weather struct with data or nil if none exists
     existing_data = ExternalAPI.get_weather_by_city(city)
@@ -47,8 +43,8 @@ defmodule TravelpalWeb.WeatherController do
     ysql_query = "SELECT #{columns} FROM weather.forecast WHERE woeid in (SELECT woeid FROM geo.places(1) WHERE text=\"#{city}\")"
     uri = URI.encode(weather_url <> "?q=#{ysql_query}&format=json")
     # comment out HTTP request for dev purposes and use dummy data instead
-    #res = HTTPoison.get!(uri)
-    res = dummy_data()
+    res = HTTPoison.get!(uri)
+    #res = dummy_data()
     data = Poison.decode!(res.body)["query"]["results"]["channel"]
     # converts all of the dates in the forecast list to Elixir date objects and the temperature strings to integers
     forecast = data["item"]["forecast"]

@@ -12,39 +12,32 @@ defmodule TravelpalWeb.FlightController do
   end
 
   def search(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "date_to" => date_to}) do
-    flight = request_flights_to_from(origin, dest, date_from, date_to)
-
-    render(conn, "show.json", flight: flight)
-  end
-
-  def test() do
-    flights = ExternalAPI.get_flights_by_params("Boston", "Los Angeles", "05/08/2018", "05/12/2018")
-    #flights = request_flights_to_from("boston", "los-angeles", "05/08/2018", "05/12/2018")
-    # Enum.each(flights, fn(x) -> 
-    #   IO.inspect(x)
-    #   ExternalAPI.create_flight(x)
-    # end)
-  end
-
-  defp request_flights_to_from(origin, dest, date_from, date_to) do
+    existing_data = ExternalAPI.get_flights_by_params(origin, dest, date_from, date_to)
     converted_origin = String.split(origin, "-") |> Enum.join(" ")
     converted_dest = String.split(dest, "-") |> Enum.join(" ")
+    flights = if (!Enum.empty?(existing_data)),
+      do: existing_data,
+      else: request_flights(converted_origin, converted_dest, date_from, date_to)
+
+    if (Enum.empty?(existing_data)) do
+      Enum.each(flights, fn(x) -> ExternalAPI.create_flight(x) end)
+    end
+
+    render(conn, "show.json", flight: flights)
+  end
+
+  defp request_flights(origin, dest, date_from, date_to) do
     flight_url = "https://api.skypicker.com/flights"
     # gets top 5 flights
-    uri = URI.encode(flight_url <> "?flyFrom=#{converted_origin}&to=#{converted_dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
+    uri = URI.encode(flight_url <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
         <> "&returnFrom=#{date_to}&returnTo=#{date_to}&partner=picky&partner_market=us&curr=USD&limit=5")
-    # comment out HTTP request for dev purposes and use dummy data instead
-    #res = HTTPoison.get!(uri)
-    #data = Poison.decode!(res.body)
 
     # Comment out HTTP request for dev purposes and use dummy data instead
-    # res = HTTPoison.get!(uri)
-    # data = Poison.decode!(res.body)
-
-    # Use dummy data for dev purposes
-    # flight = data["data"]
-    # @TODO decide if more details are needed
-    flights = dummy_data()
+    res = HTTPoison.get!(uri)
+    data = Poison.decode!(res.body)
+    IO.inspect(data)
+    # dummy_data()
+    data["data"]
     |> Enum.map(fn(x) -> format_flight(x, date_from, date_to) end)
   end
 
