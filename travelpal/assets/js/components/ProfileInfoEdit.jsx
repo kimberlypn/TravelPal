@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Row, Input, InputGroupAddon, InputGroup } from 'reactstrap';
 
-// Renders the input field for the profile edit form
+// Renders the profile edit fields
 export default function ProfileInfoEdit({name, value, label, inputType,
   formOnChange, submitOnClick, toggleEdit, prepend}) {
   return (
@@ -25,13 +25,13 @@ export default function ProfileInfoEdit({name, value, label, inputType,
       </span>
     </Row>
   );
-};
+}
 
 ProfileInfoEdit.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
+    PropTypes.string,
+    PropTypes.number
   ]),
   label: PropTypes.string.isRequired,
   inputType: PropTypes.string.isRequired,

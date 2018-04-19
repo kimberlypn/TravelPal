@@ -61,15 +61,18 @@ input {
   margin-top: 0px;
 }
 
-// Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+a:hover {
+  text-decoration: none;
 }
 
-b {
-  font-weight: 400;
+.page-content button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.page-content button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
 }
 
 .card-title {
@@ -80,7 +83,6 @@ b {
 .orange {
   background: #f0ad4e;
 }
-
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -203,6 +205,14 @@ b {
 .friend-btn {
   text-align: right;
 }
+
+#profile-friends .card button {
+  margin-left: 10px;
+}
+
+.profile-view button {
+  margin-right: 10px;
+}
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/
@@ -231,8 +241,9 @@ b {
 }
 /*************************** END OF BOOKED TRIPS *************************/
 
-/******************************* TRAVEL DATES ****************************/
-#trip-create {
-  display: none;
+// Gets rid of the spinner for number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-/************************** END OF TRAVEL DATES **************************/

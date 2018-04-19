@@ -180,23 +180,10 @@ function booked(state = empty_booked, action) {
   }
 }
 
-// Travel dates form
-let empty_travel = {
-  id: "",
-  destination: "",
-  start_date: "",
-  end_date: "",
-  price_limit: "",
-  passengers: "",
-  user_id: ""
-}
-
-function travel(state = empty_travel, action) {
+function search(state = "", action) {
   switch (action.type) {
-    case 'UPDATE_TRAVEL_FORM':
-      return Object.assign({}, state, action.data);
-    case 'CLEAR_TRAVEL_FORM':
-      return empty_travel;
+    case 'UPDATE_SEARCH':
+      return action.data
     default:
       return state;
   }
@@ -208,8 +195,8 @@ function root_reducer(state0, action) {
   // {tasks: tasks, users: users, form: form}
   console.log("state0", state0)
   let reducer = combineReducers({
-    users, friends, travelDates, bookedTrips, flights, hotels,
-    form, token, login, register, booked, travel
+    users, friends, travelDates, bookedTrips,
+    flights, hotels, form, token, login, register, booked, search
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)

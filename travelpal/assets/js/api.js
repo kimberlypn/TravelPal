@@ -3,7 +3,7 @@ import store from './store';
 
 class TheServer {
   request_users() {
-    $.ajax("/api/v1/users", {
+    return $.ajax("/api/v1/users", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
@@ -20,7 +20,7 @@ class TheServer {
   }
 
   request_friends() {
-    $.ajax("/api/v1/friends", {
+    return $.ajax("/api/v1/friends", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
@@ -37,7 +37,7 @@ class TheServer {
   }
 
   request_travel_dates() {
-    $.ajax("/api/v1/traveldates", {
+    return $.ajax("/api/v1/traveldates", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
@@ -54,7 +54,7 @@ class TheServer {
   }
 
   request_booked_trips() {
-    $.ajax("/api/v1/bookedtrips", {
+    return $.ajax("/api/v1/bookedtrips", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
@@ -71,7 +71,7 @@ class TheServer {
   }
 
   request_flights() {
-    $.ajax("/api/v1/flights", {
+    return $.ajax("/api/v1/flights", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
@@ -87,12 +87,14 @@ class TheServer {
     });
   }
 
-  request_hotels() {
-    $.ajax("/api/v1/hotels", {
-      method: "get",
+  request_hotels(data) {
+    return $.ajax("/api/v1/hotels/fetch", {
+      method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({info:data}),
       success: (resp) => {
+        console.log(resp.data);
         store.dispatch({
           type: 'HOTELS_LIST',
           hotels: resp.data,
@@ -163,6 +165,18 @@ class TheServer {
       },
       error: (resp) => {
         alert("Could not save the edit. Please try again.");
+      }
+    });
+  }
+
+  friend_request(data) {
+    $.ajax("/api/v1/friends/", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ friend: data }),
+      success: (resp) => {
+        this.request_friends();
       }
     });
   }

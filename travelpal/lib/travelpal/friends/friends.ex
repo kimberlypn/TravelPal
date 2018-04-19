@@ -52,14 +52,17 @@ defmodule Travelpal.Friends do
 
   """
   def create_friend(attrs \\ %{}) do
-    {:ok, friend} = %Friend{}
-    |> Friend.changeset(attrs)
-    |> Repo.insert()
+    {:ok, friend} =
+      %Friend{}
+      |> Friend.changeset(attrs)
+      |> Repo.insert()
 
-    friend = friend
-    |> Repo.preload(:requestor)
-    |> Repo.preload(:acceptor)
-    {:ok, friend}
+    fullFriend =
+      friend
+      |> Repo.preload(:requestor)
+      |> Repo.preload(:acceptor)
+
+    {:ok, fullFriend}
   end
 
   @doc """
