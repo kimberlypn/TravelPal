@@ -43,6 +43,8 @@ defmodule TravelpalWeb.BookedTripController do
       parse_time(Map.get(booked_trip_params, "arrival_time")))
     |> Map.put("departure_time",
       parse_time(Map.get(booked_trip_params, "departure_time")))
+    |> Map.put("cost",
+      Map.get(booked_trip_params, "cost") |> String.to_integer())
 
     with {:ok, %BookedTrip{} = booked_trip} <-
       BookedTrips.update_booked_trip(booked_trip, booked_trip_params) do

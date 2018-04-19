@@ -10,45 +10,32 @@ defmodule Travelpal.Flights do
 
   @doc """
   Returns the list of flights.
-
   ## Examples
-
       iex> list_flights()
       [%Flight{}, ...]
-
   """
   def list_flights do
-    Repo.all(from f in Flight,
-      order_by: [asc: :airline])
+    Repo.all(Flight)
   end
 
   @doc """
   Gets a single flight.
-
   Raises `Ecto.NoResultsError` if the Flight does not exist.
-
   ## Examples
-
       iex> get_flight!(123)
       %Flight{}
-
       iex> get_flight!(456)
       ** (Ecto.NoResultsError)
-
   """
   def get_flight!(id), do: Repo.get!(Flight, id)
 
   @doc """
   Creates a flight.
-
   ## Examples
-
       iex> create_flight(%{field: value})
       {:ok, %Flight{}}
-
       iex> create_flight(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def create_flight(attrs \\ %{}) do
 
@@ -60,15 +47,11 @@ defmodule Travelpal.Flights do
 
   @doc """
   Updates a flight.
-
   ## Examples
-
       iex> update_flight(flight, %{field: new_value})
       {:ok, %Flight{}}
-
       iex> update_flight(flight, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
-
   """
   def update_flight(%Flight{} = flight, attrs) do
     flight
@@ -78,15 +61,11 @@ defmodule Travelpal.Flights do
 
   @doc """
   Deletes a Flight.
-
   ## Examples
-
       iex> delete_flight(flight)
       {:ok, %Flight{}}
-
       iex> delete_flight(flight)
       {:error, %Ecto.Changeset{}}
-
   """
   def delete_flight(%Flight{} = flight) do
     Repo.delete(flight)
@@ -94,12 +73,9 @@ defmodule Travelpal.Flights do
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking flight changes.
-
   ## Examples
-
       iex> change_flight(flight)
       %Ecto.Changeset{source: %Flight{}}
-
   """
   def change_flight(%Flight{} = flight) do
     Flight.changeset(flight, %{})
