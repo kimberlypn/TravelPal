@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'reactstrap';
 
-// Renders a searched friend's profile details
+// Renders the label for the profile edit form
 export default function ProfileLabel({ name, label, value, toggleEdit,
   isEditDisabled }) {
-  // Renders the edit button if applicable
+  // Renders the edit button
   const edit = (
     <a href="javascript:void(0)" onClick={() => toggleEdit(name)}>
       <img src="images/edit.png" alt={`edit-${name}`} />
@@ -28,9 +27,9 @@ ProfileLabel.propTypes = {
     PropTypes.number
   ]).isRequired,
   toggleEdit: PropTypes.func,
-  isEditDisabled: PropTypes.bool,
+  isEditDisabled: PropTypes.bool
 };
 
 ProfileLabel.defaultProps = {
-  isEditDisabled: true,
+  isEditDisabled: true
 };

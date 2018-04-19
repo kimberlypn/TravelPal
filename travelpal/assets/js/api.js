@@ -289,23 +289,22 @@ class TheServer {
     });
   }
 
-
   create_travel_date(data) {
-  $.ajax("/api/v1/traveldates", {
-    method: "post",
-    dataType: "json",
-    contentType: "application/json; charset=UTF-8",
-    data: JSON.stringify({travel_date: data}),
-    success: (resp) => {
-      store.dispatch({
-        type: 'ADD_TRAVEL_DATE',
-        travelDate: resp.data,
-      });
-    },
-    error: (resp) => {
-      alert("Failed to create the travel date. Please try again.");
-    },
-  });
+    $.ajax("/api/v1/traveldates", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({travel_date: data}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'ADD_TRAVEL_DATE',
+          travelDate: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Failed to create the travel date. Please try again.");
+      },
+    });
   }
 }
 

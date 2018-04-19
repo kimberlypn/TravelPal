@@ -23,7 +23,8 @@ defmodule TravelpalWeb.TravelDateView do
   end
 
   def render("travel_date.json", %{travel_date: travel_date}) do
-    %{id: travel_date.id,
+    %{
+      id: travel_date.id,
       start_date: travel_date.start_date,
       end_date: travel_date.end_date,
       destination: travel_date.destination,

@@ -12,7 +12,7 @@ import Profile from './Profile';
 import ProfileView from './ProfileView';
 
 // Renders the home page after logging in
-export default function Main({ form, booked, friends, travelDates,
+export default function Main({ form, booked, travel, friends, travelDates,
   bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;
   let today = new Date();
@@ -35,7 +35,7 @@ export default function Main({ form, booked, friends, travelDates,
         <Search userId={userId} users={users} updateSearch={actions.updateSearch} search={search} />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
-        <TravelDates travelDates={travelDates} />
+        <TravelDates travelDates={travelDates} form={travel} userId={token.id} />
       } />
       <Route path="/travel/booked" exact={true} render={() =>
         <BookedTrips bookedTrips={currentBooked} form={booked}
@@ -68,9 +68,11 @@ export default function Main({ form, booked, friends, travelDates,
 Main.propTypes = {
   form: PropTypes.object.isRequired,
   booked: PropTypes.object.isRequired,
+  travel: PropTypes.object.isRequired,
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
   flights: PropTypes.array.isRequired,
-  hotels: PropTypes.array.isRequired
+  hotels: PropTypes.array.isRequired,
+  token: PropTypes.object.isRequired
 };

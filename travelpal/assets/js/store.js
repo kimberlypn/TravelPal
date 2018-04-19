@@ -180,6 +180,7 @@ function booked(state = empty_booked, action) {
   }
 }
 
+// Search for friends
 function search(state = "", action) {
   switch (action.type) {
     case 'UPDATE_SEARCH':
@@ -189,14 +190,36 @@ function search(state = "", action) {
   }
 }
 
+// Travel dates form
+let empty_travel = {
+  id: "",
+  destination: "",
+  start_date: "",
+  end_date: "",
+  price_limit: "",
+  passengers: "",
+  user_id: ""
+}
+
+function travel(state = empty_travel, action) {
+  switch (action.type) {
+    case 'UPDATE_TRAVEL_FORM':
+      return Object.assign({}, state, action.data);
+    case 'CLEAR_TRAVEL_FORM':
+      return empty_travel;
+    default:
+      return state;
+    }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
   console.log("state0", state0)
   let reducer = combineReducers({
-    users, friends, travelDates, bookedTrips,
-    flights, hotels, form, token, login, register, booked, search
+    users, friends, travelDates, bookedTrips, flights, hotels, form, token,
+    login, register, booked, search, travel
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)

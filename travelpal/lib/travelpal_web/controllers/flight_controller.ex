@@ -28,7 +28,8 @@ defmodule TravelpalWeb.FlightController do
   def update(conn, %{"id" => id, "flight" => flight_params}) do
     flight = Flights.get_flight!(id)
 
-    with {:ok, %Flight{} = flight} <- Flights.update_flight(flight, flight_params) do
+    with {:ok, %Flight{} = flight} <-
+      Flights.update_flight(flight, flight_params) do
       render(conn, "show.json", flight: flight)
     end
   end

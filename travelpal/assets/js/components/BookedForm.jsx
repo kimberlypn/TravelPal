@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardBody, Button, Row, Col } from 'reactstrap';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { Form, FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
-// Renders the edit form for a booked trip
+// Renders the form for a booked trip
 function BookedForm(props) {
-  // Grabs all of the airlines to populate the dropdown
+  // Grab all of the airlines to populate the dropdown
   let airlines = [];
   airlines.push(<option disabled value="" key="-1">--</option>);
   _.map(props.flights, (ff) =>
-    airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
+  airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
 
-  // Grabs all of the hotels to populate the dropdown
+  // Grab all of the hotels to populate the dropdown
   let hotels = [];
   hotels.push(<option value="" key="-1">--</option>);
   _.map(props.hotels, (hh) =>
-    hotels.push(<option key={hh.id} value={hh.id}>{hh.name}</option>));
+  hotels.push(<option key={hh.id} value={hh.id}>{hh.name}</option>));
 
   // Updates the state with the inputted values from the form
   function update(ev) {
@@ -35,84 +35,89 @@ function BookedForm(props) {
     });
   }
 
-  // Sends a request to update the booked trip with the values from the form
-  function submit(ev) {
-    api.edit_booked_trip(props.form);
-    cancel();
-  }
-
-  // Clears and closes the registration form
-  function cancel() {
-    props.dispatch({
-      type: 'CLEAR_BOOKED_FORM',
-    });
-    $('#trip-details-' + props.id).toggle();
-    $('#trip-edit-' + props.id).toggle();
-  }
-
   return (
-    <CardBody className="trip-edit" id={"trip-edit-" + props.id}>
+    <React.Fragment>
       <Row>
         <Col md="6">
-          <FormGroup>
-            <Label for="cost"><b>Total Cost*</b></Label>
-            <Input type="number" className="form-control" name="cost" min="0"
-              step="100" required="" value={props.form.cost} onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="departure_time">
-              <b>Departure Time (HH:MM AM/PM)*</b>
-            </Label>
-            <Input type="time" className="form-control" name="departure_time"
-              required="" value={props.form.departure_time} onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="arrival_time"><b>Arrival Time (HH:MM AM/PM)*</b></Label>
-            <Input type="time" className="form-control" name="arrival_time"
-              required="" value={props.form.arrival_time} onChange={update} />
-          </FormGroup>
+          <Form name="booked-left-form">
+            <FormGroup name="cost">
+              <Label for="cost"><b>Total Cost*</b></Label>
+              <Input type="number" className="form-control" name="cost" min="0"
+                step="100" required="" value={props.form.cost} onChange={update} />
+              <p className="form-error cost-error">
+                Total cost must be at least $0.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="departure_time">
+                <b>Departure Time (HH:MM AM/PM)*</b>
+              </Label>
+              <Input type="time" className="form-control" name="departure_time"
+                required="" value={props.form.departure_time} onChange={update} />
+              <p className="form-error departure-error">
+                Departure time must be before arrival time.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="arrival_time"><b>Arrival Time (HH:MM AM/PM)*</b></Label>
+              <Input type="time" className="form-control" name="arrival_time"
+                required="" value={props.form.arrival_time} onChange={update} />
+              <p className="form-error arrival-error">
+                Arrival time must be after departure time.
+              </p>
+            </FormGroup>
+            {/* Need start/end dates to validate arrival/departure times */}
+            <Input type="hidden" name="start_date" value={props.startDate}></Input>
+            <Input type="hidden" name="end_date" value={props.endDate}></Input>
+          </Form>
         </Col>
         <Col md="6">
-          <FormGroup>
-            <Label for="flight_id"><b>Airline*</b></Label>
-            <Input type="select" name="flight_id" value={props.form.flight_id}
-              onChange={update}>
-              {airlines}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="passengers">
-              <b>Number of Passengers (self included)*</b>
-            </Label>
-            <Input type="number" className="form-control" name="passengers"
-              min="1" required="" value={props.form.passengers} onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="hotel_id"><b>Hotel</b></Label>
-            <Input type="select" name="hotel_id" value={props.form.hotel_id}
-              onChange={update}>
-              {hotels}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="rooms"><b>Number of Rooms</b></Label>
-            <Input type="number" className="form-control" name="rooms" min="0"
-              required="" value={props.form.rooms} onChange={update} />
-          </FormGroup>
+          <Form name="booked-right-form">
+            <FormGroup>
+              <Label for="flight_id"><b>Airline*</b></Label>
+              <Input type="select" name="flight_id" value={props.form.flight_id}
+                onChange={update}>
+                {airlines}
+              </Input>
+              <p className="form-error flight-error">
+                You must select a flight.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="passengers">
+                <b>Number of Passengers (self included)*</b>
+              </Label>
+              <Input type="number" className="form-control" name="passengers"
+                min="1" required="" value={props.form.passengers} onChange={update} />
+              <p className="form-error passengers-error">
+                Number of passengers must be at least 1.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="hotel_id"><b>Hotel</b></Label>
+              <Input type="select" name="hotel_id" value={props.form.hotel_id}
+                onChange={update}>
+                {hotels}
+              </Input>
+            </FormGroup>
+            <FormGroup>
+              <Label for="rooms"><b>Number of Rooms</b></Label>
+              <Input type="number" className="form-control" name="rooms" min="0"
+                required="" value={props.form.rooms} onChange={update} />
+              <p className="form-error rooms-error">
+                Number of rooms must be at least 1 if you selected a hotel;
+                else, 0.
+              </p>
+            </FormGroup>
+          </Form>
         </Col>
       </Row>
       <Row>
         <Col md="12">
-            <b>* = required</b>
+          <b>* = required</b>
         </Col>
       </Row>
-      <Row>
-        <Col md="12" className="trip-btn">
-          <Button type="button" onClick={cancel}>Cancel</Button>
-          <Button type="button" onClick={submit}>Submit</Button>
-        </Col>
-      </Row>
-    </CardBody>
+    </React.Fragment>
   );
 };
 

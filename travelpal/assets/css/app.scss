@@ -24,12 +24,12 @@ h1 {
   color: #333a41;
 }
 
-.page-content {
-  margin-top: 20px;
+b {
+  font-weight: 400;
 }
 
-.page-content b {
-  color: #19609e;
+a:hover {
+  text-decoration: none;
 }
 
 .card {
@@ -39,16 +39,6 @@ h1 {
 .card-header {
   background-color: #597487;
   color: white;
-}
-
-.page-content button {
-  background-color: #e06969;
-  border-color: #e06969;
-}
-
-.page-content button:hover {
-  background-color: #d84545;
-  border-color: #d84545;
 }
 
 input {
@@ -61,8 +51,19 @@ input {
   margin-top: 0px;
 }
 
-a:hover {
-  text-decoration: none;
+// Gets rid of the spinner for number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-content {
+  margin-top: 20px;
+}
+
+.page-content b {
+  color: #19609e;
 }
 
 .page-content button {
@@ -239,11 +240,16 @@ a:hover {
 .required {
   padding-left: 25px;
 }
+
+.form-error {
+  font-size: 14px;
+  color: red;
+  display: none;
+}
 /*************************** END OF BOOKED TRIPS *************************/
 
-// Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/******************************* TRAVEL DATES ****************************/
+#trip-create {
+  display: none;
 }
+/************************** END OF TRAVEL DATES **************************/
