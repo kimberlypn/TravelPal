@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import HotelCard from './HotelCard'
 import api from '../api';
 
 // Renders the home page
 function Home(props) {
-
+  let hotels = _.map(props.hotels, (uu) => <HotelCard key={uu.id} name={uu.name} district={uu.district}
+    link={uu.link} rating={uu.rating} />);
   return (
     <div className="page-content">
       Home
+      {hotels}
     </div>
   );
 };

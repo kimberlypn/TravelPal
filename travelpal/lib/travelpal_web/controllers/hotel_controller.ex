@@ -6,7 +6,7 @@ defmodule TravelpalWeb.HotelController do
 
   action_fallback TravelpalWeb.FallbackController
 
-  def callExternalScript(location) do
+  def scrape_hotel_information(location) do
     "python3"
     |> System.cmd(["./scrape-hotels.py", "--dest", location, "--store", "1"])
   end
@@ -16,8 +16,14 @@ defmodule TravelpalWeb.HotelController do
     l_location = travel_info["location"]
                  |> String.downcase()
 
-    callExternalScript(l_location)
     hotels = Accommodation.list_hotels_by_location(l_location)
+
+    # only call script if the given location has not been searched
+    if length(hotels) == 0 do
+      scrape_hotel_information(l_location)
+      hotels = Accommodation.list_hotels_by_location(l_location)
+    end
+
     render(conn, "index.json", hotels: hotels)
   end
 

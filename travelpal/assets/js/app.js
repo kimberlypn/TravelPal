@@ -29,5 +29,7 @@ $(function() {
   api.request_travel_dates();
   api.request_booked_trips();
   api.request_flights();
+  api.request_hotels({"location":"california"});
+
   travelpal_init(store);
 });
