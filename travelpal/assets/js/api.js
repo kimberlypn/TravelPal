@@ -105,7 +105,6 @@ class TheServer {
   }
 
   submit_login(data) {
-    console.log(data);
     $.ajax("/api/v1/token", {
       method: "post",
       dataType: "json",
@@ -253,8 +252,6 @@ class TheServer {
   }
 
   edit_booked_trip(data) {
-    console.log("EDIT");
-    console.log(data.id);
     $.ajax("/api/v1/bookedtrips/" + data.id, {
       method: "patch",
       dataType: "json",

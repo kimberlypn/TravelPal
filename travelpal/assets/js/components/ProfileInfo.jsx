@@ -32,14 +32,6 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
         submitOnClick={submitOnClick}
         toggleEdit={toggleEdit}
       />
-      {/* TODO: toggle the entire input group when clicking the edit button
-      and make it so that the budget input width is the same as the others'
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-        <Input type="number" className="form-control" name="budget"
-          placeholder="budget" step="100" min="0" onChange={update} />
-      </InputGroup>
-      */}
     </div>
   );
 };

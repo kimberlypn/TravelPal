@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FormGroup, Label, Input, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import SearchResults from './SearchResults';
@@ -9,7 +10,7 @@ import api from '../api';
 // Renders the search page
 export default function Search({ users, search, updateSearch }) {
 
-
+  // Updates the form with the query
   function update(ev) {
     const query = $(ev.target).val().toLowerCase();
     updateSearch(query);
@@ -18,8 +19,9 @@ export default function Search({ users, search, updateSearch }) {
   return (
     <div className="page-content">
       <FormGroup>
-        <Label>Search</Label>
-        <Input onChange={update} value={search} type="search" name="search" placeholder="Enter name or username" />
+        <Label>Search for Friends</Label>
+        <Input onChange={update} value={search} type="search" name="search"
+          placeholder="Enter name or username" />
       </FormGroup>
       <SearchResults users={users} search={search} />
     </div>
@@ -27,4 +29,7 @@ export default function Search({ users, search, updateSearch }) {
 };
 
 Search.propTypes = {
+  users: PropTypes.array.isRequired,
+  search: PropTypes.string.isRequired,
+  updateSearch: PropTypes.object.isRequired
 };
