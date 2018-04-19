@@ -18,10 +18,8 @@ parser.add_argument('--store', action="store", dest='shouldStore', default=0)
 
 results = parser.parse_args()
 destination = results.destination
-# 1 = store parsed data
 shouldStoreResults = results.shouldStore
 
-# exit if no argument given
 if destination is None:
   print("Please enter a desination by adding -dest 'some destination' when running the script")
   exit()

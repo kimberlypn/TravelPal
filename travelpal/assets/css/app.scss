@@ -71,6 +71,16 @@ input[type=number]::-webkit-outer-spin-button {
 b {
   font-weight: 400;
 }
+
+.card-title {
+  min-height: 3em;
+  margin: 0 auto;
+}
+
+.orange {
+  background: #f0ad4e;
+}
+
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
