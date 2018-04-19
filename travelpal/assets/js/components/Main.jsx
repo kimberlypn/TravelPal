@@ -32,7 +32,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
         <Home />
       } />
       <Route path="/search" exact={true} render={() =>
-        <Search userId={userId} users={users} updateSearch={actions.updateSearch} search={search} />
+        <Search />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
         <TravelDates travelDates={travelDates} form={travel} userId={token.id} />
