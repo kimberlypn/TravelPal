@@ -2,7 +2,6 @@
 import { createStore, combineReducers } from 'redux';
 import deepFreeze from 'deep-freeze';
 
-// List of users
 function users(state = [], action) {
   switch (action.type) {
     case 'USERS_LIST':
@@ -14,7 +13,6 @@ function users(state = [], action) {
   }
 }
 
-// List of friends
 function friends(state = [], action) {
   switch (action.type) {
     case 'FRIENDS_LIST':
@@ -24,19 +22,15 @@ function friends(state = [], action) {
   }
 }
 
-// List of travel dates
 function travelDates(state = [], action) {
   switch (action.type) {
     case 'TRAVEL_DATES_LIST':
       return [...action.travelDates];
-    case 'ADD_TRAVEL_DATE':
-      return [action.travelDate, ...state];
     default:
       return state;
   }
 }
 
-// List of booked trips
 function bookedTrips(state = [], action) {
   switch (action.type) {
     case 'BOOKED_TRIPS_LIST':
@@ -46,7 +40,6 @@ function bookedTrips(state = [], action) {
   }
 }
 
-// List of flights
 function flights(state = [], action) {
   switch (action.type) {
     case 'FLIGHTS_LIST':
@@ -56,7 +49,6 @@ function flights(state = [], action) {
   }
 }
 
-// List of hotels
 function hotels(state = [], action) {
   switch (action.type) {
     case 'HOTELS_LIST':
@@ -66,7 +58,6 @@ function hotels(state = [], action) {
   }
 }
 
-// User's profile and session details
 let empty_form = {
   token: "",
   id: "",
@@ -97,7 +88,6 @@ function form(state = empty_form, action) {
   }
 }
 
-// Current user's token
 function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
@@ -107,6 +97,7 @@ function token(state = null, action) {
       localStorage.setItem('name', action.token.name)
       localStorage.setItem('username', action.token.username)
       localStorage.setItem('budget', action.token.budget)
+      console.log(localStorage.getItem('username'))
       return action.token;
     case 'DESTROY_TOKEN':
       localStorage.clear();
@@ -116,7 +107,6 @@ function token(state = null, action) {
   }
 }
 
-// Log-in form
 let empty_login = {
   username: "",
   password: ""
@@ -133,7 +123,6 @@ function login(state = empty_login, action) {
   }
 }
 
-// Registration form
 let empty_register = {
   email: "",
   name: "",
@@ -153,7 +142,6 @@ function register(state = empty_register, action) {
   }
 }
 
-// Booked trip form
 let empty_booked = {
   id: "",
   destination: "",
@@ -164,7 +152,6 @@ let empty_booked = {
   passengers: 1,
   cost: 0,
   rooms: 0,
-  summary: "",
   flight_id: "",
   hotel_id: ""
 }
@@ -175,6 +162,16 @@ function booked(state = empty_booked, action) {
       return Object.assign({}, state, action.data);
     case 'CLEAR_BOOKED_FORM':
       return empty_booked;
+    default:
+      return state;
+  }
+}
+
+// Search for friends
+function search(state = "", action) {
+  switch (action.type) {
+    case 'UPDATE_SEARCH':
+      return action.data
     default:
       return state;
   }
@@ -197,15 +194,6 @@ function travel(state = empty_travel, action) {
       return Object.assign({}, state, action.data);
     case 'CLEAR_TRAVEL_FORM':
       return empty_travel;
-
-// Search for friends
-function search(state = "", action) {
-  switch (action.type) {
-    case 'UPDATE_SEARCH':
-      return action.data
-    default:
-      return state;
-  }
 }
 
 function root_reducer(state0, action) {
@@ -214,8 +202,8 @@ function root_reducer(state0, action) {
   // {tasks: tasks, users: users, form: form}
   console.log("state0", state0)
   let reducer = combineReducers({
-    users, friends, travelDates, bookedTrips, flights, hotels,
-    form, token, login, register, booked, travel, search
+    users, friends, travelDates, bookedTrips, flights, hotels, form, token,
+    login, register, booked, search, travel
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)
