@@ -87,12 +87,14 @@ class TheServer {
     });
   }
 
-  request_hotels() {
-    return $.ajax("/api/v1/hotels", {
-      method: "get",
+  request_hotels(data) {
+    return $.ajax("/api/v1/hotels/fetch", {
+      method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({info:data}),
       success: (resp) => {
+        console.log(resp.data);
         store.dispatch({
           type: 'HOTELS_LIST',
           hotels: resp.data,

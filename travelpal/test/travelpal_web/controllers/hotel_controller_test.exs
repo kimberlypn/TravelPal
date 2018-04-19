@@ -1,15 +1,15 @@
 defmodule TravelpalWeb.HotelControllerTest do
   use TravelpalWeb.ConnCase
 
-  alias Travelpal.Hotels
-  alias Travelpal.Hotels.Hotel
+  alias Travelpal.Accommodation
+  alias Travelpal.Accommodation.Hotel
 
-  @create_attrs %{name: "some name", rooms: 42}
-  @update_attrs %{name: "some updated name", rooms: 43}
-  @invalid_attrs %{name: nil, rooms: nil}
+  @create_attrs %{district: "some district", link: "some link", name: "some name", price: 120.5, rating: 120.5}
+  @update_attrs %{district: "some updated district", link: "some updated link", name: "some updated name", price: 456.7, rating: 456.7}
+  @invalid_attrs %{district: nil, link: nil, name: nil, price: nil, rating: nil}
 
   def fixture(:hotel) do
-    {:ok, hotel} = Hotels.create_hotel(@create_attrs)
+    {:ok, hotel} = Accommodation.create_hotel(@create_attrs)
     hotel
   end
 
@@ -32,8 +32,11 @@ defmodule TravelpalWeb.HotelControllerTest do
       conn = get conn, hotel_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
+        "district" => "some district",
+        "link" => "some link",
         "name" => "some name",
-        "rooms" => 42}
+        "price" => 120.5,
+        "rating" => 120.5}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -52,8 +55,11 @@ defmodule TravelpalWeb.HotelControllerTest do
       conn = get conn, hotel_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
+        "district" => "some updated district",
+        "link" => "some updated link",
         "name" => "some updated name",
-        "rooms" => 43}
+        "price" => 456.7,
+        "rating" => 456.7}
     end
 
     test "renders errors when data is invalid", %{conn: conn, hotel: hotel} do

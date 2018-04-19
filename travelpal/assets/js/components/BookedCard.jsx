@@ -74,7 +74,7 @@ function BookedCard(props) {
       successful = false;
     }
     // Check if the number of rooms is at least 1 if the user chose a hotel
-    if (hotel && rooms < 1) {
+    if (hotel && rooms < 1 || !hotel && rooms != 0) {
       $(".rooms-error").show();
       successful = false;
     }

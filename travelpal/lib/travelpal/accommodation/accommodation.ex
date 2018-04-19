@@ -1,12 +1,12 @@
-defmodule Travelpal.Hotels do
+defmodule Travelpal.Accommodation do
   @moduledoc """
-  The Hotels context.
+  The Accommodation context.
   """
 
   import Ecto.Query, warn: false
   alias Travelpal.Repo
 
-  alias Travelpal.Hotels.Hotel
+  alias Travelpal.Accommodation.Hotel
 
   @doc """
   Returns the list of hotels.
@@ -20,6 +20,12 @@ defmodule Travelpal.Hotels do
   def list_hotels do
     Repo.all(from h in Hotel,
       order_by: [asc: :name])
+  end
+
+  def list_hotels_by_location(location) do
+    query = from h in Hotel,
+            where: h.result_from == ^(location)
+    Repo.all(query)
   end
 
   @doc """
@@ -51,10 +57,9 @@ defmodule Travelpal.Hotels do
 
   """
   def create_hotel(attrs \\ %{}) do
-    {:ok, hotel} = %Hotel{}
+    %Hotel{}
     |> Hotel.changeset(attrs)
     |> Repo.insert()
-    {:ok, hotel}
   end
 
   @doc """

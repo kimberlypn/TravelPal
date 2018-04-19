@@ -75,6 +75,15 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #d84545;
   border-color: #d84545;
 }
+
+.card-title {
+  min-height: 3em;
+  margin: 0 auto;
+}
+
+.orange {
+  background: #f0ad4e;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/

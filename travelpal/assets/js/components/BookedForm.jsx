@@ -105,7 +105,8 @@ function BookedForm(props) {
               <Input type="number" className="form-control" name="rooms" min="0"
                 required="" value={props.form.rooms} onChange={update} />
               <p className="form-error rooms-error">
-                Number of rooms must be at least 1 if you selected a hotel.
+                Number of rooms must be at least 1 if you selected a hotel;
+                else, 0.
               </p>
             </FormGroup>
           </Form>

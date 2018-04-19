@@ -4,7 +4,7 @@ defmodule Travelpal.BookedTrips.BookedTrip do
 
   alias Travelpal.Users.User
   alias Travelpal.Flights.Flight
-  alias Travelpal.Hotels.Hotel
+  alias Travelpal.Accommodation.Hotel
 
   schema "bookedtrips" do
     field :destination, :string
