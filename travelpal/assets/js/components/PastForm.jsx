@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, FormGroup, Input, Label } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
@@ -34,11 +34,16 @@ function PastForm(props) {
   return (
       <Row>
         <Col md="12">
-          <FormGroup>
-            <Label for="summary"><b>Trip Summary</b></Label>
-            <Input type="textarea" className="form-control" name="summary"
-              required="" value={props.form.summary} onChange={update} />
-          </FormGroup>
+          <Form name="past-form">
+            <FormGroup>
+              <Label for="summary"><b>Trip Summary</b></Label>
+              <Input type="textarea" className="form-control" name="summary"
+                required="" value={props.form.summary} onChange={update} />
+              <p className="form-error" id="summary-error">
+                You must enter a summary.
+              </p>
+            </FormGroup>
+          </Form>
         </Col>
       </Row>
   );

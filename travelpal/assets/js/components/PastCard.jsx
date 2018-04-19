@@ -35,6 +35,24 @@ function PastCard(props) {
     cancel();
   }
 
+  // Validates the form inputs
+  function validate() {
+    let form = document.forms["past-form"];
+    let summary = form["summary"].value;
+    let successful = true;
+    // Check if the user wrote a summary
+    if (!summary) {
+      $("#summary-error").show();
+      successful = false;
+    }
+    // Successfully validated, so submit the form
+    if (successful) {
+      // Hide any errors
+      $(".form-error").hide();
+      submit();
+    }
+  }
+
   return (
     <Col md="12">
       <Card>
@@ -45,7 +63,7 @@ function PastCard(props) {
           <Row>
             <Col md="12" className="trip-btn">
               <Button type="button" onClick={cancel}>Cancel</Button>
-              <Button type="button" onClick={submit}>Submit</Button>
+              <Button type="button" onClick={validate}>Submit</Button>
             </Col>
           </Row>
         </CardBody>
