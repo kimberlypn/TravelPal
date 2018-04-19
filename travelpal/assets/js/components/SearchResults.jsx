@@ -59,5 +59,5 @@ export default function SearchResults({ users, search }) {
 
 SearchResults.propTypes = {
   users: PropTypes.array.isRequired,
-  search: PropTypes.array.isRequired
+  search: PropTypes.string.isRequired
 };

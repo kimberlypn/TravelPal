@@ -76,6 +76,16 @@ input {
 a:hover {
   text-decoration: none;
 }
+
+.page-content button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.page-content button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
