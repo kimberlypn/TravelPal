@@ -34,6 +34,7 @@ function BookedCard(props) {
     cancel();
   }
 
+  // Validates the form inputs
   function validate() {
     let formLeft = document.forms["booked-left-form"];
     let formRight = document.forms["booked-right-form"];
@@ -46,15 +47,40 @@ function BookedCard(props) {
     let passengers = formRight["passengers"].value;
     let hotel = formRight["hotel_id"].value;
     let rooms = formRight["rooms"].value;
+    let successful = true;
+    // Check if the cost is at least 0
     if (!cost || cost < 0) {
-      $("#cost-error").toggle();
-      return false;
+      $("#cost-error").show();
+      successful = false;
     }
-    else if (!departureTime || !arrivalTime ||
+    // Departure time only needs to be before arrival time if the start and end
+    // dates are the same
+    if (!departureTime || !arrivalTime ||
       (startDate.getTime() == endDate.getTime() && departureTime > arrivalTime)) {
-        $("#departure-error").toggle();
-        $("#arrival-error").toggle();
-        return false;
+        $("#departure-error").show();
+        $("#arrival-error").show();
+        successful = false;
+    }
+    // Check if the user chose a flight
+    if (!flight) {
+      $("#flight-error").show();
+      successful = false;
+    }
+    // Check if the number of passengers is at least 1
+    if (!passengers || passengers < 1) {
+      $("#passengers-error").show();
+      successful = false;
+    }
+    // Check if the number of rooms is at least 1 if the user chose a hotel
+    if (hotel && rooms < 1) {
+      $("#rooms-error").show();
+      successful = false;
+    }
+    // Successfully validated, so submit the form
+    if (successful) {
+      // Hide any errors
+      $(".form-error").hide();
+      submit();
     }
   }
 
