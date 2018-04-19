@@ -11,9 +11,12 @@ defmodule TravelpalWeb.HotelView do
   end
 
   def render("hotel.json", %{hotel: hotel}) do
-    %{
-      id: hotel.id,
-      name: hotel.name
-    }
+    %{id: hotel.id,
+      name: hotel.name,
+      district: hotel.district,
+      price: hotel.price,
+      link: hotel.link,
+      rating: hotel.rating,
+      image_src: hotel.image_src}
   end
 end

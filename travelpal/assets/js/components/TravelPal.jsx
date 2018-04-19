@@ -19,8 +19,7 @@ export default function travelpal_init(store) {
 };
 
 let TravelPal = connect((state) => state)((props) => {
-  // Choose what to render depending on whether or not the user is logged in
-  var main;
+  // Save the user's information to the local storage
   if (!props.form.token && localStorage.getItem('token')) {
     props.dispatch({
       type: 'SET_TOKEN',
@@ -34,6 +33,9 @@ let TravelPal = connect((state) => state)((props) => {
       },
     });
   }
+
+  // Choose what to render depending on whether or not the user is logged in
+  var main;
   if (!props.form.token) {
     main = (
       <Route path="/*" exact={true} render={() =>
@@ -51,8 +53,17 @@ let TravelPal = connect((state) => state)((props) => {
         data: data,
       });
     }
+
+    function updateSearch(query) {
+      props.dispatch({
+        type: 'UPDATE_SEARCH',
+        data: query,
+      });
+    }
+    
     const actions = {
-      updateFormAction
+      updateFormAction,
+      updateSearch
     }
 
     function submitProfileChanges(field) {

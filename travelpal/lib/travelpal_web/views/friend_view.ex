@@ -4,14 +4,16 @@ defmodule TravelpalWeb.FriendView do
   alias TravelpalWeb.UserView
 
   def render("index.json", %{friends: friends}) do
-    friends = Enum.map(friends, fn friend ->
-      %{
-        id: Map.get(friend, :id),
-        status: Map.get(friend, :status),
-        requestor: render_one(Map.get(friend, :requestor), UserView, "user.json"),
-        acceptor: render_one(Map.get(friend, :acceptor), UserView, "user.json")
-      }
-    end)
+    friends =
+      Enum.map(friends, fn friend ->
+        %{
+          id: Map.get(friend, :id),
+          status: Map.get(friend, :status),
+          requestor: render_one(Map.get(friend, :requestor), UserView, "user.json"),
+          acceptor: render_one(Map.get(friend, :acceptor), UserView, "user.json")
+        }
+      end)
+
     %{data: friends}
   end
 
@@ -20,7 +22,11 @@ defmodule TravelpalWeb.FriendView do
   end
 
   def render("friend.json", %{friend: friend}) do
-    %{id: friend.id,
-      status: friend.status}
+    %{
+      id: friend.id,
+      status: friend.status,
+      requestor: render_one(friend.requestor, UserView, "user.json"),
+      acceptor: render_one(friend.acceptor, UserView, "user.json")
+    }
   end
 end

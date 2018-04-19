@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 
 import api from '../api';
@@ -13,7 +12,7 @@ export default function ProfileFriends({ userId, friends }) {
   friends = _.map(friends, function (ff) {
     if (userId == ff.acceptor.id) {
       // User received the friend request, so should say "Accept Request"
-      btnTxt = (ff.status == "Accepted") ? "Unfriend" : "Accept Request";
+      btnTxt = (ff.status == "Accepted") ? "Unfriend" : "Accept";
       return <FriendCard key={ff.id} btnTxt={btnTxt} name={ff.requestor.name}
         email={ff.requestor.email} username={ff.requestor.username} id={ff.id} />
     }

@@ -2,26 +2,28 @@ defmodule TravelpalWeb.Router do
   use TravelpalWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_flash)
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", TravelpalWeb do
-    pipe_through :browser # Use the default browser stack
+    # Use the default browser stack
+    pipe_through(:browser)
 
-    get "/", PageController, :index
-    get "/search", PageController, :index
-    get "/travel/dates", PageController, :index
-    get "/travel/booked", PageController, :index
-    get "/travel/past", PageController, :index
-    get "/profile", PageController, :index
+    get("/", PageController, :index)
+    get("/search", PageController, :index)
+    get("/travel/dates", PageController, :index)
+    get("/travel/booked", PageController, :index)
+    get("/travel/past", PageController, :index)
+    get("/profile", PageController, :index)
+    get("/profile/:username", PageController, :index)
   end
 
   # Other scopes may use custom stacks.
@@ -32,10 +34,12 @@ defmodule TravelpalWeb.Router do
     resources "/friends", FriendController, except: [:new, :edit]
     resources "/hotels", HotelController, except: [:new, :edit]
     resources "/bookedtrips", BookedTripController, except: [:new, :edit]
-    
+
     post "/token", TokenController, :create
 
-    get "/weather/:city", WeatherController, :search
-    get "/travel/flights", FlightController, :search
+    resources "/hotels", HotelController, except: [:new, :edit, :show]
+    post "/hotels/fetch", HotelController, :get_hotel_information
+    get "/weather/:city", WeatherController, :get_weather_by_city
+    get "/travel/flights", FlightController, :get_flights_to_from
   end
 end

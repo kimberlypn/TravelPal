@@ -24,12 +24,12 @@ h1 {
   color: #333a41;
 }
 
-.page-content {
-  margin-top: 20px;
+b {
+  font-weight: 400;
 }
 
-.page-content b {
-  color: #19609e;
+a:hover {
+  text-decoration: none;
 }
 
 .card {
@@ -41,28 +41,6 @@ h1 {
   color: white;
 }
 
-.card button {
-  background-color: #e06969;
-  border-color: #e06969;
-}
-
-.card button:hover {
-  background-color: #d84545;
-  border-color: #d84545;
-}
-
-.trip-btn {
-  text-align: right;
-}
-
-.trip-btn button {
-  margin-left: 10px;
-}
-
-.trip-card-header {
-  text-align: center;
-}
-
 input {
   margin-bottom: 2px;
   border-bottom-left-radius: 0;
@@ -71,6 +49,40 @@ input {
 
 .input-group {
   margin-top: 0px;
+}
+
+// Gets rid of the spinner for number inputs
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-content {
+  margin-top: 20px;
+}
+
+.page-content b {
+  color: #19609e;
+}
+
+.page-content button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.page-content button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
+}
+
+.card-title {
+  min-height: 3em;
+  margin: 0 auto;
+}
+
+.orange {
+  background: #f0ad4e;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
@@ -194,6 +206,14 @@ input {
 .friend-btn {
   text-align: right;
 }
+
+#profile-friends .card button {
+  margin-left: 10px;
+}
+
+.profile-view button {
+  margin-right: 10px;
+}
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/
@@ -205,14 +225,31 @@ input {
   display: none;
 }
 
+.trip-btn {
+  text-align: right;
+}
+
+.trip-btn button {
+  margin-left: 10px;
+}
+
+.trip-card-header {
+  text-align: center;
+}
+
 .required {
   padding-left: 25px;
 }
+
+.form-error {
+  font-size: 14px;
+  color: red;
+  display: none;
+}
 /*************************** END OF BOOKED TRIPS *************************/
 
-// Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+/******************************* TRAVEL DATES ****************************/
+#trip-create {
+  display: none;
 }
+/************************** END OF TRAVEL DATES **************************/

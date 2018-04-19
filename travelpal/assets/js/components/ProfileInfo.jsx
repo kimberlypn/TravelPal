@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import { Row, Col } from 'reactstrap';
+
+import api from '../api';
 import ProfileLabel from './ProfileLabel';
 import ProfileInfoEdit from './ProfileInfoEdit';
-import api from '../api';
 
 // Renders the user's information
-export default function ProfileInfo({ name, username, email, budget, formOnChange, submitOnClick }) {
+export default function ProfileInfo({ name, username, email, budget,
+  formOnChange, submitOnClick }) {
 
   // Toggles the edit input for the given field
   function toggleEdit(field) {
@@ -14,11 +14,11 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
     $('#' + field + '-edit').toggle();
   }
 
-
   return (
     <div id="profile-info">
       <h3>About</h3>
-      <ProfileLabel name={"name"} label={"Name"} value={name} toggleEdit={toggleEdit} isEditDisabled={false} />
+      <ProfileLabel name={"name"} label={"Name"} value={name}
+        toggleEdit={toggleEdit} isEditDisabled={false} />
       <ProfileInfoEdit name={"name"} label={"Name"} inputType={"text"}
         formOnChange={formOnChange}
         submitOnClick={submitOnClick}
@@ -26,20 +26,14 @@ export default function ProfileInfo({ name, username, email, budget, formOnChang
       />
       <ProfileLabel name={"username"} label={"Username"} value={username} />
       <ProfileLabel name={"email"} label={"Email"} value={email} />
-      <ProfileLabel name={"budget"} label={"Budget"} value={budget} toggleEdit={toggleEdit} isEditDisabled={false} />
-      <ProfileInfoEdit name={"budget"} label={"Budget"} inputType={"number"} prepend={"$"}
+      <ProfileLabel name={"budget"} label={"Budget"} value={budget}
+        toggleEdit={toggleEdit} isEditDisabled={false} />
+      <ProfileInfoEdit name={"budget"} label={"Budget"} inputType={"number"}
+        prepend={"$"}
         formOnChange={formOnChange}
         submitOnClick={submitOnClick}
         toggleEdit={toggleEdit}
       />
-      {/* TODO: toggle the entire input group when clicking the edit button
-      and make it so that the budget input width is the same as the others'
-      <InputGroup>
-        <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-        <Input type="number" className="form-control" name="budget"
-          placeholder="budget" step="100" min="0" onChange={update} />
-      </InputGroup>
-      */}
     </div>
   );
 };

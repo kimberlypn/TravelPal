@@ -10,14 +10,26 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+# Script for populating the database. You can run it as:
+#
+#     mix run priv/repo/seeds.exs
+#
+# Inside the script, you can read and write to any of your
+# repositories directly:
+#
+#     Travelpal.Repo.insert!(%Travelpal.SomeSchema{})
+#
+# We recommend using the bang functions (`insert!`, `update!`
+# and so on) as they will fail if something goes wrong.
+
 defmodule Seeds do
   alias Travelpal.Repo
   alias Travelpal.Users.User
   alias Travelpal.Friends.Friend
   alias Travelpal.TravelDates.TravelDate
   alias Travelpal.BookedTrips.BookedTrip
-  alias Travelpal.ExternalAPI.Flight
-  alias Travelpal.Hotels.Hotel
+  alias Travelpal.Flights.Flight
+  alias Travelpal.Accommodation.Hotel
 
   def insert_users do
     Repo.delete_all(User)
@@ -191,10 +203,37 @@ defmodule Seeds do
 
   def insert_hotels do
     Repo.delete_all(Hotel)
-    Repo.insert!(%Hotel{name: "Hyatt"})
-    Repo.insert!(%Hotel{name: "Sheraton"})
-    Repo.insert!(%Hotel{name: "Best Western"})
-    Repo.insert!(%Hotel{name: "Westin"})
+    Repo.insert!(%Hotel{
+      name: "Hyatt", district: "Downtown",
+      price: 125.0,
+      link: "www.hotel.com/hyatt",
+      rating: 4.5,
+      result_from: "Boston"
+    })
+    Repo.insert!(%Hotel{
+      name: "Sheraton",
+      district: "Seaport",
+      price: 133.3,
+      link: "www.hotel.com/sheraton",
+      rating: 3.5,
+      result_from: "Boston"
+    })
+    Repo.insert!(%Hotel{
+      name: "Best Western",
+      district: "South Boston",
+      price: 125.45,
+      link: "www.hotel.com/best_western",
+      rating: 4.5,
+      result_from: "Boston"
+    })
+    Repo.insert!(%Hotel{
+      name: "Westin",
+      district: "Downtown",
+      price: 125.5,
+      link: "www.hotel.com/Westin",
+      rating: 5.0,
+      result_from: "Boston"
+    })
   end
 
   def insert_booked_trips do
@@ -209,6 +248,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 3000,
       rooms: 1,
+      summary: "So many kangaroos!",
       user_id: 1,
       flight_id: 1,
       hotel_id: 1
@@ -222,6 +262,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 1,
+      summary: "",
       user_id: 1,
       flight_id: 2,
       hotel_id: 3
@@ -235,6 +276,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 2000,
       rooms: 0,
+      summary: "",
       user_id: 1,
       flight_id: 1
     })
@@ -249,6 +291,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 1500,
       rooms: 0,
+      summary: "Fun in the sun.",
       user_id: 2,
       flight_id: 4
     })
@@ -261,6 +304,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 1000,
       rooms: 1,
+      summary: "",
       user_id: 2,
       flight_id: 2,
       hotel_id: 1
@@ -274,6 +318,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 2000,
       rooms: 1,
+      summary: "",
       user_id: 2,
       flight_id: 1,
       hotel_id: 1
@@ -289,6 +334,7 @@ defmodule Seeds do
       passengers: 3,
       cost: 3000,
       rooms: 2,
+      summary: "Isn't Matt going next year?",
       user_id: 3,
       flight_id: 4,
       hotel_id: 4
@@ -302,6 +348,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 1,
+      summary: "",
       user_id: 3,
       flight_id: 1,
       hotel_id: 1
@@ -315,6 +362,7 @@ defmodule Seeds do
       passengers: 1,
       cost: 2000,
       rooms: 0,
+      summary: "",
       user_id: 3,
       flight_id: 4
     })
@@ -329,6 +377,7 @@ defmodule Seeds do
       passengers: 5,
       cost: 3000,
       rooms: 5,
+      summary: "Wonder when Long is going to get here.",
       user_id: 4,
       flight_id: 4,
       hotel_id: 3
@@ -342,6 +391,7 @@ defmodule Seeds do
       passengers: 2,
       cost: 3000,
       rooms: 0,
+      summary: "",
       user_id: 4,
       flight_id: 1
     })
@@ -354,6 +404,7 @@ defmodule Seeds do
       passengers: 4,
       cost: 2000,
       rooms: 2,
+      summary: "",
       user_id: 4,
       flight_id: 2,
       hotel_id: 2

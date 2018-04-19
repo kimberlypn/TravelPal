@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function Nav(props) {
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       <div className="header">
         {/* Image source: https://www.shareicon.net/transport-flight-aeroplane-airplane-airport-transportation-travel-plane-824400 */}
         <img src="/images/airplane-icon.png" alt="logo" />
@@ -55,7 +55,7 @@ function Nav(props) {
           <a href="javascript:void(0)" onClick={destroy_token}> Log Out</a>
         </span>
       </nav>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

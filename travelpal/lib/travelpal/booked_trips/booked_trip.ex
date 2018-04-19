@@ -4,7 +4,7 @@ defmodule Travelpal.BookedTrips.BookedTrip do
 
   alias Travelpal.Users.User
   alias Travelpal.Flights.Flight
-  alias Travelpal.Hotels.Hotel
+  alias Travelpal.Accommodation.Hotel
 
   schema "bookedtrips" do
     field :destination, :string
@@ -15,6 +15,7 @@ defmodule Travelpal.BookedTrips.BookedTrip do
     field :passengers, :integer
     field :cost, :integer
     field :rooms, :integer
+    field :summary, :string
 
     belongs_to :user, User
     belongs_to :flight, Flight
@@ -27,7 +28,7 @@ defmodule Travelpal.BookedTrips.BookedTrip do
   def changeset(booked_trip, attrs) do
     booked_trip
     |> cast(attrs, [:destination, :start_date, :end_date, :departure_time,
-      :arrival_time, :passengers, :cost, :rooms, :user_id, :flight_id,
+      :arrival_time, :passengers, :cost, :rooms, :summary, :user_id, :flight_id,
       :hotel_id])
     |> validate_required([:destination, :start_date, :end_date, :departure_time,
       :arrival_time, :passengers, :cost, :user_id, :flight_id])

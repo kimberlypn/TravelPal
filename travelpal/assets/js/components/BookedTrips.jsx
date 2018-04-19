@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 
 import api from '../api';
 import BookedCard from './BookedCard';
+import BookedForm from './BookedForm.jsx';
 
 // Renders the user's booked trips
 export default function BookedTrips({bookedTrips, form, flights, hotels}) {

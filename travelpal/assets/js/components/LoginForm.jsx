@@ -6,7 +6,7 @@ import { Button, FormGroup, Input } from 'reactstrap';
 import api from '../api';
 import RegistrationForm from './RegistrationForm';
 
-// Renders the log-in form; adapted from Nat's lecture notes
+// Renders the log-in form
 function LoginForm(props) {
   // Updates the state with the inputted values from the log-in form
   function update(ev) {
@@ -25,7 +25,7 @@ function LoginForm(props) {
   }
 
   // Toggles the registration form
-  function register() {
+  function toggle() {
     $("#registration").show();
     $("#login").hide();
   }
@@ -52,7 +52,7 @@ function LoginForm(props) {
          </Button>
           <br />
           <p>Don't have an account? Register <a href="javascript:void(0)"
-            onClick={register}>here</a>.</p>
+            onClick={toggle}>here</a>.</p>
         </FormGroup>
       </div>
     </React.Fragment>
