@@ -197,6 +197,12 @@ function travel(state = empty_travel, action) {
       return Object.assign({}, state, action.data);
     case 'CLEAR_TRAVEL_FORM':
       return empty_travel;
+
+// Search for friends
+function search(state = "", action) {
+  switch (action.type) {
+    case 'UPDATE_SEARCH':
+      return action.data
     default:
       return state;
   }
@@ -209,7 +215,7 @@ function root_reducer(state0, action) {
   console.log("state0", state0)
   let reducer = combineReducers({
     users, friends, travelDates, bookedTrips, flights, hotels,
-    form, token, login, register, booked, travel
+    form, token, login, register, booked, travel, search
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)

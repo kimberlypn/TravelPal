@@ -16,7 +16,17 @@ export default function FriendCard({btnTxt, name, email, username, id}) {
     api.accept_friend({id: id, status: "Accepted"});
   }
 
-  let func = (btnTxt == "Accept Request") ? (() => accept()) : (() => unfriend());
+  let func = (btnTxt == "Accept") ? (() => accept()) : (() => unfriend());
+
+  let denyBtn = [];
+  // Add a deny friend request button if the user is the acceptor
+  if (btnTxt == "Accept") {
+    denyBtn.push(
+      <Button key={id} type="button" onClick={() => unfriend()}>
+        Deny
+      </Button>
+    );
+  }
 
   return (
     <Col md="6">
@@ -28,6 +38,7 @@ export default function FriendCard({btnTxt, name, email, username, id}) {
             </Col>
             <Col md="6" className="friend-btn">
               <Button type="button" onClick={func}>{btnTxt}</Button>
+              {denyBtn}
             </Col>
           </Row>
         </CardHeader>

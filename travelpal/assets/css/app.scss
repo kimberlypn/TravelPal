@@ -24,12 +24,12 @@ h1 {
   color: #333a41;
 }
 
-.page-content {
-  margin-top: 20px;
+b {
+  font-weight: 400;
 }
 
-.page-content b {
-  color: #19609e;
+a:hover {
+  text-decoration: none;
 }
 
 .card {
@@ -39,16 +39,6 @@ h1 {
 .card-header {
   background-color: #597487;
   color: white;
-}
-
-.page-content button {
-  background-color: #e06969;
-  border-color: #e06969;
-}
-
-.page-content button:hover {
-  background-color: #d84545;
-  border-color: #d84545;
 }
 
 input {
@@ -68,14 +58,22 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-b {
-  font-weight: 400;
+.page-content {
+  margin-top: 20px;
 }
 
-.form-error {
-  font-size: 14px;
-  color: red;
-  display: none;
+.page-content b {
+  color: #19609e;
+}
+
+.page-content button {
+  background-color: #e06969;
+  border-color: #e06969;
+}
+
+.page-content button:hover {
+  background-color: #d84545;
+  border-color: #d84545;
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
@@ -199,6 +197,14 @@ b {
 .friend-btn {
   text-align: right;
 }
+
+#profile-friends .card button {
+  margin-left: 10px;
+}
+
+.profile-view button {
+  margin-right: 10px;
+}
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/
@@ -224,6 +230,12 @@ b {
 
 .required {
   padding-left: 25px;
+}
+
+.form-error {
+  font-size: 14px;
+  color: red;
+  display: none;
 }
 /*************************** END OF BOOKED TRIPS *************************/
 

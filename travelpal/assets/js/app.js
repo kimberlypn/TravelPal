@@ -23,12 +23,18 @@ import store from './store';
 import api from './api';
 import travelpal_init from "./components/TravelPal";
 
-$(function() {
-  api.request_users();
-  api.request_friends();
-  api.request_travel_dates();
-  api.request_booked_trips();
-  api.request_flights();
-  api.request_hotels();
-  travelpal_init(store);
+$(function () {
+  api.request_users().then(
+    () => api.request_friends().then(
+      () => api.request_travel_dates().then(
+        () => api.request_booked_trips().then(
+          () => api.request_flights().then(
+            () => api.request_hotels().then(
+              travelpal_init(store)
+            )
+          )
+        )
+      )
+    )
+  );
 });

@@ -30,8 +30,8 @@ export default function ProfileInfoEdit({name, value, label, inputType,
 ProfileInfoEdit.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
+    PropTypes.string,
+    PropTypes.number
   ]),
   label: PropTypes.string.isRequired,
   inputType: PropTypes.string.isRequired,

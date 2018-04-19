@@ -54,8 +54,16 @@ let TravelPal = connect((state) => state)((props) => {
       });
     }
 
+    function updateSearch(query) {
+      props.dispatch({
+        type: 'UPDATE_SEARCH',
+        data: query,
+      });
+    }
+    
     const actions = {
-      updateFormAction
+      updateFormAction,
+      updateSearch
     }
 
     function submitProfileChanges(field) {
