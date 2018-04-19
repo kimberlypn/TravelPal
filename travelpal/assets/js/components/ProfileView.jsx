@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ProfileLabel from './ProfileLabel';
 import { Button, Row, Col } from 'reactstrap';
@@ -42,7 +42,8 @@ export default function ProfileView({ users, friends, username, userId }) {
       btnTxt = "Accept Request";
       func = () => api.accept_friend({ id: friendRecord.id, status: "Accepted" });
       denyBtn.push(
-        <Button type="button" onClick={() => api.delete_friend(friendRecord.id)}>
+        <Button key={friendRecord.id} type="button"
+          onClick={() => api.delete_friend(friendRecord.id)}>
           Deny Request
         </Button>
       )

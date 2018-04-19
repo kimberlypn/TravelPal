@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ export default function Main({ form, booked, friends, travelDates,
     new Date(pp.end_date) < today);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Nav name={form.name} />
       <Route path="/" exact={true} render={() =>
         <Home />
@@ -61,7 +61,7 @@ export default function Main({ form, booked, friends, travelDates,
           submitOnClick={apiCalls.submitProfileChanges}
         />
       } />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
