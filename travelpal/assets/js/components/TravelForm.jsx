@@ -39,7 +39,8 @@ function TravelForm(props) {
               <Input type="date" className="form-control" name="start_date"
                 required="" value={props.form.start_date} onChange={update} />
               <p className="form-error start-error">
-                Start date must be before or equal to end date.
+                Start date must be before or equal to end date and cannot be
+                in the past.
               </p>
             </FormGroup>
             <FormGroup>

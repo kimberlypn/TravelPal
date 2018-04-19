@@ -50,17 +50,17 @@ function TravelDates(props) {
     let price = formRight["price_limit"].value;
     let passengers = formRight["passengers"].value;
     let successful = true;
+    let today = new Date();
     // Check if the user entered a destination
     if (!destination) {
       let dest = $("#destination-error");
-      console.log(dest);
       $(".destination-error").show();
       successful = false;
     }
-    console.log(startDate);
-    // Check if departure date is <= arrival date
-    if (!startDate || !endDate ||
-      new Date(startDate).getTime() > new Date(endDate).getTime()) {
+    // Check if departure date is <= arrival date and that departure date is
+    // no earlier than today's date
+    if (!startDate || !endDate || new Date(startDate) > new Date(endDate) ||
+      new Date(startDate) < today) {
       $(".start-error").show();
       $(".end-error").show();
       successful = false;

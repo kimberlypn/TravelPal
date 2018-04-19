@@ -50,6 +50,7 @@ function TravelCard(props) {
     let price = formRight["price_limit"].value;
     let passengers = formRight["passengers"].value;
     let successful = true;
+    let today = new Date();
     // Check if the user entered a destination
     if (!destination) {
       let dest = $("#destination-error");
@@ -59,8 +60,8 @@ function TravelCard(props) {
     }
     console.log(startDate);
     // Check if departure date is <= arrival date
-    if (!startDate || !endDate ||
-      new Date(startDate).getTime() > new Date(endDate).getTime()) {
+    if (!startDate || !endDate || new Date(startDate) > new Date(endDate) ||
+      new Date(startDate) < today) {
       $(".start-error").show();
       $(".end-error").show();
       successful = false;
