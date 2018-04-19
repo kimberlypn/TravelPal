@@ -3,8 +3,6 @@ defmodule TravelpalWeb.FlightController do
 
   alias Travelpal.ExternalAPI
   alias Travelpal.ExternalAPI.Flight
-  alias Travelpal.Flights
-  alias Travelpal.Flights.Flight
 
   action_fallback(TravelpalWeb.FallbackController)
 
@@ -43,7 +41,6 @@ defmodule TravelpalWeb.FlightController do
       send_resp(conn, :no_content, "")
     end
   end
-
 
   def search(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "date_to" => date_to}) do
     flight = request_flights_to_from(origin, dest, date_from, date_to)
