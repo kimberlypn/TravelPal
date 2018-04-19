@@ -39,19 +39,19 @@ export default function ProfileView({ users, friends, username, userId }) {
       btnTxt = "Cancel Request";
       func = () => api.delete_friend(friendRecord.id);
     } else {
-      btnTxt = "Accept Request";
+      btnTxt = "Accept";
       func = () => api.accept_friend({ id: friendRecord.id, status: "Accepted" });
       denyBtn.push(
         <Button key={friendRecord.id} type="button"
           onClick={() => api.delete_friend(friendRecord.id)}>
-          Deny Request
+          Deny
         </Button>
       )
     }
   }
 
   return (
-    <div className="page-content">
+    <div className="page-content profile-view">
       <Row>
         <Col md="12">
           <ProfileLabel label={"Name"} value={currentUser.name} />
@@ -63,10 +63,8 @@ export default function ProfileView({ users, friends, username, userId }) {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
+        <Col md="12">
           <Button type="button" onClick={func}>{btnTxt}</Button>
-        </Col>
-        <Col md="6">
           {denyBtn}
         </Col>
       </Row>
