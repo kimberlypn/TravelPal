@@ -84,12 +84,8 @@ for hotel in listing:
     rating = float(rating.text.lstrip().rstrip()) if rating else None        
     image_src = image['src']    
 
-    hotel_info = (name, district, price, base_url + link, rating, destination, image_src, datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
+    hotel_info = (name, district, price, base_url + link, rating, image_src, destination, datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
     hotel_list.append(hotel_info)
-
-
-for hotel in hotel_list:
-    print(hotel[0], hotel[5])
 
 print("Retrieved information of " + str(len(hotel_list)) + " hotels")
 
@@ -100,7 +96,7 @@ if len(hotel_list) > 0 and shouldStoreResults != 0:
         cur = conn.cursor()
         
         for hotel in hotel_list: 
-            cur.execute("""INSERT INTO hotels (name, district, price, link, rating, result_from, image_src, inserted_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);""", hotel)  
+            cur.execute("""INSERT INTO hotels (name, district, price, link, rating, image_src, result_from, inserted_at, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);""", hotel)  
             if (cur.rowcount == 1):
                 conn.commit()
                 commits += 1 

@@ -5,18 +5,18 @@ import { Card, CardBody, CardHeader, Button, Row, Col } from 'reactstrap';
 import api from '../api';
 
 // Renders the details of a hotel
-export default function HotelCard({name, district, price, link, rating}) {
+export default function HotelCard({name, district, price, link, rating, image}) {
   return (
-    <div className="card w-50 mx-auto">
+    <div className="card mx-auto">
       <div className="">
-        <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Card image cap" />
+        <img className="card-img-top" src={image} alt="Card image cap" />
       </div>
 
-      <div class="card-body text-center">
-        <h4 class="card-title"><strong>{name}</strong></h4>
-        <h6 class="font-weight-bold">{district}</h6>
-        <h6 class="font-weight-bold">{price}</h6>
-        <h6 class="font-weight-bold">{rating}</h6>
+      <div className="card-body text-center">
+        <h4 className="card-title"><strong>{name}</strong></h4>
+        <h6 className="font-weight-bold">{district}</h6>
+        <h6 className="font-weight-bold">{price}</h6>
+        <h6 className="font-weight-bold">{rating}</h6>
         <a href={link}>Book here!</a>
       </div>
 
@@ -29,5 +29,6 @@ HotelCard.propTypes = {
   district: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired
 };

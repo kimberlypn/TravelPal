@@ -6,7 +6,8 @@ import api from '../api';
 // Renders the home page
 function Home(props) {
   let hotels = _.map(props.hotels, (uu) => <HotelCard key={uu.id} name={uu.name} district={uu.district}
-    link={uu.link} rating={uu.rating} />);
+    price={uu.price} link={uu.link} rating={uu.rating} image={uu.image_src} />);
+
   return (
     <div className="page-content">
       Home
