@@ -34,6 +34,30 @@ function BookedCard(props) {
     cancel();
   }
 
+  function validate() {
+    let formLeft = document.forms["booked-left-form"];
+    let formRight = document.forms["booked-right-form"];
+    let cost = formLeft["cost"].value;
+    let departureTime = formLeft["departure_time"].value;
+    let arrivalTime = formLeft["arrival_time"].value;
+    let startDate = new Date(formLeft["start_date"].value);
+    let endDate = new Date(formLeft["end_date"].value);
+    let flight = formRight["flight_id"].value;
+    let passengers = formRight["passengers"].value;
+    let hotel = formRight["hotel_id"].value;
+    let rooms = formRight["rooms"].value;
+    if (!cost || cost < 0) {
+      $("#cost-error").toggle();
+      return false;
+    }
+    else if (!departureTime || !arrivalTime ||
+      (startDate.getTime() == endDate.getTime() && departureTime > arrivalTime)) {
+        $("#departure-error").toggle();
+        $("#arrival-error").toggle();
+        return false;
+    }
+  }
+
   return (
     <Col md="12">
       <Card>
@@ -47,7 +71,7 @@ function BookedCard(props) {
           <Row>
             <Col md="12" className="trip-btn">
               <Button type="button" onClick={cancel}>Cancel</Button>
-              <Button type="button" onClick={submit}>Submit</Button>
+              <Button type="submit" onClick={validate}>Submit</Button>
             </Col>
           </Row>
         </CardBody>

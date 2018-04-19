@@ -71,6 +71,12 @@ input[type=number]::-webkit-outer-spin-button {
 b {
   font-weight: 400;
 }
+
+.form-error {
+  font-size: 14px;
+  color: red;
+  display: none;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
