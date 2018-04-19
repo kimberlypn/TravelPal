@@ -7,7 +7,7 @@ import SearchResults from './SearchResults';
 import api from '../api';
 
 // Renders the search page
-export default function Search({ users, search, updateSearch }) {
+export default function Search({ userId, users, search, updateSearch }) {
 
   // Updates the form with the query
   function update(ev) {
@@ -22,12 +22,13 @@ export default function Search({ users, search, updateSearch }) {
         <Input onChange={update} value={search} type="search" name="search"
           placeholder="Enter name or username" />
       </FormGroup>
-      <SearchResults users={users} search={search} />
+      <SearchResults userId={userId} users={users} search={search} />
     </div>
   );
 };
 
 Search.propTypes = {
+  userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   users: PropTypes.array.isRequired,
   search: PropTypes.string.isRequired
 };
