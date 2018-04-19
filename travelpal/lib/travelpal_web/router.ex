@@ -28,17 +28,19 @@ defmodule TravelpalWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api/v1", TravelpalWeb do
-    pipe_through(:api)
-    resources("/users", UserController, except: [:new, :edit])
-    resources("/traveldates", TravelDateController, except: [:new, :edit])
-    resources("/friends", FriendController, except: [:new, :edit])
-    resources("/flights", FlightController, except: [:new, :edit])
-    resources("/hotels", HotelController, except: [:new, :edit])
-    resources("/bookedtrips", BookedTripController, except: [:new, :edit])
+    pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/traveldates", TravelDateController, except: [:new, :edit]
+    resources "/friends", FriendController, except: [:new, :edit]
+    resources "/flights", FlightController, except: [:new, :edit]
+    resources "/hotels", HotelController, except: [:new, :edit]
+    resources "/bookedtrips", BookedTripController, except: [:new, :edit]
 
-    post("/token", TokenController, :create)
+    post "/token", TokenController, :create
 
-    get("/weather/:city", WeatherController, :search)
-    get("/travel/flights", FlightController, :search)
+    resources "/hotels", HotelController, except: [:new, :edit, :show]
+    post "/hotels/fetch", HotelController, :get_hotel_information
+    get "/weather/:city", WeatherController, :get_weather_by_city
+    get "/travel/flights", FlightController, :get_flights_to_from
   end
 end

@@ -87,12 +87,14 @@ class TheServer {
     });
   }
 
-  request_hotels() {
-    return $.ajax("/api/v1/hotels", {
-      method: "get",
+  request_hotels(data) {
+    return $.ajax("/api/v1/hotels/fetch", {
+      method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({info:data}),
       success: (resp) => {
+        console.log(resp.data);
         store.dispatch({
           type: 'HOTELS_LIST',
           hotels: resp.data,
@@ -267,6 +269,43 @@ class TheServer {
         alert("Could not save the edit. Please try again.");
       }
     });
+  }
+
+  edit_travel_date(data) {
+    $.ajax("/api/v1/traveldates/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ travel_date: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'TRAVEL_DATES_LIST',
+          travelDates: resp.data,
+        });
+      },
+      error: (resp) => {
+        alert("Could not save the edit. Please try again.");
+      }
+    });
+  }
+
+
+  create_travel_date(data) {
+  $.ajax("/api/v1/traveldates", {
+    method: "post",
+    dataType: "json",
+    contentType: "application/json; charset=UTF-8",
+    data: JSON.stringify({travel_date: data}),
+    success: (resp) => {
+      store.dispatch({
+        type: 'ADD_TRAVEL_DATE',
+        travelDate: resp.data,
+      });
+    },
+    error: (resp) => {
+      alert("Failed to create the travel date. Please try again.");
+    },
+  });
   }
 }
 

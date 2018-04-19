@@ -3,7 +3,13 @@ defmodule Travelpal.Repo.Migrations.CreateHotels do
 
   def change do
     create table(:hotels) do
-      add :name, :string, null: false
+      add :name, :string
+      add :district, :text
+      add :price, :float
+      add :link, :text
+      add :rating, :float
+      add :image_src, :text
+      add :result_from, :text
 
       timestamps()
     end
