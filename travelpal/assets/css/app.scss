@@ -72,6 +72,10 @@ input {
 .input-group {
   margin-top: 0px;
 }
+
+a:hover {
+  text-decoration: none;
+}
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
 /************************** LOGIN/REGISTRATION FORM **********************/
@@ -211,8 +215,8 @@ input {
 /*************************** END OF BOOKED TRIPS *************************/
 
 // Gets rid of the spinner for number inputs
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
