@@ -289,24 +289,6 @@ class TheServer {
     });
   }
 
-  request_hotels(data) {
-    $.ajax("/api/v1/hotels/fetch", {
-      method: "post",
-      dataType: "json",
-      contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({info:data}),
-      success: (resp) => {
-        console.log(resp.data);
-        store.dispatch({
-          type: 'HOTELS_LIST',
-          hotels: resp.data,
-        });
-      },
-      error: (resp) => {
-        alert("Could not load friends.");
-      }
-    });
-  }
 
   create_travel_date(data) {
   $.ajax("/api/v1/traveldates", {

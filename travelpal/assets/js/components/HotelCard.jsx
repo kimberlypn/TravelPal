@@ -6,7 +6,7 @@ import api from '../api';
 // Renders the details of a hotel
 export default function HotelCard({name, district, price, link, rating, image}) {
   return (
-    <div className="card col-md-3 p-0 list-group text-center mx-3">
+    <div className="card col-md-3 p-0 list-group text-center">
       <img className="card-img list-group-item border-0 orange" src={image} alt={name} />
       <div className="card-body list-group-item">
         <h4 className="card-title"><strong>{name}</strong></h4>
