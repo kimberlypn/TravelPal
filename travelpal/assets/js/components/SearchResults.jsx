@@ -25,7 +25,7 @@ export default function SearchResults({ userId, users, search }) {
   // Determines if the query results are a full match, a partial match to the
   // beginning, or a match to some part of the name/username
   const query = search.toLowerCase();
-  if (query == null || query == "") {
+  if (query == null || query == "" || query == " ") {
     let fullMatch = [];
     let begMatch = [];
     let partialMatch = [];
