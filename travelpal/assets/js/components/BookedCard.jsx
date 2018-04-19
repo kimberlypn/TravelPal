@@ -18,6 +18,8 @@ function BookedCard(props) {
   function toggle() {
     $('#trip-details-' + props.trip.id).toggle();
     $('#trip-edit-' + props.trip.id).toggle();
+    // Hide any errors
+    $(".form-error").hide();
   }
 
   // Clears and closes the edit form
@@ -50,30 +52,30 @@ function BookedCard(props) {
     let successful = true;
     // Check if the cost is at least 0
     if (!cost || cost < 0) {
-      $("#cost-error").show();
+      $(".cost-error").show();
       successful = false;
     }
     // Departure time only needs to be before arrival time if the start and end
     // dates are the same
     if (!departureTime || !arrivalTime ||
       (startDate.getTime() == endDate.getTime() && departureTime > arrivalTime)) {
-        $("#departure-error").show();
-        $("#arrival-error").show();
+        $(".departure-error").show();
+        $(".arrival-error").show();
         successful = false;
     }
     // Check if the user chose a flight
     if (!flight) {
-      $("#flight-error").show();
+      $(".flight-error").show();
       successful = false;
     }
     // Check if the number of passengers is at least 1
     if (!passengers || passengers < 1) {
-      $("#passengers-error").show();
+      $(".passengers-error").show();
       successful = false;
     }
     // Check if the number of rooms is at least 1 if the user chose a hotel
     if (hotel && rooms < 1) {
-      $("#rooms-error").show();
+      $(".rooms-error").show();
       successful = false;
     }
     // Successfully validated, so submit the form

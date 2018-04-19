@@ -44,7 +44,7 @@ function BookedForm(props) {
               <Label for="cost"><b>Total Cost*</b></Label>
               <Input type="number" className="form-control" name="cost" min="0"
                 step="100" required="" value={props.form.cost} onChange={update} />
-              <p className="form-error" id="cost-error">
+              <p className="form-error cost-error">
                 Total cost must be at least $0.
               </p>
             </FormGroup>
@@ -54,7 +54,7 @@ function BookedForm(props) {
               </Label>
               <Input type="time" className="form-control" name="departure_time"
                 required="" value={props.form.departure_time} onChange={update} />
-              <p className="form-error" id="departure-error">
+              <p className="form-error departure-error">
                 Departure time must be before arrival time.
               </p>
             </FormGroup>
@@ -62,7 +62,7 @@ function BookedForm(props) {
               <Label for="arrival_time"><b>Arrival Time (HH:MM AM/PM)*</b></Label>
               <Input type="time" className="form-control" name="arrival_time"
                 required="" value={props.form.arrival_time} onChange={update} />
-              <p className="form-error" id="arrival-error">
+              <p className="form-error arrival-error">
                 Arrival time must be after departure time.
               </p>
             </FormGroup>
@@ -79,7 +79,7 @@ function BookedForm(props) {
                 onChange={update}>
                 {airlines}
               </Input>
-              <p className="form-error" id="flight-error">
+              <p className="form-error flight-error">
                 You must select a flight.
               </p>
             </FormGroup>
@@ -89,7 +89,7 @@ function BookedForm(props) {
               </Label>
               <Input type="number" className="form-control" name="passengers"
                 min="1" required="" value={props.form.passengers} onChange={update} />
-              <p className="form-error" id="passengers-error">
+              <p className="form-error passengers-error">
                 Number of passengers must be at least 1.
               </p>
             </FormGroup>
@@ -104,7 +104,7 @@ function BookedForm(props) {
               <Label for="rooms"><b>Number of Rooms</b></Label>
               <Input type="number" className="form-control" name="rooms" min="0"
                 required="" value={props.form.rooms} onChange={update} />
-              <p className="form-error" id="rooms-error">
+              <p className="form-error rooms-error">
                 Number of rooms must be at least 1 if you selected a hotel.
               </p>
             </FormGroup>

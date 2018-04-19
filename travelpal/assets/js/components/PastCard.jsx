@@ -18,6 +18,8 @@ function PastCard(props) {
   function toggle() {
     $('#trip-details-' + props.trip.id).toggle();
     $('#trip-edit-' + props.trip.id).toggle();
+    // Hide any errors
+    $(".form-error").hide();
   }
 
   // Clears and closes the edit form
@@ -42,7 +44,7 @@ function PastCard(props) {
     let successful = true;
     // Check if the user wrote a summary
     if (!summary) {
-      $("#summary-error").show();
+      $(".summary-error").show();
       successful = false;
     }
     // Successfully validated, so submit the form

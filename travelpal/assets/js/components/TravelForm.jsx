@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardBody, Button, Row, Col } from 'reactstrap';
-import { FormGroup, Input, Label } from 'reactstrap';
+import { Form, FormGroup, Input, Label } from 'reactstrap';
 
 import api from '../api';
 
@@ -25,35 +25,54 @@ function TravelForm(props) {
     <React.Fragment>
       <Row>
         <Col md="6">
-          <FormGroup>
-            <Label for="destination"><b>Destination*</b></Label>
-            <Input type="text" className="form-control" name="destination"
-              required="" value={props.form.destination} onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="start_date"><b>From Date (MM/DD/YYYY)*</b></Label>
-            <Input type="date" className="form-control" name="start_date"
-              required="" value={props.form.start_date} onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="end_date"><b>To Date (MM/DD/YYYY)*</b></Label>
-            <Input type="date" className="form-control" name="end_date"
-              required="" value={props.form.end_date} onChange={update} />
-          </FormGroup>
+          <Form name="travel-left-form">
+            <FormGroup>
+              <Label for="destination"><b>Destination*</b></Label>
+              <Input type="text" className="form-control" name="destination"
+                required="" value={props.form.destination} onChange={update} />
+              <p className="form-error destination-error">
+                You must enter a destination.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="start_date"><b>From Date (MM/DD/YYYY)*</b></Label>
+              <Input type="date" className="form-control" name="start_date"
+                required="" value={props.form.start_date} onChange={update} />
+              <p className="form-error start-error">
+                Start date must be before or equal to end date.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="end_date"><b>To Date (MM/DD/YYYY)*</b></Label>
+              <Input type="date" className="form-control" name="end_date"
+                required="" value={props.form.end_date} onChange={update} />
+              <p className="form-error end-error">
+                End date must be after or equal to start date.
+              </p>
+            </FormGroup>
+          </Form>
         </Col>
         <Col md="6">
-          <FormGroup>
-            <Label for="price_limit"><b>Price Limit*</b></Label>
-            <Input type="number" className="form-control" name="price_limit"
-              min="0" step="100" required="" value={props.form.price_limit}
-              onChange={update} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="passengers"><b>Number of Passengers (self included)*</b></Label>
-            <Input type="number" className="form-control" name="passengers"
-              min="1" required="" value={props.form.passengers}
-              onChange={update} />
-          </FormGroup>
+          <Form name="travel-right-form">
+            <FormGroup>
+              <Label for="price_limit"><b>Price Limit*</b></Label>
+              <Input type="number" className="form-control" name="price_limit"
+                min="0" step="100" required="" value={props.form.price_limit}
+                onChange={update} />
+              <p className="form-error price-error">
+                Price limit must be at least $0.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="passengers"><b>Number of Passengers (self included)*</b></Label>
+              <Input type="number" className="form-control" name="passengers"
+                min="1" required="" value={props.form.passengers}
+                onChange={update} />
+              <p className="form-error passengers-error">
+                Number of passengers must be at least 1.
+              </p>
+            </FormGroup>
+          </Form>
         </Col>
       </Row>
       <Row>

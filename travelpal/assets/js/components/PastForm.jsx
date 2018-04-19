@@ -39,7 +39,7 @@ function PastForm(props) {
               <Label for="summary"><b>Trip Summary</b></Label>
               <Input type="textarea" className="form-control" name="summary"
                 required="" value={props.form.summary} onChange={update} />
-              <p className="form-error" id="summary-error">
+              <p className="form-error summary-error">
                 You must enter a summary.
               </p>
             </FormGroup>
