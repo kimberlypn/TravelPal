@@ -13,21 +13,21 @@ defmodule TravelpalWeb.HotelController do
 
   def get_hotel_information(conn, %{"info" => travel_info}) do
 
-    l_location = travel_info["location"]
-                 |> String.downcase()
-
+    l_location = String.downcase(travel_info["location"])
     hotels = Accommodation.list_hotels_by_location(l_location)
-             |> Enum.take(-15)
 
     # only call script if the given location has not been searched
-    if length(hotels) == 0 do
-      scrape_hotel_information(l_location)
-      hotels = Accommodation.list_hotels_by_location(l_location)
-              |> Enum.take(-15)
-    end
+    hotels =
+      if length(hotels) == 0 do
+        scrape_hotel_information(l_location)
+        Accommodation.list_hotels_by_location(l_location)
+      else
+        hotels
+      end
 
-    render(conn, "index.json", hotels: hotels)
+    render(conn, "index.json", hotels: Enum.take(hotels, -15))
   end
+
 
   def index(conn, params) do
     IO.inspect params

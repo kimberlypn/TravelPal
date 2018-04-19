@@ -26,7 +26,7 @@ if destination is None:
   print("Please enter a desination by adding -dest 'some destination' when running the script")
   exit()
 
-url = 'https://www.booking.com/searchresults.html?'
+base_url = "https://www.booking.com/"
 head = {"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36"}
 
 # use orderedDict to keep order of query parameters
@@ -40,7 +40,7 @@ params['ss'] = destination
 params['checkin_monthday'] = 20
 params['checkin_month'] = 6
 params['checkin_year'] = 2018
-params['checkout_monthday'] = 25
+params['checkout_monthday'] = 21
 params['checkout_month'] = 6
 params['checkout_year'] = 2018
 params['group_adults'] = 2
@@ -49,20 +49,19 @@ params['no_rooms'] = 1
 params['from_sf'] = 1
 params['dest_id'] = ''
 params['dest_type'] = ''
+params['order'] = 'review_score_and_price'
 
-response = get(url, headers=head, params=params)
+response = get(base_url + 'searchresults.html?', headers=head, params=params)
 print(response.status_code)
 
 if(response.status_code != 200):
     print("Bad response")
     exit()
 
-# parse response into bs object
 html_soup = BeautifulSoup(response.text, "html5lib")
 
 listing = html_soup.find_all(class_='sr_item')
 hotel_list = []
-base_url = "https://www.booking.com/"
 
 for hotel in listing:
   name = hotel.select_one("span.sr-hotel__name")
