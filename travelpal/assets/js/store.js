@@ -194,6 +194,8 @@ function travel(state = empty_travel, action) {
       return Object.assign({}, state, action.data);
     case 'CLEAR_TRAVEL_FORM':
       return empty_travel;
+    default:
+      return state;
     }
 }
 
