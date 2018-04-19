@@ -30,7 +30,6 @@ defmodule TravelpalWeb.Router do
     resources "/users", UserController, except: [:new, :edit]
     resources "/traveldates", TravelDateController, except: [:new, :edit]
     resources "/friends", FriendController, except: [:new, :edit]
-    resources "/flights", FlightController, except: [:new, :edit]
     resources "/hotels", HotelController, except: [:new, :edit]
     resources "/bookedtrips", BookedTripController, except: [:new, :edit]
     
