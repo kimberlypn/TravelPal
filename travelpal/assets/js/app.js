@@ -29,9 +29,7 @@ $(function () {
       () => api.request_travel_dates().then(
         () => api.request_booked_trips().then(
           () => api.request_flights().then(
-            () => api.request_hotels({"location": "boston"}).then(
-              travelpal_init(store)
-            )
+            travelpal_init(store)  
           )
         )
       )

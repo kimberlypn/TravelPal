@@ -29,7 +29,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
     <Fragment>
       <Nav name={form.name} />
       <Route path="/" exact={true} render={() =>
-        <Home hotels={hotels}/>
+        <Home />
       } />
       <Route path="/search" exact={true} render={() =>
         <Search />

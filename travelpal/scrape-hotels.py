@@ -36,9 +36,15 @@ def validate_date(date_text):
 validate_date(start_date)
 validate_date(end_date)
 
-if dt.strptime(start_date, '%Y-%m-%d') > dt.strptime(end_date, '%Y-%m-%d'): 
+sdate = dt.strptime(start_date, '%Y-%m-%d')
+edate = dt.strptime(end_date, '%Y-%m-%d')
+if sdate > edate: 
   print("Start date cannot be after end date!")
   exit()
+
+
+delta = edate - sdate
+days = delta.days
 
 start_date_args = start_date.split("-")
 end_date_args = end_date.split("-")
@@ -66,7 +72,8 @@ params['no_rooms'] = 1
 params['from_sf'] = 1
 params['dest_id'] = ''
 params['dest_type'] = ''
-params['order'] = 'review_score_and_price'
+# params['order'] = 'review_score_and_price'
+params['order'] = 'price'
 
 response = get(base_url + 'searchresults.html?', headers=head, params=params)
 print(response.status_code)
@@ -95,12 +102,12 @@ for hotel in listing:
     
     # all prices in us currency
     price = price.text.strip()
-    price = float(price[price.find('$') + 1:].replace(',', ''))
+    price = float(price[price.find('$') + 1:].replace(',', '')) / days
     link = link.attrs['href']
     rating = float(rating.text.lstrip().rstrip()) if rating else None        
     image_src = image['src']    
 
-    hotel_info = (name, district, price, base_url + link, rating, image_src, destination, datetime.datetime.utcnow(), datetime.datetime.utcnow()) 
+    hotel_info = (name, district, price, base_url + link, rating, image_src, destination, dt.utcnow(), dt.utcnow()) 
     hotel_list.append(hotel_info)
 
 print("Retrieved information of " + str(len(hotel_list)) + " hotels")
