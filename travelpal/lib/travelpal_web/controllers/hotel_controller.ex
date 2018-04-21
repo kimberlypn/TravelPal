@@ -24,7 +24,7 @@ defmodule TravelpalWeb.HotelController do
       else
         hotels
       end
-
+      
     render(conn, "index.json", hotels: Enum.take(hotels, -15))
   end
 
