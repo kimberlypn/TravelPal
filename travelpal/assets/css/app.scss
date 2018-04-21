@@ -214,6 +214,15 @@ input[type=number]::-webkit-outer-spin-button {
 .profile-view button {
   margin-right: 10px;
 }
+
+#searchFriends {
+  display: none;
+}
+
+#viewBtn {
+  display: none;
+}
+
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/

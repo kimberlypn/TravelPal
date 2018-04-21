@@ -17,8 +17,10 @@ defmodule Travelpal.ExternalAPI.Flight do
   @doc false
   def changeset(flight, attrs) do
     flight
-    |> cast(attrs, [:origin, :dest, :date_from, :date_to, :price, :airlines, :duration])
-    |> validate_required([:origin, :dest, :date_from, :date_to, :price, :airlines, :duration])
+    |> cast(attrs, [:origin, :dest, :date_from, :date_to, :price,
+      :airlines, :duration])
+    |> validate_required([:origin, :dest, :date_from, :date_to, :price,
+      :airlines, :duration])
     |> validate_locations()
     |> validate_dates_from_to()
   end

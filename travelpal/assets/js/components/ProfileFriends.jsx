@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 import api from '../api';
 import FriendCard from './FriendCard';
 
 // Renders the user's friends
-export default function ProfileFriends({ userId, friends }) {
+export default function ProfileFriends({ userId, friends, myToggle }) {
   var btnTxt; // Displays "Unfriend", "Cancel Request", or "Accept Request"
   // Renders each friend's details as a card
   friends = _.map(friends, function (ff) {
@@ -38,7 +38,18 @@ export default function ProfileFriends({ userId, friends }) {
 
   return (
     <div id="profile-friends">
-      <h3>Friends</h3>
+      <Row md="12">
+        <Col md="6">
+          <h3>Friends</h3>
+        </Col>
+        <Col md="6">
+          <div className="friend-btn">
+            <Button id={"searchBtn"} type="button" onClick={() => myToggle()}>
+              Find Friends
+        </Button>
+          </div>
+        </Col>
+      </Row>
       <Row>{friends}</Row>
     </div>
   );

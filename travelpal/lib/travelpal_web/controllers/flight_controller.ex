@@ -11,8 +11,10 @@ defmodule TravelpalWeb.FlightController do
     render(conn, "index.json", flights: flights)
   end
 
-  def search(conn, %{"origin" => origin, "dest" => dest, "date_from" => date_from, "date_to" => date_to}) do
-    existing_data = ExternalAPI.get_flights_by_params(origin, dest, date_from, date_to)
+  def search(conn, %{"origin" => origin, "dest" => dest,
+    "date_from" => date_from, "date_to" => date_to}) do
+    existing_data =
+      ExternalAPI.get_flights_by_params(origin, dest, date_from, date_to)
     converted_origin = String.split(origin, "-") |> Enum.join(" ")
     converted_dest = String.split(dest, "-") |> Enum.join(" ")
     flights = if (!Enum.empty?(existing_data)),
@@ -29,8 +31,9 @@ defmodule TravelpalWeb.FlightController do
   defp request_flights(origin, dest, date_from, date_to) do
     flight_url = "https://api.skypicker.com/flights"
     # gets top 5 flights
-    uri = URI.encode(flight_url <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
-        <> "&returnFrom=#{date_to}&returnTo=#{date_to}&partner=picky&partner_market=us&curr=USD&limit=5")
+    uri = URI.encode(flight_url
+      <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
+      <> "&returnFrom=#{date_to}&returnTo=#{date_to}&partner=picky&partner_market=us&curr=USD&limit=5")
 
     # Comment out HTTP request for dev purposes and use dummy data instead
     res = HTTPoison.get!(uri)
@@ -57,8 +60,14 @@ defmodule TravelpalWeb.FlightController do
     )
 
     %{
-      origin: flight["mapIdfrom"] |> String.split("-") |> Enum.map(fn(x)->String.capitalize(x) end) |> Enum.join(" "),
-      dest: flight["mapIdto"] |> String.split("-") |> Enum.map(fn(x)->String.capitalize(x) end) |> Enum.join(" "),
+      origin: flight["mapIdfrom"]
+        |> String.split("-")
+        |> Enum.map(fn(x)->String.capitalize(x) end)
+        |> Enum.join(" "),
+      dest: flight["mapIdto"]
+        |> String.split("-")
+        |> Enum.map(fn(x)->String.capitalize(x) end)
+        |> Enum.join(" "),
       date_from: formatted_date_from,
       date_to: formatted_date_to,
       price: flight["price"],
