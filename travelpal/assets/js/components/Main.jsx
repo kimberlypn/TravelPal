@@ -28,6 +28,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
   return (
     <Fragment>
       <Nav name={form.name} />
+      <AlertMessage />
       <Route path="/" exact={true} render={() =>
         <Home />
       } />
