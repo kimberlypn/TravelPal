@@ -228,6 +228,15 @@ function alertMessage(state = empty_alertMessage, action) {
   };
 }
 
+function isOpen(state = false, action) {
+  switch (action.type) {
+    case 'NAV_TOGGLE':
+      return action.data
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {tasks, users, form} is ES6 shorthand for
@@ -248,6 +257,7 @@ function root_reducer(state0, action) {
     search,
     travel,
     alertMessage,
+    isOpen
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)
