@@ -12,8 +12,9 @@ import Profile from './Profile';
 import ProfileView from './ProfileView';
 
 // Renders the home page after logging in
+// TODO: Re-add flights after fixing API call to flights schema
 export default function Main({ form, booked, travel, friends, travelDates,
-  bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
+  bookedTrips, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -25,6 +26,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
   let pastTrips = bookedTrips.filter(pp => (pp.user.id == userId) &&
     new Date(pp.end_date) < today);
 
+  // TODO: Re-add flights to BookedTrips and PastTrips components
   return (
     <Fragment>
       <Nav name={form.name} />
@@ -39,11 +41,11 @@ export default function Main({ form, booked, travel, friends, travelDates,
       } />
       <Route path="/travel/booked" exact={true} render={() =>
         <BookedTrips bookedTrips={currentBooked} form={booked}
-          flights={flights} hotels={hotels} />
+          hotels={hotels} />
       } />
       <Route path="/travel/past" exact={true} render={() =>
         <PastTrips pastTrips={pastTrips} form={booked}
-          flights={flights} hotels={hotels} />
+          hotels={hotels} />
       } />
       <Route path="/profile/:username" exact={true} render={({ match }) =>
         <ProfileView
@@ -76,7 +78,8 @@ Main.propTypes = {
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
-  flights: PropTypes.array.isRequired,
+  // TODO: Fix this to work with new flights schema
+  //flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired
 };

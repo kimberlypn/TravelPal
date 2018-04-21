@@ -18,7 +18,12 @@ export default function BookedTripInfo({trip}) {
         </p>
       </Col>
       <Col md="6">
-        <p><b>Airline: </b>{trip.flight.airline}</p>
+        {
+          /*
+          TODO: Add this back in
+          <p><b>Airline: </b>{trip.flight.airline}</p>
+          */
+        }
         <p><b>Number of Passengers: </b>{trip.passengers}</p>
         <p>
           <b>Hotel: </b>

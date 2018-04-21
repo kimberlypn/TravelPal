@@ -45,7 +45,8 @@ function BookedCard(props) {
     let arrivalTime = formLeft["arrival_time"].value;
     let startDate = new Date(formLeft["start_date"].value);
     let endDate = new Date(formLeft["end_date"].value);
-    let flight = formRight["flight_id"].value;
+    // TODO: Add this back in
+    // let flight = formRight["flight_id"].value;
     let passengers = formRight["passengers"].value;
     let hotel = formRight["hotel_id"].value;
     let rooms = formRight["rooms"].value;
@@ -63,11 +64,11 @@ function BookedCard(props) {
         $(".arrival-error").show();
         successful = false;
     }
-    // Check if the user chose a flight
+    /* TODO: Check if the user chose a flight
     if (!flight) {
       $(".flight-error").show();
       successful = false;
-    }
+    } */
     // Check if the number of passengers is at least 1
     if (!passengers || passengers < 1) {
       $(".passengers-error").show();
@@ -86,6 +87,7 @@ function BookedCard(props) {
     }
   }
 
+  // TODO: Re-add flights to BookedForm component
   return (
     <Col md="12">
       <Card>
@@ -95,7 +97,7 @@ function BookedCard(props) {
           <BookedForm form={props.form} id={props.trip.id}
             destination={props.trip.destination}
             startDate={props.trip.start_date} endDate={props.trip.end_date}
-            flights={props.flights} hotels={props.hotels} />
+            hotels={props.hotels} />
           <Row>
             <Col md="12" className="trip-btn">
               <Button type="button" onClick={cancel}>Cancel</Button>

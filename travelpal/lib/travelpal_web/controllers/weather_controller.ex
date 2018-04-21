@@ -10,55 +10,72 @@ defmodule TravelpalWeb.WeatherController do
     render(conn, "index.json")
   end
 
-  # Does a search for weather data on the specified city from either the database or an external API request and
-  # returns the results in JSON format.
+  # Does a search for weather data on the specified city from either the
+  # database or an external API request and returns the results in JSON format
   def search(conn, %{"city" => city}) do
-    # @TODO BUG: the city parameter only supports single-word cities, so requested multi-word cities will always
-    # return nil when existing data is searched for in the database. Not a huge deal since it still has the external
-    # request as a fallback.
-
     city = String.capitalize(city)
-    # weather data for the city in the database; returns a Weather struct with data or nil if none exists
+    # Weather data for the city in the database; returns a Weather struct with
+    # data or nil if none exists
     existing_data = ExternalAPI.get_weather_by_city(city)
-    # if there exists a record for the city then use the existing data, else make a request for new data
-    weather = if (existing_data != nil), do: existing_data, else: request_weather_by_city(city)
+
+    # If there exists a record for the city, then use the existing data;
+    # else, make a request for new data
+    weather =
+      if (existing_data != nil), do: existing_data,
+      else: request_weather_by_city(city)
 
     if (existing_data != nil) do
-      # updates the weather in the database with new external data if it's outdated
+      # Updates the weather in the database with new external data
+      # if it is outdated
       if (Date.compare(weather.date, Date.utc_today()) != :eq) do
         weather = request_weather_by_city(city)
         ExternalAPI.update_weather(existing_data, weather)
       end
     else
-      # adds a weather record for the city in the database
+      # Add a weather record for the city in the database
       ExternalAPI.create_weather(weather)
     end
 
     render(conn, "show.json", weather: weather)
   end
 
-  # Makes an external API call to request Yahoo Weather data for a specified city.
+  # Makes an external API call to request Yahoo Weather data for a specific city
   defp request_weather_by_city(city) do
     weather_url = "https://query.yahooapis.com/v1/public/yql"
-    # relevant columns from the weather table
+    # Relevant columns from the weather table
     columns = ["units", "location", "item",]
     |> Enum.join(", ")
+
     # Yahoo Weather API uses YSQL to specify data
-    ysql_query = "SELECT #{columns} FROM weather.forecast WHERE woeid in (SELECT woeid FROM geo.places(1) WHERE text=\"#{city}\")"
+    ysql_query =
+      "SELECT #{columns}
+      FROM weather.forecast
+      WHERE woeid in
+        (SELECT woeid
+        FROM geo.places(1)
+        WHERE text=\"#{city}\")"
     uri = URI.encode(weather_url <> "?q=#{ysql_query}&format=json")
-    # comment out HTTP request for dev purposes and use dummy data instead
-    #res = HTTPoison.get!(uri)
-    res = dummy_data()
+
+    # Comment out HTTP request for dev purposes and use dummy data instead
+    res = HTTPoison.get!(uri)
+    # res = dummy_data()
     data = Poison.decode!(res.body)["query"]["results"]["channel"]
-    # converts all of the dates in the forecast list to Elixir date objects and the temperature strings to integers
+
+    # Convert all of the dates in the forecast list to Elixir date objects
+    # and the temperature strings to integers
     forecast = data["item"]["forecast"]
     |> Enum.map(fn(x) ->
-      %{x | "date" => convert_date(x["date"]), "high" => String.to_integer(x["high"]), "low" => String.to_integer(x["low"])}
+      %{
+        x | "date" => convert_date(x["date"]),
+        "high" => String.to_integer(x["high"]),
+        "low" => String.to_integer(x["low"])
+      }
     end)
-    # the current day's forecast info is the first element in the forecast list
+
+    # The current day's forecast info is the first element in the forecast list
     current_day_info = Enum.at(forecast, 0)
 
-    # retrieves the relevant weather details
+    # Retrieve the relevant weather details
     %{
       city: data["location"]["city"],
       date: current_day_info["date"],
@@ -69,8 +86,8 @@ defmodule TravelpalWeb.WeatherController do
     }
   end
 
-  # Converts a date given by Yahoo Weather to an Elixir date object
-  # Yahoo Weather date is in format: "DD Mm YYYY"
+  # Converts a date given by Yahoo Weather to an Elixir date object;
+  # Yahoo Weather date is in format: "DD MM YYYY"
   defp convert_date(date) do
     month_map = %{
       "Jan" => 1, "Feb" => 2, "Mar" => 3, "Apr" => 4, "May" => 5, "Jun" => 6, "Jul" => 7, "Aug" => 8, "Sep" => 9,
