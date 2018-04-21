@@ -5,6 +5,7 @@ import { Button, FormGroup, Input } from 'reactstrap';
 
 import api from '../api';
 import RegistrationForm from './RegistrationForm';
+import AlertMessage from './AlertMessage';
 
 // Renders the log-in form
 function LoginForm(props) {
@@ -37,6 +38,7 @@ function LoginForm(props) {
         <img src="/images/airplane-icon.png" alt="logo" />
         <h1>TRAVELPAL</h1>
       </div>
+      <AlertMessage />
       <RegistrationForm />
       <div className="container" id="login">
         <FormGroup>
