@@ -37,7 +37,7 @@ defmodule TravelpalWeb.Router do
 
     post "/token", TokenController, :create
 
-    resources "/hotels", HotelController, except: [:new, :edit, :show]
+    resources "/hotels", HotelController, except: [:new, :edit]
     post "/hotels/fetch", HotelController, :get_hotel_information
     get "/weather/:city", WeatherController, :search
     get "/travel/flights", FlightController, :search

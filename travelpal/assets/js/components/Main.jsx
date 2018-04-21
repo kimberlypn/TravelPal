@@ -10,6 +10,7 @@ import PastTrips from './PastTrips';
 import BookedTrips from './BookedTrips';
 import Profile from './Profile';
 import ProfileView from './ProfileView';
+import AlertMessage from './AlertMessage';
 
 // Renders the home page after logging in
 // TODO: Re-add flights after fixing API call to flights schema
@@ -30,6 +31,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
   return (
     <Fragment>
       <Nav name={form.name} />
+      <AlertMessage />
       <Route path="/" exact={true} render={() =>
         <Home />
       } />

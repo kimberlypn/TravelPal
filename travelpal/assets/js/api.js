@@ -2,6 +2,16 @@
 import store from './store';
 
 class TheServer {
+  dispatchAlert(text, color = "danger") {
+    store.dispatch({
+      type: 'ALERT',
+      data: {
+        color,
+        text
+      }
+    })
+  }
+
   request_users() {
     return $.ajax("/api/v1/users", {
       method: "get",
@@ -14,7 +24,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load users.");
+        dispatchAlert("Could not load users");
       }
     });
   }
@@ -31,7 +41,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load friends.");
+        this.dispatchAlert("Could not load friends.");
       }
     });
   }
@@ -48,7 +58,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load travel dates.");
+        this.dispatchAlert("Could not load travel dates.");
       }
     });
   }
@@ -65,7 +75,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load booked trips.");
+        this.dispatchAlert("Could not load booked trips.");
       }
     });
   }
@@ -83,7 +93,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load flights.");
+        this.dispatchAlert("Could not load flights.");
       }
     });
   }
@@ -93,7 +103,7 @@ class TheServer {
       method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({info:data}),
+      data: JSON.stringify({ info: data }),
       success: (resp) => {
         console.log(resp.data);
         store.dispatch({
@@ -102,7 +112,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not load hotels.");
+        this.dispatchAlert("Could not load hotels.");
       }
     });
   }
@@ -120,7 +130,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not log in. Please try again.");
+        this.dispatchAlert("Could not log in. Please try again.");
       }
     });
   }
@@ -132,7 +142,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ user: data }),
       success: (resp) => {
-        alert("Successfully registered! You can now log in.");
+        this.dispatchAlert("Successfully registered! You can now log in.", "success");
         store.dispatch({
           type: 'ADD_USER',
           user: resp.data,
@@ -141,7 +151,7 @@ class TheServer {
         $("#login").show();
       },
       error: (resp) => {
-        alert("Failed to register. Please try again.");
+        this.dispatchAlert("Failed to register. Please try again.");
       },
     });
   }
@@ -165,7 +175,7 @@ class TheServer {
         $('#' + field + '-edit').toggle();
       },
       error: (resp) => {
-        alert("Could not save the edit. Please try again.");
+        this.dispatchAlert("Could not save the edit. Please try again.");
       }
     });
   }
@@ -195,7 +205,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not unfriend. Please try again.");
+        this.dispatchAlert("Could not unfriend. Please try again.");
       }
     });
   }
@@ -213,7 +223,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not accept the request. Please try again.");
+        this.dispatchAlert("Could not accept the request. Please try again.");
       }
     });
   }
@@ -231,7 +241,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not delete the travel date. Please try again.");
+        this.dispatchAlert("Could not delete the travel date. Please try again.");
       }
     });
   }
@@ -249,7 +259,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not delete the trip. Please try again.");
+        this.dispatchAlert("Could not delete the trip. Please try again.");
       }
     });
   }
@@ -267,7 +277,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not save the edit. Please try again.");
+        this.dispatchAlert("Could not save the edit. Please try again.");
       }
     });
   }
@@ -285,7 +295,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Could not save the edit. Please try again.");
+        this.dispatchAlert("Could not save the edit. Please try again.");
       }
     });
   }
@@ -295,7 +305,7 @@ class TheServer {
       method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({travel_date: data}),
+      data: JSON.stringify({ travel_date: data }),
       success: (resp) => {
         store.dispatch({
           type: 'ADD_TRAVEL_DATE',
@@ -303,7 +313,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        alert("Failed to create the travel date. Please try again.");
+        this.dispatchAlert("Failed to create the travel date. Please try again.");
       },
     });
   }
