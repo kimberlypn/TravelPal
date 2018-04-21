@@ -1,102 +1,82 @@
 defmodule TravelpalWeb.FlightController do
   use TravelpalWeb, :controller
 
-  alias Travelpal.Flights
-  alias Travelpal.Flights.Flight
+  alias Travelpal.ExternalAPI
+  alias Travelpal.ExternalAPI.Flight
 
   action_fallback(TravelpalWeb.FallbackController)
 
   def index(conn, _params) do
-    flights = Flights.list_flights()
+    flights = Flight.list_flights()
     render(conn, "index.json", flights: flights)
   end
 
-  def create(conn, %{"flight" => flight_params}) do
-    with {:ok, %Flight{} = flight} <- Flights.create_flight(flight_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", flight_path(conn, :show, flight))
-      |> render("show.json", flight: flight)
+  def search(conn, %{"origin" => origin, "dest" => dest,
+    "date_from" => date_from, "date_to" => date_to}) do
+    existing_data =
+      ExternalAPI.get_flights_by_params(origin, dest, date_from, date_to)
+    converted_origin = String.split(origin, "-") |> Enum.join(" ")
+    converted_dest = String.split(dest, "-") |> Enum.join(" ")
+    flights = if (!Enum.empty?(existing_data)),
+      do: existing_data,
+      else: request_flights(converted_origin, converted_dest, date_from, date_to)
+
+    if (Enum.empty?(existing_data)) do
+      Enum.each(flights, fn(x) -> ExternalAPI.create_flight(x) end)
     end
+
+    render(conn, "show.json", flight: flights)
   end
 
-  def show(conn, %{"id" => id}) do
-    flight = Flights.get_flight!(id)
-    render(conn, "show.json", flight: flight)
-  end
-
-  def update(conn, %{"id" => id, "flight" => flight_params}) do
-    flight = Flights.get_flight!(id)
-
-    with {:ok, %Flight{} = flight} <-
-      Flights.update_flight(flight, flight_params) do
-      render(conn, "show.json", flight: flight)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    flight = Flights.get_flight!(id)
-
-    with {:ok, %Flight{}} <- Flights.delete_flight(flight) do
-      send_resp(conn, :no_content, "")
-    end
-  end
-
-  def search(conn, %{
-        "origin" => origin,
-        "dest" => dest,
-        "date_from" => date_from,
-        "return_from" => return_from
-      }) do
-    flight = request_flights_to_from(origin, dest, date_from, return_from)
-
-    render(conn, "show.json", flight: flight)
-  end
-
-  def test() do
-    flights =
-      request_flights_to_from(
-        "boston",
-        "los-angeles",
-        "05/08/2018",
-        "05/12/2018"
-      )
-  end
-
-  defp request_flights_to_from(origin, dest, date_from, return_from) do
+  defp request_flights(origin, dest, date_from, date_to) do
     flight_url = "https://api.skypicker.com/flights"
     # gets top 5 flights
-    uri =
-      URI.encode(
-        flight_url <>
-          "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}" <>
-          "&returnFrom=#{return_from}&returnTo=#{return_from}&partner=picky&partner_market=us&curr=USD&limit=5"
-      )
+    uri = URI.encode(flight_url
+      <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
+      <> "&returnFrom=#{date_to}&returnTo=#{date_to}&partner=picky&partner_market=us&curr=USD&limit=5")
 
     # Comment out HTTP request for dev purposes and use dummy data instead
-    # res = HTTPoison.get!(uri)
-    # data = Poison.decode!(res.body)
-
-    # Use dummy data for dev purposes
-    # flight = data["data"]
-    # @TODO decide if more details are needed
-    flights =
-      dummy_data()
-      |> Enum.map(fn x -> format_flight(x) end)
+    res = HTTPoison.get!(uri)
+    data = Poison.decode!(res.body)
+    IO.inspect(data)
+    # dummy_data()
+    data["data"]
+    |> Enum.map(fn(x) -> format_flight(x, date_from, date_to) end)
   end
 
-  defp format_flight(flight) do
+  defp format_flight(flight, date_from, date_to) do
+    # parses the dates and converts them to Elixir Date objects
+    split_date_from = String.split(date_from, "/")
+    {:ok, formatted_date_from} = Date.new(
+      Enum.at(split_date_from, 2) |> String.to_integer(),
+      Enum.at(split_date_from, 0) |> String.to_integer(),
+      Enum.at(split_date_from, 1) |> String.to_integer()
+    )
+    split_date_to = String.split(date_to, "/")
+    {:ok, formatted_date_to} = Date.new(
+      Enum.at(split_date_to, 2) |> String.to_integer(),
+      Enum.at(split_date_to, 0) |> String.to_integer(),
+      Enum.at(split_date_to, 1) |> String.to_integer()
+    )
+
     %{
-      origin: flight["mapIdfrom"],
-      dest: flight["mapIdto"],
-      airlines: flight["airlines"],
+      origin: flight["mapIdfrom"]
+        |> String.split("-")
+        |> Enum.map(fn(x)->String.capitalize(x) end)
+        |> Enum.join(" "),
+      dest: flight["mapIdto"]
+        |> String.split("-")
+        |> Enum.map(fn(x)->String.capitalize(x) end)
+        |> Enum.join(" "),
+      date_from: formatted_date_from,
+      date_to: formatted_date_to,
       price: flight["price"],
-      duration: flight["duration"],
-      link: flight["deep_link"]
+      airlines: flight["airlines"],
+      duration: flight["duration"]
     }
   end
 
-  def dummy_data do
+  defp dummy_data() do
     [
       %{
         "airlines" => ["AS", "UA"],
@@ -105,7 +85,7 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19200, "total" => 42000},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 320
+        "price" => 320.0
       },
       %{
         "airlines" => ["UA"],
@@ -114,7 +94,7 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19380, "total" => 42180},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 325
+        "price" => 325.0
       },
       %{
         "airlines" => ["B6", "AS"],
@@ -123,7 +103,7 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22920, "return" => 19200, "total" => 42120},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 332
+        "price" => 332.0
       },
       %{
         "airlines" => ["B6", "UA"],
@@ -132,7 +112,7 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22920, "return" => 19380, "total" => 42300},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 337
+        "price" => 337.0
       },
       %{
         "airlines" => ["UA"],
@@ -141,7 +121,7 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19380, "total" => 42180},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 339
+        "price" => 339.0
       }
     ]
   end

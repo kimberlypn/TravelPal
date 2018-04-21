@@ -28,7 +28,7 @@ defmodule Seeds do
   alias Travelpal.Friends.Friend
   alias Travelpal.TravelDates.TravelDate
   alias Travelpal.BookedTrips.BookedTrip
-  alias Travelpal.Flights.Flight
+  alias Travelpal.ExternalAPI.Flight
   alias Travelpal.Accommodation.Hotel
 
   def insert_users do
@@ -154,11 +154,51 @@ defmodule Seeds do
 
   def insert_flights do
     Repo.delete_all(Flight)
-    Repo.insert!(%Flight{airline: "American Airlines"})
-    Repo.insert!(%Flight{airline: "Delta"})
-    Repo.insert!(%Flight{airline: "Alaska Airlines"})
-    Repo.insert!(%Flight{airline: "Southwest"})
-    Repo.insert!(%Flight{airline: "JetBlue"})
+    Repo.insert!(%Flight{
+      origin: "Boston",
+      dest: "Los Angeles",
+      date_from: ~D[2018-05-08],
+      date_to: ~D[2018-05-12],
+      price: 400.0,
+      airlines: ["American Airlines"],
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+    })
+    Repo.insert!(%Flight{
+      origin: "Chicago",
+      dest: "Tokyo",
+      date_from: ~D[2018-06-10],
+      date_to: ~D[2018-07-16],
+      price: 900.0,
+      airlines: ["Delta", "American Airlines"],
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+    })
+    Repo.insert!(%Flight{
+      origin: "Miami",
+      dest: "Alaska",
+      date_from: ~D[2018-05-08],
+      date_to: ~D[2018-05-12],
+      price: 600.0,
+      airlines: ["Alaska Airlines", "American Airlines"],
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+    })
+    Repo.insert!(%Flight{
+      origin: "London",
+      dest: "Los Angeles",
+      date_from: ~D[2018-05-08],
+      date_to: ~D[2018-05-12],
+      price: 1000.0,
+      airlines: ["American Airlines"],
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+    })
+    Repo.insert!(%Flight{
+      origin: "Atlanta",
+      dest: "Chicago",
+      date_from: ~D[2018-05-08],
+      date_to: ~D[2018-05-12],
+      price: 250.0,
+      airlines: ["JetBlue", "Delta"],
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+    })
   end
 
   def insert_hotels do

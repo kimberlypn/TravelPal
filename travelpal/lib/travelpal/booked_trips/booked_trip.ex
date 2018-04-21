@@ -3,7 +3,7 @@ defmodule Travelpal.BookedTrips.BookedTrip do
   import Ecto.Changeset
 
   alias Travelpal.Users.User
-  alias Travelpal.Flights.Flight
+  alias Travelpal.ExternalAPI.Flight
   alias Travelpal.Accommodation.Hotel
 
   schema "bookedtrips" do

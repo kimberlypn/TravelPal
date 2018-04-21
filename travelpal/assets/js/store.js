@@ -165,7 +165,8 @@ let empty_booked = {
   cost: 0,
   rooms: 0,
   summary: "",
-  flight_id: "",
+  // TODO: Remove this default value
+  flight_id: 1,
   hotel_id: ""
 }
 

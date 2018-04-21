@@ -32,7 +32,6 @@ defmodule TravelpalWeb.Router do
     resources "/users", UserController, except: [:new, :edit]
     resources "/traveldates", TravelDateController, except: [:new, :edit]
     resources "/friends", FriendController, except: [:new, :edit]
-    resources "/flights", FlightController, except: [:new, :edit]
     resources "/hotels", HotelController, except: [:new, :edit]
     resources "/bookedtrips", BookedTripController, except: [:new, :edit]
 
@@ -40,7 +39,7 @@ defmodule TravelpalWeb.Router do
 
     resources "/hotels", HotelController, except: [:new, :edit]
     post "/hotels/fetch", HotelController, :get_hotel_information
-    get "/weather/:city", WeatherController, :get_weather_by_city
-    get "/travel/flights", FlightController, :get_flights_to_from
+    get "/weather/:city", WeatherController, :search
+    get "/travel/flights", FlightController, :search
   end
 end

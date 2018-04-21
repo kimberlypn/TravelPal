@@ -7,11 +7,12 @@ import BookedCard from './BookedCard';
 import BookedForm from './BookedForm.jsx';
 
 // Renders the user's booked trips
-export default function BookedTrips({bookedTrips, form, flights, hotels}) {
+export default function BookedTrips({bookedTrips, form, hotels}) {
   let today = new Date();
   let upcoming = [];
   let future = [];
 
+  // TODO: Re-add flights to BookedCard component
   _.map(bookedTrips, function(tt) {
     // Convert the start and end date strings to Date objects
     let startDate = new Date(tt.start_date);
@@ -20,12 +21,12 @@ export default function BookedTrips({bookedTrips, form, flights, hotels}) {
     if ((today.getMonth() == startDate.getMonth()) &&
     (today.getFullYear() == startDate.getFullYear())) {
       upcoming.push(<BookedCard key={tt.id} form={form} trip={tt}
-        flights={flights} hotels={hotels} />);
+        hotels={hotels} />);
     }
     // Future trips
     else {
       future.push(<BookedCard key={tt.id} form={form} trip={tt}
-        flights={flights} hotels={hotels} />);
+        hotels={hotels} />);
     }
   });
 
@@ -51,6 +52,7 @@ export default function BookedTrips({bookedTrips, form, flights, hotels}) {
 BookedTrips.propTypes = {
   bookedTrips: PropTypes.array.isRequired,
   form: PropTypes.object.isRequired,
-  flights: PropTypes.array.isRequired,
+  // TODO: Fix this to work with new flights schema
+  // flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired
 };
