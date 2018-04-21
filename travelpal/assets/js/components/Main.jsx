@@ -13,6 +13,7 @@ import ProfileView from './ProfileView';
 import AlertMessage from './AlertMessage';
 
 // Renders the home page after logging in
+// TODO: Re-add flights after fixing API call to flights schema
 export default function Main({ form, booked, travel, friends, travelDates,
   bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;

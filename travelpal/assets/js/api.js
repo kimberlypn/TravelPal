@@ -82,16 +82,10 @@ class TheServer {
 
   // TODO: Change this to work with new flights schema
   request_flights() {
-    return $.ajax("/api/v1/travel/flights", {
+    return $.ajax("/api/v1/travel/flights/all", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: {
-        origin: "Boston",
-        dest: "Los-Angeles",
-        date_from: "05/08/2018",
-        date_to: "05/12/2018",
-      },
       success: (resp) => {
         store.dispatch({
           type: 'FLIGHTS_LIST',

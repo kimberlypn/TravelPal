@@ -31,7 +31,6 @@ $(function () {
           // TODO: Fix API call to work with new Flights schema
           () => api.request_flights().then(
               travelpal_init(store)
-
          )
         )
       )

@@ -6,11 +6,23 @@ import FlightCard from './FlightCard';
 
 // Renders the home page
 function Home(props) {
-  console.log("---------")
-  console.log(props.flights)
-  console.log("---------")
 
-  let suggestedFlights = _.map(props.flights, (uu, key) =>
+  function filterFlights(flights) {
+    let itineraries = new Set();
+    let filteredFlights = [];
+    for (let i in flights) {
+      let flight = flights[i];
+      let itinerary = flight.origin + flight.dest;
+      console.log(!itineraries.has(itinerary))
+      if (!itineraries.has(itinerary)) {
+        itineraries.add(itinerary)
+        filteredFlights.push(flight)
+      }
+    }
+    return filteredFlights;
+  }
+
+  let suggestedFlights = _.map(filterFlights(props.flights), (uu, key) =>
     <FlightCard key={key} origin={uu.origin} dest={uu.dest} dateFrom={uu.date_from}
       dateTo={uu.date_to} price={uu.price} airlines={uu.airlines} duration={uu.duration} />);
 
