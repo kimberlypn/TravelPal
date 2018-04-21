@@ -212,12 +212,17 @@ function travel(state = empty_travel, action) {
   }
 }
 
-function alertMessage(state = null, action) {
+const empty_alertMessage = {
+  text: null,
+  color: null
+}
+
+function alertMessage(state = empty_alertMessage, action) {
   switch (action.type) {
     case "ALERT":
-      return action.text
+      return action.data
     case "CLEAR_ALERT":
-      return null;
+      return empty_alertMessage;
     default:
       return state;
   };

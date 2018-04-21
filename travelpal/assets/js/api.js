@@ -2,10 +2,13 @@
 import store from './store';
 
 class TheServer {
-  dispatchAlert(text) {
+  dispatchAlert(text, color = "danger") {
     store.dispatch({
       type: 'ALERT',
-      text
+      data: {
+        color,
+        text
+      }
     })
   }
 
@@ -138,7 +141,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ user: data }),
       success: (resp) => {
-        this.dispatchAlert("Successfully registered! You can now log in.");
+        this.dispatchAlert("Successfully registered! You can now log in.", "success");
         store.dispatch({
           type: 'ADD_USER',
           user: resp.data,

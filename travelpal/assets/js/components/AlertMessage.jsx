@@ -8,11 +8,11 @@ function AlertMessage({ alertMessage, dispatch }) {
         });
     }
     return (
-        alertMessage
+        alertMessage.text
             ? <div className="row">
-                <div className="alert alert-danger w-100" role="alert">
+                <div className={`alert alert-${alertMessage.color} w-100`} role="alert">
                     <span>
-                        {alertMessage}
+                        {alertMessage.text}
                     </span>
                     <button onClick={clearAlert} type="button" className="close" >
                         <span aria-hidden="true">&times;</span>
