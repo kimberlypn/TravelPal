@@ -92,7 +92,7 @@ defmodule Travelpal.ExternalAPI do
       iex> list_flights()
       [%Flight{}, ...]
   """
-  def list_flights do
+  def list_flights() do
     Repo.all(Flight)
   end
 
