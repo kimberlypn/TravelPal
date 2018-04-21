@@ -6,10 +6,12 @@ import api from '../api';
 import PastCard from './PastCard';
 
 // Renders the user's past trips
-export default function PastTrips({pastTrips, form, flights, hotels,
+// TODO: Re-add flights
+export default function PastTrips({pastTrips, form, hotels,
   tripSummaries}) {
+  // TODO: Re-add flights to Past
   let trips = _.map(pastTrips, function(tt) {
-    return <PastCard key={tt.id} form={form} trip={tt} flights={flights}
+    return <PastCard key={tt.id} form={form} trip={tt}
       hotels={hotels} />;
   });
 
@@ -29,6 +31,7 @@ export default function PastTrips({pastTrips, form, flights, hotels,
 PastTrips.propTypes = {
   pastTrips: PropTypes.array.isRequired,
   form: PropTypes.object.isRequired,
-  flights: PropTypes.array.isRequired,
+  // TODO: Re-add once flights schema is fixed
+  // flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired
 };

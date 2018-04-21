@@ -21,7 +21,8 @@ function PastForm(props) {
     data["passengers"] = props.trip.passengers;
     data["cost"] = props.trip.cost;
     data["rooms"] = props.trip.room;
-    data["flight_id"] = props.trip.flight.id;
+    // TODO: Re-add
+    // data["flight_id"] = props.trip.flight.id;
     if (props.trip.hotel) {
       data["hotel_id"] = props.trip.hotel.id
     }
