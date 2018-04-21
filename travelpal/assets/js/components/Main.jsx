@@ -13,9 +13,8 @@ import ProfileView from './ProfileView';
 import AlertMessage from './AlertMessage';
 
 // Renders the home page after logging in
-// TODO: Re-add flights after fixing API call to flights schema
 export default function Main({ form, booked, travel, friends, travelDates,
-  bookedTrips, hotels, token, actions, apiCalls, users, search }) {
+  bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -33,7 +32,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
       <Nav name={form.name} />
       <AlertMessage />
       <Route path="/" exact={true} render={() =>
-        <Home />
+        <Home flights={flights}/>
       } />
       <Route path="/search" exact={true} render={() =>
         <Search />
@@ -80,8 +79,7 @@ Main.propTypes = {
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
-  // TODO: Fix this to work with new flights schema
-  //flights: PropTypes.array.isRequired,
+  flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired
 };
