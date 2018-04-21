@@ -41,5 +41,6 @@ defmodule TravelpalWeb.Router do
     post "/hotels/fetch", HotelController, :get_hotel_information
     get "/weather/:city", WeatherController, :search
     get "/travel/flights", FlightController, :search
+    get "/travel/flights/all", FlightController, :retrieve_all_flights
   end
 end

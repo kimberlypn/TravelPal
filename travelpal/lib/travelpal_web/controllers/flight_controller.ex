@@ -11,6 +11,16 @@ defmodule TravelpalWeb.FlightController do
     render(conn, "index.json", flights: flights)
   end
 
+  def retrieve_all_flights(conn, _params) do
+    # returns all of the flights in the database
+    flights = ExternalAPI.list_flights()
+    |> Enum.map(fn(x) -> Map.take(x,
+      [:origin, :dest, :date_from, :date_to, :price, :airlines, :duration]) end)
+
+    render(conn, "show.json", flight: flights)
+  end
+
+  # Returns all flights that match the given arguments
   def search(conn, %{"origin" => origin, "dest" => dest,
     "date_from" => date_from, "date_to" => date_to}) do
     existing_data =
