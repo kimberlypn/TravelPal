@@ -212,6 +212,22 @@ function travel(state = empty_travel, action) {
   }
 }
 
+const empty_alertMessage = {
+  text: null,
+  color: null
+}
+
+function alertMessage(state = empty_alertMessage, action) {
+  switch (action.type) {
+    case "ALERT":
+      return action.data
+    case "CLEAR_ALERT":
+      return empty_alertMessage;
+    default:
+      return state;
+  };
+}
+
 function isOpen(state = false, action) {
   switch (action.type) {
     case 'NAV_TOGGLE':
@@ -240,6 +256,7 @@ function root_reducer(state0, action) {
     booked,
     search,
     travel,
+    alertMessage,
     isOpen
   });
   let state1 = reducer(state0, action);
