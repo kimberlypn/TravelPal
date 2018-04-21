@@ -11,11 +11,11 @@ export default function HotelCard({name, district, price, link, rating, image}) 
       <div className="card-body list-group-item">
         <h4 className="card-title"><strong>{name}</strong></h4>
         <h6 className="card-text">{district}</h6>
-        <h6 className="card-text"> ~${price}</h6>
+        <h6 className="card-text"> ~${price}/day</h6>
         <h6 className="card-text">Rating: {rating}</h6>
       </div>
       <div className="card-footer list-group-item">
-        <a className="btn btn-info" href={link}>Book Here</a>
+        <a className="btn btn-info" href={link} target="_blank">Book Here</a>
       </div>
     </div>
   );
