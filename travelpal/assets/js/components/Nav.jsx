@@ -20,10 +20,15 @@ function Nav(props) {
   }
 
   function toggle() {
-    props.dispatch({
-      type: 'NAV_TOGGLE',
-      data: !props.isOpen
-    });
+    // Code found here for window size check
+    // https://stackoverflow.com/questions/14504079/jquery-trigger-function-above-a-certain-window-width
+    var windowWidth = $(window).width();
+    if (windowWidth < 768) {
+      props.dispatch({
+        type: 'NAV_TOGGLE',
+        data: !props.isOpen
+      });
+    }
   }
 
   return (
