@@ -209,7 +209,16 @@ function travel(state = empty_travel, action) {
       return empty_travel;
     default:
       return state;
-    }
+  }
+}
+
+function isOpen(state = false, action) {
+  switch (action.type) {
+    case 'NAV_TOGGLE':
+      return action.data
+    default:
+      return state;
+  }
 }
 
 function root_reducer(state0, action) {
@@ -218,8 +227,20 @@ function root_reducer(state0, action) {
   // {tasks: tasks, users: users, form: form}
   console.log("state0", state0)
   let reducer = combineReducers({
-    users, friends, travelDates, bookedTrips, flights, hotels, form, token,
-    login, register, booked, search, travel
+    users,
+    friends,
+    travelDates,
+    bookedTrips,
+    flights,
+    hotels,
+    form,
+    token,
+    login,
+    register,
+    booked,
+    search,
+    travel,
+    isOpen
   });
   let state1 = reducer(state0, action);
   console.log("state1", state1)

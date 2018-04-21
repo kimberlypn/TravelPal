@@ -1,7 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavItem
+} from 'reactstrap';
+import { Nav as ReactNav } from "reactstrap";
 import api from '../api';
 
 // Renders the navigation bar
@@ -13,6 +19,13 @@ function Nav(props) {
     });
   }
 
+  function toggle() {
+    props.dispatch({
+      type: 'NAV_TOGGLE',
+      data: !props.isOpen
+    });
+  }
+
   return (
     <Fragment>
       <div className="header">
@@ -20,48 +33,56 @@ function Nav(props) {
         <img src="/images/airplane-icon.png" alt="logo" />
         <h2>TRAVELPAL</h2>
       </div>
-      {/* Navbar template from: https://getbootstrap.com/docs/4.0/components/navbar/ */}
-      <nav className="navbar navbar-expand-lg">
-        <button className="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <NavLink to="/" exact={true} activeClassName="active"
-              className="nav-link">
-              Home
-            </NavLink>
-            <NavLink to="/search" exact={true} activeClassName="active"
-              className="nav-link">
-              Search
-            </NavLink>
-            <NavLink to="/travel/dates" href="#" className="nav-link">
-              Travel Dates
-            </NavLink>
-            <NavLink to="/travel/booked" href="#" className="nav-link">
-              Booked Trips
-            </NavLink>
-            <NavLink to="/travel/past" href="#" className="nav-link">
-              Past Trips
-            </NavLink>
-            <NavLink to="/profile" href="#" className="nav-link">
-              Profile
-            </NavLink>
-          </div>
-        </div>
+      <Navbar color="dark" dark expand="md">
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={props.isOpen} navbar>
+          <ReactNav navbar>
+            <NavItem>
+              <NavLink to="/" exact={true} activeClassName="active"
+                className="nav-link" onClick={toggle}>
+                Home
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/search" exact={true} activeClassName="active"
+                className="nav-link" onClick={toggle}>
+                Search
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/travel/dates" href="#" className="nav-link" onClick={toggle}>
+                Travel Dates
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/travel/booked" href="#" className="nav-link" onClick={toggle}>
+                Booked Trips
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/travel/past" href="#" className="nav-link" onClick={toggle}>
+                Past Trips
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/profile" href="#" className="nav-link" onClick={toggle}>
+                Profile
+              </NavLink>
+            </NavItem>
+          </ReactNav>
+        </Collapse>
         <span className="navbar-text">
           <a href="javascript:void(0)" onClick={destroy_token}> Log Out</a>
         </span>
-      </nav>
+      </Navbar>
     </Fragment>
   );
 };
 
 function state2props(state) {
   return {
-    form: state.login
+    form: state.login,
+    isOpen: state.isOpen
   };
 };
 
