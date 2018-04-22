@@ -88,7 +88,7 @@ class TheServer {
       success: (resp) => {
         store.dispatch({
           type: 'FLIGHTS_LIST',
-          flights: resp.data["flights"],
+          flights: resp.data,
         });
       },
       error: (resp) => {
