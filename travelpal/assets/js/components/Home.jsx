@@ -7,7 +7,7 @@ import BookedTripInfo from './BookedTripInfo'
 import HomePageTripCard from './HomePageTripCard'
 
 // Renders the home page
-function Home(props) {
+export default function Home(props) {
   function filterFlights(flights) {
     let itineraries = new Set();
     let filteredFlights = [];
@@ -23,19 +23,23 @@ function Home(props) {
   }
 
   let suggestedFlights = _.map(filterFlights(props.flights), (uu, key) =>
-    <FlightCard key={key} origin={uu.origin} dest={uu.dest} dateFrom={uu.date_from}
-      dateTo={uu.date_to} price={uu.price} airlines={uu.airlines} duration={uu.duration} />);
-  let bookedTrips = _.map(props.bookedTrips, (bb, key) => <HomePageTripCard key={key} traveler={bb.user.name}
-      destination={bb.destination} startDate={bb.start_date} endDate={bb.end_date} summary={bb.summary} hotel={bb.hotel}/>).slice(1).slice(-10);
+    <FlightCard key={key} origin={uu.origin} dest={uu.dest}
+      dateFrom={uu.date_from} dateTo={uu.date_to} price={uu.price}
+      airlines={uu.airlines} duration={uu.duration} />);
+  let bookedTrips = _.map(props.bookedTrips, (bb, key) =>
+    <HomePageTripCard key={key} traveler={bb.user.name}
+      destination={bb.destination} startDate={bb.start_date}
+      endDate={bb.end_date} summary={bb.summary} hotel={bb.hotel}/>).slice(1).slice(-10);
 
   return (
     <div>
       <div className="page-content container">
-        <h3 className="border-bottom my-3">Trips</h3>
+        <h3 className="border-bottom my-3">Friends' Trips</h3>
         {bookedTrips}
       </div>
+      <br />
       <div className="page-content container">
-        <h3 className="border-bottom my-3">Popular flights</h3>
+        <h3 className="border-bottom my-3">Popular Flights</h3>
         <div className="row">
           {suggestedFlights}
         </div>
@@ -43,11 +47,3 @@ function Home(props) {
     </div>
   );
 };
-
-function state2props(state) {
-  return {
-
-  };
-};
-
-export default connect(state2props)(Home);
