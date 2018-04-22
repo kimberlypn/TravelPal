@@ -28,11 +28,9 @@ $(function () {
     () => api.request_friends().then(
       () => api.request_travel_dates().then(
         () => api.request_booked_trips().then(
-          // TODO: Fix API call to work with new Flights schema
-          // () => api.request_flights().then(
+          () => api.request_flights().then(
               travelpal_init(store)
-            )
-        //  )
+         )
         )
       )
     )

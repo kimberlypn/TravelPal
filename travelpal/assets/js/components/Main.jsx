@@ -15,7 +15,7 @@ import AlertMessage from './AlertMessage';
 // Renders the home page after logging in
 // TODO: Re-add flights after fixing API call to flights schema
 export default function Main({ form, booked, travel, friends, travelDates,
-  bookedTrips, hotels, token, actions, apiCalls, users, search }) {
+  bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -26,6 +26,11 @@ export default function Main({ form, booked, travel, friends, travelDates,
   // Grab the booked trips that have already passed
   let pastTrips = bookedTrips.filter(pp => (pp.user.id == userId) &&
     new Date(pp.end_date) < today);
+  // Grab only the friends for the current users
+  let userFriends = friends.filter(ff => (ff.status == "Accepted" && (ff.requestor.id == userId || ff.acceptor.id == userId)));
+  let friendIds = new Set(userFriends.map(ff => ff.requestor.id == userId ? ff.acceptor.id : ff.requestor.id));
+  let userAndFriendsTrips = bookedTrips.filter(bb => friendIds.has(bb.user.id));
+
 
   // TODO: Re-add flights to BookedTrips and PastTrips components
   return (
@@ -33,7 +38,7 @@ export default function Main({ form, booked, travel, friends, travelDates,
       <Nav name={form.name} />
       <AlertMessage />
       <Route path="/" exact={true} render={() =>
-        <Home />
+        <Home flights={flights} bookedTrips={userAndFriendsTrips} friends={userFriends}/>
       } />
       <Route path="/search" exact={true} render={() =>
         <Search />
@@ -80,8 +85,7 @@ Main.propTypes = {
   friends: PropTypes.array.isRequired,
   travelDates: PropTypes.array.isRequired,
   bookedTrips: PropTypes.array.isRequired,
-  // TODO: Fix this to work with new flights schema
-  //flights: PropTypes.array.isRequired,
+  flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
   token: PropTypes.object.isRequired
 };

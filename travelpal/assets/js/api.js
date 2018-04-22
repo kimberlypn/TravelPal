@@ -82,14 +82,14 @@ class TheServer {
 
   // TODO: Change this to work with new flights schema
   request_flights() {
-    return $.ajax("/api/v1/flights", {
+    return $.ajax("/api/v1/travel/flights/all", {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
         store.dispatch({
           type: 'FLIGHTS_LIST',
-          flights: resp.data,
+          flights: resp.data["flights"],
         });
       },
       error: (resp) => {
@@ -105,7 +105,6 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ info: data }),
       success: (resp) => {
-        console.log(resp.data);
         store.dispatch({
           type: 'HOTELS_LIST',
           hotels: resp.data,
