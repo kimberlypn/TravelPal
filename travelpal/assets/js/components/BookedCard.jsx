@@ -42,11 +42,7 @@ function BookedCard(props) {
     let formLeft = document.forms["booked-left-form"];
     let formRight = document.forms["booked-right-form"];
     let cost = formLeft["cost"].value;
-    let departureTime = formLeft["departure_time"].value;
-    let arrivalTime = formLeft["arrival_time"].value;
-    let startDate = new Date(formLeft["start_date"].value);
-    let endDate = new Date(formLeft["end_date"].value);
-    let passengers = formRight["passengers"].value;
+    let passengers = formLeft["passengers"].value;
     let hotel = formRight["hotel_id"].value;
     let rooms = formRight["rooms"].value;
     let successful = true;
@@ -54,14 +50,6 @@ function BookedCard(props) {
     if (!cost || cost < 0) {
       $(".cost-error").show();
       successful = false;
-    }
-    // Departure time only needs to be before arrival time if the start and end
-    // dates are the same
-    if (!departureTime || !arrivalTime ||
-      (startDate.getTime() == endDate.getTime() && departureTime > arrivalTime)) {
-        $(".departure-error").show();
-        $(".arrival-error").show();
-        successful = false;
     }
     // Check if the number of passengers is at least 1
     if (!passengers || passengers < 1) {
@@ -81,9 +69,17 @@ function BookedCard(props) {
     }
   }
 
-  function viewItinerary() {
-    $("#trip-info-" + props.trip.id).toggle();
-    $("#trip-itinerary-" + props.trip.id).toggle();
+  // Toggles the itinerary
+  function viewItinerary(ev) {
+    $('#trip-info-' + props.trip.id).toggle();
+    $('#trip-itinerary-' + props.trip.id).toggle();
+    let btn = $(ev.target);
+    if (btn.text() == "View Itinerary") {
+      $(btn).text("View Overview");
+    }
+    else {
+      $(btn).text("View Itinerary");
+    }
   }
 
   return (
@@ -92,9 +88,7 @@ function BookedCard(props) {
         <TripCardHeader destination={props.trip.destination}
           startDate={props.trip.start_date} endDate={props.trip.end_date} />
         <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
-          <BookedForm form={props.form} id={props.trip.id}
-            destination={props.trip.destination}
-            startDate={props.trip.start_date} endDate={props.trip.end_date}
+          <BookedForm form={props.form} id={props.trip.id} trip={props.trip}
             hotels={props.hotels} />
           <Row>
             <Col md="12" className="trip-btn">
@@ -108,7 +102,9 @@ function BookedCard(props) {
           <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12" className="trip-btn">
-              <Button type="button" onClick={viewItinerary}>View Itinerary</Button>
+              <Button type="button" onClick={viewItinerary}>
+                View Itinerary
+              </Button>
               <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={unbook}>Unbook</Button>
             </Col>
