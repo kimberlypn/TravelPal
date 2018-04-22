@@ -31,7 +31,7 @@ $(function () {
           () => api.request_flights().then(
               travelpal_init(store)
             //)
-        //  )
+         )
         )
       )
     )

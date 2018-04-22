@@ -16,7 +16,8 @@ defmodule TravelpalWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Users.create_user(user_params) do
       # sends a welcome email when an account gets created
-      Email.welcome_email(user_params["email"], user_params["name"]) |> Mailer.deliver_now
+      Email.welcome_email(user_params["email"], user_params["name"])
+      |> Mailer.deliver_now()
 
       conn
       |> put_status(:created)
@@ -32,6 +33,8 @@ defmodule TravelpalWeb.UserController do
 
   def update(conn, %{"user" => user_params}) do
     user = Users.get_user!(Map.get(user_params, "id"))
+    Email.updated_account_email(user_params["email"], user_params["username"])
+    |> Mailer.deliver_now()
 
     with {:ok, %User{} = user} <- Users.update_user(user, user_params) do
       conn
