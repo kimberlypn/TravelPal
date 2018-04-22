@@ -71,6 +71,7 @@ function PastCard(props) {
         </CardBody>
         <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
           <BookedTripInfo trip={props.trip} />
+          <br />
           <Row>
             <Col md="12">
               <p><b>Trip Summary: </b></p>

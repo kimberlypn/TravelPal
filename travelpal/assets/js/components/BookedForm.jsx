@@ -7,12 +7,6 @@ import api from '../api';
 
 // Renders the form for a booked trip
 function BookedForm(props) {
-  // Grab all of the airlines to populate the dropdown
-  let airlines = [];
-  airlines.push(<option disabled value="" key="-1">--</option>);
-  _.map(props.flights, (ff) =>
-  airlines.push(<option key={ff.id} value={ff.id}>{ff.airline}</option>));
-
   // Grab all of the hotels to populate the dropdown
   let hotels = [];
   hotels.push(<option value="" key="-1">--</option>);
@@ -26,9 +20,11 @@ function BookedForm(props) {
     data[tgt.attr('name')] = tgt.val();
     // Populate the fields that should not change
     data["id"] = props.id;
-    data["destination"] = props.destination;
-    data["start_date"] = props.startDate;
-    data["end_date"] = props.endDate;
+    data["destination"] = props.trip.destination;
+    data["start_date"] = props.trip.start_date;
+    data["end_date"] = props.trip.end_date;
+    data["departure_time"] = props.trip.departure_time;
+    data["arrival_time"] = props.trip.arrival_time;
     props.dispatch({
       type: 'UPDATE_BOOKED_FORM',
       data: data,
@@ -49,41 +45,6 @@ function BookedForm(props) {
               </p>
             </FormGroup>
             <FormGroup>
-              <Label for="departure_time">
-                <b>Departure Time (HH:MM AM/PM)*</b>
-              </Label>
-              <Input type="time" className="form-control" name="departure_time"
-                required="" value={props.form.departure_time} onChange={update} />
-              <p className="form-error departure-error">
-                Departure time must be before arrival time.
-              </p>
-            </FormGroup>
-            <FormGroup>
-              <Label for="arrival_time"><b>Arrival Time (HH:MM AM/PM)*</b></Label>
-              <Input type="time" className="form-control" name="arrival_time"
-                required="" value={props.form.arrival_time} onChange={update} />
-              <p className="form-error arrival-error">
-                Arrival time must be after departure time.
-              </p>
-            </FormGroup>
-            {/* Need start/end dates to validate arrival/departure times */}
-            <Input type="hidden" name="start_date" value={props.startDate}></Input>
-            <Input type="hidden" name="end_date" value={props.endDate}></Input>
-          </Form>
-        </Col>
-        <Col md="6">
-          <Form name="booked-right-form">
-            <FormGroup>
-              <Label for="flight_id"><b>Airline*</b></Label>
-              <Input type="select" name="flight_id" value={props.form.flight_id}
-                onChange={update}>
-                {airlines}
-              </Input>
-              <p className="form-error flight-error">
-                You must select a flight.
-              </p>
-            </FormGroup>
-            <FormGroup>
               <Label for="passengers">
                 <b>Number of Passengers (self included)*</b>
               </Label>
@@ -93,6 +54,12 @@ function BookedForm(props) {
                 Number of passengers must be at least 1.
               </p>
             </FormGroup>
+            <Input type="hidden" name="start_date" value={props.startDate}></Input>
+            <Input type="hidden" name="end_date" value={props.endDate}></Input>
+          </Form>
+        </Col>
+        <Col md="6">
+          <Form name="booked-right-form">
             <FormGroup>
               <Label for="hotel_id"><b>Hotel</b></Label>
               <Input type="select" name="hotel_id" value={props.form.hotel_id}
