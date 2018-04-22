@@ -20,7 +20,7 @@ defmodule Travelpal.Mixfile do
   def application do
     [
       mod: {Travelpal.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo],
     ]
   end
 
@@ -47,6 +47,7 @@ defmodule Travelpal.Mixfile do
       {:httpoison, "~> 1.1"},
       {:poison, "~> 3.1"},
       {:hackney, "~> 1.12"},
+      {:bamboo, github: "thoughtbot/bamboo"},
     ]
   end
 

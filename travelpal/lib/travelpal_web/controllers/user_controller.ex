@@ -3,6 +3,8 @@ defmodule TravelpalWeb.UserController do
 
   alias Travelpal.Users
   alias Travelpal.Users.User
+  alias Travelpal.Email
+  alias Travelpal.Mailer
 
   action_fallback TravelpalWeb.FallbackController
 
@@ -13,6 +15,9 @@ defmodule TravelpalWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Users.create_user(user_params) do
+      # sends a welcome email when an account gets created
+      Email.welcome_email(user_params["email"], user_params["name"]) |> Mailer.deliver_now
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", page_path(conn, :index))
