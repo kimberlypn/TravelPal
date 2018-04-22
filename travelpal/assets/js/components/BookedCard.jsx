@@ -6,6 +6,7 @@ import api from '../api';
 import TripCardHeader from './TripCardHeader';
 import BookedForm from './BookedForm';
 import BookedTripInfo from './BookedTripInfo';
+import Itinerary from './Itinerary';
 
 // Renders the details of an individual booked trip
 function BookedCard(props) {
@@ -45,8 +46,6 @@ function BookedCard(props) {
     let arrivalTime = formLeft["arrival_time"].value;
     let startDate = new Date(formLeft["start_date"].value);
     let endDate = new Date(formLeft["end_date"].value);
-    // TODO: Add this back in
-    // let flight = formRight["flight_id"].value;
     let passengers = formRight["passengers"].value;
     let hotel = formRight["hotel_id"].value;
     let rooms = formRight["rooms"].value;
@@ -64,11 +63,6 @@ function BookedCard(props) {
         $(".arrival-error").show();
         successful = false;
     }
-    /* TODO: Check if the user chose a flight
-    if (!flight) {
-      $(".flight-error").show();
-      successful = false;
-    } */
     // Check if the number of passengers is at least 1
     if (!passengers || passengers < 1) {
       $(".passengers-error").show();
@@ -87,7 +81,11 @@ function BookedCard(props) {
     }
   }
 
-  // TODO: Re-add flights to BookedForm component
+  function viewItinerary() {
+    $("#trip-info-" + props.trip.id).toggle();
+    $("#trip-itinerary-" + props.trip.id).toggle();
+  }
+
   return (
     <Col md="12">
       <Card>
@@ -106,9 +104,11 @@ function BookedCard(props) {
           </Row>
         </CardBody>
         <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          <Itinerary flight={props.trip.flight} id={props.trip.id} />
           <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12" className="trip-btn">
+              <Button type="button" onClick={viewItinerary}>View Itinerary</Button>
               <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={unbook}>Unbook</Button>
             </Col>
