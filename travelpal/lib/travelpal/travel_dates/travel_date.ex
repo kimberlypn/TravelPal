@@ -5,6 +5,7 @@ defmodule Travelpal.TravelDates.TravelDate do
   alias Travelpal.Users.User
 
   schema "traveldates" do
+    field :origin, :string
     field :destination, :string
     field :end_date, :date
     field :price_limit, :integer
@@ -19,9 +20,9 @@ defmodule Travelpal.TravelDates.TravelDate do
   @doc false
   def changeset(travel_date, attrs) do
     travel_date
-    |> cast(attrs, [:start_date, :end_date, :destination, :price_limit,
+    |> cast(attrs, [:start_date, :end_date, :origin, :destination, :price_limit,
       :passengers, :user_id])
-    |> validate_required([:start_date, :end_date, :destination, :price_limit,
-      :passengers, :user_id])
+    |> validate_required([:start_date, :end_date, :origin, :destination,
+      :price_limit, :passengers, :user_id])
   end
 end
