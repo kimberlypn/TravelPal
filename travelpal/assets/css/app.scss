@@ -271,3 +271,27 @@ input[type=number]::-webkit-outer-spin-button {
   display: none;
 }
 /************************** END OF TRAVEL DATES **************************/
+
+/******************************* HOMEPAGE ********************************/
+.flight::before {
+  content:'';
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 0px;
+	height: 100%;
+	background: rgba(255,255,255,0.3);
+	transition: all 1.5s ease;
+}
+
+.flight:hover::before {
+	width: 100%;
+}
+
+.flight-card {
+  background: #0492BA;
+}
+
+
+
+/************************** END OF HOMEPAGE *******************************/

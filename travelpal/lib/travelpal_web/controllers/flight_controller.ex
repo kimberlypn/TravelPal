@@ -11,8 +11,8 @@ defmodule TravelpalWeb.FlightController do
     render(conn, "index.json", flights: flights)
   end
 
+  # Returns all of the flights in the database
   def retrieve_all_flights(conn, _params) do
-    # returns all of the flights in the database
     flights = ExternalAPI.list_flights()
     |> Enum.map(fn(x) -> Map.take(x,
       [:origin, :dest, :date_from, :date_to, :price, :airlines, :duration]) end)
@@ -48,7 +48,7 @@ defmodule TravelpalWeb.FlightController do
     # Comment out HTTP request for dev purposes and use dummy data instead
     res = HTTPoison.get!(uri)
     data = Poison.decode!(res.body)
-    IO.inspect(data)
+
     # dummy_data()
     data["data"]
     |> Enum.map(fn(x) -> format_flight(x, date_from, date_to) end)

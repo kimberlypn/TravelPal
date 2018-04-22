@@ -88,7 +88,7 @@ class TheServer {
       success: (resp) => {
         store.dispatch({
           type: 'FLIGHTS_LIST',
-          flights: resp.data,
+          flights: resp.data["flights"],
         });
       },
       error: (resp) => {
@@ -104,7 +104,6 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ info: data }),
       success: (resp) => {
-        console.log(resp.data);
         store.dispatch({
           type: 'HOTELS_LIST',
           hotels: resp.data,
