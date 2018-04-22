@@ -27,11 +27,11 @@ function TravelForm(props) {
         <Col md="6">
           <Form name="travel-left-form">
             <FormGroup>
-              <Label for="destination"><b>Destination*</b></Label>
-              <Input type="text" className="form-control" name="destination"
-                required="" value={props.form.destination} onChange={update} />
-              <p className="form-error destination-error">
-                You must enter a destination.
+              <Label for="origin"><b>Origin*</b></Label>
+              <Input type="text" className="form-control" name="origin"
+                required="" value={props.form.origin} onChange={update} />
+              <p className="form-error origin-error">
+                You must enter an origin.
               </p>
             </FormGroup>
             <FormGroup>
@@ -44,11 +44,12 @@ function TravelForm(props) {
               </p>
             </FormGroup>
             <FormGroup>
-              <Label for="end_date"><b>To Date (MM/DD/YYYY)*</b></Label>
-              <Input type="date" className="form-control" name="end_date"
-                required="" value={props.form.end_date} onChange={update} />
-              <p className="form-error end-error">
-                End date must be after or equal to start date.
+              <Label for="price_limit"><b>Price Limit*</b></Label>
+              <Input type="number" className="form-control" name="price_limit"
+                min="0" step="100" required="" value={props.form.price_limit}
+                onChange={update} />
+              <p className="form-error price-error">
+                Price limit must be at least $0.
               </p>
             </FormGroup>
           </Form>
@@ -56,12 +57,19 @@ function TravelForm(props) {
         <Col md="6">
           <Form name="travel-right-form">
             <FormGroup>
-              <Label for="price_limit"><b>Price Limit*</b></Label>
-              <Input type="number" className="form-control" name="price_limit"
-                min="0" step="100" required="" value={props.form.price_limit}
-                onChange={update} />
-              <p className="form-error price-error">
-                Price limit must be at least $0.
+              <Label for="destination"><b>Destination*</b></Label>
+              <Input type="text" className="form-control" name="destination"
+                required="" value={props.form.destination} onChange={update} />
+              <p className="form-error destination-error">
+                You must enter a destination.
+              </p>
+            </FormGroup>
+            <FormGroup>
+              <Label for="end_date"><b>To Date (MM/DD/YYYY)*</b></Label>
+              <Input type="date" className="form-control" name="end_date"
+                required="" value={props.form.end_date} onChange={update} />
+              <p className="form-error end-error">
+                End date must be after or equal to start date.
               </p>
             </FormGroup>
             <FormGroup>

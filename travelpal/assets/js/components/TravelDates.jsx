@@ -44,10 +44,11 @@ function TravelDates(props) {
   function validate() {
     let formLeft = document.forms["travel-left-form"];
     let formRight = document.forms["travel-right-form"];
-    let destination = formLeft["destination"].value;
+    let destination = formRight["destination"].value;
     let start = formLeft["start_date"].value;
-    let end = formLeft["end_date"].value;
-    let price = formRight["price_limit"].value;
+    let end = formRight["end_date"].value;
+    let origin = formLeft["origin"].value;
+    let price = formLeft["price_limit"].value;
     let passengers = formRight["passengers"].value;
     let successful = true;
     let today = new Date();
@@ -56,8 +57,13 @@ function TravelDates(props) {
 
     // Check if the user entered a destination
     if (!destination) {
-      let dest = $("#destination-error");
       $(".destination-error").show();
+      successful = false;
+    }
+
+    // Check if the user entered an origin
+    if (!origin) {
+      $(".origin-error").show();
       successful = false;
     }
 

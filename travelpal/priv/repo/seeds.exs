@@ -82,6 +82,7 @@ defmodule Seeds do
     Repo.delete_all(TravelDate)
     # Matt's trips
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
@@ -90,6 +91,7 @@ defmodule Seeds do
       user_id: 1
     })
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Casablanca",
       end_date: ~D[2018-12-30],
       price_limit: 3000,
@@ -99,6 +101,7 @@ defmodule Seeds do
 
     # Kimberly's trips
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Beijing",
       end_date: ~D[2019-03-30],
       price_limit: 3000,
@@ -107,6 +110,7 @@ defmodule Seeds do
       user_id: 2
     })
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Singapore",
       end_date: ~D[2018-12-20],
       price_limit: 3000,
@@ -117,6 +121,7 @@ defmodule Seeds do
 
     # Long's trips
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
@@ -125,6 +130,7 @@ defmodule Seeds do
       user_id: 3
     })
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Casablanca",
       end_date: ~D[2018-12-30],
       price_limit: 3000,
@@ -135,6 +141,7 @@ defmodule Seeds do
 
     # Will's trips
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Bangkok",
       end_date: ~D[2019-05-30],
       price_limit: 3000,
@@ -143,6 +150,7 @@ defmodule Seeds do
       user_id: 4
     })
     Repo.insert!(%TravelDate{
+      origin: "Boston",
       destination: "Casablanca",
       end_date: ~D[2018-12-30],
       price_limit: 3000,

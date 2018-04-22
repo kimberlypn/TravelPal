@@ -5,6 +5,7 @@ defmodule Travelpal.Repo.Migrations.CreateTraveldates do
     create table(:traveldates) do
       add :start_date, :date, null: false
       add :end_date, :date, null: false
+      add :origin, :string, null: false
       add :destination, :string, null: false
       add :price_limit, :integer, default: 0, null: false
       add :passengers, :integer, default: 1, null: false

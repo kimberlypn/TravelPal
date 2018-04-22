@@ -195,6 +195,7 @@ function search(state = "", action) {
 let empty_travel = {
   id: "",
   destination: "",
+  origin: "",
   start_date: "",
   end_date: "",
   price_limit: "",
