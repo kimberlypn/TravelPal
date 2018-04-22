@@ -17,6 +17,10 @@ config :travelpal, TravelpalWeb.Endpoint,
   pubsub: [name: Travelpal.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :travelpal, Travelpal.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: "INSERT API KEY"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
