@@ -9,3 +9,12 @@ This repository contains all of the required documents for the project.
 - Describe which external API(s) you will use, how, and why 
 - Describe what data you will store in your database 
 - Describe how you plan to build your UI 
+
+## [Project 2 - Status](proj2-status.txt) 
+- Name of team members 
+- URL of the Github repo 
+- Version number for the release 
+- URL that the project was deployed to 
+- App functionality 
+- App deployment 
+- Individual contributions 

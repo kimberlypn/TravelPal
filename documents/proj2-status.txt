@@ -38,6 +38,9 @@ Kimberly: overall UI design; "Travel Dates," "Booked Trips," and "Past Trips"
 pages; rendering of friends on the "Profile" page and (un)friending logic; 
 UI input validation for edit/new forms 
 
+Long: "Home" page; creation of Python script to scrape from Booking.com; logic 
+for displaying and booking hotels from the "Search" page
+
 Matt: log-in/registration functionality; sending requests to the flights API 
 using user input and efficiently saving results to save API calls; email 
 notifications for new users 
@@ -45,9 +48,6 @@ notifications for new users
 Will: collapsible navigation bar for screen-size compatibility, logic for 
 searching for friends and viewing other users' profiles; editing of profile 
 "About" section; redirects and token logic
-
-Long: "Home" page; creation of Python script to scrape from Booking.com; logic 
-for displaying and booking hotels from the "Search" page
 
 
 We utilized PRs to review each other's work and also all collaborated on the 
