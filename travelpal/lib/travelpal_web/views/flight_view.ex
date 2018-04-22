@@ -7,12 +7,19 @@ defmodule TravelpalWeb.FlightView do
   end
 
   def render("show.json", %{flight: flight}) do
-    %{data: render_one(flight, FlightView, "flight.json")}
+    %{data: flight}
   end
 
   def render("flight.json", %{flight: flight}) do
     %{
-      flights: flight
+      id: flight.id,
+      origin: flight.origin,
+      dest: flight.dest,
+      date_from: flight.date_from,
+      date_to: flight.date_to,
+      price: flight.price,
+      airlines: flight.airlines,
+      duration: flight.duration
     }
   end
 end

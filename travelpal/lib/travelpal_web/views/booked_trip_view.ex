@@ -19,8 +19,7 @@ defmodule TravelpalWeb.BookedTripView do
         rooms: Map.get(trip, :rooms),
         summary: Map.get(trip, :summary),
         user: render_one(Map.get(trip, :user), UserView, "user.json"),
-        # TODO: Add back in flight
-        # flight: render_one(Map.get(trip, :flight), FlightView, "flight.json"),
+        flight: render_one(Map.get(trip, :flight), FlightView, "flight.json"),
         hotel: render_one(Map.get(trip, :hotel), HotelView, "hotel.json")
       }
     end)
@@ -44,8 +43,7 @@ defmodule TravelpalWeb.BookedTripView do
       rooms: booked_trip.rooms,
       summary: booked_trip.summary,
       user: render_one(booked_trip.user, UserView, "user.json"),
-      # TODO: Add back in flight
-      # flight: render_one(booked_trip.flight, FlightView, "flight.json"),
+      flight: render_one(booked_trip.flight, FlightView, "flight.json"),
       hotel: render_one(booked_trip.hotel, HotelView, "hotel.json")
     }
   end

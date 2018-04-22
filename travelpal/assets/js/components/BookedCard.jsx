@@ -6,6 +6,7 @@ import api from '../api';
 import TripCardHeader from './TripCardHeader';
 import BookedForm from './BookedForm';
 import BookedTripInfo from './BookedTripInfo';
+import Itinerary from './Itinerary';
 
 // Renders the details of an individual booked trip
 function BookedCard(props) {
@@ -33,6 +34,9 @@ function BookedCard(props) {
   // Sends a request to update the booked trip with the values from the form
   function submit(ev) {
     api.edit_booked_trip(props.form);
+    // Go back to the overview after submitting so user can see changes
+    $('#trip-info-' + props.trip.id).show();
+    $('#trip-itinerary-' + props.trip.id).hide();
     cancel();
   }
 
@@ -41,13 +45,7 @@ function BookedCard(props) {
     let formLeft = document.forms["booked-left-form"];
     let formRight = document.forms["booked-right-form"];
     let cost = formLeft["cost"].value;
-    let departureTime = formLeft["departure_time"].value;
-    let arrivalTime = formLeft["arrival_time"].value;
-    let startDate = new Date(formLeft["start_date"].value);
-    let endDate = new Date(formLeft["end_date"].value);
-    // TODO: Add this back in
-    // let flight = formRight["flight_id"].value;
-    let passengers = formRight["passengers"].value;
+    let passengers = formLeft["passengers"].value;
     let hotel = formRight["hotel_id"].value;
     let rooms = formRight["rooms"].value;
     let successful = true;
@@ -56,19 +54,6 @@ function BookedCard(props) {
       $(".cost-error").show();
       successful = false;
     }
-    // Departure time only needs to be before arrival time if the start and end
-    // dates are the same
-    if (!departureTime || !arrivalTime ||
-      (startDate.getTime() == endDate.getTime() && departureTime > arrivalTime)) {
-        $(".departure-error").show();
-        $(".arrival-error").show();
-        successful = false;
-    }
-    /* TODO: Check if the user chose a flight
-    if (!flight) {
-      $(".flight-error").show();
-      successful = false;
-    } */
     // Check if the number of passengers is at least 1
     if (!passengers || passengers < 1) {
       $(".passengers-error").show();
@@ -87,16 +72,26 @@ function BookedCard(props) {
     }
   }
 
-  // TODO: Re-add flights to BookedForm component
+  // Toggles the itinerary
+  function viewItinerary(ev) {
+    $('#trip-info-' + props.trip.id).toggle();
+    $('#trip-itinerary-' + props.trip.id).toggle();
+    let btn = $(ev.target);
+    if (btn.text() == "View Itinerary") {
+      $(btn).text("View Overview");
+    }
+    else {
+      $(btn).text("View Itinerary");
+    }
+  }
+
   return (
     <Col md="12">
       <Card>
         <TripCardHeader destination={props.trip.destination}
           startDate={props.trip.start_date} endDate={props.trip.end_date} />
         <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
-          <BookedForm form={props.form} id={props.trip.id}
-            destination={props.trip.destination}
-            startDate={props.trip.start_date} endDate={props.trip.end_date}
+          <BookedForm form={props.form} id={props.trip.id} trip={props.trip}
             hotels={props.hotels} />
           <Row>
             <Col md="12" className="trip-btn">
@@ -106,9 +101,13 @@ function BookedCard(props) {
           </Row>
         </CardBody>
         <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          <Itinerary flight={props.trip.flight} id={props.trip.id} />
           <BookedTripInfo trip={props.trip} />
           <Row>
             <Col md="12" className="trip-btn">
+              <Button type="button" onClick={viewItinerary}>
+                View Itinerary
+              </Button>
               <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={unbook}>Unbook</Button>
             </Col>

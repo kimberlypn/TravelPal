@@ -5,7 +5,7 @@ import { Button, Row, Col } from 'reactstrap';
 // Renders the details of a booked trip
 export default function BookedTripInfo({trip}) {
   return (
-    <Row>
+    <Row className="trip-info" id={"trip-info-" + trip.id}>
       <Col md="6">
         <p><b>Total Cost: </b>${trip.cost}</p>
         <p>
@@ -18,12 +18,6 @@ export default function BookedTripInfo({trip}) {
         </p>
       </Col>
       <Col md="6">
-        {
-          /*
-          TODO: Add this back in
-          <p><b>Airline: </b>{trip.flight.airline}</p>
-          */
-        }
         <p><b>Number of Passengers: </b>{trip.passengers}</p>
         <p>
           <b>Hotel: </b>
