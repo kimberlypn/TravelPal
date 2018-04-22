@@ -34,6 +34,9 @@ function BookedCard(props) {
   // Sends a request to update the booked trip with the values from the form
   function submit(ev) {
     api.edit_booked_trip(props.form);
+    // Go back to the overview after submitting so user can see changes
+    $('#trip-info-' + props.trip.id).show();
+    $('#trip-itinerary-' + props.trip.id).hide();
     cancel();
   }
 
