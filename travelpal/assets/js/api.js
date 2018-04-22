@@ -80,7 +80,6 @@ class TheServer {
     });
   }
 
-  // TODO: Change this to work with new flights schema
   request_flights() {
     return $.ajax("/api/v1/travel/flights/all", {
       method: "get",

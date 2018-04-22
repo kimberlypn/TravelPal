@@ -45,27 +45,44 @@ function TravelCard(props) {
     let formLeft = document.forms["travel-left-form"];
     let formRight = document.forms["travel-right-form"];
     let destination = formLeft["destination"].value;
-    let startDate = formLeft["start_date"].value;
-    let endDate = formLeft["end_date"].value;
+    let start = formLeft["start_date"].value;
+    let end = formLeft["end_date"].value;
     let price = formRight["price_limit"].value;
     let passengers = formRight["passengers"].value;
     let successful = true;
     let today = new Date();
+    // Set today's time to midnight
+    today.setHours(0,0,0,0);
+
     // Check if the user entered a destination
     if (!destination) {
       let dest = $("#destination-error");
-      console.log(dest);
       $(".destination-error").show();
       successful = false;
     }
-    console.log(startDate);
-    // Check if departure date is <= arrival date
-    if (!startDate || !endDate || new Date(startDate) > new Date(endDate) ||
-      new Date(startDate) < today) {
+
+    // Check if the start or end dates are null
+    if (!start || !end) {
       $(".start-error").show();
       $(".end-error").show();
       successful = false;
     }
+    // Check if departure date is <= arrival date and that departure date is
+    // no earlier than today's date
+    else {
+      // Add 1 day to the dates because Javascript is weird
+      let startDate = new Date(start);
+      startDate.setDate(startDate.getDate() + 1);
+      let endDate = new Date(end);
+      endDate.setDate(endDate.getDate() + 1);
+
+      if (startDate > endDate || startDate < today) {
+        $(".start-error").show();
+        $(".end-error").show();
+        successful = false;
+      }
+    }
+
     // Check if the price is at least 0
     if (!price || price < 0) {
       $(".price-error").show();
