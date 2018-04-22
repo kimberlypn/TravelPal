@@ -8,9 +8,6 @@ import HomePageTripCard from './HomePageTripCard'
 
 // Renders the home page
 function Home(props) {
-  console.log(props.friends);
-  console.log(props.bookedTrips);
-
   function filterFlights(flights) {
     let itineraries = new Set();
     let filteredFlights = [];
