@@ -25,9 +25,9 @@ function Home(props) {
   let suggestedFlights = _.map(filterFlights(props.flights), (uu, key) =>
     <FlightCard key={key} origin={uu.origin} dest={uu.dest} dateFrom={uu.date_from}
       dateTo={uu.date_to} price={uu.price} airlines={uu.airlines} duration={uu.duration} />);
-  let bookedTrips = _.map(props.bookedTrips, (bb, key) => <HomePageTripCard key={key}
+  let bookedTrips = _.map(props.bookedTrips, (bb, key) => <HomePageTripCard key={key} traveler={bb.user.name}
       destination={bb.destination} startDate={bb.start_date} endDate={bb.end_date} summary={bb.summary} hotel={bb.hotel}/>).slice(1).slice(-10);
-
+  console.log(bookedTrips)
   return (
     <div>
       <div className="page-content container">
