@@ -7,18 +7,28 @@ defmodule Travelpal.Email do
       to: user_email,
       from: "support@travelpal.kimberlynguyen.solutions",
       subject: "Welcome to Travelpal!",
-      html_body: "<h2>Welcome #{name}!</h2><p>Your account on Travelpal has successfully been created.</p>",
+      html_body: "<p>Hi #{name},</p><p>Your account on Travelpal has successfully been created.</p>",
       text_body: "Your account on Travelpal has successfully been created."
     )
   end
 
-  def updated_account_email(user_email, username) do
+  def updated_account_email(user_email, name, username) do
     new_email(
       to: user_email,
       from: "support@travelpal.kimberlynguyen.solutions",
-      subject: "Travelpal Account Change for #{username}",
-      html_body: "<h2>Account Updated</h2><p>Your account on Travelpal has recently been updated.</p>",
+      subject: "Travelpal Account Change Notice for #{username}",
+      html_body: "<p>Hi #{name},</p><p>Your account on Travelpal has recently been updated.</p>",
       text_body: "Your account on Travelpal has recently been updated."
+    )
+  end
+
+  def deleted_account_email(user_email, name, username) do
+    new_email(
+      to: user_email,
+      from: "support@travelpal.kimberlynguyen.solutions",
+      subject: "Travelpal Account Deletion Notice for #{username}",
+      html_body: "<p>Hi #{name},</p><p>Your account on Travelpal has been successfully deleted.</p>",
+      text_body: "Your account on Travelpal has successfully been deleted."
     )
   end
 end
