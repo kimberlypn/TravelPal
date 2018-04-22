@@ -26,6 +26,5 @@ HotelCard.propTypes = {
   district: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired
 };
