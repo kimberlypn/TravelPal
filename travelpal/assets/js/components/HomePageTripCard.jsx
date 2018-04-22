@@ -22,7 +22,7 @@ export default function HomePageTripCard({destination, startDate, endDate, summa
           <p className="card-text">Staying at: {hotelName}</p>
         </div>
         <div className="col-3">
-          <img className="" src={"https://q-fa.bstatic.com/xdata/images/hotel/square200/66399746.jpg?k=cc2d685e65b4f64cd7c8bb539b00cd7d24518b86742da3eeb8c76589bdb58211&o="} alt={name} />
+          <img className="" src={hotelImage} alt={hotelName} />
         </div>
       </div>
     </div>

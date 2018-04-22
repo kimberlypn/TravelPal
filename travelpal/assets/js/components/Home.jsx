@@ -31,7 +31,7 @@ function Home(props) {
   return (
     <div>
       <div className="page-content container">
-        <h3 className="border-bottom my-3">Popular flights</h3>
+        <h3 className="border-bottom my-3">Trips</h3>
         {bookedTrips}
       </div>
       <div className="page-content container">
