@@ -33,7 +33,7 @@ defmodule TravelpalWeb.UserController do
 
   def update(conn, %{"user" => user_params}) do
     user = Users.get_user!(Map.get(user_params, "id"))
-    Email.updated_account_email(user_params["email"], user_params["username"])
+    Email.updated_account_email(user.email, user.name, user.username)
     |> Mailer.deliver_now()
 
     with {:ok, %User{} = user} <- Users.update_user(user, user_params) do
@@ -46,6 +46,8 @@ defmodule TravelpalWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Users.get_user!(id)
+    Email.deleted_account_email(user.email, user.name, user.username)
+
     with {:ok, %User{}} <- Users.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
