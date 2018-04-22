@@ -1,0 +1,66 @@
+
+Web Dev Spring 2018 Project 2 Status
+
+Answer the following questions:
+
+
+1. What are the names of the members of your team?
+Kimberly Nguyen
+Longsheng Lin
+Matt Dang
+William Guo
+
+
+2. What's the URL of the github repo with your code for this project?
+Repo: https://github.com/kimberlypn/TravelPal/tree/v1.0
+
+The code itself is in the travelpal directory of the above repo.
+
+
+3. What's the version number of your github release?
+v1.0
+
+
+4. What's the URL that you deployed to?
+https://travelpal.kimberlynguyen.solutions
+
+
+5. Is your app functionality complete? If not, what's missing?
+Yes.
+
+
+6. Is your app properly deployed? If not, what went wrong?
+Yes.
+
+
+7. What parts of the project did each team member work on?
+Kimberly: overall UI design; "Travel Dates," "Booked Trips," and "Past Trips" 
+pages; rendering of friends on the "Profile" page and (un)friending logic; 
+UI input validation for edit/new forms 
+
+Matt: log-in/registration functionality; sending requests to the flights API 
+using user input and efficiently saving results to save API calls; email 
+notifications for new users 
+
+Will: collapsible navigation bar for screen-size compatibility, logic for 
+searching for friends and viewing other users' profiles; editing of profile 
+"About" section; redirects and token logic
+
+Long: "Home" page; creation of Python script to scrape from Booking.com; logic 
+for displaying and booking hotels from the "Search" page
+
+
+We utilized PRs to review each other's work and also all collaborated on the 
+report.
+
+And here's a list of tasks for grading comments. Just leave this here:
+ - Development
+ - Deployment
+ - Submission
+ - Report
+   - 1
+   - 2
+   - 3
+   - 4
+   - 5
+
