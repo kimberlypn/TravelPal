@@ -21,8 +21,7 @@ function PastForm(props) {
     data["passengers"] = props.trip.passengers;
     data["cost"] = props.trip.cost;
     data["rooms"] = props.trip.room;
-    // TODO: Re-add
-    // data["flight_id"] = props.trip.flight.id;
+
     if (props.trip.hotel) {
       data["hotel_id"] = props.trip.hotel.id
     }
@@ -33,20 +32,20 @@ function PastForm(props) {
   }
 
   return (
-      <Row>
-        <Col md="12">
-          <Form name="past-form">
-            <FormGroup>
-              <Label for="summary"><b>Trip Summary</b></Label>
-              <Input type="textarea" className="form-control" name="summary"
-                required="" value={props.form.summary} onChange={update} />
-              <p className="form-error summary-error">
-                You must enter a summary.
-              </p>
-            </FormGroup>
-          </Form>
-        </Col>
-      </Row>
+    <Row>
+      <Col md="12">
+        <Form name="past-form">
+          <FormGroup>
+            <Label for="summary"><b>Trip Summary</b></Label>
+            <Input type="textarea" className="form-control" name="summary"
+              required="" value={props.form.summary} onChange={update} />
+            <p className="form-error summary-error">
+              You must enter a summary.
+            </p>
+          </FormGroup>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 

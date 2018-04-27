@@ -10,6 +10,8 @@ defmodule Travelpal.ExternalAPI.Flight do
     field :price, :float
     field :airlines, {:array, :string}
     field :duration, :map
+    field :arrival_time, :string
+    field :departure_time, :string
 
     timestamps()
   end
@@ -18,9 +20,9 @@ defmodule Travelpal.ExternalAPI.Flight do
   def changeset(flight, attrs) do
     flight
     |> cast(attrs, [:origin, :dest, :date_from, :date_to, :price,
-      :airlines, :duration])
+      :airlines, :duration, :arrival_time, :departure_time])
     |> validate_required([:origin, :dest, :date_from, :date_to, :price,
-      :airlines, :duration])
+      :airlines, :duration, :arrival_time, :departure_time])
     |> validate_locations()
     |> validate_dates_from_to()
   end

@@ -9,11 +9,12 @@ import api from '../api';
 function BookedForm(props) {
   // Grab all of the hotels to populate the dropdown
   let hotels = [];
+  let propHotels = props.hotels.filter(hotel =>
+    hotel.result_from == props.trip.destination.toLowerCase());
   hotels.push(<option value="" key="-1">--</option>);
-  _.map(props.hotels, (hh) =>
+  _.map(propHotels, (hh) =>
   hotels.push(<option key={hh.id} value={hh.id}>{hh.name}</option>));
-
-  // Updates the state with the inputted values from the form
+  
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};

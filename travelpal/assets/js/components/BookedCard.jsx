@@ -89,7 +89,8 @@ function BookedCard(props) {
     <Col md="12">
       <Card>
         <TripCardHeader destination={props.trip.destination}
-          startDate={props.trip.start_date} endDate={props.trip.end_date} />
+          origin={props.trip.origin} startDate={props.trip.start_date}
+          endDate={props.trip.end_date} />
         <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
           <BookedForm form={props.form} id={props.trip.id} trip={props.trip}
             hotels={props.hotels} />

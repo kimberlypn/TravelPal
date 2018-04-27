@@ -25,21 +25,6 @@ export default function HomePageTripCard({traveler, destination, startDate,
     accomodation = "Stayed at: ";
   }
 
-  // <div className="card">
-  //    <h5 className="card-header">{toDateReadable(startDate)}  -  {toDateReadable(endDate)}</h5>
-  //    <div className="card-body row">
-  //      <div className="col-9">
-  //        <p className="card-tetx">Traveler: {traveler}</p>
-  //        <p className="card-tetx">Destination: {destination}</p>
-  //        <p className="card-text">Summary: {summary}</p>
-  //        <p className="card-text">Staying at: {hotelName}</p>
-  //      </div>
-  //      <div className="col-3">
-  //        <img className="" src={hotelImage} alt={hotelName} />
-  //      </div>
-  //    </div>
-  //  </div>
-
   return (
     <Card>
       <CardHeader>
@@ -51,14 +36,18 @@ export default function HomePageTripCard({traveler, destination, startDate,
       </CardHeader>
       <CardBody>
         <Row>
-          <Col md="9">
+          <Col md="6">
             <p><b>Departure Date: </b>{toDateReadable(startDate)}</p>
-            <p><b>Return Date: </b>{toDateReadable(endDate)}</p>
             <p><b>{accomodation}</b>{hotelName}</p>
-            <p><b>Trip Summary: </b>{summary}</p>
           </Col>
-          <Col md="3">
-            <img className="" src={hotelImage} alt={hotelName} />
+          <Col md="6">
+            <p><b>Return Date: </b>{toDateReadable(endDate)}</p>
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col md="12">
+            <p><b>Trip Summary: </b>{summary}</p>
           </Col>
         </Row>
       </CardBody>

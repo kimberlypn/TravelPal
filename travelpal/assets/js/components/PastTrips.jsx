@@ -6,10 +6,8 @@ import api from '../api';
 import PastCard from './PastCard';
 
 // Renders the user's past trips
-// TODO: Re-add flights
 export default function PastTrips({pastTrips, form, hotels,
   tripSummaries}) {
-  // TODO: Re-add flights to Past
   let trips = _.map(pastTrips, function(tt) {
     return <PastCard key={tt.id} form={form} trip={tt}
       hotels={hotels} />;

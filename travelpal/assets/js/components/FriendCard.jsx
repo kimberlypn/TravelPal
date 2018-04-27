@@ -5,7 +5,8 @@ import { Card, CardBody, CardHeader, Button, Row, Col } from 'reactstrap';
 import api from '../api';
 
 // Renders the details of an individual friend
-export default function FriendCard({btnTxt, name, email, username, id}) {
+export default function FriendCard({btnTxt, name, email, username, id,
+  anniversary}) {
   // Sends an unfriend request
   function unfriend() {
     api.delete_friend(id);
@@ -32,19 +33,16 @@ export default function FriendCard({btnTxt, name, email, username, id}) {
     <Col md="6">
       <Card>
         <CardHeader>
-          <Row>
-            <Col md="6">
-              {name}
-            </Col>
-            <Col md="6" className="friend-btn">
-              <Button type="button" onClick={func}>{btnTxt}</Button>
-              {denyBtn}
-            </Col>
-          </Row>
+          <h3>{name.toUpperCase()}</h3>
+          FRIENDS SINCE {anniversary.substring(0, 4)}
         </CardHeader>
         <CardBody>
           <p><b>Username: </b>{username}</p>
           <p><b>Email: </b>{email}</p>
+          <div className="right-btn">
+            <Button type="button" onClick={func}>{btnTxt}</Button>
+            {denyBtn}
+          </div>
         </CardBody>
       </Card>
     </Col>
@@ -56,5 +54,6 @@ FriendCard.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  anniversary: PropTypes.string.isRequired
 };

@@ -9,6 +9,7 @@ defmodule TravelpalWeb.FriendView do
         %{
           id: Map.get(friend, :id),
           status: Map.get(friend, :status),
+          inserted_at: Map.get(friend, :inserted_at),
           requestor: render_one(Map.get(friend, :requestor), UserView, "user.json"),
           acceptor: render_one(Map.get(friend, :acceptor), UserView, "user.json")
         }
@@ -25,6 +26,7 @@ defmodule TravelpalWeb.FriendView do
     %{
       id: friend.id,
       status: friend.status,
+      inserted_at: friend.inserted_at,
       requestor: render_one(friend.requestor, UserView, "user.json"),
       acceptor: render_one(friend.acceptor, UserView, "user.json")
     }

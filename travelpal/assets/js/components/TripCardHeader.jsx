@@ -5,7 +5,7 @@ import { CardHeader } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
 
 // Renders the card header for a trip
-export default function TripCardHeader({destination, startDate, endDate}) {
+export default function TripCardHeader({ destination, origin, startDate, endDate }) {
   // Add 1 day to the dates because Javascript is weird
   let depart = new Date(startDate);
   depart.setDate(depart.getDate() + 1);
@@ -23,7 +23,11 @@ export default function TripCardHeader({destination, startDate, endDate}) {
   return (
     <CardHeader className="trip-card-header">
       <Row>
-        <Col md="12"><h2>{destination.toUpperCase()}</h2></Col>
+        <Col md="12">
+          <h2>{origin.toUpperCase()}
+            <span className="arrow"> G </span>
+            {destination.toUpperCase()}</h2>
+        </Col>
       </Row>
       <Row>
         <Col md="12">{depart} - {arrive}</Col>

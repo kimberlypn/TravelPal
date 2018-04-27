@@ -18,3 +18,11 @@ This repository contains all of the required documents for the project.
 - App functionality 
 - App deployment 
 - Individual contributions 
+
+## [Project 2 - Report](report.pdf) 
+- Introduction and App Description 
+- User Interface 
+- Server-Side State 
+- APIs 
+- Complexity 
+- Challenges and Solutions 

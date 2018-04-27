@@ -10,6 +10,11 @@
   font-family: 'Quicksand_Light';
   src: url('/fonts/Quicksand_Light.otf');
 }
+
+@font-face {
+  font-family: 'Arrows';
+  src: url('/fonts/Arrows tfb.ttf');
+}
 /****************************** END OF FONTS *****************************/
 
 /************************** SHARED ACROSS PAGES **************************/
@@ -36,10 +41,9 @@ a:hover {
   margin-bottom: 15px;
 }
 
-.card-header {
+.card-header, .card-footer {
   background-color: #597487;
   color: white;
-  text-align: center;
 }
 
 input {
@@ -77,6 +81,10 @@ input[type=number]::-webkit-outer-spin-button {
   border-color: #d84545;
 }
 
+a button {
+  margin-right: 0;
+}
+
 .card-title {
   min-height: 4em;
   margin: 0 auto;
@@ -84,6 +92,32 @@ input[type=number]::-webkit-outer-spin-button {
 
 .orange {
   background: #f0ad4e;
+}
+
+.arrow {
+  font-family: 'Arrows';
+}
+
+.card-footer {
+  text-align: center;
+}
+
+.card-footer p {
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.card-footer a:hover {
+  color: white;
+}
+
+.card-img {
+  border: 4px 4px 4px 4px;
+}
+
+.card-footer button {
+  margin-left: 10px;
+
 }
 /*********************** END OF SHARED ACROSS PAGES **********************/
 
@@ -204,8 +238,20 @@ input[type=number]::-webkit-outer-spin-button {
   margin-right: 10px;
 }
 
-.friend-btn {
-  text-align: right;
+#profile-friends .card-header {
+  text-align: center;
+  background: #0492BA;
+}
+
+#profile-friends button, #searchFriends button {
+  background-color: #84b595;
+  border-color: #84b595;
+}
+
+#profile-friends button:hover, #searchFriends button:hover {
+  margin-left: 10px;
+  background-color: #699979;
+  border-color: #699979;
 }
 
 #profile-friends .card button {
@@ -223,7 +269,6 @@ input[type=number]::-webkit-outer-spin-button {
 #viewBtn {
   display: none;
 }
-
 /***************************** END OF PROFILE ****************************/
 
 /****************************** BOOKED TRIPS *****************************/
@@ -264,7 +309,6 @@ input[type=number]::-webkit-outer-spin-button {
 .trip-itinerary {
   display: none;
 }
-
 /*************************** END OF BOOKED TRIPS *************************/
 
 /******************************* TRAVEL DATES ****************************/
@@ -274,30 +318,65 @@ input[type=number]::-webkit-outer-spin-button {
 /************************** END OF TRAVEL DATES **************************/
 
 /******************************* HOMEPAGE ********************************/
-.flight::before {
-  content:'';
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 0px;
-	height: 100%;
-	background: rgba(255,255,255,0.3);
-	transition: all 1.5s ease;
-}
-
-.flight:hover::before {
-	width: 100%;
-}
-
 .flight-card {
   background: #0492BA;
 }
 
+.home .card-header {
+  text-align: center;
+}
 
+.flight .btn {
+  background-color: #84b595;
+  border-color: #84b595;
+}
+
+.flight .btn:hover {
+  background-color: #699979;
+  border-color: #699979;
+}
+
+.flight a, .flight a:hover {
+  color: white;
+}
 /************************** END OF HOMEPAGE *******************************/
 
-/************************** Loading ***************************************/
-/** all credits to https://codepen.io/danielmorosan/pen/XmYBVx for loading animation **/
+/********************************* SEARCH *********************************/
+.right-btn {
+  text-align: right;
+}
+
+#flight-search-results, #hotel-search-results, #booked-success {
+  display: none;
+}
+
+#hotel-search-results .card-header, #hotel-search-results .card-footer {
+  background: #0492BA;
+  text-align: center;
+}
+
+#hotel-search-results .card button, #hotel-search-results .card .btn {
+  background-color: #84b595;
+  border-color: #84b595;
+}
+
+#hotel-search-results .card button:hover, #hotel-search-results .card .btn:hover {
+  background-color: #699979;
+  border-color: #699979;
+}
+
+#hotel-search-results .card a, #hotel-search-results .card a:hover {
+  color: white;
+}
+
+#booked-success {
+  text-align: center;
+  display: none;
+}
+/*************************** END OF SEARCH ********************************/
+
+/*************************** LOADING ANIMATION ****************************/
+/** All credits to https://codepen.io/danielmorosan/pen/XmYBVx for loading animation **/
 .spinner {
   margin: 100px auto 0;
   width: 70px;
@@ -339,5 +418,4 @@ input[type=number]::-webkit-outer-spin-button {
     transform: scale(1.0);
   }
 }
-
-/**************************************************************************/
+/************************ END OF LOADING ANIMATION ************************/

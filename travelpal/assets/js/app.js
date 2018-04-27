@@ -11,7 +11,6 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
 
 // Import local files
 //
@@ -29,7 +28,9 @@ $(function () {
       () => api.request_travel_dates().then(
         () => api.request_booked_trips().then(
           () => api.request_flights().then(
-            travelpal_init(store)
+            () => api.request_all_hotels().then(
+              travelpal_init(store)
+            )
           )
         )
       )

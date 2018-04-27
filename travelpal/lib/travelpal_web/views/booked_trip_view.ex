@@ -9,6 +9,7 @@ defmodule TravelpalWeb.BookedTripView do
     trips = Enum.map(bookedtrips, fn trip ->
       %{
         id: Map.get(trip, :id),
+        origin: Map.get(trip, :origin),
         destination: Map.get(trip, :destination),
         start_date: Map.get(trip, :start_date),
         end_date: Map.get(trip, :end_date),
@@ -33,6 +34,7 @@ defmodule TravelpalWeb.BookedTripView do
   def render("booked_trip.json", %{booked_trip: booked_trip}) do
     %{
       id: booked_trip.id,
+      origin: booked_trip.origin,
       destination: booked_trip.destination,
       start_date: booked_trip.start_date,
       end_date: booked_trip.end_date,

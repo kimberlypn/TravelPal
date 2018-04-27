@@ -7,7 +7,6 @@ import ProfileInfoEdit from './ProfileInfoEdit';
 // Renders the user's information
 export default function ProfileInfo({ name, username, email, budget,
   formOnChange, submitOnClick }) {
-
   // Toggles the edit input for the given field
   function toggleEdit(field) {
     $('#' + field).toggle();
