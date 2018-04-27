@@ -59,3 +59,64 @@ After successfully booking a flight, a message will be displayed telling users
 what to do next. 
 ![successfully booked](screenshots/successfully-booked.png) 
 
+## Travel Dates Page 
+The “Travel Dates” page is where users can organize potential trips. 
+![travel dates page](screenshots/travel-dates.png) 
+
+Users can click the “+ Add” button in the top right to create a new travel date 
+card. Clicking this will toggle the "New Travel Date" form. 
+![new travel dates](screenshots/travel-dates-new.png) 
+
+The "Search" button starts the booking process using the details from the 
+travel date card (see section "Search Page"). The "Delete" button allows users 
+to delete the travel date card. The "Edit" button allows users to edit the 
+details of a travel date card. Clicking the "Edit" button toggles the edit form. 
+![edit travel dates](screenshots/travel-dates-edit.png) 
+
+## Booked Trips Page 
+The “Booked Trips” page shows all of the trips that users have booked, 
+organized by trips this month and future trips. 
+![booked trips](screenshots/booked-trips.png) 
+
+Users can click the "View Itinerary" button in the bottom-right of a booked trip 
+card to view the itinerary for that trip. Clicking this button again will 
+re-display the overview of the trip. 
+![booked trips itinerary](screenshots/booked-trips-itinerary.png) 
+
+Users can edit the details of a booked trip by clicking the "Edit" button, which 
+will toggle the edit form. Users can delete a booked trip by clicking the 
+"Unbook" button. 
+![booked trips edit](screenshots/booked-trips-edit.png) 
+
+## Past Trips Page 
+The “Past Trips” page shows all of the trips that users have booked and gone on. 
+![past trips](screenshots/past-trips.png) 
+
+Users can click the "View Itinerary" button in the bottom-right of a past trip 
+card to view the itinerary for that trip. Clicking this button again will 
+re-display the overview of the trip. 
+![past trips itinerary](screenshots/past-trips-itinerary.png) 
+
+Users can edit the summary of a past trip by clicking the "Edit" button, which 
+will toggle the edit form. Users can delete a booked trip by clicking the 
+"Delete" button. 
+![past trips edit](screenshots/past-trips-edit.png) 
+
+## Profile Page 
+The “Profile” page shows the user’s information and the user’s friends. 
+![profile about section](screenshots/profile-about.png) 
+![profile friends section](screenshots/profile-friends.png) 
+
+Users can edit their name or budget by clicking the pencil icon beside these 
+fields in the "About" section. Doing so will toggle an input field for the user 
+to input the new value(s). 
+![profile about edit](screenshots/profile-about-edit.png) 
+
+Users can search for friends by username or name by clicking the "Find Friends" 
+button in the top-right of the "Friends" section. Doing so will toggle a search 
+bar, below which any results will be listed as the user types. 
+![profile search for friends](screenshots/profile-search.png) 
+
+Users can click on a search result to view that user's profile. From this page, 
+users can friend or unfriend the user. 
+![profile search result](screenshots/profile-user-view.png) 
