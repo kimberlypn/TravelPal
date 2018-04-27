@@ -20,7 +20,7 @@ If users do not have an account, they can use the registration link below the
 log-in form to create one. This link will toggle the registration form. 
 ![registration form](screenshots/registration-form.png) 
 
-## "Home" Page
+## Home
 After logging in, users will be redirected to the "Home" page where they can 
 view their social feed. The "Friends' Trips" section displays all of the booked 
 trips of the user's friends. 
@@ -32,7 +32,7 @@ recommends potential trips based on the user's budget. Users can click the
 booking process. 
 ![home page popular flights](screenshots/popular-flights.png) 
 
-## "Search" Page 
+## Search
 When first clicked, the "Search" page will display a form, where users can enter 
 in details about the flight for which they would like to search. 
 ![search form](screenshots/search-form.png) 
@@ -58,7 +58,7 @@ After successfully booking a flight, a message will be displayed telling users
 what to do next. 
 ![successfully booked](screenshots/successfully-booked.png) 
 
-## "Travel Dates" Page 
+## Travel Dates
 The “Travel Dates” page is where users can organize potential trips. 
 ![travel dates page](screenshots/travel-dates.png) 
 
@@ -72,7 +72,7 @@ to delete the travel date card. The "Edit" button allows users to edit the
 details of a travel date card. Clicking the "Edit" button toggles the edit form. 
 ![edit travel dates](screenshots/travel-dates-edit.png) 
 
-## "Booked Trips" Page 
+## Booked Trips
 The “Booked Trips” page shows all of the trips that the user has booked, 
 organized by trips this month and future trips. 
 ![booked trips](screenshots/booked-trips.png) 
@@ -87,7 +87,7 @@ Users can edit the details of a booked trip by clicking the "Edit" button, which
 will toggle the edit form. 
 ![booked trips edit](screenshots/booked-trips-edit.png) 
 
-## "Past Trips" Page 
+## Past Trips
 The “Past Trips” page shows all of the trips that the user has booked and gone 
 on. 
 ![past trips](screenshots/past-trips.png) 
@@ -102,7 +102,7 @@ Users can edit the summary of a past trip by clicking the "Edit" button, which
 will toggle the edit form. 
 ![past trips edit](screenshots/past-trips-edit.png) 
 
-## "Profile" Page 
+## Profile
 The “Profile” page shows the user’s information and friends. 
 ![profile about section](screenshots/profile-about.png) 
 ![profile friends section](screenshots/profile-friends.png) 
