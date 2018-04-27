@@ -14,13 +14,15 @@ export default function ProfileFriends({ userId, friends, myToggle }) {
       // User received the friend request, so should say "Accept Request"
       btnTxt = (ff.status == "Accepted") ? "Unfriend" : "Accept";
       return <FriendCard key={ff.id} btnTxt={btnTxt} name={ff.requestor.name}
-        email={ff.requestor.email} username={ff.requestor.username} id={ff.id} />
+        email={ff.requestor.email} username={ff.requestor.username} id={ff.id}
+        anniversary={ff.inserted_at} />
     }
     if (userId == ff.requestor.id) {
       // User sent the friend request, so should say "Cancel Request"
       btnTxt = (ff.status == "Accepted") ? "Unfriend" : "Cancel Request";
       return <FriendCard key={ff.id} btnTxt={btnTxt} name={ff.acceptor.name}
-        email={ff.acceptor.email} username={ff.acceptor.username} id={ff.id} />
+        email={ff.acceptor.email} username={ff.acceptor.username} id={ff.id}
+        anniversary={ff.inserted_at} />
     }
   });
 
@@ -43,10 +45,10 @@ export default function ProfileFriends({ userId, friends, myToggle }) {
           <h3>Friends</h3>
         </Col>
         <Col md="6">
-          <div className="friend-btn">
+          <div className="right-btn">
             <Button id={"searchBtn"} type="button" onClick={() => myToggle()}>
               Find Friends
-        </Button>
+            </Button>
           </div>
         </Col>
       </Row>

@@ -14,7 +14,8 @@ import AlertMessage from './AlertMessage';
 
 // Renders the home page after logging in
 export default function Main({ form, booked, travel, friends, travelDates,
-  bookedTrips, flights, hotels, token, actions, apiCalls, users, search }) {
+  bookedTrips, flights, hotels, token, actions, apiCalls, users, search,
+  searchResponses, newBookedTrip, dispatch }) {
   let userId = form.id;
   let today = new Date();
   // Grab only the travelDates for the current user
@@ -28,11 +29,10 @@ export default function Main({ form, booked, travel, friends, travelDates,
   // Grab only the friends for the current users
   let userFriends = friends.filter(ff =>
     (ff.status == "Accepted"
-    && (ff.requestor.id == userId || ff.acceptor.id == userId)));
+      && (ff.requestor.id == userId || ff.acceptor.id == userId)));
   let friendIds = new Set(userFriends.map(ff =>
     ff.requestor.id == userId ? ff.acceptor.id : ff.requestor.id));
   let userAndFriendsTrips = bookedTrips.filter(bb => friendIds.has(bb.user.id));
-
 
   return (
     <Fragment>
@@ -40,10 +40,11 @@ export default function Main({ form, booked, travel, friends, travelDates,
       <AlertMessage />
       <Route path="/" exact={true} render={() =>
         <Home flights={flights} bookedTrips={userAndFriendsTrips}
-          friends={userFriends}/>
+          friends={userFriends} />
       } />
       <Route path="/search" exact={true} render={() =>
-        <Search />
+        <Search searchResponses={searchResponses} dispatch={dispatch}
+          hotels={hotels} newBookedTrip={newBookedTrip} />
       } />
       <Route path="/travel/dates" exact={true} render={() =>
         <TravelDates travelDates={travelDates} form={travel} userId={token.id} />
@@ -89,5 +90,10 @@ Main.propTypes = {
   bookedTrips: PropTypes.array.isRequired,
   flights: PropTypes.array.isRequired,
   hotels: PropTypes.array.isRequired,
-  token: PropTypes.object.isRequired
+  token: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  apiCalls: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
+  search: PropTypes.string.isRequired,
+  searchResponses: PropTypes.array
 };

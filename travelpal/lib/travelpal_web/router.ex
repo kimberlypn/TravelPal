@@ -28,19 +28,19 @@ defmodule TravelpalWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api/v1", TravelpalWeb do
-    pipe_through :api
-    resources "/users", UserController, except: [:new, :edit]
-    resources "/traveldates", TravelDateController, except: [:new, :edit]
-    resources "/friends", FriendController, except: [:new, :edit]
-    resources "/hotels", HotelController, except: [:new, :edit]
-    resources "/bookedtrips", BookedTripController, except: [:new, :edit]
+    pipe_through(:api)
+    resources("/users", UserController, except: [:new, :edit])
+    resources("/traveldates", TravelDateController, except: [:new, :edit])
+    resources("/friends", FriendController, except: [:new, :edit])
+    resources("/hotels", HotelController, except: [:new, :edit])
+    resources("/bookedtrips", BookedTripController, except: [:new, :edit])
 
-    post "/token", TokenController, :create
+    post("/token", TokenController, :create)
 
-    resources "/hotels", HotelController, except: [:new, :edit]
-    post "/hotels/fetch", HotelController, :get_hotel_information
-    get "/weather/:city", WeatherController, :search
-    get "/travel/flights", FlightController, :search
-    get "/travel/flights/all", FlightController, :retrieve_all_flights
+    resources("/hotels", HotelController, except: [:new, :edit])
+    post("/hotels/fetch", HotelController, :get_hotel_information)
+    get("/weather/:city", WeatherController, :search)
+    get("/travel/flights", FlightController, :search)
+    get("/travel/flights/all", FlightController, :retrieve_all_flights)
   end
 end

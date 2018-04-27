@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'reactstrap';
 
 export default function Itinerary({flight, id}) {
-  console.log(flight);
-
   // Converts seconds to hours, minutes, and seconds
   // Adapted from: http://jsfiddle.net/StevenIseki/apg8yx1s/
   function convertSeconds(seconds) {

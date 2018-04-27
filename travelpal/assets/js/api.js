@@ -24,7 +24,7 @@ class TheServer {
         });
       },
       error: (resp) => {
-        dispatchAlert("Could not load users");
+        this.dispatchAlert("Could not load users");
       }
     });
   }
@@ -103,6 +103,23 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ info: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'ADD_HOTEL',
+          hotels: resp.data,
+        });
+      },
+      error: (resp) => {
+        this.dispatchAlert("Could not load hotels.");
+      }
+    });
+  }
+
+  request_all_hotels() {
+    return $.ajax("/api/v1/hotels", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
       success: (resp) => {
         store.dispatch({
           type: 'HOTELS_LIST',
@@ -315,6 +332,62 @@ class TheServer {
       },
     });
   }
+  search_flight_by_params({ dest, origin, date_from, date_to }) {
+    $.ajax(`/api/v1/travel/flights?origin=${origin}&dest=${dest}&date_from=${date_from}&date_to=${date_to}`, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: "SEARCH_RETURNS",
+          data: resp.data
+        });
+      },
+    });
+  }
+
+  create_booked_trip(data) {
+    console.log("yo");
+    console.log(data);
+    $.ajax("/api/v1/bookedtrips", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ booked_trip: data }),
+      success: (resp) => {
+        console.log(resp.data)
+        store.dispatch({
+          type: 'ADD_BOOKED_TRIP',
+          bookedTrip: resp.data,
+        });
+        if (data.travelDateId) {
+          this.delete_travel_date(data.travelDateId);
+        }
+      },
+      error: (resp) => {
+        this.dispatchAlert("Failed to create the booked trip. Please try again.");
+      },
+    });
+  }
+
+  update_booked_trip(data) {
+    $.ajax("/api/v1/bookedtrips/" + data.id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ booked_trip: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'EDIT_BOOKED_TRIP',
+          bookedTrip: resp.data,
+        });
+      },
+      error: (resp) => {
+        this.dispatchAlert("Could not save the edit. Please try again.");
+      }
+    });
+  }
+
 }
 
 export default new TheServer();

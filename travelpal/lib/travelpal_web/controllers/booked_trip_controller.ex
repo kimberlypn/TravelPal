@@ -11,7 +11,22 @@ defmodule TravelpalWeb.BookedTripController do
     render(conn, "index.json", bookedtrips: bookedtrips)
   end
 
+  # Converts a string from "YYYY/MM/DD" to a date object
+  defp parse_date(date) do
+    date = String.split(date, "-")
+    yyyy = Enum.at(date, 0) |> String.to_integer()
+    mm = Enum.at(date, 1) |> String.to_integer()
+    dd = Enum.at(date, 2) |> String.to_integer()
+    %Date{year: yyyy, month: mm, day: dd}
+  end
+
   def create(conn, %{"booked_trip" => booked_trip_params}) do
+    booked_trip_params = booked_trip_params
+    |> Map.put("start_date",
+      parse_date(Map.get(booked_trip_params, "start_date")))
+    |> Map.put("end_date",
+      parse_date(Map.get(booked_trip_params, "end_date")))
+
     with {:ok, %BookedTrip{} = booked_trip} <-
       BookedTrips.create_booked_trip(booked_trip_params) do
       conn
@@ -35,8 +50,6 @@ defmodule TravelpalWeb.BookedTripController do
   end
 
   def update(conn, %{"booked_trip" => booked_trip_params}) do
-    IO.inspect("YOOOOO")
-    IO.inspect(booked_trip_params)
     booked_trip =
       BookedTrips.get_booked_trip!(Map.get(booked_trip_params, "id"))
 

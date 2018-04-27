@@ -23,27 +23,43 @@ defmodule TravelpalWeb.FlightController do
   # Returns all flights that match the given arguments
   def search(conn, %{"origin" => origin, "dest" => dest,
     "date_from" => date_from, "date_to" => date_to}) do
+    decoded_origin = URI.decode(origin)
+    decoded_dest = URI.decode(dest)
+    decoded_date_from = URI.decode(date_from)
+    decoded_date_to = URI.decode(date_to)
     existing_data =
-      ExternalAPI.get_flights_by_params(origin, dest, date_from, date_to)
-    converted_origin = String.split(origin, "-") |> Enum.join(" ")
-    converted_dest = String.split(dest, "-") |> Enum.join(" ")
+      ExternalAPI.get_flights_by_params(decoded_origin, decoded_dest, decoded_date_from, decoded_date_to)
     flights = if (!Enum.empty?(existing_data)),
       do: existing_data,
-      else: request_flights(converted_origin, converted_dest, date_from, date_to)
+      else: request_flights(decoded_origin, decoded_dest, decoded_date_from, decoded_date_to)
 
     if (Enum.empty?(existing_data)) do
-      Enum.each(flights, fn(x) -> ExternalAPI.create_flight(x) end)
+      flights = Enum.map(flights, fn(x) -> 
+        {:ok, record} = ExternalAPI.create_flight(x)
+        record
+      end)
     end
+
+    flights = Enum.map(flights, fn(x) -> 
+      Map.take(x, [:id, :origin, :dest, :date_from, :date_to, :price, :airlines, :duration, :arrival_time, :departure_time]) end)
 
     render(conn, "show.json", flight: flights)
   end
 
   defp request_flights(origin, dest, date_from, date_to) do
     flight_url = "https://api.skypicker.com/flights"
+    split_date_from = String.split(date_from, "/")
+    converted_date_from = Enum.at(split_date_from, 1) <> "/" <>
+                          Enum.at(split_date_from, 0) <> "/" <>
+                          Enum.at(split_date_from, 2)
+    split_date_to = String.split(date_to, "/")
+    converted_date_to = Enum.at(split_date_to, 1) <> "/" <>
+                        Enum.at(split_date_to, 0) <> "/" <>
+                        Enum.at(split_date_to, 2)
     # gets top 5 flights
     uri = URI.encode(flight_url
-      <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{date_from}&dateTo=#{date_from}"
-      <> "&returnFrom=#{date_to}&returnTo=#{date_to}&partner=picky&partner_market=us&curr=USD&limit=5")
+      <> "?flyFrom=#{origin}&to=#{dest}&dateFrom=#{converted_date_from}&dateTo=#{converted_date_from}"
+      <> "&returnFrom=#{converted_date_to}&returnTo=#{converted_date_to}&partner=picky&partner_market=us&curr=USD&limit=1")
 
     # Comment out HTTP request for dev purposes and use dummy data instead
     res = HTTPoison.get!(uri)
@@ -82,7 +98,9 @@ defmodule TravelpalWeb.FlightController do
       date_to: formatted_date_to,
       price: flight["price"],
       airlines: flight["airlines"],
-      duration: flight["duration"]
+      duration: flight["duration"],
+      arrival_time: flight["aTime"] |> Integer.to_string(),
+      departure_time: flight["dTime"] |> Integer.to_string()
     }
   end
 
@@ -95,7 +113,9 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19200, "total" => 42000},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 320.0
+        "price" => 320.0,
+        "dTime" => 1525157400,
+        "aTime" => 1525305300
       },
       %{
         "airlines" => ["UA"],
@@ -104,7 +124,9 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19380, "total" => 42180},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 325.0
+        "price" => 325.0,
+        "dTime" => 1525157400,
+        "aTime" => 1525305300
       },
       %{
         "airlines" => ["B6", "AS"],
@@ -113,7 +135,9 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22920, "return" => 19200, "total" => 42120},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 332.0
+        "price" => 332.0,
+        "dTime" => 1525157400,
+        "aTime" => 1525305300
       },
       %{
         "airlines" => ["B6", "UA"],
@@ -122,7 +146,9 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22920, "return" => 19380, "total" => 42300},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 337.0
+        "price" => 337.0,
+        "dTime" => 1525157400,
+        "aTime" => 1525305300
       },
       %{
         "airlines" => ["UA"],
@@ -131,7 +157,9 @@ defmodule TravelpalWeb.FlightController do
         "duration" => %{"departure" => 22800, "return" => 19380, "total" => 42180},
         "mapIdfrom" => "boston",
         "mapIdto" => "los-angeles",
-        "price" => 339.0
+        "price" => 339.0,
+        "dTime" => 1525157400,
+        "aTime" => 1525305300
       }
     ]
   end

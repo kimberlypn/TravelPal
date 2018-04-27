@@ -31,10 +31,6 @@ export default function Profile({
     $("#viewBtn").toggle();
   }
 
-  // the same row as the "Friends" header? And change the search label to 
-  // be a h3 and make the "View Friends" button on the same row as it as well.
-
-
   const viewBtn = (
     <Button id={"viewBtn"} type="button" onClick={() => myToggle()}>
       View Friends
@@ -42,7 +38,7 @@ export default function Profile({
   );
 
   const friendViewArea = (
-    <div id={"profileFriends"}>
+    <div id={"profileFriends"} className="page-content">
       <ProfileFriends userId={userInfo.id} friends={friends} myToggle={myToggle} />
     </div>
   );
@@ -53,7 +49,7 @@ export default function Profile({
           <h3>Search for Friends</h3>
         </Col>
         <Col md="6">
-          <div className="friend-btn">
+          <div className="right-btn">
             {viewBtn}
           </div>
         </Col>

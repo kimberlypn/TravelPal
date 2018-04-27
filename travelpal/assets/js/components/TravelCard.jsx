@@ -5,6 +5,7 @@ import { Card, CardBody, Button, Row, Col } from 'reactstrap';
 import api from '../api';
 import TripCardHeader from './TripCardHeader';
 import TravelForm from './TravelForm';
+import { Link } from 'react-router-dom';
 
 // Renders the details of an individual trip as a card
 function TravelCard(props) {
@@ -13,9 +14,45 @@ function TravelCard(props) {
     api.delete_travel_date(props.trip.id);
   }
 
-  // TODO: Sends a request to flights API with the trip details
-  function search() {
+  function search(origin, destination, passengers, sDate, eDate) {
+    const start_date = props.trip.start_date
+    const end_date = props.trip.end_date
+    const newFrom = start_date.substring(5, 7) + "/"
+      + start_date.substring(8, 10) + "/" + start_date.substring(0, 4);
+    const newEnd = end_date.substring(5, 7) + "/"
+      + end_date.substring(8, 10) + "/" + end_date.substring(0, 4);
+    api.search_flight_by_params({
+      dest: props.trip.destination,
+      origin: props.trip.origin,
+      date_from: newFrom,
+      date_to: newEnd
+    })
+    props.dispatch({
+      type: 'ADD_TRAVEL_CARD_INFO',
+      data: {
+        travelDateId: props.trip.id,
+        origin,
+        destination,
+        start_date: {
+          month: parseInt(sDate.substring(5, 7)),
+          day: parseInt(sDate.substring(8, 10)),
+          year: parseInt(sDate.substring(0, 4))
+        },
+        end_date: {
+          month: parseInt(eDate.substring(5, 7)),
+          day: parseInt(eDate.substring(8, 10)),
+          year: parseInt(eDate.substring(0, 4))
+        },
+        passengers,
+        user_id: localStorage.getItem('id'),
+      }
+    });
 
+    // Display the flights
+    $('#search-form').hide();
+    $('#hotel-search-results').hide();
+    $('#booked-success').hide();
+    $('#flight-search-results').show();
   }
 
   // Toggles the edit form
@@ -53,7 +90,7 @@ function TravelCard(props) {
     let successful = true;
     let today = new Date();
     // Set today's time to midnight
-    today.setHours(0,0,0,0);
+    today.setHours(0, 0, 0, 0);
 
     // Check if the user entered a destination
     if (!destination) {
@@ -111,18 +148,19 @@ function TravelCard(props) {
     <Col md="12">
       <Card>
         <TripCardHeader destination={props.trip.destination}
-          startDate={props.trip.start_date} endDate={props.trip.end_date} />
-          <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
-            <TravelForm form={props.form} id={props.trip.id}
-              userId={props.trip.user.id} />
-            <Row>
-              <Col md="12" className="trip-btn">
-                <Button type="button" onClick={cancel}>Cancel</Button>
-                <Button type="button" onClick={validate}>Submit</Button>
-              </Col>
-            </Row>
-          </CardBody>
-          <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          origin={props.trip.origin} startDate={props.trip.start_date}
+          endDate={props.trip.end_date} />
+        <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
+          <TravelForm form={props.form} id={props.trip.id}
+            userId={props.trip.user.id} />
+          <Row>
+            <Col md="12" className="trip-btn">
+              <Button type="button" onClick={cancel}>Cancel</Button>
+              <Button type="button" onClick={validate}>Submit</Button>
+            </Col>
+          </Row>
+        </CardBody>
+        <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
           <Row>
             <Col md="6">
               <p><b>Price Limit:</b> ${props.trip.price_limit}</p>
@@ -133,7 +171,15 @@ function TravelCard(props) {
           </Row>
           <Row>
             <Col md="12" className="trip-btn">
-              <Button type="button" onClick={search}>Search</Button>
+              {/* origin, destination, passengers, sDate, eDate */}
+              <Link onClick={() => search(
+                props.trip.origin,
+                props.trip.destination,
+                props.trip.passengers,
+                props.trip.start_date,
+                props.trip.end_date)} to="/search">
+                <Button type="button">Search</Button>
+              </Link>
               <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={remove}>Delete</Button>
             </Col>

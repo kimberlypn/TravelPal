@@ -8,6 +8,7 @@ import BookedForm from './BookedForm.jsx';
 
 // Renders the user's booked trips
 export default function BookedTrips({bookedTrips, form, flights, hotels}) {
+
   let today = new Date();
   let upcoming = [];
   let future = [];

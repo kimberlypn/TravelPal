@@ -3,6 +3,7 @@ defmodule Travelpal.Repo.Migrations.CreateBookedtrips do
 
   def change do
     create table(:bookedtrips) do
+      add :origin, :string, null: false
       add :destination, :string, null: false
       add :start_date, :date, null: false
       add :end_date, :date, null: false

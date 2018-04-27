@@ -169,7 +169,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 400.0,
       airlines: ["American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Chicago",
@@ -178,7 +180,9 @@ defmodule Seeds do
       date_to: ~D[2018-07-16],
       price: 900.0,
       airlines: ["Delta", "American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Miami",
@@ -187,7 +191,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 600.0,
       airlines: ["Alaska Airlines", "American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "London",
@@ -196,7 +202,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 1000.0,
       airlines: ["American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Atlanta",
@@ -205,7 +213,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 250.0,
       airlines: ["JetBlue", "Delta"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
   end
 
@@ -248,6 +258,7 @@ defmodule Seeds do
     Repo.delete_all(BookedTrip)
     # Matt's trips
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Melbourne",
       start_date: ~D[2016-10-10],
       end_date: ~D[2016-10-20],
@@ -262,6 +273,7 @@ defmodule Seeds do
       hotel_id: 1
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Seoul",
       start_date: ~D[2018-04-20],
       end_date: ~D[2018-04-30],
@@ -276,6 +288,7 @@ defmodule Seeds do
       hotel_id: 3
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Tokyo",
       start_date: ~D[2018-06-01],
       end_date: ~D[2018-07-01],
@@ -291,6 +304,7 @@ defmodule Seeds do
 
     # Kimberly's trips
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Honolulu",
       start_date: ~D[2017-01-01],
       end_date: ~D[2017-01-20],
@@ -304,6 +318,7 @@ defmodule Seeds do
       flight_id: 4
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Rome",
       start_date: ~D[2018-04-19],
       end_date: ~D[2018-04-25],
@@ -318,6 +333,7 @@ defmodule Seeds do
       hotel_id: 1
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Tokyo",
       start_date: ~D[2018-06-01],
       end_date: ~D[2018-07-01],
@@ -334,6 +350,7 @@ defmodule Seeds do
 
     # Long's trips
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Melbourne",
       start_date: ~D[2016-10-10],
       end_date: ~D[2016-10-20],
@@ -348,6 +365,7 @@ defmodule Seeds do
       hotel_id: 4
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Seoul",
       start_date: ~D[2018-04-20],
       end_date: ~D[2018-04-30],
@@ -362,6 +380,7 @@ defmodule Seeds do
       hotel_id: 1
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Tokyo",
       start_date: ~D[2018-06-01],
       end_date: ~D[2018-07-01],
@@ -377,6 +396,7 @@ defmodule Seeds do
 
     # Will's trips
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Melbourne",
       start_date: ~D[2016-10-10],
       end_date: ~D[2016-10-20],
@@ -391,6 +411,7 @@ defmodule Seeds do
       hotel_id: 3
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Seoul",
       start_date: ~D[2018-04-20],
       end_date: ~D[2018-04-30],
@@ -404,6 +425,7 @@ defmodule Seeds do
       flight_id: 1
     })
     Repo.insert!(%BookedTrip{
+      origin: "Boston",
       destination: "Tokyo",
       start_date: ~D[2018-06-01],
       end_date: ~D[2018-07-01],

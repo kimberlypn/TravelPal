@@ -6,6 +6,7 @@ import api from '../api';
 import TripCardHeader from './TripCardHeader';
 import BookedTripInfo from './BookedTripInfo';
 import PastForm from './PastForm';
+import Itinerary from './Itinerary';
 
 // Renders the details of an individual past trip
 function PastCard(props) {
@@ -55,11 +56,25 @@ function PastCard(props) {
     }
   }
 
+  // Toggles the itinerary
+  function viewItinerary(ev) {
+    $('#trip-info-' + props.trip.id).toggle();
+    $('#trip-itinerary-' + props.trip.id).toggle();
+    let btn = $(ev.target);
+    if (btn.text() == "View Itinerary") {
+      $(btn).text("View Overview");
+    }
+    else {
+      $(btn).text("View Itinerary");
+    }
+  }
+
   return (
     <Col md="12">
       <Card>
         <TripCardHeader destination={props.trip.destination}
-          startDate={props.trip.start_date} endDate={props.trip.end_date} />
+          origin={props.trip.origin} startDate={props.trip.start_date}
+          endDate={props.trip.end_date} />
         <CardBody className="trip-edit" id={"trip-edit-" + props.trip.id}>
           <PastForm trip={props.trip} form={props.form} />
           <Row>
@@ -70,6 +85,7 @@ function PastCard(props) {
           </Row>
         </CardBody>
         <CardBody className="trip-details" id={"trip-details-" + props.trip.id}>
+          <Itinerary flight={props.trip.flight} id={props.trip.id} />
           <BookedTripInfo trip={props.trip} />
           <br />
           <Row>
@@ -80,6 +96,9 @@ function PastCard(props) {
           </Row>
           <Row>
             <Col md="12" className="trip-btn">
+              <Button type="button" onClick={viewItinerary}>
+                View Itinerary
+              </Button>
               <Button type="button" onClick={toggle}>Edit</Button>
               <Button type="button" onClick={remove}>Delete</Button>
             </Col>

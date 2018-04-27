@@ -17,6 +17,7 @@ defmodule TravelpalWeb.HotelView do
       price: hotel.price,
       link: hotel.link,
       rating: hotel.rating,
-      image_src: hotel.image_src}
+      image_src: hotel.image_src,
+      result_from: hotel.result_from}
   end
 end
