@@ -17,7 +17,7 @@ When users first visit the home page, they will be prompted with a log-in form.
 ![index page](screenshots/log-in-form.png) 
 
 If users do not have an account, they can use the registration link below the 
-log-in form to create one. This link will redirect them to a registration form. 
+log-in form to create one. This link will toggle the registration form. 
 ![registration form](screenshots/registration-form.png) 
 
 ## Home Page
