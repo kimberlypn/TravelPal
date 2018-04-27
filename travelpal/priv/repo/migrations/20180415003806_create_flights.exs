@@ -10,6 +10,8 @@ defmodule Travelpal.Repo.Migrations.CreateFlights do
       add :price, :float
       add :airlines, {:array, :string}
       add :duration, :map
+      add :arrival_time, :string
+      add :departure_time, :string
 
       timestamps()
     end

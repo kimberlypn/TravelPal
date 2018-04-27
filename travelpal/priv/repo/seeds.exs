@@ -169,7 +169,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 400.0,
       airlines: ["American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Chicago",
@@ -178,7 +180,9 @@ defmodule Seeds do
       date_to: ~D[2018-07-16],
       price: 900.0,
       airlines: ["Delta", "American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Miami",
@@ -187,7 +191,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 600.0,
       airlines: ["Alaska Airlines", "American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "London",
@@ -196,7 +202,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 1000.0,
       airlines: ["American Airlines"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
     Repo.insert!(%Flight{
       origin: "Atlanta",
@@ -205,7 +213,9 @@ defmodule Seeds do
       date_to: ~D[2018-05-12],
       price: 250.0,
       airlines: ["JetBlue", "Delta"],
-      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000}
+      duration: %{"departure" => 22800, "return" => 19200, "total" => 42000},
+      departure_time: "1525157400",
+      arrival_time: "1525305300"
     })
   end
 
