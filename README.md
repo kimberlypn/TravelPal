@@ -2,7 +2,7 @@
 
 **Collaborators**: Kimberly Nguyen, Longsheng Lin, Matt Dang, William Guo
 
-**TravelPal**: https://travelpal.kimberlypn.com
+**TravelPal**: https://my-travelpal.herokuapp.com/
 
 **Course Website**: http://www.ccs.neu.edu/home/ntuck/courses/2018/01/cs4550/
 
